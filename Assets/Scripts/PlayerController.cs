@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeScriptTest : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// BLEP BLEP
+		
 	}
 	
 	// Update is called once per frame

@@ -13,10 +13,10 @@ public class PlayerController : NetworkBehaviour
 	[Client]
 	void Update()
 	{
-		//if(this.isServer)
-		//{
-		//	return;
-		//}
+		if(!this.isLocalPlayer)
+		{
+			return;
+		}
 
 		var xAxis = Input.GetAxis("Horizontal") * 1.5f;
 		var yAxis = Input.GetAxis("Vertical") * 0.1f;

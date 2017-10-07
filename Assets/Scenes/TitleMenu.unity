@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 1050464904}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: TitleCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,27 +287,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1182266953}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -822479833, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Script: {fileID: -859942077, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_NetworkPort: 7777
   m_ServerBindToIP: 0
   m_ServerBindAddress: 
-  m_NetworkAddress: localhost
+  m_NetworkAddress: enterhostip
   m_DontDestroyOnLoad: 1
   m_RunInBackground: 1
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1272122108534882, guid: 4e481e6a112f737408406927f600d80d,
-    type: 2}
+  m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 1
+  m_PlayerSpawnMethod: 0
   m_OfflineScene: TitleMenu
-  m_OnlineScene: Main
+  m_OnlineScene: 
   m_SpawnPrefabs: []
-  m_CustomConfig: 1
-  m_MaxConnections: 3
+  m_CustomConfig: 0
+  m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1440
     m_FragmentSize: 500
@@ -358,9 +357,20 @@ MonoBehaviour:
   m_MatchHost: mm.unet.unity3d.com
   m_MatchPort: 443
   matchName: default
-  matchSize: 3
+  matchSize: 4
   isNetworkActive: 0
   matchMaker: {fileID: 0}
+  m_ShowLobbyGUI: 1
+  m_MaxPlayers: 4
+  m_MaxPlayersPerConnection: 1
+  m_MinPlayers: 1
+  m_LobbyPlayerPrefab: {fileID: 114057401421476706, guid: b61f85211065ef44a904ac76f5a60fef,
+    type: 2}
+  m_GamePlayerPrefab: {fileID: 1272122108534882, guid: 4e481e6a112f737408406927f600d80d,
+    type: 2}
+  m_LobbyScene: TitleMenu
+  m_PlayScene: Main
+  lobbySlots: []
 --- !u!4 &1182266955
 Transform:
   m_ObjectHideFlags: 0

@@ -3,20 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "PluggableAI/Actions/Wander")]
-public class Wander : Action {
+public class WanderAction : Action {
 
     public override void Act(StateController controller)
     {
-        WanderAbout(controller);
+        Wander(controller);
     }
 
-    private void WanderAbout(StateController controller)
+    private void Wander(StateController controller)
     {
-        if (controller.navMeshAgent.remainingDistance < 1)
+
+        //Debug.Log("Wander called");
+
+        if (controller.navMeshAgent.remainingDistance < 2)
         {
             var randomPosition = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
             controller.navMeshAgent.SetDestination(randomPosition);
-            Debug.Log("New Location Set");
+            Debug.Log("Wandering to new location");
         }
     }
 	

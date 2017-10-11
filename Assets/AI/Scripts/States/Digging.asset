@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df077eafb9c6b884a93b1cfbfea6b3c7, type: 3}
-  m_Name: Wandering
+  m_Name: Digging
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 11400000, guid: 58504f5fde4f7d4439c74a0cac0db17d, type: 2}
+  - {fileID: 11400000, guid: b9a107d59d773b14fbb2f39605504064, type: 2}
   sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   transitions:
   - decision: {fileID: 11400000, guid: 6227a34c814f04049bbe97079f74b360, type: 2}
-    trueState: {fileID: 11400000, guid: 5d4a389242b8a754a80b9873f7c9daa8, type: 2}
+    trueState: {fileID: 11400000, guid: 207f2b94f63786340ae0809011bd7140, type: 2}
     falseState: {fileID: 0}

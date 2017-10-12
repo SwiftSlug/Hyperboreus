@@ -49,6 +49,6 @@ public class PlayerController : NetworkBehaviour
     //Called after the scene has been updating
     void LateUpdate()
     {
-        myCamera.transform.position = (this.transform.position + heightOffset + verticalOffset); //Make sure our camera is following the player
+        myCamera.transform.position = Vector3.Lerp(myCamera.transform.position, this.transform.position + heightOffset + verticalOffset, Time.deltaTime * 2.0f); //Make sure our camera is following the player, smoothly move it.
     }
 }

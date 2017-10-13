@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114148089913796268}
   - component: {fileID: 114610079029982304}
   - component: {fileID: 114255740137734454}
+  - component: {fileID: 114348478218635018}
   m_Layer: 0
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -215,6 +216,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 1400124946779370, guid: 64531fe4dd336fb4684aec9123f5080f, type: 2}
+--- !u!114 &114348478218635018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9e186f6f562a649b6d4159f26d8140, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  isDead: 0
+  timeDamaged: 0
+  regenHealthSpeed: 0.25
+  regenHealthDelay: 10
 --- !u!114 &114610079029982304
 MonoBehaviour:
   m_ObjectHideFlags: 1

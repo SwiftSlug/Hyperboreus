@@ -302,7 +302,7 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
-  m_OfflineScene: TitleMenu
+  m_OfflineScene: CoopLobby
   m_OnlineScene: 
   m_SpawnPrefabs: []
   m_CustomConfig: 1
@@ -347,7 +347,7 @@ MonoBehaviour:
     m_MaxTimerTimeout: 12000
     m_MinNetSimulatorTimeout: 1
     m_MaxNetSimulatorTimeout: 12000
-  m_Channels: 0500000000000000
+  m_Channels: 0500000005000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -368,7 +368,7 @@ MonoBehaviour:
     type: 2}
   m_GamePlayerPrefab: {fileID: 1138322535066456, guid: 4e481e6a112f737408406927f600d80d,
     type: 2}
-  m_LobbyScene: TitleMenu
+  m_LobbyScene: CoopLobby
   m_PlayScene: Main
   lobbySlots: []
 --- !u!4 &1182266955

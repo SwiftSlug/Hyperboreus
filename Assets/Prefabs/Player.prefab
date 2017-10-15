@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138322535066456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5914824, y: 1, z: -14.115134}
+  m_LocalPosition: {x: -2.4444878, y: 1, z: -6.4664583}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4282745514251646}
@@ -309,11 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 224000553041229700}
   maxHealth: 100
-  currentHealth: 0
-  isDead: 0
-  timeDamaged: 0
-  regenHealthSpeed: 0.25
-  regenHealthDelay: 10
+  currentHealth: 100
 --- !u!114 &114505928617221474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,7 +484,7 @@ RectTransform:
   - {fileID: 224841103092150506}
   m_Father: {fileID: 4261929151935168}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 80, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}

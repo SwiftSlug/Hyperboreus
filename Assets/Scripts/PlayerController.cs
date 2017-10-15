@@ -10,7 +10,7 @@ public class PlayerController : NetworkBehaviour
 
     void Start()
     {
-        if (this.isLocalPlayer)
+        if (isLocalPlayer)
         {
            myCamera = GameObject.FindGameObjectWithTag("MainCamera"); //Set a reference to the player
            heightOffset = new Vector3(0.0f, 12.0f, 0.0f); //Give our camera a certain height to offset - could be exposed to editor
@@ -21,7 +21,7 @@ public class PlayerController : NetworkBehaviour
 	//Update is called once per frame
 	void Update()
 	{
-		if (!this.isLocalPlayer)
+		if (!isLocalPlayer)
 		{
 			return;
 		}
@@ -49,6 +49,11 @@ public class PlayerController : NetworkBehaviour
     //Called after the scene has been updating
     void LateUpdate()
     {
+		if (!isLocalPlayer)
+		{
+			return;
+		}
+
         myCamera.transform.position = Vector3.Lerp(myCamera.transform.position, this.transform.position + heightOffset + verticalOffset, Time.deltaTime * 2.0f); //Make sure our camera is following the player, smoothly move it.
     }
 }

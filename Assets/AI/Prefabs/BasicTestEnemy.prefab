@@ -24,7 +24,10 @@ GameObject:
   - component: {fileID: 23741794029421922}
   - component: {fileID: 54868234820314730}
   - component: {fileID: 195919686104034100}
-  - component: {fileID: 114136499655237846}
+  - component: {fileID: 114685237175142478}
+  - component: {fileID: 114917807030115594}
+  - component: {fileID: 114911875217546654}
+  - component: {fileID: 114985058893909474}
   m_Layer: 0
   m_Name: BasicTestEnemy
   m_TagString: Untagged
@@ -39,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1332893165969140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.41, z: 7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.3, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -92,14 +95,46 @@ Rigidbody:
   m_GameObject: {fileID: 1332893165969140}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: Infinity
+  m_AngularDrag: Infinity
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114136499655237846
+--- !u!114 &114685237175142478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332893165969140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 25
+    i1: 178
+    i2: 231
+    i3: 13
+    i4: 25
+    i5: 231
+    i6: 246
+    i7: 116
+    i8: 107
+    i9: 91
+    i10: 204
+    i11: 18
+    i12: 124
+    i13: 136
+    i14: 167
+    i15: 73
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114911875217546654
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -117,6 +152,40 @@ MonoBehaviour:
   nextWayPoint: 0
   chaseTarget: {fileID: 0}
   stateTimeElapsed: 0
+--- !u!114 &114917807030115594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332893165969140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 500
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114985058893909474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332893165969140}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16aa047a4552a447b82907cbd17078d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  realPosition: {x: 0, y: 0, z: 0}
+  updateInterval: 0.11
 --- !u!136 &136060196601364672
 CapsuleCollider:
   m_ObjectHideFlags: 1

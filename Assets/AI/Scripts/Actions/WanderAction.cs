@@ -19,8 +19,11 @@ public class WanderAction : Action {
         {
             var randomPosition = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
             controller.navMeshAgent.SetDestination(randomPosition);
-            Debug.Log("Wandering to new location");
+            
+            //Debug.Log("Wandering to new location");
         }
     }
+
+
 	
 }

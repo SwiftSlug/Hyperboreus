@@ -9,6 +9,11 @@ public class StateController : MonoBehaviour {
     public State currentState;
     public State remainState;
 
+    public float detectionRange = 500.0f;
+
+    public GameObject target;
+    public Vector3 targetLocation;
+
 
 	[HideInInspector] public NavMeshAgent navMeshAgent;
 	[HideInInspector] public List<Transform> wayPointList;

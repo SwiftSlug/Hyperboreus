@@ -71,6 +71,17 @@ public class PlayerStats : NetworkBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider sphere)
+    {
+        if (sphere.CompareTag("NetworkedPlayer"))
+        {
+            if (sphere.GetComponent<PlayerStats>().isDead == true)
+            {
+                sphere.GetComponent<PlayerStats>().CmdRevive();
+            }
+        }
+    }
+
 	[Command]
 	public void CmdDamage(int amount)
 	{

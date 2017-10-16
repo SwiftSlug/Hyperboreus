@@ -73,11 +73,14 @@ public class PlayerStats : NetworkBehaviour
 
     void OnTriggerEnter(Collider sphere)
     {
-        if (sphere.CompareTag("NetworkedPlayer"))
+        if(isLocalPlayer)
         {
-            if (sphere.GetComponent<PlayerStats>().isDead == true)
+            if (sphere.CompareTag("NetworkedPlayer"))
             {
-                sphere.GetComponent<PlayerStats>().CmdRevive();
+                if (sphere.GetComponent<PlayerStats>().isDead == true)
+                {
+                    sphere.GetComponent<PlayerStats>().CmdRevive();
+                }
             }
         }
     }

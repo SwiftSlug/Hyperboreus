@@ -24,31 +24,10 @@ public class NetworkUpdate : NetworkBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        /*
-        if (isLocalPlayer)
-        {
-
-            //realPosition = navMesh.destination;
-            Debug.Log("Is local player");
-            updateInterval += Time.deltaTime;
-            if (updateInterval > 0.11f) // 9 times per second
-            {
-                updateInterval = 0;
-                Debug.Log("Update should run");
-                CmdSync(transform.position, transform.rotation);
-
-            }
-            
-        }
-        else
-        {
-            Debug.Log("Not local");
-            transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
-        }
-        */
         if (isServer)
         {
+            Debug.Log("Is Server");
+            updateInterval += Time.deltaTime;
             if (updateInterval > 0.11f) // 9 times per second
             {
                 updateInterval = 0;
@@ -59,6 +38,7 @@ public class NetworkUpdate : NetworkBehaviour {
         }
         else
         {
+            Debug.Log("Not Server");
             transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f);
             transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
         }

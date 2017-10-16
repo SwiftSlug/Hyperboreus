@@ -6,7 +6,7 @@ public class PlayerStats : NetworkBehaviour
 	public RectTransform healthBar;
 
 	[Tooltip("Player max health")]
-	//[SyncVar] 
+	[SyncVar]
 	public int maxHealth = 100; //Max health of the player, should only change through
 
 	[Tooltip("Current player health")]
@@ -53,14 +53,14 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-		if(Input.GetKeyDown(KeyCode.O))
-		{
-			CmdDamage(20);
-		}
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			CmdHeal(20);
-		}
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            CmdDamage(20);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CmdHeal(20);
+        }
         if (Input.GetKeyDown(KeyCode.K))
         {
             CmdKill();
@@ -69,7 +69,7 @@ public class PlayerStats : NetworkBehaviour
         {
             CmdRevive();
         }
-	}
+    }
 
 	[Command]
 	public void CmdDamage(int amount)

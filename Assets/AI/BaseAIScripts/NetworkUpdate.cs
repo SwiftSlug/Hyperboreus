@@ -26,31 +26,29 @@ public class NetworkUpdate : NetworkBehaviour {
 
         if (isServer)
         {
-            Debug.Log("Is Server");
+            //Debug.Log("Is Server");
             updateInterval += Time.deltaTime;
             if (updateInterval > 0.11f) // 9 times per second
             {
                 updateInterval = 0;
-                Debug.Log("Update should run");
+                //Debug.Log("Update should run");
                 RpcSyncClients(transform.position, transform.rotation);
 
             }
         }
         else
         {
-            Debug.Log("Not Server");
+            //Debug.Log("Not Server");
             transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f);
             transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
         }
-
-
 
     }
 
     [ClientRpc]
     void RpcSyncClients(Vector3 position, Quaternion rotation)
     {
-        Debug.Log("Client Updated");
+        //Debug.Log("Client Updated");
         realPosition = position;
         realRotation = rotation;
 

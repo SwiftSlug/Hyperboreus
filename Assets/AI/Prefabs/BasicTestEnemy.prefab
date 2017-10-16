@@ -145,9 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e555c94dce3a624a8b82762331848e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 207f2b94f63786340ae0809011bd7140, type: 2}
-  remainState: {fileID: 0}
-  detectionRange: 500
+  currentState: {fileID: 11400000, guid: a2970886c239dd4409a97505e7d5078b, type: 2}
+  remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
+  detectionRange: 10
   walkSpeed: 3.5
   runSpeed: 6
   target: {fileID: 0}

@@ -27,6 +27,15 @@ public class PlayerStats : NetworkBehaviour
 	[SyncVar]
     public float regenHealthDelay = 10.0f; //Time in (seconds) before regen kicks in. 10 Second Default
 
+    [SyncVar]
+    public float revivalTime = 3.0f;
+
+    [SyncVar]
+    public bool canRevive = false;
+
+    [SyncVar]
+    GameObject collidedPlayer = null;
+
 	void Start()
 	{
 		if (!isLocalPlayer)
@@ -53,42 +62,57 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.O)) //Danage Key
         {
             CmdDamage(20);
         }
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P)) //Heal Key
         {
             CmdHeal(20);
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K)) //Kill Key
         {
             CmdKill();
         }
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L)) //Revive Self Key
         {
             CmdRevive();
         }
+
+        if (Input.GetKeyDown(KeyCode.E)) //Interact Key
+        {
+            if (canRevive == true)
+            {
+                collidedPlayer.GetComponent<PlayerStats>().CmdRevive();
+            }
+        }
     }
 
-    void OnTriggerEnter(Collider sphere)
+    void OnTriggerEnter(Collider otherPlayer)
     {
-        if(isLocalPlayer)
+        if (otherPlayer.CompareTag("NetworkedPlayer"))
         {
-            if (sphere.CompareTag("NetworkedPlayer"))
+            if (otherPlayer.GetComponent<PlayerStats>().isDead == true)
             {
-                if (sphere.GetComponent<PlayerStats>().isDead == true)
-                {
-                    sphere.GetComponent<PlayerStats>().CmdRevive();
-                }
+                collidedPlayer = otherPlayer.gameObject;
+                    
+                canRevive = true;
             }
+        }
+    }
+
+    void OnTriggerExit(Collider otherPlayer)
+    {
+        if (otherPlayer.CompareTag("NetworkedPlayer"))
+        {
+            canRevive = false;
         }
     }
 
 	[Command]
 	public void CmdDamage(int amount)
 	{
-		if(!isServer)
+		if (!isServer)
 		{
 			return;
 		}

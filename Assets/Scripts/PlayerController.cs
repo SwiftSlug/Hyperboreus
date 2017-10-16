@@ -4,17 +4,17 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour
 {
 	Vector3 playerOrientation; //Player Orientation
-	public GameObject myCamera; //Camera Reference
-    Vector3 heightOffset; //Camera height from player
-    Vector3 verticalOffset; //Camera vertical alignment from player
+	//public GameObject myCamera; //Camera Reference
+    //Vector3 heightOffset; //Camera height from player
+    //Vector3 verticalOffset; //Camera vertical alignment from player
 
     void Start()
     {
         if (isLocalPlayer)
         {
-           myCamera = GameObject.FindGameObjectWithTag("MainCamera"); //Set a reference to the player
-           heightOffset = new Vector3(0.0f, 12.0f, 0.0f); //Give our camera a certain height to offset - could be exposed to editor
-           verticalOffset = new Vector3(0.0f, 0.0f, -2.0f); //Give our camera a certain vertical offset - could be exposed to editor
+           //myCamera = GameObject.FindGameObjectWithTag("MainCamera"); //Set a reference to the player
+           //heightOffset = new Vector3(0.0f, 12.0f, 0.0f); //Give our camera a certain height to offset - could be exposed to editor
+           //verticalOffset = new Vector3(0.0f, 0.0f, -2.0f); //Give our camera a certain vertical offset - could be exposed to editor
         }
     }
 
@@ -46,14 +46,14 @@ public class PlayerController : NetworkBehaviour
 		transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
 	}
 
-    //Called after the scene has been updating
-    void LateUpdate()
-    {
-		if (!isLocalPlayer)
-		{
-			return;
-		}
+  //  //Called after the scene has been updating
+  //  void LateUpdate()
+  //  {
+		//if (!isLocalPlayer)
+		//{
+		//	return;
+		//}
 
-        myCamera.transform.position = Vector3.Lerp(myCamera.transform.position, this.transform.position + heightOffset + verticalOffset, Time.deltaTime * 2.0f); //Make sure our camera is following the player, smoothly move it.
-    }
+  //      myCamera.transform.position = Vector3.Lerp(myCamera.transform.position, this.transform.position + heightOffset + verticalOffset, Time.deltaTime * 2.0f); //Make sure our camera is following the player, smoothly move it.
+  //  }
 }

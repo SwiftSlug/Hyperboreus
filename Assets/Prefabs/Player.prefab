@@ -310,6 +310,10 @@ MonoBehaviour:
   healthBar: {fileID: 224000553041229700}
   maxHealth: 100
   currentHealth: 100
+  isDead: 0
+  timeDamaged: 0
+  regenHealthSpeed: 0.25
+  regenHealthDelay: 10
 --- !u!114 &114505928617221474
 MonoBehaviour:
   m_ObjectHideFlags: 1

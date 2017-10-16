@@ -767,6 +767,8 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: cd6f6a6309e31e143afd429ec8f1851e, type: 2}
   remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
   detectionRange: 15
+  walkSpeed: 3.5
+  runSpeed: 8
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
   navMeshAgent: {fileID: 0}

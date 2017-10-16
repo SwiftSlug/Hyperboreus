@@ -11,6 +11,9 @@ public class StateController : MonoBehaviour {
 
     public float detectionRange = 500.0f;
 
+    public float walkSpeed = 3.5f;
+    public float runSpeed = 6.0f;
+
     public GameObject target;
     public Vector3 targetLocation;
 

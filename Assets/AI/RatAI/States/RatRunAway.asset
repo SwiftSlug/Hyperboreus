@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df077eafb9c6b884a93b1cfbfea6b3c7, type: 3}
+  m_Name: RatRunAway
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 3b6070f0c3165794a9288b4c69f3e806, type: 2}
+  sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  transitions:
+  - decision: {fileID: 11400000, guid: bdb7402c982007340bedc296eae61f07, type: 2}
+    trueState: {fileID: 11400000}
+    falseState: {fileID: 11400000, guid: cd6f6a6309e31e143afd429ec8f1851e, type: 2}

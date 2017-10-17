@@ -14,6 +14,8 @@ public class StateController : MonoBehaviour {
     public float walkSpeed = 3.5f;
     public float runSpeed = 6.0f;
 
+    public float searchWaitTime = 5.0f;
+
     public GameObject target;
     public Vector3 targetLocation;
 

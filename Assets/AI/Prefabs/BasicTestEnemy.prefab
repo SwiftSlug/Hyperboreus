@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114685237175142478}
   - component: {fileID: 114917807030115594}
   - component: {fileID: 114911875217546654}
+  - component: {fileID: 114347787036173842}
   - component: {fileID: 114985058893909474}
   m_Layer: 0
   m_Name: BasicTestEnemy
@@ -102,6 +103,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114347787036173842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332893165969140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375b816e513b6984787c3200100e4ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 100
+  enemyAttackDamage: 100
 --- !u!114 &114685237175142478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -148,8 +162,9 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: a2970886c239dd4409a97505e7d5078b, type: 2}
   remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
   detectionRange: 20
-  walkSpeed: 3.5
+  walkSpeed: 0.1
   runSpeed: 10
+  searchWaitTime: 5
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
   navMeshAgent: {fileID: 0}

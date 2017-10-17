@@ -28,7 +28,7 @@ public class PlayerStats : NetworkBehaviour
     public float regenHealthDelay = 10.0f; //Time in (seconds) before regen kicks in. 10 Second Default
 
     [SyncVar]
-    public float revivalTime = 3.0f;
+    public float revivalTime = 5.0f;
 
     [SyncVar]
     public bool canRevive = false;
@@ -36,7 +36,7 @@ public class PlayerStats : NetworkBehaviour
     [SyncVar]
     GameObject collidedPlayer = null;
 
-	void Start()
+    void Start()
 	{
 		if (!isLocalPlayer)
 		{
@@ -62,7 +62,7 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        if (Input.GetKeyDown(KeyCode.O)) //Danage Key
+        if (Input.GetKeyDown(KeyCode.O)) //Damage Key
         {
             CmdDamage(20);
         }
@@ -79,16 +79,14 @@ public class PlayerStats : NetworkBehaviour
             CmdRevive();
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) //Interact Key
+        if (Input.GetKey(KeyCode.E)) //Interact Key is being held down
         {
-            if (canRevive == true)
-            {
-                collidedPlayer.GetComponent<PlayerStats>().CmdRevive();
-            }
+            CmdPlayerRevive();
         }
+
     }
 
-    void OnTriggerEnter(Collider otherPlayer)
+    void OnTriggerStay(Collider otherPlayer)
     {
         if (otherPlayer.CompareTag("NetworkedPlayer"))
         {
@@ -98,18 +96,52 @@ public class PlayerStats : NetworkBehaviour
                     
                 canRevive = true;
             }
+            else
+            {
+                canRevive = false;
+            }
         }
     }
 
-    void OnTriggerExit(Collider otherPlayer)
+    //void OnTriggerExit(Collider otherPlayer)
+    //{
+    //    if (otherPlayer.CompareTag("NetworkedPlayer"))
+    //    {
+    //        canRevive = false;
+    //    }
+    //}
+
+    [Command]
+    public void CmdPlayerRevive()
     {
-        if (otherPlayer.CompareTag("NetworkedPlayer"))
+        if (!isServer)
         {
-            canRevive = false;
+            return;
+        }
+        
+        if (isDead)
+        {
+            return;
+        }
+
+        if (canRevive == true)
+        {
+            revivalTime -= Time.deltaTime;
+
+            if (revivalTime <= 0)
+            {
+                collidedPlayer.GetComponent<PlayerStats>().CmdRevive();
+
+                revivalTime = 5.0f;
+            }
+        }
+        else
+        {
+            revivalTime = 5.0f;
         }
     }
 
-	[Command]
+    [Command]
 	public void CmdDamage(int amount)
 	{
 		if (!isServer)

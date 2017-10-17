@@ -26,8 +26,9 @@ GameObject:
   - component: {fileID: 114148089913796268}
   - component: {fileID: 114610079029982304}
   - component: {fileID: 114255740137734454}
-  - component: {fileID: 114348478218635018}
+  - component: {fileID: 114512577744461136}
   - component: {fileID: 135124012025750978}
+  - component: {fileID: 114348478218635018}
   m_Layer: 0
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -296,7 +297,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77a4809527d8c40a0e9836f30a0eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCamera: {fileID: 1400124946779370, guid: 64531fe4dd336fb4684aec9123f5080f, type: 2}
 --- !u!114 &114348478218635018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,6 +315,8 @@ MonoBehaviour:
   timeDamaged: 0
   regenHealthSpeed: 0.25
   regenHealthDelay: 10
+  revivalTime: 5
+  canRevive: 0
 --- !u!114 &114505928617221474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -342,6 +344,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114512577744461136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b750c3206315e4fb16c0e5a2f70bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myCamera: {fileID: 1400124946779370, guid: 64531fe4dd336fb4684aec9123f5080f, type: 2}
 --- !u!114 &114610079029982304
 MonoBehaviour:
   m_ObjectHideFlags: 1

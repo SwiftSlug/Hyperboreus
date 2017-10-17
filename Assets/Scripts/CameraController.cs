@@ -7,8 +7,6 @@ public class CameraController : NetworkBehaviour
     Vector3 heightOffset; //Camera height from player
     Vector3 verticalOffset; //Camera vertical alignment from player
 
-
-    // Use this for initialization
     void Start ()
     {
 		if(isLocalPlayer)
@@ -19,7 +17,7 @@ public class CameraController : NetworkBehaviour
         }
 	}
 
-    //Called after the scene has been updating
+    //Called after the scene has been updated
     void LateUpdate()
     {
         if (!isLocalPlayer)
@@ -27,6 +25,7 @@ public class CameraController : NetworkBehaviour
             return;
         }
 
-        myCamera.transform.position = Vector3.Lerp(myCamera.transform.position, this.transform.position + heightOffset + verticalOffset, Time.deltaTime * 2.0f); //Make sure our camera is following the player, smoothly move it.
+        //Make sure our camera is following the player, smoothly move it.
+        myCamera.transform.position = Vector3.Lerp(myCamera.transform.position, this.transform.position + heightOffset + verticalOffset, Time.deltaTime * 2.0f); 
     }
 }

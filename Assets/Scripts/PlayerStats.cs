@@ -3,15 +3,15 @@ using UnityEngine.Networking;
 
 public class PlayerStats : NetworkBehaviour
 {
-	public RectTransform healthBar;
+	public RectTransform healthBar; //Store a reference to the health bar transform so it can change in size
 
-	[Tooltip("Player max health")]
+	[Tooltip("Player maximum health")]
 	[SyncVar]
 	public int maxHealth = 100; //Max health of the player, should only change through
 
 	[Tooltip("Current player health")]
 	[SyncVar(hook = "ChangeHealth")]
-	public int currentHealth; //The player's current health, can go down from being damaged or up from being healed or regenerating.
+	public int currentHealth; //The player's current health, can go down from being damaged or up from being healed or regenerating
 
 	[Tooltip("Boolean for player death check")]
 	[SyncVar]
@@ -20,24 +20,30 @@ public class PlayerStats : NetworkBehaviour
 	[Tooltip("Time code at which player was damaged")]
 	[SyncVar] 
 	public float timeDamaged = 0.0f; //Time code at which player was damaged
+
 	[Tooltip("Regen rate. Quarter of a second Default before each regen tick")]
 	[SyncVar]
 	public float regenHealthSpeed = 0.25f; //Regen rate. Quarter of a second Default before each regen tick
-	[Tooltip("Time in (seconds)before regen kicks in. 10 Second Default")]
+
+	[Tooltip("Time in (seconds) before regen kicks in. 10 Second Default")]
 	[SyncVar]
     public float regenHealthDelay = 10.0f; //Time in (seconds) before regen kicks in. 10 Second Default
 
+    [Tooltip("Time taken to revive another player. 5 Second Default")]
     [SyncVar]
-    public float revivalTime = 5.0f;
+    public float revivalTime = 5.0f; //Time in (seconds) before the receiving player is revive. 5 Second Default
 
+    [Tooltip("Can this player revive another player?")]
     [SyncVar]
-    public bool canRevive = false;
+    public bool canRevive = false; //Boolean to check whether we can revive a player using the CmdRevive method
 
+    [Tooltip("Store the player we collided with so we can revive them")]
     [SyncVar]
-    GameObject collidedPlayer = null;
+    GameObject collidedPlayer = null; //Placeholder to store a reference with a collided player, we use this to call revive on them
 
     void Start()
 	{
+        //If we are not the local player then disable all other canvas' so we do not see what they see
 		if (!isLocalPlayer)
 		{
 			Canvas playerUI = gameObject.GetComponentInChildren<Canvas>();
@@ -50,9 +56,9 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        currentHealth = maxHealth;
+        currentHealth = maxHealth; //Set the player's health to their maximum health locally
 
-        CmdStartRegen();
+        CmdStartRegen(); //Invoke our regen function on the server which will check if enough time has passed to start regenerating player health
     }
 
 	void Update()
@@ -62,39 +68,51 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
+        //DEBUG USE
         if (Input.GetKeyDown(KeyCode.O)) //Damage Key
         {
-            CmdDamage(20);
+            CmdDamage(20); //Call the damage method on the server to damage the player by 20
         }
         if (Input.GetKeyDown(KeyCode.P)) //Heal Key
         {
-            CmdHeal(20);
+            CmdHeal(20); //Call the heal method on the server to heal the player by 20
         }
         if (Input.GetKeyDown(KeyCode.K)) //Kill Key
         {
-            CmdKill();
+            CmdKill(); //Call the kill method on the server to down the player
         }
         if (Input.GetKeyDown(KeyCode.L)) //Revive Self Key
         {
-            CmdRevive();
+            CmdRevive(); //Call the revive method on the server to revive the downed player with 10 health
         }
-
         if (Input.GetKey(KeyCode.E)) //Interact Key is being held down
         {
-            CmdPlayerRevive();
+            CmdPlayerRevive(); //If the 'E' key is being held down, call the player revival method which will try and revive another player if conditions are met
         }
 
+        //Check if player is dead locally
+        if (isDead)
+        {
+            GetComponent<PlayerController>().enabled = false; //Disable the player's movement locally
+        }
+        else
+        {
+            GetComponent<PlayerController>().enabled = true; //Enable the player's movement locally
+        }
     }
 
+    //Check if trigger colliding sphere is overlapping with another collider
     void OnTriggerStay(Collider otherPlayer)
     {
+        //If the overlap is of a tagged network player
         if (otherPlayer.CompareTag("NetworkedPlayer"))
         {
+            //And the player is dead
             if (otherPlayer.GetComponent<PlayerStats>().isDead == true)
             {
-                collidedPlayer = otherPlayer.gameObject;
+                collidedPlayer = otherPlayer.gameObject; //Store the other player so we can call revive on them
                     
-                canRevive = true;
+                canRevive = true; //Allow this current player to revive them if needed
             }
             else
             {
@@ -103,14 +121,7 @@ public class PlayerStats : NetworkBehaviour
         }
     }
 
-    //void OnTriggerExit(Collider otherPlayer)
-    //{
-    //    if (otherPlayer.CompareTag("NetworkedPlayer"))
-    //    {
-    //        canRevive = false;
-    //    }
-    //}
-
+    //Call this on the server
     [Command]
     public void CmdPlayerRevive()
     {
@@ -119,20 +130,23 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
         
+        //If the player trying to revive another is dead, don't allow this
         if (isDead)
         {
             return;
         }
 
+        //If we are allowed to revive the player
         if (canRevive == true)
         {
-            revivalTime -= Time.deltaTime;
+            revivalTime -= Time.deltaTime; //Count down from the set revival time using time between frames
 
+            //When the countdown reaches 0
             if (revivalTime <= 0)
             {
-                collidedPlayer.GetComponent<PlayerStats>().CmdRevive();
+                collidedPlayer.GetComponent<PlayerStats>().CmdRevive(); //Revive the other player using our stored reference.
 
-                revivalTime = 5.0f;
+                revivalTime = 5.0f; //Reset our revival time in case their is another player to revive
             }
         }
         else
@@ -141,6 +155,7 @@ public class PlayerStats : NetworkBehaviour
         }
     }
 
+    //Call this for the player on the server
     [Command]
 	public void CmdDamage(int amount)
 	{
@@ -149,16 +164,18 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        currentHealth -= amount;
+        currentHealth -= amount; //Set the server player's health to a reduced amount given via argument to the method
 
-		timeDamaged = Time.time;
+		timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
 
+        //If the server player's health reaches 0
 		if (currentHealth <= 0)
 		{
-            CmdKill();
+            CmdKill(); //Send the command to the server to kill/down the player
 		}
 	}
 
+    //Call this for the player on the server
 	[Command]
 	public void CmdHeal(int amount)
 	{
@@ -167,19 +184,22 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
+        //If the player is dead then we should not be able to heal them
         if (isDead)
         {
             return;
         }
 
-		currentHealth += amount;
+		currentHealth += amount; //Increase the player's health by incremented amount given via argument to the method
 
+        //Make sure the player's health does not exceed their maximum
 		if (currentHealth >= maxHealth)
 		{
 			currentHealth = maxHealth;
 		}
 	}
 
+    //Call this command for the player on the server
     [Command]
     public void CmdKill()
     {
@@ -188,13 +208,14 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
-        isDead = true;
+        GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
 
-        timeDamaged = Time.time;
+        isDead = true; //Set our boolean to show that player is dead
 
-        currentHealth = 0;
+        currentHealth = 0; //Set the player's current health to 0 on the server
     }
 
+    //Call this command for the player on the server
     [Command]
     public void CmdRevive()
     {
@@ -203,13 +224,16 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
-        isDead = false;
+        GetComponent<PlayerController>().enabled = true; //Enable the player's movement server side
 
-        timeDamaged = Time.time;
+        isDead = false; //Reset our boolean so the player is "alive"
 
-        currentHealth = 10;
+        timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
+
+        currentHealth = 10; //Set the player's revived health
     }
 
+    //Call the regen on the server for the player
     [Command]
     public void CmdStartRegen()
     {
@@ -218,9 +242,10 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
-        InvokeRepeating("CmdRegenHealth", 0.0f, regenHealthSpeed);
+        InvokeRepeating("CmdRegenHealth", 0.0f, regenHealthSpeed); //Call the server regen health method that repeats each tick depending on regenHealthSpeed value
     }
 
+    //Regenerate health on the server
 	[Command]
 	public void CmdRegenHealth()
 	{
@@ -229,17 +254,20 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
+        //If we have a timestamp (prevents regen starting needlessly starting when the game starts)
         if (timeDamaged != 0.0)
         {
+            //If; on the server, the player's current health is less than their maximum & the time has increased by the timestamped amount + a specified delay (10 seconds) & the player is not dead
             if (currentHealth < maxHealth && Time.time > (timeDamaged + regenHealthDelay) && isDead == false)
             {
-                CmdHeal(1);
+                CmdHeal(1); //Heal the player for 1 each call of this method
             }
         }
 	}
 
+    //Using the SyncVar hook, this method is called each time the current health value is synchronized between server and client
 	void ChangeHealth(int currentHealth)
 	{
-		healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+		healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
 	}
 }

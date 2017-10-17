@@ -16,6 +16,11 @@ public class StateController : MonoBehaviour {
 
     public float searchWaitTime = 5.0f;
 
+    public float attackCooldown = 5.0f;
+    public float jumpDistance = 10.0f;
+
+    public float lastJumped = 0.0f;
+
     public GameObject target;
     public Vector3 targetLocation;
 

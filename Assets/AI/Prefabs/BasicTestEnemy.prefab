@@ -147,9 +147,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: a2970886c239dd4409a97505e7d5078b, type: 2}
   remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
-  detectionRange: 10
+  detectionRange: 20
   walkSpeed: 3.5
-  runSpeed: 6
+  runSpeed: 10
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
   navMeshAgent: {fileID: 0}

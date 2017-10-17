@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PluggableAI/Decisions/CrawlerBasicPlayerDetection")]
 public class CrawlerBasicPlayerDetectionDecision : Decision {
 
-    public float basicDetectionMultiplier = 1.5f;
+    public float basicDetectionMultiplier = 2.0f;
 
     public override bool Decide(StateController controller)
     {

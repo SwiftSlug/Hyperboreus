@@ -17,7 +17,9 @@ public class CrawlerAttackAction : Action {
         
         controller.navMeshAgent.destination = controller.target.transform.position;
 
-
+        //Debug.Log(controller.animator.GetComponent<Animation>().isPlaying);
+        //Debug.Log(controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"));
+        
         //Debug.Log("Last Jumped = " + controller.lastJumped);
         //Debug.Log("Time = " + Time.time);
         if ( (controller.transform.position - controller.target.transform.position).magnitude < 2.0)
@@ -29,13 +31,13 @@ public class CrawlerAttackAction : Action {
             controller.navMeshAgent.destination = controller.target.transform.position; //  Target too far move to target
         }
         
-        if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("jump"))    //  Is animation running ***** THIS WONT WORK WHEN FINIAL ANIMATIONS ARE IN
+        if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"))    //  Is animation running ***** THIS WONT WORK WHEN FINIAL ANIMATIONS ARE IN
         {
             controller.navMeshAgent.speed = controller.runSpeed;
         }
         else
         {
-            controller.navMeshAgent.speed = controller.runSpeed * 1000;
+            controller.navMeshAgent.speed = controller.runSpeed * 100;
         }
 
         JumpAttack(controller);            
@@ -55,7 +57,7 @@ public class CrawlerAttackAction : Action {
                     controller.lastJumped = Time.time;
                     //controller.jumpAnimation.Play();
 
-                    controller.navMeshAgent.speed = controller.runSpeed * 1000;
+                    controller.navMeshAgent.speed = controller.runSpeed * 100;
                     controller.animator.SetTrigger("jump");
                     
 

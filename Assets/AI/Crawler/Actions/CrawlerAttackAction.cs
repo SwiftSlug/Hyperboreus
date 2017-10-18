@@ -14,7 +14,7 @@ public class CrawlerAttackAction : Action {
 
     private void CrawlerAttack(StateController controller)
     {
-        controller.navMeshAgent.speed = controller.runSpeed;
+        
         controller.navMeshAgent.destination = controller.target.transform.position;
 
 
@@ -29,6 +29,15 @@ public class CrawlerAttackAction : Action {
             controller.navMeshAgent.destination = controller.target.transform.position; //  Target too far move to target
         }
         
+        if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("jump"))    //  Is animation running ***** THIS WONT WORK WHEN FINIAL ANIMATIONS ARE IN
+        {
+            controller.navMeshAgent.speed = controller.runSpeed;
+        }
+        else
+        {
+            controller.navMeshAgent.speed = controller.runSpeed * 1000;
+        }
+
         JumpAttack(controller);            
 
     }
@@ -38,11 +47,18 @@ public class CrawlerAttackAction : Action {
 
         if (Time.time > (controller.lastJumped + controller.attackCooldown)) //  Call jump only every 5 seconds
         {
-            if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max range
+            if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max jump range
             {
-                if ((controller.transform.position - controller.target.transform.position).magnitude > 5.0) //  Check within min range
+                if ((controller.transform.position - controller.target.transform.position).magnitude > 5.0) //  Check within min jump range
                 {
+
                     controller.lastJumped = Time.time;
+                    //controller.jumpAnimation.Play();
+
+                    controller.navMeshAgent.speed = controller.runSpeed * 1000;
+                    controller.animator.SetTrigger("jump");
+                    
+
                     Debug.Log("Jump !");
                 }
             }            

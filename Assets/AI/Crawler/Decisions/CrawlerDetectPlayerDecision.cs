@@ -25,7 +25,7 @@ public class CrawlerDetectPlayerDecision : Decision {
             }
         }
 
-        //Debug.Log("Ah nice and safe!");
+        //Debug.Log("Speed Set");
 
         controller.navMeshAgent.speed = controller.walkSpeed;
         return false;

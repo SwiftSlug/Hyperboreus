@@ -24,6 +24,8 @@ public class StateController : MonoBehaviour {
     public GameObject target;
     public Vector3 targetLocation;
 
+    public Animator animator;
+
 
 	[HideInInspector] public NavMeshAgent navMeshAgent;
 	[HideInInspector] public List<Transform> wayPointList;
@@ -37,6 +39,9 @@ public class StateController : MonoBehaviour {
 	void Awake () 
 	{
 		navMeshAgent = GetComponent<NavMeshAgent> ();
+
+        animator = GetComponentInChildren<Animator>();
+
         aiActive = true;
 	}
 

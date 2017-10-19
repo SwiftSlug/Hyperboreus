@@ -16,7 +16,7 @@ public class RatDetectEnemiesDecision : Decision {
         
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            if (hitColliders[i].gameObject.CompareTag("Player") || hitColliders[i].gameObject.CompareTag("Enemy"))
+            if (hitColliders[i].gameObject.CompareTag("NetworkedPlayer") || hitColliders[i].gameObject.CompareTag("Enemy"))
             {
                 //Debug.Log("Player Seen Run Away !");
                 controller.navMeshAgent.speed = controller.runSpeed;

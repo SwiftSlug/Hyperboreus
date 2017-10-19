@@ -4,13 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TitleCamera
-<<<<<<< HEAD
   - NetworkedPlayer
-=======
-  - RatFood
+  - TitleCamera
   - Enemy
->>>>>>> Enemy-AI-Jay
+  - RatFood
   layers:
   - Default
   - TransparentFX

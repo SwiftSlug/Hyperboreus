@@ -16,7 +16,7 @@ public class CrawlerDetectPlayerDecision : Decision {
 
         for (int i = 0; i < hitColliders.Length; i++)
         {
-            if (hitColliders[i].gameObject.CompareTag("Player"))
+            if (hitColliders[i].gameObject.CompareTag("NetworkedPlayer"))
             {
                 //Debug.Log("Player Seen Run Away !");
                 controller.navMeshAgent.speed = controller.runSpeed;

@@ -16,7 +16,7 @@ public class CanSeePlayerDecision : Decision
 
     private bool CanSeePlayer(StateController controller)
     {
-        Ray hit;
+        //Ray hit;
         
         //Physics.OverlapSphere()
 

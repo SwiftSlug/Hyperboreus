@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PluggableAI/Decisions/RatArrivedAtFoodDecision")]
 public class RatArrivedAtFoodDecision : Decision {
 
-    public float stoppingDistance = 2.0f;
-
     public override bool Decide(StateController controller)
     {
         return RatArrivedAtFood(controller);
@@ -18,7 +16,7 @@ public class RatArrivedAtFoodDecision : Decision {
 
         //Debug.Log("Stopping Distance = " + stoppingDistance);
 
-        if (controller.navMeshAgent.remainingDistance < stoppingDistance)
+        if (controller.navMeshAgent.remainingDistance < controller.stopDistance)
         //if ((controller.transform.position - controller.target.transform.position).magnitude < stoppingDistance)
         {
             //Debug.Log("CloseEnough");

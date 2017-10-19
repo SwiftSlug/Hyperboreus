@@ -12,9 +12,9 @@ public class RatMoveToFoodAction : Action {
 
     private void RatMoveToFood(StateController controller)
     {
-        if (controller.target.transform.position != null) {
-            controller.navMeshAgent.destination = controller.target.transform.position;
-        }
+        
+        controller.navMeshAgent.destination = controller.target.transform.position;
+        
         /*
         Collider[] hitColliders = Physics.OverlapSphere(controller.transform.position, controller.detectionRange);
         

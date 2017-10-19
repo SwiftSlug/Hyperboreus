@@ -13,13 +13,14 @@ public class CrawlerMoveLocationSetDecision : Decision {
     private bool CrawlerMoveLocationSet(StateController controller)
     {
 
-        if (controller.targetLocation == null)
+        if (controller.moveCommandLocation != Vector3.zero) //  May be better to use a move to bool instead of the zero comparison
         {
-            return false;
+            //Debug.Log("MoveLocation Set !");
+            return true;
         }
         else
         {            
-            return true;
+            return false;
         }
 
     }

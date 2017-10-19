@@ -208,15 +208,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: a2970886c239dd4409a97505e7d5078b, type: 2}
   remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
-  detectionRange: 20
-  walkSpeed: 0.1
+  detectionRange: 10
+  walkSpeed: 3.5
   runSpeed: 5
   searchWaitTime: 5
   attackCooldown: 5
-  jumpDistance: 200
+  stopDistance: 1
   lastJumped: 0
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
+  moveCommandLocation: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
   navMeshAgent: {fileID: 0}
   wayPointList: []
@@ -280,7 +281,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 200
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

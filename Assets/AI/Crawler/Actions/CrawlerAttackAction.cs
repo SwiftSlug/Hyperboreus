@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PluggableAI/Actions/CrawlerAttack")]
 public class CrawlerAttackAction : Action {
 
-    //private float lastJumped = 0;
-
     public override void Act(StateController controller)
     {
         CrawlerAttack(controller);
@@ -16,22 +14,18 @@ public class CrawlerAttackAction : Action {
     {
         
         controller.navMeshAgent.destination = controller.target.transform.position;
-
-        //Debug.Log(controller.animator.GetComponent<Animation>().isPlaying);
-        //Debug.Log(controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"));
-        
-        //Debug.Log("Last Jumped = " + controller.lastJumped);
-        //Debug.Log("Time = " + Time.time);
-        if ( (controller.transform.position - controller.target.transform.position).magnitude < 2.0)
+       
+        if ( (controller.transform.position - controller.target.transform.position).magnitude < controller.stopDistance)
         {
             controller.navMeshAgent.destination = controller.transform.position;    //  Target close enough stop moving
+            // Player damage function goes here ********************
         }
         else
         {
             controller.navMeshAgent.destination = controller.target.transform.position; //  Target too far move to target
         }
         
-        if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"))    //  Is animation running ***** THIS WONT WORK WHEN FINIAL ANIMATIONS ARE IN
+        if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"))   //  Is the jump animation running
         {
             controller.navMeshAgent.speed = controller.runSpeed;
         }
@@ -61,27 +55,10 @@ public class CrawlerAttackAction : Action {
                     controller.animator.SetTrigger("jump");
                     
 
-                    Debug.Log("Jump !");
+                    //Debug.Log("Jump !");
                 }
             }            
         }
-
-            
-
-        //Rigidbody rb = controller.GetComponent<Rigidbody>();
-
-        //controller.navMeshAgent.isStopped = true;
-        //controller.navMeshAgent.Stop(true);
-        //rb.useGravity = true;
-
-
-
-        //controller.GetComponent<Rigidbody>().AddForce( controller.transform.up * controller.jumpDistance , ForceMode.Force);
-
-        //controller.GetComponent<Rigidbody>().AddForce(new Vector3(0, 500, 0), ForceMode.Impulse);
-
-        
-        //controller.GetComponent<Rigidbody>().velocity = controller.transform.up * controller.jumpDistance;
     }
 
 }

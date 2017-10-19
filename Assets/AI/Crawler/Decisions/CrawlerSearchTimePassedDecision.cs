@@ -15,6 +15,7 @@ public class CrawlerSearchTimePassedDecision : Decision {
 
         if (controller.CheckIfCountDownElapsed(controller.searchWaitTime))
         {
+            //Debug.Log("Search Time Passed");
             return true;
         }
         else

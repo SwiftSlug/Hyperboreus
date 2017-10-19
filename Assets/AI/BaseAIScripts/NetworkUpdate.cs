@@ -11,16 +11,8 @@ public class NetworkUpdate : NetworkBehaviour {
     [SyncVar]
     Quaternion realRotation;
 
-    NavMeshAgent navMesh;
     public float updateInterval;
 
-	// Use this for initialization
-	void Start () {
-        navMesh = GetComponent<NavMeshAgent>();
-
-        //realPosition = transform.position;
-    }
-	
 	// Update is called once per frame
 	void Update () {
 

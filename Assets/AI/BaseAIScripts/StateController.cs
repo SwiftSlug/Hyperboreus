@@ -27,6 +27,10 @@ public class StateController : MonoBehaviour {
     [Tooltip("The distance at which AI stop moving towards their target")]
     public float stopDistance = 1.0f;
 
+
+    [Tooltip("The area size around the player the AI will search in")]
+    public float wanderRange = 5.0f;
+
     [HideInInspector] public float lastJumped = 0.0f;   //  Used for timing cooldown between jumps
 
 

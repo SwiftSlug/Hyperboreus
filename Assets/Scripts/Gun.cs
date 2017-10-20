@@ -80,7 +80,7 @@ public class Gun : MonoBehaviour
         Debug.Log("Reloading...");
 
         animator.SetBool("Reloading", true);
-
+        DisableMuzzleEffects();
         yield return new WaitForSeconds(reloadTime - 0.25f);
         animator.SetBool("Reloading", false);
         yield return new WaitForSeconds(0.25f);
@@ -124,7 +124,7 @@ public class Gun : MonoBehaviour
         //Perform the raycast 
         if (Physics.Raycast(shootRay, out shootHit, range))
         {
-            //code in place for damaging enemy health... uncomment and adjust when enemy 
+            //code in place for damaging enemy health... uncomment and adjust when enemy health is implemented
             //EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
             //if (enemyHealth != null)
             //{

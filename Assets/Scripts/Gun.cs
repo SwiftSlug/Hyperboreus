@@ -1,12 +1,19 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Gun : MonoBehaviour
 {
     public float damagePerShot = 10f;               //Damage each bullet deals to enemies.
     public float timeBetweenShots = 0.15f;          //The time between each shot.
     public float range = 100f;                      //The range that the gun can fire.
+    public int maxAmmo = 45;
+    public float reloadTime = 1f;
+    public Animator animator;
     //public GameObject impactEffect;                 //Particle system at bullet point of impact.
 
+
+    private int currentAmmo;
+    private bool reloading;
 
     float timer;                                    //Timer to know when you can shoot (used for 'timeBetweenShots').
     Ray shootRay = new Ray();                       //Ray from the gun.
@@ -26,10 +33,32 @@ public class Gun : MonoBehaviour
         //gunAudio = GetComponent<AudioSource>();
     }
 
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
+
+    private void OnEnable()
+    {
+        reloading = false;
+        animator.SetBool("Reloading", false);
+    }
+
     // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;
+        
+        if (reloading)
+        {
+            return;
+        }
+
+        if (currentAmmo <= 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
 
         if (Input.GetButton("Fire1") && timer >= timeBetweenShots && Time.timeScale != 0)
         {
@@ -44,6 +73,23 @@ public class Gun : MonoBehaviour
         }
     }
 
+    IEnumerator Reload()
+    {
+        reloading = true;
+
+        Debug.Log("Reloading...");
+
+        animator.SetBool("Reloading", true);
+
+        yield return new WaitForSeconds(reloadTime - 0.25f);
+        animator.SetBool("Reloading", false);
+        yield return new WaitForSeconds(0.25f);
+
+        currentAmmo = maxAmmo;
+
+        reloading = false;
+    }
+
     public void DisableMuzzleEffects()
     {
         // Disable the line renderer and the light.
@@ -55,6 +101,8 @@ public class Gun : MonoBehaviour
     {
         //Resets the timer.
         timer = 0f;
+
+        currentAmmo--;
 
         //gunAudio.Play();
 

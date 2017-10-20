@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4819876095096188}
   - component: {fileID: 114391469134598484}
+  - component: {fileID: 95907416983184236}
   m_Layer: 0
   m_Name: WeaponSlots
   m_TagString: Untagged
@@ -465,6 +466,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &95907416983184236
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1114318535140166}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2143c1cd78bf9f845a7153a9506eaf58, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!108 &108649941190232306
 Light:
   m_ObjectHideFlags: 1
@@ -551,6 +569,9 @@ MonoBehaviour:
   damagePerShot: 10
   timeBetweenShots: 0.15
   range: 100
+  maxAmmo: 45
+  reloadTime: 1
+  animator: {fileID: 95907416983184236}
 --- !u!114 &114128805567268048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -565,6 +586,9 @@ MonoBehaviour:
   damagePerShot: 50
   timeBetweenShots: 1
   range: 100
+  maxAmmo: 45
+  reloadTime: 1
+  animator: {fileID: 95907416983184236}
 --- !u!114 &114148089913796268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1033,7 +1057,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -949546436
+  randomSeed: 1053467022
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4306,7 +4330,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -586405124
+  randomSeed: 757995982
   InitialModule:
     serializedVersion: 3
     enabled: 1

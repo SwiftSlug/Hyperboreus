@@ -71,11 +71,11 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
-    - blurRadius: 5
+    - blurRadius: 4
     - horizontalStep: 2
     - hstep: 1
     - radius: 30
-    - resolution: 1920
+    - resolution: 2000
     - verticalStep: 2
     - vstep: 1
     m_Colors:

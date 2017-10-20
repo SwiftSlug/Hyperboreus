@@ -13,9 +13,12 @@ public class CrawlerTargetDeadDecision : Decision {
     private bool CrawlerTargetDead(StateController controller)
     {
 
-        //if(controller.target)
+        if (controller.target.GetComponent<PlayerStats>().isDead)
+        {
+            return true;
+        }
 
-        return false;
+            return false;
 
     }
 

@@ -212,9 +212,13 @@ MonoBehaviour:
   walkSpeed: 3.5
   runSpeed: 5
   searchWaitTime: 5
-  attackCooldown: 5
-  stopDistance: 1
+  attackCooldown: 1.5
+  jumpCooldown: 5
+  stopDistance: 1.5
+  attackDamage: 5
+  wanderRange: 5
   lastJumped: 0
+  lastAttack: 0
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
   moveCommandLocation: {x: 0, y: 0, z: 0}

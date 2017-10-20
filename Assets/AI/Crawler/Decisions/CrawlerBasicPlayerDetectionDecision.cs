@@ -19,9 +19,13 @@ public class CrawlerBasicPlayerDetectionDecision : Decision {
         for (int i = 0; i < hitColliders.Length; i++)
         {
             if (hitColliders[i].gameObject.CompareTag("NetworkedPlayer"))
-            {  
-                controller.target = hitColliders[i].gameObject;
-                return true;
+            {
+                if (!hitColliders[i].gameObject.GetComponent<PlayerStats>().isDead)
+                {
+                    controller.target = hitColliders[i].gameObject;
+                    return true;
+                }
+                
             }
         }
 

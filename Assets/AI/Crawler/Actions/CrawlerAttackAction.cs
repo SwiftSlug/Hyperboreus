@@ -17,8 +17,15 @@ public class CrawlerAttackAction : Action {
        
         if ( (controller.transform.position - controller.target.transform.position).magnitude < controller.stopDistance)
         {
-            controller.navMeshAgent.destination = controller.transform.position;    //  Target close enough stop moving
-            // Player damage function goes here ********************
+            controller.navMeshAgent.destination = controller.transform.position;    //  Target close enough stop moving        
+            
+            if (Time.time > (controller.lastAttack + controller.attackCooldown)) //  Call attack only every 5 seconds
+            {
+                controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
+                controller.lastAttack = Time.time;
+                //Debug.Log("Attack");
+            }
+
         }
         else
         {
@@ -41,7 +48,7 @@ public class CrawlerAttackAction : Action {
     private void JumpAttack(StateController controller)
     {
 
-        if (Time.time > (controller.lastJumped + controller.attackCooldown)) //  Call jump only every 5 seconds
+        if (Time.time > (controller.lastJumped + controller.jumpCooldown)) //  Call jump only every 5 seconds
         {
             if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max jump range
             {
@@ -52,10 +59,10 @@ public class CrawlerAttackAction : Action {
                     //controller.jumpAnimation.Play();
 
                     controller.navMeshAgent.speed = controller.runSpeed * 100;
-                    controller.animator.SetTrigger("jump");
-                    
+                    controller.animator.SetTrigger("jump");                                  
+                
 
-                    //Debug.Log("Jump !");
+                //Debug.Log("Jump !");
                 }
             }            
         }

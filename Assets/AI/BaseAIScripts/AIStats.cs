@@ -17,4 +17,7 @@ public class AIStats : NetworkBehaviour
             enemyHealth -= damageAmount;
         }
     }
+
+
+
 }

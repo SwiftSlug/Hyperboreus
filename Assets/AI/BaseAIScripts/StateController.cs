@@ -24,15 +24,20 @@ public class StateController : MonoBehaviour {
     [Tooltip("The default cooldown inbetween attacks (Seconds)")]
     public float attackCooldown = 5.0f;
 
+    [Tooltip("The default cooldown inbetween jumps (Seconds)")]
+    public float jumpCooldown = 5.0f;
+
     [Tooltip("The distance at which AI stop moving towards their target")]
     public float stopDistance = 1.0f;
 
+    [Tooltip("The amount of damage the AI unit does per hit")]
+    public int attackDamage = 5;
 
     [Tooltip("The area size around the player the AI will search in")]
     public float wanderRange = 5.0f;
 
     [HideInInspector] public float lastJumped = 0.0f;   //  Used for timing cooldown between jumps
-
+    [HideInInspector] public float lastAttack = 0.0f;   //  Used for timing cooldown between jumps
 
     [HideInInspector] public GameObject target;         //  Generic gameobject target for AI
     [HideInInspector] public Vector3 targetLocation;    //  Generic vector location used for AI

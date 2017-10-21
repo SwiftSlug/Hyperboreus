@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 114448158268848662}
   - component: {fileID: 114336186841088678}
   - component: {fileID: 114373607148911020}
+  - component: {fileID: 114569721352902792}
   m_Layer: 0
   m_Name: RatAI
   m_TagString: Untagged
@@ -769,13 +770,24 @@ MonoBehaviour:
   detectionRange: 15
   walkSpeed: 3.5
   runSpeed: 8
+  searchWaitTime: 5
+  attackCooldown: 5
+  jumpCooldown: 5
+  stopDistance: 1
+  attackDamage: 5
+  wanderRange: 5
+  lastJumped: 0
+  lastAttack: 0
   target: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
+  moveCommandLocation: {x: 0, y: 0, z: 0}
+  animator: {fileID: 0}
   navMeshAgent: {fileID: 0}
   wayPointList: []
   nextWayPoint: 0
   chaseTarget: {fileID: 0}
   stateTimeElapsed: 0
+  aiActive: 0
 --- !u!114 &114373607148911020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -842,6 +854,19 @@ MonoBehaviour:
     i15: 163
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114569721352902792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1728472473201530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 375b816e513b6984787c3200100e4ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHealth: 100
+  isDead: 0
 --- !u!136 &136139960603143248
 CapsuleCollider:
   m_ObjectHideFlags: 1

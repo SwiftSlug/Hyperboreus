@@ -55,7 +55,7 @@ public class StateController : MonoBehaviour {
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public float stateTimeElapsed;
 
-    private bool aiActive;
+    public bool aiActive;
 
 
 	void Awake () 

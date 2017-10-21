@@ -14,17 +14,41 @@ public class AIDebug : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
-            //Debug.Log("Blep");
+            
 
             GameObject[] ai = GameObject.FindGameObjectsWithTag("Enemy");
 
             foreach (GameObject foundAI in ai)
             {
                 foundAI.GetComponent<StateController>().moveCommandLocation = new Vector3(20, 0, 0);
+                Debug.Log("Move Command Sent");
             }
 
         }
 
+        if (Input.GetButtonDown("DebugAIDamage"))
+        {
+            
+
+            GameObject[] ai = GameObject.FindGameObjectsWithTag("Enemy");
+
+            foreach (GameObject foundAI in ai)
+            {
+                foundAI.GetComponent<AIStats>().CmdDamage(10);
+                Debug.Log("Enemy Damaged");
+            }
+
+        }
+
+        GameObject[] aibelp = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (false)
+        {
+            foreach (GameObject foundAI in aibelp)
+            {
+                Debug.Log("Enemy health = :" + foundAI.GetComponent<AIStats>().enemyHealth);
+            }
+        }
         /*
         if (Input.GetKeyDown(KeyCode.))
         {

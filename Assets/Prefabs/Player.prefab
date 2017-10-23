@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4819876095096188}
-  - component: {fileID: 114391469134598484}
   - component: {fileID: 95907416983184236}
   m_Layer: 0
   m_Name: WeaponSlots
@@ -38,6 +37,7 @@ GameObject:
   - component: {fileID: 4451153192981950}
   - component: {fileID: 33355833754393008}
   - component: {fileID: 23313715921718568}
+  - component: {fileID: 114272359265272102}
   m_Layer: 0
   m_Name: Gun2
   m_TagString: Untagged
@@ -115,7 +115,6 @@ GameObject:
   - component: {fileID: 198472297241221612}
   - component: {fileID: 120732741239139334}
   - component: {fileID: 108746809936843168}
-  - component: {fileID: 114128805567268048}
   - component: {fileID: 199627585926326762}
   m_Layer: 0
   m_Name: GunEnd
@@ -135,7 +134,6 @@ GameObject:
   - component: {fileID: 198733629769606852}
   - component: {fileID: 120254834431040018}
   - component: {fileID: 108649941190232306}
-  - component: {fileID: 114025818910545288}
   - component: {fileID: 199530380952955868}
   m_Layer: 0
   m_Name: GunEnd
@@ -555,40 +553,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114025818910545288
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1512185868602208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da80b7e19f876d42ace566ae90f789d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 10
-  timeBetweenShots: 0.15
-  range: 100
-  maxAmmo: 45
-  reloadTime: 1
-  animator: {fileID: 95907416983184236}
---- !u!114 &114128805567268048
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1419846213581800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da80b7e19f876d42ace566ae90f789d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 50
-  timeBetweenShots: 1
-  range: 100
-  maxAmmo: 45
-  reloadTime: 1
-  animator: {fileID: 95907416983184236}
 --- !u!114 &114148089913796268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -659,6 +623,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77a4809527d8c40a0e9836f30a0eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114272359265272102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1135307419279864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 78
+    i1: 72
+    i2: 30
+    i3: 106
+    i4: 17
+    i5: 47
+    i6: 115
+    i7: 116
+    i8: 8
+    i9: 64
+    i10: 105
+    i11: 39
+    i12: 246
+    i13: 0
+    i14: 216
+    i15: 13
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114348478218635018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,18 +675,6 @@ MonoBehaviour:
   regenHealthDelay: 10
   revivalTime: 5
   canRevive: 0
---- !u!114 &114391469134598484
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1114318535140166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8b77db001279748a5f28023eb08009, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeapon: 0
 --- !u!114 &114505928617221474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -911,12 +895,12 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 0.1
+    widthMultiplier: 0.2
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 0.09958649
+        time: 0.19937897
         value: 1
         inSlope: 0
         outSlope: 0
@@ -4330,7 +4314,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 757995982
+  randomSeed: 1324334823
   InitialModule:
     serializedVersion: 3
     enabled: 1

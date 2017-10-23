@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Gun : MonoBehaviour
+public class Gun : NetworkBehaviour
 {
     public float damagePerShot = 10f;               //Damage each bullet deals to enemies.
     public float timeBetweenShots = 0.15f;          //The time between each shot.
     public float range = 100f;                      //The range that the gun can fire.
     public int maxAmmo = 10;                        //Value for maximum ammo per 'magazine'.
     public float reloadTime = 1f;                   //Time taken to reload gun back to max ammo.
-    public Animator animator;
+    //public Animator animator;
     //public GameObject impactEffect;                 //Particle system at bullet point of impact.
 
 
@@ -42,15 +43,16 @@ public class Gun : MonoBehaviour
     private void OnEnable()
     {
         reloading = false;                          //sets reloading to false when a new weapon is enabled.
-        animator.SetBool("Reloading", false);       //sets the animation for reloading to false when a new weapon is enabled.
+        //animator.SetBool("Reloading", false);       //sets the animation for reloading to false when a new weapon is enabled.
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //timer to help with weapon rate of fire.
         timer += Time.deltaTime;
-        
+
         //stops other statements from running while reloading.
         if (reloading)
         {
@@ -94,10 +96,10 @@ public class Gun : MonoBehaviour
 
         //Debug.Log("Reloading...");
 
-        animator.SetBool("Reloading", true);                    //Starts reloading animation.
+        //animator.SetBool("Reloading", true);                    //Starts reloading animation.
         DisableMuzzleEffects();                                 //Disables all muzzle effects (e.g. light and particles) while reloading.
         yield return new WaitForSeconds(reloadTime - 0.25f);    //Waits until reload time is up.
-        animator.SetBool("Reloading", false);                   //Animation for reloading is ending and going back to idle.
+        //animator.SetBool("Reloading", false);                   //Animation for reloading is ending and going back to idle.
         yield return new WaitForSeconds(0.25f);                 //0.25 second wait to alow for animation to go back to its idle state before anything else continues.
 
         //Resets the current ammo to maximum ammo.
@@ -106,12 +108,14 @@ public class Gun : MonoBehaviour
         reloading = false;
     }
 
+
     public void DisableMuzzleEffects()
     {
         // Disable the line renderer and the light.
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
+
 
     void Shooting()
     {

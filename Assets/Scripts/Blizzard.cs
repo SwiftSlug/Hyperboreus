@@ -14,7 +14,7 @@ public class Blizzard : MonoBehaviour {
     public float fogChangeRate = 0.005f;
 
     [Tooltip("Maximum emmision rate of the snow particle system")]
-    public int maxEmissionRate = 1000;
+    public int maxEmissionRate = 2000;
 
     [Tooltip("The speed that the emission rate will change over time")]
     public float particleChangeRate = 50.0f;
@@ -23,9 +23,12 @@ public class Blizzard : MonoBehaviour {
     public GameObject player;
     
     [Tooltip("Should the effect follow the player")]
-    public bool followPlayer = false;
+    public bool followPlayer = true;
 
     ParticleSystem particles;
+
+    //[Tooltip("Test bool")]
+    //public bool test;
 
     // Use this for initialization
     void Start () {

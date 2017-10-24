@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4215730183481266}
-  - component: {fileID: 114042299394828650}
+  - component: {fileID: 114531674884370494}
   m_Layer: 0
   m_Name: Blizzard
   m_TagString: Untagged
@@ -71,7 +71,7 @@ Transform:
   m_Father: {fileID: 4215730183481266}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
---- !u!114 &114042299394828650
+--- !u!114 &114531674884370494
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -83,10 +83,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blizzardActive: 0
-  maxFogIntensity: 0.3
+  maxFogIntensity: 0.1
   fogChangeRate: 0.005
-  maxEmissionRate: 1000
-  particleChangeRate: 10
+  maxEmissionRate: 4000
+  particleChangeRate: 50
+  player: {fileID: 0}
+  followPlayer: 0
 --- !u!198 &198951748165654094
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -542,7 +544,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 1
-    maxNumParticles: 2000
+    maxNumParticles: 8000
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -611,7 +613,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 4
     radius:
-      value: 4
+      value: 1
       mode: 0
       spread: 0
       speed:

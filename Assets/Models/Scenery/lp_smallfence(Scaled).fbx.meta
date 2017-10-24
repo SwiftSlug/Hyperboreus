@@ -1,52 +1,32 @@
 fileFormatVersion: 2
-guid: be791678d9ff02f40bf2a4fe65789120
-timeCreated: 1508781173
+guid: c4bb14560046f4248ae71b312b0983e5
+timeCreated: 1508844607
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: Icosphere
-    100002: Icosphere.001
-    100004: Icosphere.002
-    100006: Icosphere.003
-    100008: Icosphere.004
-    100010: Icosphere.005
-    100012: Icosphere.006
-    100014: Icosphere.007
-    100016: //RootNode
-    400000: Icosphere
-    400002: Icosphere.001
-    400004: Icosphere.002
-    400006: Icosphere.003
-    400008: Icosphere.004
-    400010: Icosphere.005
-    400012: Icosphere.006
-    400014: Icosphere.007
-    400016: //RootNode
-    2300000: Icosphere
-    2300002: Icosphere.001
-    2300004: Icosphere.002
-    2300006: Icosphere.003
-    2300008: Icosphere.004
-    2300010: Icosphere.005
-    2300012: Icosphere.006
-    2300014: Icosphere.007
-    3300000: Icosphere
-    3300002: Icosphere.001
-    3300004: Icosphere.002
-    3300006: Icosphere.003
-    3300008: Icosphere.004
-    3300010: Icosphere.005
-    3300012: Icosphere.006
-    3300014: Icosphere.007
-    4300000: Icosphere.007
-    4300002: Icosphere.006
-    4300004: Icosphere.005
-    4300006: Icosphere.004
-    4300008: Icosphere.003
-    4300010: Icosphere.002
-    4300012: Icosphere.001
-    4300014: Icosphere
+    100000: Cube
+    100002: Cube.001
+    100004: Cube.002
+    100006: Cube.003
+    100008: //RootNode
+    400000: Cube
+    400002: Cube.001
+    400004: Cube.002
+    400006: Cube.003
+    400008: //RootNode
+    2300000: Cube
+    2300002: Cube.001
+    2300004: Cube.002
+    2300006: Cube.003
+    3300000: Cube
+    3300002: Cube.001
+    3300004: Cube.002
+    3300006: Cube.003
+    4300000: Cube
+    4300002: Cube.001
+    4300004: Cube.002
+    4300006: Cube.003
   materials:
     importMaterials: 1
     materialName: 0

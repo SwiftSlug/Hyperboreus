@@ -1,82 +1,15 @@
 fileFormatVersion: 2
 guid: f280ddd4123ce2a4fac2e753f664ecc7
-timeCreated: 1508845314
+timeCreated: 1509008811
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
-    100000: BackWheel.001
-    100002: BackWheel.002
-    100004: BackWheel.003
-    100006: BackWheel.005
-    100008: Cab
-    100010: Cargo
-    100012: Cube
-    100014: Cube.001
-    100016: Cube.002
-    100018: Cube.003
-    100020: Cylinder
-    100022: Cylinder.001
-    100024: FrontWheel
-    100026: //RootNode
-    100028: Rename
-    400000: BackWheel.001
-    400002: BackWheel.002
-    400004: BackWheel.003
-    400006: BackWheel.005
-    400008: Cab
-    400010: Cargo
-    400012: Cube
-    400014: Cube.001
-    400016: Cube.002
-    400018: Cube.003
-    400020: Cylinder
-    400022: Cylinder.001
-    400024: FrontWheel
-    400026: //RootNode
-    400028: Rename
-    2300000: BackWheel.001
-    2300002: BackWheel.002
-    2300004: BackWheel.003
-    2300006: BackWheel.005
-    2300008: Cab
-    2300010: Cargo
-    2300012: Cube
-    2300014: Cube.001
-    2300016: Cube.002
-    2300018: Cube.003
-    2300020: Cylinder
-    2300022: Cylinder.001
-    2300024: FrontWheel
-    2300026: Rename
-    3300000: BackWheel.001
-    3300002: BackWheel.002
-    3300004: BackWheel.003
-    3300006: BackWheel.005
-    3300008: Cab
-    3300010: Cargo
-    3300012: Cube
-    3300014: Cube.001
-    3300016: Cube.002
-    3300018: Cube.003
-    3300020: Cylinder
-    3300022: Cylinder.001
-    3300024: FrontWheel
-    3300026: Rename
-    4300000: Cab
-    4300002: Cargo
-    4300004: Rename
-    4300006: FrontWheel
-    4300008: BackWheel.003
-    4300010: BackWheel.001
-    4300012: BackWheel.002
-    4300014: Cylinder
-    4300016: Cylinder.001
-    4300018: BackWheel.005
-    4300020: Cube
-    4300022: Cube.001
-    4300024: Cube.002
-    4300026: Cube.003
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cargo
   materials:
     importMaterials: 1
     materialName: 0

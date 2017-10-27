@@ -5,7 +5,6 @@ public class WeaponSwitch : NetworkBehaviour
 {
     [SyncVar]
     public int currentWeapon = 0;
-    public int childNumber;
 
     private Transform weaponSwtitchObj;
 
@@ -13,7 +12,7 @@ public class WeaponSwitch : NetworkBehaviour
     void Start()
     {
         weaponSwtitchObj = this.gameObject.transform.GetChild(2);
-        CmdSelectWeapon();
+        SelectWeapon();
     }
 
     // Update is called once per frame
@@ -53,14 +52,14 @@ public class WeaponSwitch : NetworkBehaviour
         if (previousWeapon != currentWeapon)
         {
             //Select that new weapon.
-            CmdSelectWeapon();
+            SelectWeapon();
         }
     }
 
-    [Command]
-    void CmdSelectWeapon()
+    void SelectWeapon()
     {
-        childNumber = 0;
+        int childNumber = 0;
+
         //for each child transform in this transform...
         foreach (Transform weapon in weaponSwtitchObj)
         {
@@ -81,13 +80,13 @@ public class WeaponSwitch : NetworkBehaviour
     }
 
     //[ClientRpc]
-    //void RpcsetWeaponActive(childNumber)
+    //void RpcsetWeaponActive()
     //{
     //    weaponSwtitchObj.GetChild().gameObject.SetActive(true);
     //}
 
     //[ClientRpc]
-    //void RpcsetWeaponNotActive(childNumber)
+    //void RpcsetWeaponNotActive()
     //{
     //    weaponSwtitchObj.GetChild().gameObject.SetActive(false);
     //}

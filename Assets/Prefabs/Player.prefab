@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 114512577744461136}
   - component: {fileID: 135124012025750978}
   - component: {fileID: 114348478218635018}
+  - component: {fileID: 114979996257772882}
   m_Layer: 0
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -772,6 +773,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114979996257772882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc8b77db001279748a5f28023eb08009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeapon: 0
 --- !u!120 &120254834431040018
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -1041,7 +1054,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1053467022
+  randomSeed: 2139573276
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4314,7 +4327,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 1324334823
+  randomSeed: -1751993784
   InitialModule:
     serializedVersion: 3
     enabled: 1

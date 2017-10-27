@@ -3,18 +3,27 @@ using UnityEngine.Networking;
 
 public class WeaponSwitch : NetworkBehaviour
 {
-
+    [SyncVar]
     public int currentWeapon = 0;
+    public int childNumber;
+
+    private Transform weaponSwtitchObj;
 
     // Use this for initialization
     void Start()
     {
-        SelectWeapon();
+        weaponSwtitchObj = this.gameObject.transform.GetChild(2);
+        CmdSelectWeapon();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         //int for previous weapon number set to current weapon so there is always a current weapon value.
         int previousWeapon = currentWeapon;
 
@@ -44,18 +53,19 @@ public class WeaponSwitch : NetworkBehaviour
         if (previousWeapon != currentWeapon)
         {
             //Select that new weapon.
-            SelectWeapon();
+            CmdSelectWeapon();
         }
     }
 
-    void SelectWeapon()
+    [Command]
+    void CmdSelectWeapon()
     {
-        int i = 0;
+        childNumber = 0;
         //for each child transform in this transform...
-        foreach (Transform weapon in transform)
+        foreach (Transform weapon in weaponSwtitchObj)
         {
             //Sets the current weapon to active..
-            if (i == currentWeapon)
+            if (childNumber == currentWeapon)
             {
                 weapon.gameObject.SetActive(true);
             }
@@ -65,7 +75,20 @@ public class WeaponSwitch : NetworkBehaviour
                 weapon.gameObject.SetActive(false);
             }
             //increment i to check through each weapon.
-            i++;
+            childNumber++;
         }
+
     }
+
+    //[ClientRpc]
+    //void RpcsetWeaponActive(childNumber)
+    //{
+    //    weaponSwtitchObj.GetChild().gameObject.SetActive(true);
+    //}
+
+    //[ClientRpc]
+    //void RpcsetWeaponNotActive(childNumber)
+    //{
+    //    weaponSwtitchObj.GetChild().gameObject.SetActive(false);
+    //}
 }

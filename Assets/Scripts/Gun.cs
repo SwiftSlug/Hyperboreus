@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class Gun : NetworkBehaviour
+public class Gun : MonoBehaviour
 {
     public float damagePerShot = 10f;               //Damage each bullet deals to enemies.
     public float timeBetweenShots = 0.15f;          //The time between each shot.

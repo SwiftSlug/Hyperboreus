@@ -26,10 +26,13 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
         }
 	}
 
-    private void OnTriggerEnter(Collider CollidedAsset)
+    private void OnTriggerEnter(Collider CollidedAsset)    
     {
+        BoxCollider boxColliderComponent = GetComponent<BoxCollider>();
+
        if (CollidedAsset.CompareTag("GridCollider"))
        {
+            Debug.Log("ColliderHit!");
             if (StructurePrefab.GetComponent<WallController>().placeStatus != true)
             {
                 StructurePrefab.GetComponent<Transform>().position = new Vector3(CollidedAsset.transform.position.x, CollidedAsset.transform.position.y, CollidedAsset.transform.position.z);

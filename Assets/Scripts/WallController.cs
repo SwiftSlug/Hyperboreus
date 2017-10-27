@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class WallController : MonoBehaviour
+public class WallController : NetworkBehaviour
 {
     public Vector3 currentRot;
     public bool placeStatus;

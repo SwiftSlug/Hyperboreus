@@ -22,7 +22,8 @@ GameObject:
   - component: {fileID: 33477951860918794}
   - component: {fileID: 65323673668020974}
   - component: {fileID: 23003172416174024}
-  - component: {fileID: 114605430325133124}
+  - component: {fileID: 114590959626455612}
+  - component: {fileID: 114144322870208202}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -94,7 +95,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114605430325133124
+--- !u!114 &114144322870208202
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,9 +103,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1275933350590844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de2008dc193fbc042aa7ec85a1fa9ff5, type: 3}
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentRot: {x: 0, y: 0, z: 0}
-  placeStatus: 0
-  Wall_obj: {fileID: 0}
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114590959626455612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275933350590844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 80
+    i1: 139
+    i2: 119
+    i3: 203
+    i4: 157
+    i5: 125
+    i6: 135
+    i7: 36
+    i8: 152
+    i9: 114
+    i10: 244
+    i11: 26
+    i12: 78
+    i13: 154
+    i14: 180
+    i15: 89
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

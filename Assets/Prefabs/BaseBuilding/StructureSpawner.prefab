@@ -38,6 +38,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4204335189578996}
   - component: {fileID: 114632312975694922}
+  - component: {fileID: 114526178148871118}
+  - component: {fileID: 114945422313274118}
   m_Layer: 0
   m_Name: StructureSpawner
   m_TagString: Untagged
@@ -52,7 +54,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462981531308506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 0, z: 11}
+  m_LocalPosition: {x: 3, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4991471265209876}
@@ -123,6 +125,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114526178148871118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462981531308506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 244
+    i1: 241
+    i2: 93
+    i3: 12
+    i4: 199
+    i5: 251
+    i6: 222
+    i7: 52
+    i8: 88
+    i9: 108
+    i10: 37
+    i11: 204
+    i12: 70
+    i13: 101
+    i14: 146
+    i15: 8
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114632312975694922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -137,3 +171,24 @@ MonoBehaviour:
   currentRot: {x: 0, y: 0, z: 0}
   placeStatus: 0
   Wall_obj: {fileID: 4991471265209876}
+--- !u!114 &114945422313274118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462981531308506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1

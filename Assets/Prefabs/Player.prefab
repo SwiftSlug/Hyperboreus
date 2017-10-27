@@ -30,6 +30,7 @@ GameObject:
   - component: {fileID: 114348478218635018}
   - component: {fileID: 114393970185486974}
   - component: {fileID: 65061811301593610}
+  - component: {fileID: 114865795530275024}
   m_Layer: 0
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -501,6 +502,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114865795530275024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6decfd3e164af848980d05e601e07fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Object: {fileID: 0}
+  StructurePrefab: {fileID: 1462981531308506, guid: f4f15d0cc7fbde34586c25cc46659208,
+    type: 2}
 --- !u!135 &135124012025750978
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -8,6 +8,7 @@ TagManager:
   - TitleCamera
   - Enemy
   - RatFood
+  - GridCollider
   layers:
   - Default
   - TransparentFX

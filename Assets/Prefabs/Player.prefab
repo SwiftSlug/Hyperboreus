@@ -516,6 +516,9 @@ MonoBehaviour:
   Object: {fileID: 4204335189578996, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
   StructurePrefab: {fileID: 1462981531308506, guid: f4f15d0cc7fbde34586c25cc46659208,
     type: 2}
+  metal: {fileID: 2100000, guid: 1439d4429f08cec499ef9a7beb2b129a, type: 2}
+  stone: {fileID: 2100000, guid: ba7992e63a793944bb3eaf7723eb4613, type: 2}
+  wood: {fileID: 2100000, guid: b547fcad801035f4da4d113c48207616, type: 2}
 --- !u!135 &135124012025750978
 SphereCollider:
   m_ObjectHideFlags: 1

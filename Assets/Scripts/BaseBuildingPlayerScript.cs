@@ -17,6 +17,11 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
 		if (Input.GetKeyDown ("b"))
         {
             StructurePrefab = (GameObject)Instantiate(StructurePrefab, Object.position, Object.rotation);

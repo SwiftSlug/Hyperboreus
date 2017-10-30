@@ -13,7 +13,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
     public Material stone;
     public Material wood;
    
-    private Material NeededMaterial;
+    private int NeededMaterial;
 
     public GameObject SpawnedStructure;
 
@@ -58,9 +58,16 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
     void CmdSpawnStructure()
     {
         StructurePrefab = (GameObject)Instantiate(StructurePrefab, Object.position, Object.rotation);
-        StructurePrefab.GetComponent<WallController>().SetMaterial(NeededMaterial);
+        //StructurePrefab.GetComponent<WallController>().SetMaterial(NeededMaterial);
         NetworkServer.Spawn(StructurePrefab);
     }
+
+    /*[Command]
+    void CmdSetMaterial(Material Mat)
+    {
+        StructurePrefab.GetComponent<WallController>().SetMaterial(Mat);
+
+    }*/
 	
 	// Update is called once per frame
 	void Update ()
@@ -79,27 +86,27 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
 
         if (Input.GetKeyDown("1") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
-            //StructurePrefab.GetComponentInChildren<Renderer>().material = wood;
-            StructurePrefab.GetComponent<WallController>().SetMaterial(wood);
-            NeededMaterial = wood;
+            NeededMaterial = 0;
+            //StructurePrefab.GetComponentInChildren<Renderer>().material = NeededMaterial;
+            StructurePrefab.GetComponent<WallController>().RpcSetMaterial(NeededMaterial);
             hitpoints = 100;
 
             Debug.Log("ChangingToWood");
         }
         if (Input.GetKeyDown("2") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
-            //StructurePrefab.GetComponentInChildren<Renderer>().material = stone;
-            StructurePrefab.GetComponent<WallController>().SetMaterial(stone);
-            NeededMaterial = stone;
+            NeededMaterial = 1;
+            //StructurePrefab.GetComponentInChildren<Renderer>().material = NeededMaterial;
+            StructurePrefab.GetComponent<WallController>().RpcSetMaterial(NeededMaterial);
             hitpoints = 200;
 
             Debug.Log("ChangingToStone");
         }
         if (Input.GetKeyDown("3") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
-            // StructurePrefab.GetComponentInChildren<Renderer>().material = metal;
-            StructurePrefab.GetComponent<WallController>().SetMaterial(metal);
-            NeededMaterial = metal;
+            NeededMaterial = 2;
+            StructurePrefab.GetComponent<WallController>().RpcSetMaterial(NeededMaterial);
+            //StructurePrefab.GetComponentInChildren<Renderer>().material = NeededMaterial;
             hitpoints = 300;
 
             Debug.Log("ChangingToMetal");

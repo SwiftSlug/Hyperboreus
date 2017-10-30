@@ -26,8 +26,48 @@ public class WallController : NetworkBehaviour
 
     public int ActiveStructure = 0;
 
+    [ClientRpc]
+    public void RpcSetMaterial(int MaterialToSet)
+    {
+        //StructureToApplyMatTo.GetComponent<Renderer>().material = MaterialToApply;
+
+        switch (MaterialToSet)
+        {
+            case 0:
+                Wall_obj.GetComponent<Renderer>().material = wood;
+                Stairs_obj.GetComponent<Renderer>().material = wood;
+                Door_obj.GetComponent<Renderer>().material = wood;
+                Doorway_obj.GetComponent<Renderer>().material = wood;
+                Floor_obj.GetComponent<Renderer>().material = wood;
+                Ceiling_obj.GetComponent<Renderer>().material = wood;
+                Ramps_obj.GetComponent<Renderer>().material = wood;
+                BarbedWireTrap_obj.GetComponent<Renderer>().material = wood;
+                break;
+            case 1:
+                Wall_obj.GetComponent<Renderer>().material = stone;
+                Stairs_obj.GetComponent<Renderer>().material = stone;
+                Door_obj.GetComponent<Renderer>().material = stone;
+                Doorway_obj.GetComponent<Renderer>().material = stone;
+                Floor_obj.GetComponent<Renderer>().material = stone;
+                Ceiling_obj.GetComponent<Renderer>().material = stone;
+                Ramps_obj.GetComponent<Renderer>().material = stone;
+                BarbedWireTrap_obj.GetComponent<Renderer>().material = stone;
+                break;
+            case 2:
+                Wall_obj.GetComponent<Renderer>().material = metal;
+                Stairs_obj.GetComponent<Renderer>().material = metal;
+                Door_obj.GetComponent<Renderer>().material = metal;
+                Doorway_obj.GetComponent<Renderer>().material = metal;
+                Floor_obj.GetComponent<Renderer>().material = metal;
+                Ceiling_obj.GetComponent<Renderer>().material = metal;
+                Ramps_obj.GetComponent<Renderer>().material = metal;
+                BarbedWireTrap_obj.GetComponent<Renderer>().material = metal;
+                break;
+        }
+    }
+
     // Use this for initialization
-    void Start ()
+   void Start ()
     {
         currentRot.x = transform.rotation.x;
         currentRot.y = transform.rotation.y;
@@ -51,7 +91,7 @@ public class WallController : NetworkBehaviour
         Ramps_obj.GetComponent<Renderer>().enabled = false;
         BarbedWireTrap_obj.GetComponent<Renderer>().enabled = false;
 
-        SetMaterial(wood);
+        //SetMaterial(wood);
     }
 
     // Update is called once per frame
@@ -163,7 +203,7 @@ public class WallController : NetworkBehaviour
 
     }
 
-    public void SetMaterial(Material MaterialToApply)
+    /*public void SetMaterial(Material MaterialToApply)
     {
         //StructureToApplyMatTo.GetComponent<Renderer>().material = MaterialToApply;
         Wall_obj.GetComponent<Renderer>().material = MaterialToApply;
@@ -174,5 +214,5 @@ public class WallController : NetworkBehaviour
         Ceiling_obj.GetComponent<Renderer>().material = MaterialToApply;
         Ramps_obj.GetComponent<Renderer>().material = MaterialToApply;
         BarbedWireTrap_obj.GetComponent<Renderer>().material = MaterialToApply;
-    }
+    }*/
 }

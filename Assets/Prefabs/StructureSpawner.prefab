@@ -28,7 +28,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1032956933678560
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +206,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1462981531308506}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: -7}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4991471265209876}
@@ -687,9 +687,9 @@ MonoBehaviour:
   Ceiling_obj: {fileID: 1749145448969340}
   Ramps_obj: {fileID: 1357340441126544}
   BarbedWireTrap_obj: {fileID: 1150084230318230}
-  metal: {fileID: 0}
-  stone: {fileID: 0}
-  wood: {fileID: 0}
+  metal: {fileID: 2100000, guid: 1439d4429f08cec499ef9a7beb2b129a, type: 2}
+  stone: {fileID: 2100000, guid: ba7992e63a793944bb3eaf7723eb4613, type: 2}
+  wood: {fileID: 2100000, guid: b547fcad801035f4da4d113c48207616, type: 2}
   StructureToApplyMatTo: {fileID: 0}
   ActiveStructure: 4
 --- !u!114 &114945422313274118
@@ -774,7 +774,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136963459842916430

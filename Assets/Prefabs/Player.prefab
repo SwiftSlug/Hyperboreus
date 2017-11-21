@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 4451153192981950}
   - component: {fileID: 33355833754393008}
   - component: {fileID: 23313715921718568}
-  - component: {fileID: 114272359265272102}
   m_Layer: 0
   m_Name: Gun2
   m_TagString: Untagged
@@ -643,38 +642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77a4809527d8c40a0e9836f30a0eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114272359265272102
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1135307419279864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 78
-    i1: 72
-    i2: 30
-    i3: 106
-    i4: 17
-    i5: 47
-    i6: 115
-    i7: 116
-    i8: 8
-    i9: 64
-    i10: 105
-    i11: 39
-    i12: 246
-    i13: 0
-    i14: 216
-    i15: 13
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114348478218635018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -751,7 +718,6 @@ MonoBehaviour:
   maxAmmo: 10
   reloadTime: 1
   animator: {fileID: 95907416983184236}
-  yes: 0
 --- !u!114 &114610079029982304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4364,7 +4330,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: -176036673
+  randomSeed: -1475252299
   InitialModule:
     serializedVersion: 3
     enabled: 1

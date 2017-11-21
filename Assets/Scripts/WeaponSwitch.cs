@@ -1,28 +1,22 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-public class WeaponSwitch : NetworkBehaviour
+public class WeaponSwitch : MonoBehaviour
 {
-    [SyncVar]
     public int currentWeapon = 0;
 
-    private Transform weaponSwtitchObj;
+    private Transform weaponSwitchTransform;
 
     // Use this for initialization
     void Start()
     {
-        weaponSwtitchObj = this.gameObject.transform.GetChild(2);
+        weaponSwitchTransform = gameObject.transform.GetChild(2);
         SelectWeapon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
         //int for previous weapon number set to current weapon so there is always a current weapon value.
         int previousWeapon = currentWeapon;
 
@@ -56,12 +50,19 @@ public class WeaponSwitch : NetworkBehaviour
         }
     }
 
+    //[Command]
+    //void CmdSelectWeapon()
+    //{
+    //    RpcSelectWeapon();
+    //}
+
     void SelectWeapon()
     {
+
         int childNumber = 0;
 
         //for each child transform in this transform...
-        foreach (Transform weapon in weaponSwtitchObj)
+        foreach (Transform weapon in weaponSwitchTransform)
         {
             //Sets the current weapon to active..
             if (childNumber == currentWeapon)
@@ -76,18 +77,5 @@ public class WeaponSwitch : NetworkBehaviour
             //increment i to check through each weapon.
             childNumber++;
         }
-
     }
-
-    //[ClientRpc]
-    //void RpcsetWeaponActive()
-    //{
-    //    weaponSwtitchObj.GetChild().gameObject.SetActive(true);
-    //}
-
-    //[ClientRpc]
-    //void RpcsetWeaponNotActive()
-    //{
-    //    weaponSwtitchObj.GetChild().gameObject.SetActive(false);
-    //}
 }

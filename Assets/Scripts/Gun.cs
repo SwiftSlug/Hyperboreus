@@ -2,30 +2,42 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class Gun : NetworkBehaviour
+public class Gun : MonoBehaviour
 {
+    
     public float damagePerShot = 10f;               //Damage each bullet deals to enemies.
+    
     public float timeBetweenShots = 0.15f;          //The time between each shot.
+    
     public float range = 100f;                      //The range that the gun can fire.
+    
     public int maxAmmo = 10;                        //Value for maximum ammo per 'magazine'.
+    
     public float reloadTime = 1f;                   //Time taken to reload gun back to max ammo.
+
     public Animator animator;
     //public GameObject impactEffect;                 //Particle system at bullet point of impact.
+
     
     private int currentAmmo;                        //Value for the ammo currently in the magazine.
+    
     private bool reloading;                         //Bool showing if the player is reloading or not.
 
-    public bool yes;
+    
+    private GameObject GunEnd;
 
-    private Transform GunEnd;
-    private Transform weaponSwtitchObj;
+    private Transform weaponSwitchTransform;
 
+    
     float timer;                                    //Timer to know when you can shoot (used for 'timeBetweenShots').
+
     Ray shootRay = new Ray();                       //Ray from the gun.
     RaycastHit shootHit;                            //Raycast hit to determine what was hit.                           
     ParticleSystem gunParticles;                    //Reference to the particle system.
     LineRenderer gunLine;                           //Reference to the line renderer.
     Light gunLight;                                 //Reference to the guns light source.
+
+    
     float effectsDisplayTime = 0.2f;                //The proportion of the timeBetweenShots that the effects which display for.
     //AudioSource gunAudio;
 
@@ -35,16 +47,30 @@ public class Gun : NetworkBehaviour
         gunParticles = GetComponentInChildren<ParticleSystem>();
         gunLine = GetComponentInChildren<LineRenderer>();
         gunLight = GetComponentInChildren<Light>();
-        
+
         //gunAudio = GetComponent<AudioSource>();
     }
 
     void Start()
     {
-        //temporary
-        GunEnd = this.gameObject.transform.GetChild(2).GetChild(0).GetChild(0);
         //
-        weaponSwtitchObj = this.gameObject.transform.GetChild(2);
+        weaponSwitchTransform = gameObject.transform.GetChild(2);
+
+        //temporary
+        //GunEnd = weaponSwitchObj.GetChild(0).GetChild(0).gameObject;
+
+        //for each child transform in this transform...
+        foreach (Transform weapon in weaponSwitchTransform)
+        {
+            int i = 0;
+            //Checks which gun is active, and sets a transform for the end of the gun.
+            if (gameObject.transform.GetChild(2).GetChild(i).gameObject.activeSelf)
+            {
+                GunEnd = weaponSwitchTransform.GetChild(i).GetChild(0).gameObject;
+            }
+            //increment i to check through each child.
+            i++;
+        }
 
         //Starts off game with the magazine at max value.
         currentAmmo = maxAmmo;
@@ -59,19 +85,14 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
         //for each child transform in this transform...
-        foreach (Transform weapon in weaponSwtitchObj)
+        foreach (Transform weapon in weaponSwitchTransform)
         {
             int i = 0;
             //Checks which gun is active, and sets a transform for the end of the gun.
-            if (this.gameObject.transform.GetChild(2).GetChild(i).gameObject.activeSelf)
+            if (gameObject.transform.GetChild(2).GetChild(i).gameObject.activeSelf)
             {
-                GunEnd = this.gameObject.transform.GetChild(2).GetChild(i).GetChild(0);
+                GunEnd = weaponSwitchTransform.GetChild(i).GetChild(0).gameObject;
             }
             //increment i to check through each child.
             i++;
@@ -135,13 +156,14 @@ public class Gun : NetworkBehaviour
         reloading = false;
     }
 
+   
     public void DisableMuzzleEffects()
     {
         // Disable the line renderer and the light.
         gunLine.enabled = false;
         gunLight.enabled = false;
     }
-
+    
     void Shooting()
     {
         //Resets the timer.

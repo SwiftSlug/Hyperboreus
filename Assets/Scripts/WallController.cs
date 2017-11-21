@@ -54,6 +54,10 @@ public class WallController : NetworkBehaviour
 
                 Door_obj.GetComponent<Collider>().enabled = false;
                 Door_obj.GetComponent<Renderer>().enabled = false;
+                Stairs_obj.GetComponent<Collider>().enabled = false;
+                Stairs_obj.GetComponent<Renderer>().enabled = false;
+                Doorway_obj.GetComponent<Collider>().enabled = false;
+                Doorway_obj.GetComponent<Renderer>().enabled = false;
 
                 Wall_obj.GetComponent<Collider>().enabled = true;
                 Wall_obj.GetComponent<Renderer>().enabled = true;
@@ -65,6 +69,10 @@ public class WallController : NetworkBehaviour
 
                 Wall_obj.GetComponent<Collider>().enabled = false;
                 Wall_obj.GetComponent<Renderer>().enabled = false;
+                Door_obj.GetComponent<Collider>().enabled = false;
+                Door_obj.GetComponent<Renderer>().enabled = false;
+                Doorway_obj.GetComponent<Collider>().enabled = false;
+                Doorway_obj.GetComponent<Renderer>().enabled = false;
 
                 Stairs_obj.GetComponent<Collider>().enabled = true;
                 Stairs_obj.GetComponent<Renderer>().enabled = true;
@@ -76,6 +84,10 @@ public class WallController : NetworkBehaviour
 
                 Stairs_obj.GetComponent<Collider>().enabled = false;
                 Stairs_obj.GetComponent<Renderer>().enabled = false;
+                Door_obj.GetComponent<Collider>().enabled = false;
+                Door_obj.GetComponent<Renderer>().enabled = false;
+                Stairs_obj.GetComponent<Collider>().enabled = false;
+                Stairs_obj.GetComponent<Renderer>().enabled = false;
 
                 Doorway_obj.GetComponent<Collider>().enabled = true;
                 Doorway_obj.GetComponent<Renderer>().enabled = true;
@@ -85,6 +97,10 @@ public class WallController : NetworkBehaviour
 
             case 3:
 
+                Doorway_obj.GetComponent<Collider>().enabled = false;
+                Doorway_obj.GetComponent<Renderer>().enabled = false;
+                Stairs_obj.GetComponent<Collider>().enabled = false;
+                Stairs_obj.GetComponent<Renderer>().enabled = false;
                 Doorway_obj.GetComponent<Collider>().enabled = false;
                 Doorway_obj.GetComponent<Renderer>().enabled = false;
 

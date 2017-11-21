@@ -7,6 +7,7 @@ public class WallController : NetworkBehaviour
 {
     public Vector3 currentRot;
     public bool placeStatus;
+    public bool firstPlace = true;
 
     public GameObject Wall_obj;
     public GameObject Stairs_obj;
@@ -28,7 +29,6 @@ public class WallController : NetworkBehaviour
                 Stairs_obj.GetComponent<Renderer>().material = wood;
                 Doorway_obj.GetComponent<Renderer>().material = wood;
                 Door_obj.GetComponent<Renderer>().material = wood;
-
                 break;
             case 1:
                 Wall_obj.GetComponent<Renderer>().material = stone;
@@ -119,17 +119,21 @@ public class WallController : NetworkBehaviour
         currentRot.y = transform.rotation.y;
         currentRot.z = transform.rotation.z;
 
-        //disable colliders for placement actor choices
-        Stairs_obj.GetComponent<Collider>().enabled = false;
-        Doorway_obj.GetComponent<Collider>().enabled = false;
-        Door_obj.GetComponent<Collider>().enabled = false;
+        if(firstPlace == true)
+        {
+            //disable colliders for placement actor choices
+            Stairs_obj.GetComponent<Collider>().enabled = false;
+            Doorway_obj.GetComponent<Collider>().enabled = false;
+            Door_obj.GetComponent<Collider>().enabled = false;
 
-        //disable renderer for all except Wall
-        Stairs_obj.GetComponent<Renderer>().enabled = false;
-        Doorway_obj.GetComponent<Renderer>().enabled = false;
-        Door_obj.GetComponent<Renderer>().enabled = false;
+            //disable renderer for all except Wall
+            Stairs_obj.GetComponent<Renderer>().enabled = false;
+            Doorway_obj.GetComponent<Renderer>().enabled = false;
+            Door_obj.GetComponent<Renderer>().enabled = false;
 
-        RpcSetMaterial(0);
+            RpcSetMaterial(0);
+            firstPlace = false;
+        }
     }
 
     // Update is called once per frame

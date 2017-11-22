@@ -119,8 +119,8 @@ public class WallController : NetworkBehaviour
         currentRot.y = transform.rotation.y;
         currentRot.z = transform.rotation.z;
 
-        if(firstPlace == true)
-        {
+ //       if(firstPlace == true)
+ //       {
             //disable colliders for placement actor choices
             Stairs_obj.GetComponent<Collider>().enabled = false;
             Doorway_obj.GetComponent<Collider>().enabled = false;
@@ -132,8 +132,8 @@ public class WallController : NetworkBehaviour
             Door_obj.GetComponent<Renderer>().enabled = false;
 
             RpcSetMaterial(0);
-            firstPlace = false;
-        }
+//            firstPlace = false;
+//       }
     }
 
     // Update is called once per frame

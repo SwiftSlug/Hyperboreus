@@ -56,7 +56,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
         {
             CmdSpawnStructure();
 
-            Debug.Log("build mode engaged!!!");
+            //Debug.Log("build mode engaged!!!");
         }
 
         if (Input.GetKeyDown("1") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
@@ -65,7 +65,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
             CmdSetMaterial(NeededMaterial);
             hitpoints = 100;
 
-            Debug.Log("ChangingToWood");
+            //Debug.Log("ChangingToWood");
         }
         if (Input.GetKeyDown("2") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
@@ -73,7 +73,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
             CmdSetMaterial(NeededMaterial);
             hitpoints = 200;
 
-            Debug.Log("ChangingToStone");
+            //Debug.Log("ChangingToStone");
         }
         if (Input.GetKeyDown("3") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
@@ -81,7 +81,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
             CmdSetMaterial(NeededMaterial);
             hitpoints = 300;
 
-            Debug.Log("ChangingToMetal");
+            //Debug.Log("ChangingToMetal");
         }
 
         if (Input.GetKeyDown("4") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
@@ -89,27 +89,27 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
             structureSelector = 0;
             CmdSetStructure(structureSelector);
 
-            Debug.Log("ChangingToWall");
+            //Debug.Log("ChangingToWall");
         }
         if (Input.GetKeyDown("5") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
             structureSelector = 1;
             CmdSetStructure(structureSelector);
 
-            Debug.Log("ChangingToStairs");
+            //Debug.Log("ChangingToStairs");
         }
         if (Input.GetKeyDown("6") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
             structureSelector = 2;
             CmdSetStructure(structureSelector);
 
-            Debug.Log("ChangingToDoorway");
+            //Debug.Log("ChangingToDoorway");
         }
         if (Input.GetKeyDown("7") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
         {
             structureSelector = 3;
             CmdSetStructure(structureSelector);
-            Debug.Log("ChangingToDoor");
+            //Debug.Log("ChangingToDoor");
         }
     }
 
@@ -119,7 +119,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
 
        if (CollidedAsset.CompareTag("GridCollider"))
        {
-            Debug.Log("ColliderHit!");
+            //Debug.Log("ColliderHit!");
             if (StructurePrefab.GetComponent<WallController>().placeStatus != true)
             {
                 StructurePrefab.GetComponent<Transform>().position = new Vector3(CollidedAsset.transform.position.x, CollidedAsset.transform.position.y, CollidedAsset.transform.position.z);

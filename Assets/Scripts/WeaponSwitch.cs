@@ -9,10 +9,9 @@ public class WeaponSwitch : NetworkBehaviour
     public bool poop;
 
     [SyncVar]
-    int childNumber = 0;
+    private int childNumber = 0;
 
-    [SyncVar]
-    int maxWeaponNo = 3;
+    //private int maxWeaponNo = 3;
 
     private Transform weaponSwitchTransform;
 

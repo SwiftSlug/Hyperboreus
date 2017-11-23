@@ -29,9 +29,8 @@ public class Gun : NetworkBehaviour
 
     //public Animator animator;
     //public GameObject impactEffect;                 //Particle system at bullet point of impact.
-
     Ray shootRay = new Ray();                       //Ray from the gun.
-    RaycastHit shootHit;                            //Raycast hit to determine what was hit.                           
+    RaycastHit shootHit;                            //Raycast hit to determine what was hit.          
     ParticleSystem gunParticles;                    //Reference to the particle system.
     LineRenderer gunLine;                           //Reference to the line renderer.
     Light gunLight;                                 //Reference to the guns light source.
@@ -52,14 +51,6 @@ public class Gun : NetworkBehaviour
         //
         weaponSwitchTransform = gameObject.transform.GetChild(2);
 
-        //for (int i = 0; i == maxWeaponNo; i++)
-        //{
-        //    if (gameObject.transform.GetChild(2).GetChild(i).gameObject.activeSelf)
-        //    {
-        //        GunEnd = weaponSwitchTransform.GetChild(i).GetChild(0).gameObject;
-        //    }
-        //}
-
         CmdGunEndCheck();
 
         //Starts off game with the magazine at max value.
@@ -79,14 +70,6 @@ public class Gun : NetworkBehaviour
         {
             return;
         }
-
-        //for (int i = 0; i == maxWeaponNo; i++)
-        //{
-        //    if (gameObject.transform.GetChild(2).GetChild(i).gameObject.activeSelf)
-        //    {
-        //        GunEnd = weaponSwitchTransform.GetChild(i).GetChild(0).gameObject;
-        //    }
-        //}
 
         CmdGunEndCheck();
 
@@ -119,7 +102,15 @@ public class Gun : NetworkBehaviour
         if (Input.GetButton("Fire1") && timer >= timeBetweenShots && Time.timeScale != 0)
         {
             //...then the gun shoots.
-            CmdShooting();
+
+            if (isServer)
+            {
+                RpcShooting();
+            }
+            else
+            {
+                CmdShooting();
+            }
         }
 
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
@@ -156,8 +147,7 @@ public class Gun : NetworkBehaviour
         gunLight.enabled = false;
     }
 
-    [Command]
-    void CmdShooting()
+    void Shooting()
     {
         //Resets the timer.
         timer = 0f;
@@ -203,6 +193,22 @@ public class Gun : NetworkBehaviour
             //...then draw the line render anyway at its max range.
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
+    }
+
+    [ClientRpc]
+    void RpcShooting()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        Shooting();
+    }
+
+    [Command]
+    void CmdShooting()
+    {
+        RpcShooting();
     }
 
     [Command]

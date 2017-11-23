@@ -394,6 +394,7 @@ MonoBehaviour:
   regenHealthDelay: 10
   revivalTime: 5
   canRevive: 0
+  manager: {fileID: 0}
 --- !u!114 &114393970185486974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -519,17 +520,7 @@ MonoBehaviour:
   metal: {fileID: 2100000, guid: 1439d4429f08cec499ef9a7beb2b129a, type: 2}
   stone: {fileID: 2100000, guid: ba7992e63a793944bb3eaf7723eb4613, type: 2}
   wood: {fileID: 2100000, guid: b547fcad801035f4da4d113c48207616, type: 2}
-  Wall_obj: {fileID: 4991471265209876, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
-  Stairs_obj: {fileID: 4462992314688202, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
-  Doorway_obj: {fileID: 4744866902050898, guid: f4f15d0cc7fbde34586c25cc46659208,
-    type: 2}
-  Door_obj: {fileID: 4558284113559948, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
-  Floor_obj: {fileID: 4263854386486762, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
-  Ceiling_obj: {fileID: 4808339249066452, guid: f4f15d0cc7fbde34586c25cc46659208,
-    type: 2}
-  Ramps_obj: {fileID: 4131093517451110, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
-  BarbedWireTrap_obj: {fileID: 4274325660951052, guid: f4f15d0cc7fbde34586c25cc46659208,
-    type: 2}
+  SpawnedStructure: {fileID: 0}
   hitpoints: 100
   structureSelector: 0
 --- !u!135 &135124012025750978

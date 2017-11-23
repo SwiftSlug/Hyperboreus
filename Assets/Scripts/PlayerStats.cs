@@ -41,6 +41,8 @@ public class PlayerStats : NetworkBehaviour
     [SyncVar]
     GameObject collidedPlayer = null; //Placeholder to store a reference with a collided player, we use this to call revive on them
 
+    public GameObject manager = null;
+
     void Start()
 	{
         //If we are not the local player then disable all other canvas' so we do not see what they see
@@ -57,6 +59,11 @@ public class PlayerStats : NetworkBehaviour
 		}
 
         currentHealth = maxHealth; //Set the player's health to their maximum health locally
+
+        if (manager)
+        {
+            Debug.Log("Manager Set!");
+        }
 
         CmdStartRegen(); //Invoke our regen function on the server which will check if enough time has passed to start regenerating player health
     }
@@ -212,6 +219,13 @@ public class PlayerStats : NetworkBehaviour
 
         isDead = true; //Set our boolean to show that player is dead
 
+        if (manager.gameObject.GetComponent<GameOver>().GetDowned() == manager.gameObject.GetComponent<GameOver>().GetPlayerAmount())
+        {
+            Debug.Log("All Players Are Dead");
+        }
+
+        manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
+
         currentHealth = 0; //Set the player's current health to 0 on the server
     }
 
@@ -227,6 +241,8 @@ public class PlayerStats : NetworkBehaviour
         GetComponent<PlayerController>().enabled = true; //Enable the player's movement server side
 
         isDead = false; //Reset our boolean so the player is "alive"
+
+        manager.gameObject.GetComponent<GameOver>().DecreaseDowned();
 
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 

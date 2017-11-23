@@ -12,7 +12,7 @@ public class CameraController : NetworkBehaviour
 		if(isLocalPlayer)
         {
             myCamera = GameObject.FindGameObjectWithTag("MainCamera"); //Set a reference to the player
-            heightOffset = new Vector3(0.0f, 12.0f, 0.0f); //Give our camera a certain height to offset - could be exposed to editor
+            heightOffset = new Vector3(0.0f, 22.0f, 0.0f); //Give our camera a certain height to offset - could be exposed to editor
             verticalOffset = new Vector3(0.0f, 0.0f, -2.0f); //Give our camera a certain vertical offset - could be exposed to editor
         }
 	}

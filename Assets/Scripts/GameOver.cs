@@ -3,29 +3,38 @@ using UnityEngine.Networking;
 
 public class GameOver : NetworkBehaviour
 {
-    private int playersDown = 0;
+    public int playersDown = 0;
+
+    private NetworkLobbyManager lobbyManager;
 
     GameObject[] players;
 
     void Start()
     {
+        lobbyManager = FindObjectOfType<NetworkLobbyManager>();
+
         players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
 
         for (int i = 0; i < players.Length; i++)
         {
-            Debug.Log("Settings Manager");
             players[i].GetComponent<PlayerStats>().manager = gameObject;
         }
     }
 
     public void IncreaseDowned()
     {
-        playersDown++;
+        if (playersDown < players.Length)
+        {
+            playersDown++;
+        }
     }
 
     public void DecreaseDowned()
     {
-        playersDown--;
+        if (playersDown > 0)
+        {
+            playersDown--;
+        }
     }
 
     public int GetDowned()
@@ -36,5 +45,15 @@ public class GameOver : NetworkBehaviour
     public int GetPlayerAmount()
     {
         return players.Length - 1;
+    }
+
+    public void FinishGame()
+    {
+        if (lobbyManager != null)
+        {
+            Network.Disconnect(200);
+            Destroy(lobbyManager.gameObject);
+            NetworkLobbyManager.Shutdown();
+        }
     }
 }

@@ -221,10 +221,12 @@ public class PlayerStats : NetworkBehaviour
 
         if (manager.gameObject.GetComponent<GameOver>().GetDowned() == manager.gameObject.GetComponent<GameOver>().GetPlayerAmount())
         {
-            Debug.Log("All Players Are Dead");
+            manager.gameObject.GetComponent<GameOver>().FinishGame();
         }
-
-        manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
+        else
+        {
+            manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
+        }
 
         currentHealth = 0; //Set the player's current health to 0 on the server
     }

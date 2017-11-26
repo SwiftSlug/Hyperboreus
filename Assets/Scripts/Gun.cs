@@ -157,6 +157,13 @@ public class Gun : NetworkBehaviour
         {
             //line renderer ends where it hits something.
             gunLine.SetPosition(1, shootHit.point);
+
+            //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
+            if (shootHit.collider.gameObject.GetComponent<AIStats>())
+            {
+                shootHit.collider.gameObject.GetComponent<AIStats>().CmdDamage(25);
+                Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
+            }
             //GameObject impactObject = Instantiate(impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
         }
         //If nothing gets hit by the raycast...

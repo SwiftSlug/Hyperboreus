@@ -129,7 +129,7 @@ public class WallController : NetworkBehaviour
         Doorway_obj.GetComponent<Renderer>().enabled = false;
         Door_obj.GetComponent<Renderer>().enabled = false;
 
-        RpcSetMaterial(0);
+        //RpcSetMaterial(0);
     }
 
     // Update is called once per frame

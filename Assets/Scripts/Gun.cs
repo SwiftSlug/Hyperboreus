@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class Gun : NetworkBehaviour
 {
- 
+
     public float damagePerShot = 10f;               //Damage each bullet deals to enemies.
     public float timeBetweenShots = 0.15f;          //The time between each shot.
     public float range = 100f;                      //The range that the gun can fire.
@@ -18,7 +18,7 @@ public class Gun : NetworkBehaviour
     float effectsDisplayTime = 0.2f;                //The proportion of the timeBetweenShots that the effects which display for.
     private int currentAmmo;                        //Value for the ammo currently in the magazine.
     private bool reloading;                         //Bool showing if the player is reloading or not.
-    
+
     float timer;                                    //Timer to know when you can shoot (used for 'timeBetweenShots').
 
     //public Animator animator;
@@ -62,6 +62,7 @@ public class Gun : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (!isLocalPlayer)
         {
             return;
@@ -96,26 +97,20 @@ public class Gun : NetworkBehaviour
         //If 'Fire1' button is pressed, and the time between shots has not exceeded the timer...
         if (Input.GetButton("Fire1") && timer >= timeBetweenShots && Time.timeScale != 0)
         {
-            if (isServer)
-            {
-                RpcShooting();
-            }
-            else
-            {
-                CmdShooting();
-            }
+            Shoot();
+            CmdServerShoot();
         }
 
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
         if (timer >= timeBetweenShots * effectsDisplayTime)
         {
-            //.. then disable the effects.
+            //  Disable Effects
             CmdDisableMuzzleEffects();
         }
     }
 
     void StartReload()
-    {        
+    {
         if (reloading == false)
         {
             Debug.Log("Invoking Reload");
@@ -133,55 +128,36 @@ public class Gun : NetworkBehaviour
     }
 
 
-    [Command]
-    public void CmdDisableMuzzleEffects()
-    {
-        // Disable the line renderer and the light.
-        gunLine.enabled = false;
-        gunLight.enabled = false;
-    }
-
     void Shoot()
     {
-        //Resets the timer.
+        //  Resets the timer.
         timer = 0f;
 
-        //Reduce ammo by 1 each time the gun shoots.
+        //  Reduce ammo by 1
         currentAmmo--;
 
-        //gunAudio.Play();
 
-        //Turns on gun flash (light source).
+        //gunAudio.Play();
         gunLight.enabled = true;
 
-        //Stops particles playing if they were already, then starts playing again.
+        //  Restart particles
         gunParticles.Stop();
         gunParticles.Play();
 
-        //Gunshot();
-
-        //Enable the line renderer and set its position to the gun.
+        //  Draw Line renderer
         gunLine.enabled = true;
         gunLine.SetPosition(0, GunEnd.position);
 
-        //Sets the shootRay so it starts at the gun and points forward.
+        //  Sets the shootRay so it starts at the gun and points forward.
         shootRay.origin = GunEnd.position;
         shootRay.direction = GunEnd.forward;
 
         //Perform the raycast against game objects, and if it hits...
         if (Physics.Raycast(shootRay, out shootHit, range))
         {
-            //code in place for damaging enemy health... uncomment and adjust when enemy health is implemented
-            //EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
-            //if (enemyHealth != null)
-            //{
-            //    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-            //}
-
             //line renderer ends where it hits something.
             gunLine.SetPosition(1, shootHit.point);
             //GameObject impactObject = Instantiate(impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
-            //Destroy(impactObject, 2f);
         }
         //If nothing gets hit by the raycast...
         else
@@ -190,24 +166,73 @@ public class Gun : NetworkBehaviour
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
     }
-    
-    [ClientRpc]
-    void RpcShooting()
+
+    void ShootEffect()
     {
-        if (isLocalPlayer)
-        {
-            Shoot();
-        }
+        //  Handles all the firing effects without touching the ammo or damage counts
+        //  This stops multiple damage calls and ammo reductions being called per shot
         
-    }    
-    
-    [Command]
-    void CmdShooting()
-    {
-        if (!isLocalPlayer)
+        //gunAudio.Play();
+        gunLight.enabled = true;
+
+        //  Restart particles
+        gunParticles.Stop();
+        gunParticles.Play();
+
+        //  Draw Line renderer
+        gunLine.enabled = true;
+        gunLine.SetPosition(0, GunEnd.position);
+
+        //  Sets the shootRay so it starts at the gun and points forward.
+        shootRay.origin = GunEnd.position;
+        shootRay.direction = GunEnd.forward;
+
+        //Perform the raycast against game objects, and if it hits...
+        if (Physics.Raycast(shootRay, out shootHit, range))
         {
-            Shoot();
+            //line renderer ends where it hits something.
+            gunLine.SetPosition(1, shootHit.point);
+            //GameObject impactObject = Instantiate(impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
+        }
+        else
+        {
+            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
     }
-    
+
+    [Command]
+    public void CmdServerShoot()
+    {
+        if (isServer)
+        {
+            ShootEffect();
+            RpcClientsShoot();
+        }
+    }
+
+    [ClientRpc]
+    public void RpcClientsShoot()
+    {
+        ShootEffect();
+    }
+
+    [Command]
+    public void CmdDisableMuzzleEffects()
+    {
+        // Disable the line renderer and the light.
+        gunLine.enabled = false;
+        gunLight.enabled = false;
+        gunLight.enabled = false;
+
+        RpcDisableMuzzleEffects();
+    }
+
+    [ClientRpc]
+    public void RpcDisableMuzzleEffects()
+    {
+        // Disable the line renderer and the light.
+        gunLine.enabled = false;
+        gunLight.enabled = false;
+        gunLight.enabled = false;
+    }
 }

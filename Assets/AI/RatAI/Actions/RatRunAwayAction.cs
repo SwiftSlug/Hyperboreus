@@ -13,8 +13,11 @@ public class RatRunAwayAction : Action {
     private void RatRunAway(StateController controller)
     {
         //controller.navMeshAgent.speed = controller.runSpeed;
-        Vector3 reverseVector = (-(controller.target.transform.position - controller.transform.position).normalized) * 50;
-        controller.navMeshAgent.destination = reverseVector;
+        if (controller.target)
+        {
+            Vector3 reverseVector = (-(controller.target.transform.position - controller.transform.position).normalized) * 50;
+            controller.navMeshAgent.destination = reverseVector;
+        }
     }
 
 }

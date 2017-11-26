@@ -6,8 +6,6 @@ public class WeaponSwitch : NetworkBehaviour
     [SyncVar]
     public int currentWeapon = 0;
 
-    public bool poop;
-
     [SyncVar]
     private int childNumber = 0;
 

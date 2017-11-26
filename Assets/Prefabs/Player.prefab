@@ -84,8 +84,8 @@ GameObject:
   - component: {fileID: 114393970185486974}
   - component: {fileID: 65061811301593610}
   - component: {fileID: 114865795530275024}
+  - component: {fileID: 114356735643011980}
   - component: {fileID: 114182524897530358}
-  - component: {fileID: 114388570922044432}
   m_Layer: 0
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -2540,7 +2540,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: 0
-  poop: 0
 --- !u!114 &114251673205330040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2599,7 +2598,7 @@ MonoBehaviour:
   regenHealthDelay: 10
   revivalTime: 5
   canRevive: 0
---- !u!114 &114388570922044432
+--- !u!114 &114356735643011980
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2607,16 +2606,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1138322535066456}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665a363daf5c96a42ac18e3b93b61ff3, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cec4a1f19dc7604db0b45e6da66ee79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 10
-  timeBetweenShots: 0.15
+  damagePerShot: 25
+  timeBetweenShots: 0.1
   range: 100
   reloadTime: 1
   maxAmmo: 10
   weaponSwitchTransform: {fileID: 4714441065175790}
   GunEnd: {fileID: 4657937148490102}
+  blesadasdsadp2: 0
 --- !u!114 &114393970185486974
 MonoBehaviour:
   m_ObjectHideFlags: 1

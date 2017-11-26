@@ -33,13 +33,13 @@ public class AIStats : NetworkBehaviour
 
     private void Update()
     {
-        //if (isServer)
-        //{
+        if (isServer)
+        {
             if (enemyHealth <= 0)
             {
                 CmdDie();
             }
-        //}
+        }
 
     }
 

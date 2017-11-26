@@ -1,21 +1,26 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
 
-public class Gun : NetworkBehaviour
+public class PlayerWeapon : NetworkBehaviour
 {
 
-    public float damagePerShot = 10f;               //Damage each bullet deals to enemies.
-    public float timeBetweenShots = 0.15f;          //The time between each shot.
-    public float range = 100f;                      //The range that the gun can fire.
+    public float damagePerShot = 0.0f;              //Damage each bullet deals to enemies.
+    public float timeBetweenShots = 0.0f;           //The time between each shot.
+    public float range = 0.0f;                      //The range that the gun can fire.
+    public float weaponDamage = 0.0f;
 
-    public float reloadTime = 1.0f;                   //Time taken to reload gun back to max ammo.
-    public int maxAmmo = 10;                        //Value for maximum ammo per 'magazine'.
+    public float reloadTime = 0.0f;                 //Time taken to reload gun back to max ammo.
+    public int maxAmmo = 0;                        //Value for maximum ammo per 'magazine'.
 
     public Transform weaponSwitchTransform;
     public Transform GunEnd;
 
-    float effectsDisplayTime = 0.2f;                //The proportion of the timeBetweenShots that the effects which display for.
+    public GameObject weaponModel; 
+
+
+    private float effectsDisplayTime = 0.0f;        //The proportion of the timeBetweenShots that the effects which display for.
     private int currentAmmo;                        //Value for the ammo currently in the magazine.
     private bool reloading;                         //Bool showing if the player is reloading or not.
 
@@ -29,35 +34,8 @@ public class Gun : NetworkBehaviour
     LineRenderer gunLine;                           //Reference to the line renderer.
     Light gunLight;                                 //Reference to the guns light source.
     //AudioSource gunAudio;
+    
 
-    void Awake()
-    {
-        // Set up the references.
-        gunParticles = GetComponentInChildren<ParticleSystem>();
-        gunLine = GetComponentInChildren<LineRenderer>();
-        gunLight = GetComponentInChildren<Light>();
-
-        //gunAudio = GetComponent<AudioSource>();
-    }
-
-    void Start()
-    {
-        //
-        //weaponSwitchTransform = gameObject.transform.GetChild(2);
-
-        //CmdGunEndCheck();
-
-        //GunEnd = weaponSwitchTransform;
-
-        //Starts off game with the magazine at max value.
-        currentAmmo = maxAmmo;
-    }
-
-    private void OnEnable()
-    {
-        reloading = false;                          //sets reloading to false when a new weapon is enabled.
-        //animator.SetBool("Reloading", false);       //sets the animation for reloading to false when a new weapon is enabled.
-    }
 
     // Update is called once per frame
     void Update()
@@ -161,7 +139,7 @@ public class Gun : NetworkBehaviour
             //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
             if (shootHit.collider.gameObject.GetComponent<AIStats>())
             {
-                CmdHit(shootHit.collider.gameObject, 25);
+                //CmdHit(shootHit.collider.gameObject, weaponDamage);
                 Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
             }
 
@@ -180,7 +158,7 @@ public class Gun : NetworkBehaviour
     {
         //  Handles all the firing effects without touching the ammo or damage counts
         //  This stops multiple damage calls and ammo reductions being called per shot
-        
+
         //gunAudio.Play();
         gunLight.enabled = true;
 
@@ -252,4 +230,5 @@ public class Gun : NetworkBehaviour
         gunLight.enabled = false;
         gunLight.enabled = false;
     }
+
 }

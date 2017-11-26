@@ -22,7 +22,7 @@ public class EnemySpawner : NetworkBehaviour {
                 randomPosition = new Vector3(Random.Range(-spawnArea, spawnArea), 0, Random.Range(-spawnArea, spawnArea));
                 var spawnedEnemy = (GameObject)Instantiate(enemytoSpawn, randomPosition, Quaternion.identity);
                 NetworkServer.Spawn(spawnedEnemy);
-                
+                //NetworkServer.SpawnWithClientAuthority(spawnedEnemy, connectionToServer);
             }
         }
         

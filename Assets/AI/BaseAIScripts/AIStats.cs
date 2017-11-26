@@ -11,25 +11,35 @@ public class AIStats : NetworkBehaviour
     //[SyncVar]
     //public int enemyAttackDamage = 100;
 
-    [Command]
     //[ClientRpc]
+    [Command]
     public void CmdDamage(int damageAmount)
     {
         if (isServer)
         {
             enemyHealth -= damageAmount;
+            RpcSyncHealth(enemyHealth);
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSyncHealth(int newHealth)
+    {
+        if(!isServer)
+        {
+            enemyHealth = newHealth;
         }
     }
 
     private void Update()
     {
-        if (isServer)
-        {
+        //if (isServer)
+        //{
             if (enemyHealth <= 0)
             {
                 CmdDie();
             }
-        }
+        //}
 
     }
 

@@ -161,7 +161,7 @@ public class Gun : NetworkBehaviour
             //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
             if (shootHit.collider.gameObject.GetComponent<AIStats>())
             {
-                shootHit.collider.gameObject.GetComponent<AIStats>().CmdDamage(25);
+                CmdHit(shootHit.collider.gameObject, 25);
                 Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
             }
 
@@ -209,6 +209,12 @@ public class Gun : NetworkBehaviour
         {
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
         }
+    }
+
+    [Command]
+    void CmdHit(GameObject hitObject, int damageAmount)
+    {
+        hitObject.GetComponent<AIStats>().CmdDamage(damageAmount);
     }
 
     [Command]

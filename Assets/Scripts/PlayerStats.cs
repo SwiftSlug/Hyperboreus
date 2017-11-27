@@ -5,6 +5,8 @@ public class PlayerStats : NetworkBehaviour
 {
 	public RectTransform healthBar; //Store a reference to the health bar transform so it can change in size
 
+    public RectTransform gameOverOverlay; //Game Over screen to be displayed when all players are downed
+
 	[Tooltip("Player maximum health")]
 	[SyncVar]
 	public int maxHealth = 100; //Max health of the player, should only change through
@@ -86,6 +88,7 @@ public class PlayerStats : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.K)) //Kill Key
         {
+            manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
             CmdKill(); //Call the kill method on the server to down the player
         }
         if (Input.GetKeyDown(KeyCode.L)) //Revive Self Key
@@ -179,7 +182,7 @@ public class PlayerStats : NetworkBehaviour
 		if (currentHealth <= 0)
 		{
             CmdKill(); //Send the command to the server to kill/down the player
-		}
+        }
 	}
 
     //Call this for the player on the server
@@ -219,16 +222,16 @@ public class PlayerStats : NetworkBehaviour
 
         isDead = true; //Set our boolean to show that player is dead
 
+        currentHealth = 0; //Set the player's current health to 0 on the server
+
         if (manager.gameObject.GetComponent<GameOver>().GetDowned() == manager.gameObject.GetComponent<GameOver>().GetPlayerAmount())
         {
-            manager.gameObject.GetComponent<GameOver>().FinishGame();
+            gameOverOverlay.gameObject.SetActive(true); //MAYBE AN RPC TO CLIENT
         }
         else
         {
             manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
         }
-
-        currentHealth = 0; //Set the player's current health to 0 on the server
     }
 
     //Call this command for the player on the server

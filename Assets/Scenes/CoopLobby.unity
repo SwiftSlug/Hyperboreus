@@ -382,7 +382,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f48c5f239b4c77b458f079db2f638a78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.060000002
+      value: -3.32
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f48c5f239b4c77b458f079db2f638a78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -444,7 +444,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f48c5f239b4c77b458f079db2f638a78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -3.26
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f48c5f239b4c77b458f079db2f638a78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -682,6 +682,7 @@ MonoBehaviour:
   - {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749, type: 2}
   - {fileID: 1728472473201530, guid: 2596d80a970f6d348ba7005338aed1a3, type: 2}
   - {fileID: 1462981531308506, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
+  - {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -1160,7 +1161,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f48c5f239b4c77b458f079db2f638a78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: -3.26
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: f48c5f239b4c77b458f079db2f638a78, type: 3}
       propertyPath: m_LocalPosition.z

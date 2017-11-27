@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class BuildingController : NetworkBehaviour
 {
     public GameObject LinkedPlayer;
+    public GameObject PlayerStructureGuide;
+
     public int LocalNeededStructure = 0;
     public int LocalNeededMaterial = 0;
 
@@ -100,82 +102,71 @@ public class BuildingController : NetworkBehaviour
             }
         }
     }
-}
 
-    /*
-    public void SetMaterialAndStructure()
+    public void LocalSetMaterialAndStructure(int StructureValue, int MaterialValue)
     {
-        LocalNeededStructure = LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded;
-        LocalNeededMaterial = LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded;
-        Debug.Log(" ");
-        Debug.Log(" ");
-        Debug.Log(" ");
-        Debug.Log("Player Needed Material: " + LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded);
-        Debug.Log("Player Needed Structure: " + LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded);
-        Debug.Log("Structure Needed Material: " + LocalNeededMaterial);
-        Debug.Log("Structure Needed Structure: " + LocalNeededStructure);
-        Debug.Log(" ");
-        Debug.Log(" ");
-        Debug.Log(" ");
+        //LocalNeededStructure = LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded;
+        //LocalNeededMaterial = LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded;
 
-        if (LocalNeededStructure == 0)
+        if (StructureValue == 0) //if (LocalNeededStructure == 0)
         {
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
 
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-            if (LocalNeededMaterial == 0)
+            if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
             }
-            else if (LocalNeededMaterial == 1)
+            else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
             }
-            else if (LocalNeededMaterial == 2)
+            else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
             }
         }
-        else if (LocalNeededStructure == 1)
+        else if (StructureValue == 1) //else if (LocalNeededStructure == 1)
         {
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
 
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-            if (LocalNeededMaterial == 0)
+            if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorWoodMat;
             }
-            else if (LocalNeededMaterial == 1)
+            else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorStoneMat;
             }
-            else if (LocalNeededMaterial == 2)
+            else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
+
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorMetalMat;
             }
         }
-        else if (LocalNeededStructure == 2)
+        else if (StructureValue == 2) //else if (LocalNeededStructure == 2)
         {
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
 
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            if (LocalNeededMaterial == 0)
+            if (MaterialValue == 0) //             if (LocalNeededMaterial == 0)
+
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorWoodMat;
             }
-            else if (LocalNeededMaterial == 1)
+            else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorStoneMat;
             }
-            else if (LocalNeededMaterial == 2)
+            else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorMetalMat;
             }
         }
     }
 }
-*/
 

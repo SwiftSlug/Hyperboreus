@@ -102,8 +102,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1193828947013776}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5266848, y: 1.0000001, z: 0.7798414}
+  m_LocalRotation: {x: 0, y: -0.49999964, z: 0, w: -0.86602557}
+  m_LocalPosition: {x: 3.3197172, y: 1, z: -8.965092}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311921656852550}
@@ -151,7 +151,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
+  - {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -183,7 +183,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 73aff67290e51f94fa7523bfcea959bf, type: 2}
+  - {fileID: 2100000, guid: f25edeb57738ab940959c45a04080c02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -215,7 +215,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 823fbd8424a2a954688cc4b563c877b9, type: 2}
+  - {fileID: 2100000, guid: 69cfc44e7dd8d4b439eb0599abb43f48, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -303,6 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinkedPlayer: {fileID: 0}
+  PlayerStructureGuide: {fileID: 1193828947013776}
   LocalNeededStructure: 0
   LocalNeededMaterial: 0
   WallWoodMat: {fileID: 2100000, guid: f34cda7f78d214b408b33a9e2ba48681, type: 2}

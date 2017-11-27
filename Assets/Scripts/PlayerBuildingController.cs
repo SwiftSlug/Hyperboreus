@@ -51,14 +51,11 @@ public class PlayerBuildingController : NetworkBehaviour
         {
             StructureNeeded = 0;
             TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
-
-
         }
         else
         {
             StructureNeeded = StructureNeeded + 1;
             TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
-
         }
     }
     [Command]
@@ -68,12 +65,43 @@ public class PlayerBuildingController : NetworkBehaviour
             {
                 MaterialNeeded = 0;
                 TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
-            }
-            else
+               // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        }
+        else
             {
                 MaterialNeeded = MaterialNeeded + 1;
                 TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
-            }
+            // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        }
+    }
+
+    void LocalSelectStructure()
+    {
+        if (StructureNeeded == 2)
+        {
+            StructureNeeded = 0;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        }
+        else
+        {
+            StructureNeeded = StructureNeeded + 1;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        }
+    }
+    void LocalSelectMaterial()
+    {
+        if (MaterialNeeded == 2)
+        {
+            MaterialNeeded = 0;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        }
+        else
+        {
+            MaterialNeeded = MaterialNeeded + 1;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        }
     }
 
     // Use this for initialization
@@ -108,19 +136,6 @@ public class PlayerBuildingController : NetworkBehaviour
         if (Input.GetKeyDown(("space")) && (InbuildMode == true))
         {
             CmdPlaceStructure();
-           
-            
-            /* Debug.Log(" ");
-            Debug.Log(" ");
-            Debug.Log(" ");
-            Debug.Log(" ");
-            Debug.Log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Information for player: " + PlayerReference);
-            Debug.Log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Black blob location After Placement: " + PointToSpawnStructure.position);
-            Debug.Log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Placement Ghost Location After Placement: " + TempStructureGuide.transform.position);
-            Debug.Log(" ");
-            Debug.Log(" ");
-            Debug.Log(" ");
-            Debug.Log(" ");*/
         }
 
         if (Input.GetKeyDown(("r")) && (InbuildMode == true))
@@ -131,11 +146,13 @@ public class PlayerBuildingController : NetworkBehaviour
         if (Input.GetKeyDown("1") && (InbuildMode == true))
         {
             CmdSelectStructure();
+            LocalSelectStructure();
         }
 
         if (Input.GetKeyDown("2") && (InbuildMode == true))
         {
             CmdSelectMaterial();
+            LocalSelectMaterial();
         }
     }
 }

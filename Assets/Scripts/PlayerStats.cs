@@ -62,11 +62,6 @@ public class PlayerStats : NetworkBehaviour
 
         currentHealth = maxHealth; //Set the player's health to their maximum health locally
 
-        if (manager)
-        {
-            Debug.Log("Manager Set!");
-        }
-
         CmdStartRegen(); //Invoke our regen function on the server which will check if enough time has passed to start regenerating player health
     }
 
@@ -88,7 +83,6 @@ public class PlayerStats : NetworkBehaviour
         }
         if (Input.GetKeyDown(KeyCode.K)) //Kill Key
         {
-            manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
             CmdKill(); //Call the kill method on the server to down the player
         }
         if (Input.GetKeyDown(KeyCode.L)) //Revive Self Key
@@ -224,13 +218,13 @@ public class PlayerStats : NetworkBehaviour
 
         currentHealth = 0; //Set the player's current health to 0 on the server
 
-        if (manager.gameObject.GetComponent<GameOver>().GetDowned() == manager.gameObject.GetComponent<GameOver>().GetPlayerAmount())
+        if (manager.gameObject.GetComponent<GameOver>(). == manager.gameObject.GetComponent<GameOver>().RpcGetPlayerAmount())
         {
-            gameOverOverlay.gameObject.SetActive(true); //MAYBE AN RPC TO CLIENT
+            gameOverOverlay.gameObject.GetComponent<GameOver>().RpcGameOverlay();
         }
         else
         {
-            manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
+            manager.gameObject.GetComponent<GameOver>().CmdIncreaseDowned();
         }
     }
 
@@ -247,7 +241,7 @@ public class PlayerStats : NetworkBehaviour
 
         isDead = false; //Reset our boolean so the player is "alive"
 
-        manager.gameObject.GetComponent<GameOver>().DecreaseDowned();
+        manager.gameObject.GetComponent<GameOver>().CmdDecreaseDowned();
 
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 

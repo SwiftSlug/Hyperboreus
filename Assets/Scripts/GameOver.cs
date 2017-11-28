@@ -18,16 +18,27 @@ public class GameOver : NetworkBehaviour
         }
     }
 
-    public void IncreaseDowned()
+    [Command]
+    public void CmdIncreaseDowned()
     {
+        if (!isServer)
+        {
+            return;
+        }
         if (playersDown < players.Length)
         {
             playersDown++;
         }
     }
 
-    public void DecreaseDowned()
+    [Command]
+    public void CmdDecreaseDowned()
     {
+        if (!isServer)
+        {
+            return;
+        }
+
         if (playersDown > 0)
         {
             playersDown--;
@@ -36,19 +47,59 @@ public class GameOver : NetworkBehaviour
 
     public int GetDowned()
     {
+        return playersDown;
+    }
+
+    [ClientRpc]
+    public void RpcGetDowned()
+    {
+        if (!isClient)
+        {
+            return;
+        }
+
         Debug.Log(playersDown);
 
-        return playersDown;
+        GetDowned();
+
+        return;
     }
 
     public int GetPlayerAmount()
     {
         return players.Length - 1;
-    }   
+    }
 
-    public void FinishGame()
+    [ClientRpc]
+    public void RpcGetPlayerAmount()
     {
+        Debug.Log(players.Length - 1);
+
+        GetPlayerAmount();
+
+        return;
+    }  
+
+    [ClientRpc]
+    public void RpcFinishGame()
+    {
+        if (!isClient)
+        {
+            return;
+        }
+
         Network.Disconnect();
         MasterServer.UnregisterHost();
+    }
+
+    [ClientRpc]
+    public void RpcGameOverlay()
+    {
+        if (!isClient)
+        {
+            return;
+        }
+
+        players[1].GetComponent<PlayerStats>().gameOverOverlay.gameObject.SetActive(true);
     }
 }

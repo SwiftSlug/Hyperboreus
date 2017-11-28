@@ -5,37 +5,69 @@ using UnityEngine.Networking;
 public class WeaponShooting : NetworkBehaviour
 {
 
-    public WeaponType selectedWeapon;
+    //public WeaponType selectedWeapon;
 
+    //  Private reference to the specfic wepaon script
+    private WeaponType selectedWeapon;
+    //  Game object that the weapon script is attached to
+    public GameObject equippedWeapon;
 
+   
     Ray shootRay = new Ray();                       //Ray from the gun.
-    RaycastHit shootHit;                            //Raycast hit to determine what was hit.          
+    RaycastHit shootHit;                            //Raycast hit to determine what was hit.
     ParticleSystem gunParticles;                    //Reference to the particle system.
     LineRenderer gunLine;                           //Reference to the line renderer.
     Light gunLight;                                 //Reference to the guns light source.
 
+
+    public Transform weaponSwitchTransform;
+    public Transform gunEnd;
+
     //public bool blep;
+    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL;
+    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL2;
+    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL3;
+    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL4;
+
 
     private void Awake()
     {
-        Bullpup gun = new Bullpup();
+        //Bullpup gun = new Bullpup();
 
-        Debug.Log("gun name = " + gun.weaponName);
+        selectedWeapon = equippedWeapon.GetComponent<Bullpup>();
+
+        //selectedWeapon.Init();
+
+        //Debug.Log("gun name = " + gun.weaponName);
 
         //selectedWeapon = gameObject.AddComponent<Bullpup>();
-
-        Debug.Log(selectedWeapon.weaponName);
-
-        gunParticles = GetComponentInChildren<ParticleSystem>();
-        gunLine = GetComponentInChildren<LineRenderer>();
-        gunLight = GetComponentInChildren<Light>();
         
     }
 
     void Start()
     {
         //Starts off game with the magazine at max value.
-        selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
+        //selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
+        Debug.Log(selectedWeapon.weaponName);
+
+        if (GetComponentInChildren<ParticleSystem>())
+        {
+            Debug.Log("Partcle System Found");
+        }
+        if (GetComponentInChildren<LineRenderer>())
+        {
+            Debug.Log("LineRenderer System Found");
+        }
+        if (GetComponentInChildren<Light>())
+        {
+            Debug.Log("Light System Found");
+        }
+
+        gunParticles = GetComponentInChildren<ParticleSystem>();
+        gunLine = GetComponentInChildren<LineRenderer>();
+        gunLight = GetComponentInChildren<Light>();
+
+
         selectedWeapon.reloading = false;                          //sets reloading to false when a new weapon is enabled.
     }
 
@@ -126,15 +158,18 @@ public class WeaponShooting : NetworkBehaviour
 
         //  Draw Line renderer
         gunLine.enabled = true;
-        gunLine.SetPosition(0, selectedWeapon.gunEnd.position);
+        gunLine.SetPosition(0, gunEnd.transform.position);
 
         //  Sets the shootRay so it starts at the gun and points forward.
-        shootRay.origin = selectedWeapon.gunEnd.position;
-        shootRay.direction = selectedWeapon.gunEnd.forward;
+        shootRay.origin = transform.position;
+        shootRay.direction = transform.forward;
+
+        //Debug.Log("Fire the raycast !");
 
         //Perform the raycast against game objects, and if it hits...
         if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range))
         {
+            //Debug.Log("Hit Object");
             //line renderer ends where it hits something.
             gunLine.SetPosition(1, shootHit.point);
 
@@ -151,6 +186,7 @@ public class WeaponShooting : NetworkBehaviour
         //If nothing gets hit by the raycast...
         else
         {
+            //Debug.Log("Not hit anything");
             //...then draw the line render anyway at its max range.
             gunLine.SetPosition(1, shootRay.origin + shootRay.direction * selectedWeapon.range);
         }
@@ -170,15 +206,16 @@ public class WeaponShooting : NetworkBehaviour
 
         //  Draw Line renderer
         gunLine.enabled = true;
-        gunLine.SetPosition(0, selectedWeapon.gunEnd.position);
+        gunLine.SetPosition(0, gunEnd.transform.position);
 
         //  Sets the shootRay so it starts at the gun and points forward.
-        shootRay.origin = selectedWeapon.gunEnd.position;
-        shootRay.direction = selectedWeapon.gunEnd.forward;
+        shootRay.origin = gunEnd.transform.position;
+        shootRay.direction = gunEnd.transform.forward;
 
         //Perform the raycast against game objects, and if it hits...
         if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range))
         {
+            //Debug.Log("Effect Called !");
             //line renderer ends where it hits something.
             gunLine.SetPosition(1, shootHit.point);
 

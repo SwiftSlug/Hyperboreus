@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponType {
+public abstract class WeaponType : MonoBehaviour {
 
     public float damagePerShot;                 //Damage each bullet deals to enemies.
     public float timeBetweenShots;              //The time between each shot.
@@ -12,8 +12,8 @@ public class WeaponType {
     public float reloadTime;                    //Time taken to reload gun back to max ammo.
     public int maxAmmo;                         //Value for maximum ammo per 'magazine'.
 
-    public Transform weaponSwitchTransform;
-    public Transform gunEnd;
+    //public Transform weaponSwitchTransform;
+    //public Transform gunEnd;
 
     public GameObject weaponModel;
 
@@ -24,6 +24,8 @@ public class WeaponType {
     public bool reloading;                     //Bool showing if the player is reloading or not.
 
     public float timer;                                //Timer to know when you can shoot (used for 'timeBetweenShots').
+
+    //public abstract void Init();
 
     //public Animator animator;
     //public GameObject impactEffect;           //Particle system at bullet point of impact.

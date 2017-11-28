@@ -168,5 +168,10 @@ public class BuildingController : NetworkBehaviour
             }
         }
     }
+
+    public void LocalSetRotation(float Rotation)
+    {
+        gameObject.transform.eulerAngles = new Vector3(0, Rotation, 0);
+    }
 }
 

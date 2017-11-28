@@ -12,8 +12,12 @@ public class PlayerBuildingController : NetworkBehaviour
     public GameObject TempStructureGuide;
     public GameObject NetworkSpawnedStructure;
 
+    public bool blep = true;
+
     public int StructureNeeded = 0;
     public int MaterialNeeded = 0;
+    public int RotationNeeded = 0;
+    public float RotationToSet = 0;
 
     void EnterOrExitBuildMode()
     {
@@ -40,10 +44,57 @@ public class PlayerBuildingController : NetworkBehaviour
     }
 
     [Command]
-    void CmdRotateStructure()
+    void CmdRotateStructure(float Rotation)
+    {
+        TempStructureGuide.transform.eulerAngles = new Vector3(0, Rotation, 0);
+    }
+    void LocalRotateStructure(float Rotation)
+    {
+        TempStructureGuide.GetComponent<BuildingController>().LocalSetRotation(Rotation);
+    }
+
+    //[Command]
+    //void CmdRotateStructure()
+    //{
+    //    TempStructureGuide.transform.Rotate(0, 10, 0);
+    //}
+    /* [Command]
+     void CmdRotateStructure()
+     {
+             switch (RotationNeeded)
+             {
+                 case 0:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 45, 0);
+                     break;
+                 case 1:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 90, 0);
+                     break;
+                 case 2:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 135, 0);
+                     break;
+                 case 3:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 180, 0);
+                     break;
+                 case 4:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 225, 0);
+                     break;
+                 case 5:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 270, 0);
+                     break;
+                 case 6:
+                     TempStructureGuide.transform.eulerAngles = new Vector3(0, 315, 0);
+                 RotationNeeded = -1;
+                     break;
+             }
+         RotationNeeded = RotationNeeded + 1;
+     }*/
+    /*void RotateStructure()
     {
         TempStructureGuide.transform.Rotate(0, 10, 0);
-    }
+    }*/
+
+
+
     [Command]
     void CmdSelectStructure()
     {
@@ -138,11 +189,30 @@ public class PlayerBuildingController : NetworkBehaviour
             CmdPlaceStructure();
         }
 
+        /*
         if (Input.GetKeyDown(("r")) && (InbuildMode == true))
         {
-            CmdRotateStructure();
-        }
+            //CmdRotateStructure();
+            //RotateStructure();
+            //CmdRotateStructure();
+        }*/
 
+        if (Input.GetKey(KeyCode.R) && (InbuildMode == true))
+        {
+            if (RotationToSet == 360)
+            {
+                RotationToSet = 0;
+                CmdRotateStructure(RotationToSet);
+                LocalRotateStructure(RotationToSet);
+            }
+            else
+            {
+                RotationToSet = RotationToSet + 0.5f;
+                CmdRotateStructure(RotationToSet);
+                LocalRotateStructure(RotationToSet);
+                Debug.Log("RotationValue: " + RotationToSet);
+            }
+        }
         if (Input.GetKeyDown("1") && (InbuildMode == true))
         {
             CmdSelectStructure();

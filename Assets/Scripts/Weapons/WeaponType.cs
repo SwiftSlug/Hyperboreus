@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponType : MonoBehaviour {
+public class WeaponType : MonoBehaviour {
 
-    public float damagePerShot;                 //Damage each bullet deals to enemies.
+    public string weaponName;
+
+    //public float damagePerShot;                 //Damage each bullet deals to enemies.
     public float timeBetweenShots;              //The time between each shot.
     public float range;                         //The range that the gun can fire.
     public float weaponDamage;
@@ -17,7 +19,7 @@ public abstract class WeaponType : MonoBehaviour {
 
     public GameObject weaponModel;
 
-    public string weaponName;
+    
 
     public float effectsDisplayTime;           //The proportion of the timeBetweenShots that the effects which display for.
     public int currentAmmo;                    //Value for the ammo currently in the magazine.

@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullpup : WeaponType {
-
+public class LMG : WeaponType
+{
     //public override void Init()
     public void Awake()
     {
-        weaponName = "Bullpup";
+        weaponName = "Light Machine Gun";
 
-        //damagePerShot = 10.0f;
-        timeBetweenShots = 0.15f;
+        //damagePerShot = 50.0f;
+        timeBetweenShots = 0.05f;
         range = 100.0f;
-        reloadTime = 1.0f;
-        maxAmmo = 10;
-        weaponDamage = 25;
+        reloadTime = 2.0f;
+        maxAmmo = 100;
+        weaponDamage = 50;
         currentAmmo = maxAmmo;
 
-        effectsDisplayTime = 0.1f;
+        effectsDisplayTime = 0.06f;
 
         //gunEnd = new GameObject().transform;
         //gunEnd.position = new Vector3(0.29f, 1.654f, 1.322f);
@@ -26,8 +26,8 @@ public class Bullpup : WeaponType {
         //weaponSwitchTransform.position 
 
 
-        //Debug.Log("Awake Called !");
-        
+        Debug.Log("Awake Called !");
+
         //weaponSwitchTransform = this.transform;
         //gunEnd = this.transform;
 

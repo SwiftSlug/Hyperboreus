@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4049588604312526}
-  - component: {fileID: 114686861561911692}
+  - component: {fileID: 114474642771253880}
   m_Layer: 0
   m_Name: Bullpup
   m_TagString: Untagged
@@ -629,7 +629,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1474587656260106}
   m_Mesh: {fileID: 4300012, guid: 30ecd671d81ede8429331abfdb5d1eb0, type: 3}
---- !u!114 &114686861561911692
+--- !u!114 &114474642771253880
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -637,18 +637,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1380118567732836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9689b0ff1a9a1441bb3b3b7095d3749, type: 3}
+  m_Script: {fileID: 11500000, guid: 58bf5833f6f5dca4497e7ec9e5a7bb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damagePerShot: 0
-  timeBetweenShots: 0
-  range: 0
-  weaponDamage: 0
-  reloadTime: 0
-  maxAmmo: 0
+  weaponName: Bullpup
+  timeBetweenShots: 0.15
+  range: 100
+  weaponDamage: 25
+  reloadTime: 1
+  maxAmmo: 20
   weaponModel: {fileID: 0}
-  weaponName: 
-  effectsDisplayTime: 0
+  effectsDisplayTime: 0.1
   currentAmmo: 0
   reloading: 0
   timer: 0

@@ -20,27 +20,27 @@ public class WeaponShooting : NetworkBehaviour
     Light gunLight;                                 //Reference to the guns light source.
 
 
-    public Transform weaponSwitchTransform;
+    public Transform gunTransform;
     public Transform gunEnd;
 
-    //public bool blep;
-    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL;
+    public bool blep;
+    public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL;
     //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL2;
     //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL3;
     //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL4;
-
+    
 
     private void Awake()
     {
         //Bullpup gun = new Bullpup();
 
-        selectedWeapon = equippedWeapon.GetComponent<Bullpup>();
+        selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
 
         //selectedWeapon.Init();
 
-        //Debug.Log("gun name = " + gun.weaponName);
+        //Debug.Log("gun name = " + selectedWeapon.weaponName);
 
-        //selectedWeapon = gameObject.AddComponent<Bullpup>();
+        //selectedWeapon = gameObject.AddComponent<Bullpup>( );
         
     }
 
@@ -48,8 +48,8 @@ public class WeaponShooting : NetworkBehaviour
     {
         //Starts off game with the magazine at max value.
         //selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
-        Debug.Log(selectedWeapon.weaponName);
-
+        //Debug.Log(selectedWeapon.weaponName);
+        /*
         if (GetComponentInChildren<ParticleSystem>())
         {
             Debug.Log("Partcle System Found");
@@ -62,6 +62,7 @@ public class WeaponShooting : NetworkBehaviour
         {
             Debug.Log("Light System Found");
         }
+        */
 
         gunParticles = GetComponentInChildren<ParticleSystem>();
         gunLine = GetComponentInChildren<LineRenderer>();
@@ -125,7 +126,7 @@ public class WeaponShooting : NetworkBehaviour
     {
         if (selectedWeapon.reloading == false)
         {
-            Debug.Log("Reloading !");
+            //Debug.Log("Reloading !");
             CmdDisableMuzzleEffects();
             Invoke("Reload", selectedWeapon.reloadTime);
         }
@@ -161,21 +162,24 @@ public class WeaponShooting : NetworkBehaviour
         gunLine.SetPosition(0, gunEnd.transform.position);
 
         //  Sets the shootRay so it starts at the gun and points forward.
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
+        shootRay.origin = gunTransform.transform.position;
+        shootRay.direction = gunEnd.transform.forward;
 
         //Debug.Log("Fire the raycast !");
 
+        int rayLayer = 1;
+
         //Perform the raycast against game objects, and if it hits...
-        if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range))
+        if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range, rayLayer))
         {
-            //Debug.Log("Hit Object");
+            Debug.Log(shootHit.transform.name);
             //line renderer ends where it hits something.
             gunLine.SetPosition(1, shootHit.point);
 
             //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
             if (shootHit.collider.gameObject.GetComponent<AIStats>())
             {
+                Debug.Log("AI Stats found");
                 CmdHit(shootHit.collider.gameObject, 25);
                 Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
             }

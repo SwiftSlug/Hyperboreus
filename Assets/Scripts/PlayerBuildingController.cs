@@ -31,6 +31,7 @@ public class PlayerBuildingController : NetworkBehaviour
         {
             InbuildMode = true;
             TempStructureGuide = Instantiate(StructureSpawnerRef, PointToSpawnStructure.position, PointToSpawnStructure.rotation);
+            TempStructureGuide.transform.eulerAngles = new Vector3(0, RotationToSet, 0);
         }
     }
 
@@ -166,7 +167,7 @@ public class PlayerBuildingController : NetworkBehaviour
     {
         //LocalSelectStructure();
         //LocalSelectMaterial();
-        LocalRotateStructure(0);
+        //LocalRotateStructure(0);
     }
 
     // Update is called once per frame

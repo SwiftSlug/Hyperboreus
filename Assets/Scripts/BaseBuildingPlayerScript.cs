@@ -115,7 +115,7 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
 
     private void OnTriggerEnter(Collider CollidedAsset)    
     {
-        BoxCollider boxColliderComponent = GetComponent<BoxCollider>();
+        //BoxCollider boxColliderComponent = GetComponent<BoxCollider>();
 
        if (CollidedAsset.CompareTag("GridCollider"))
        {

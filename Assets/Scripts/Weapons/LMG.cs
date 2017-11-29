@@ -7,7 +7,7 @@ public class LMG : WeaponType
     //public override void Init()
     public void Awake()
     {
-        weaponName = "Light Machine Gun";
+        //weaponName = "Light Machine Gun";
 
         //damagePerShot = 50.0f;
         timeBetweenShots = 0.05f;
@@ -26,7 +26,7 @@ public class LMG : WeaponType
         //weaponSwitchTransform.position 
 
 
-        Debug.Log("Awake Called !");
+        //Debug.Log("Awake Called !");
 
         //weaponSwitchTransform = this.transform;
         //gunEnd = this.transform;

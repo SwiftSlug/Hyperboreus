@@ -16,25 +16,36 @@ public class WeaponShooting : NetworkBehaviour
     Ray shootRay = new Ray();                       //Ray from the gun.
     RaycastHit shootHit;                            //Raycast hit to determine what was hit.
     ParticleSystem gunParticles;                    //Reference to the particle system.
-    LineRenderer gunLine;                           //Reference to the line renderer.
-    Light gunLight;                                 //Reference to the guns light source.
+    LineRenderer gunLine = new LineRenderer();      //Reference to the line renderer.
+    Light gunLight = new Light();                   //Reference to the guns light source.
 
 
     public Transform gunTransform;
     public Transform gunEnd;
 
-    public bool blep;
-    public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL;
+    //public bool blep;
+    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL;
     //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL2;
     //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL3;
     //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL4;
-    
+
+    public void shootInit()
+    {
+
+        //Bullpup gun = new Bullpup();
+        if (equippedWeapon)
+        {
+            selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
+        }
+
+        gunParticles = GetComponentInChildren<ParticleSystem>();
+        gunLine = GetComponentInChildren<LineRenderer>();
+        gunLight = GetComponentInChildren<Light>();
+
+    }
 
     private void Awake()
     {
-        //Bullpup gun = new Bullpup();
-
-        selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
 
         //selectedWeapon.Init();
 
@@ -54,22 +65,38 @@ public class WeaponShooting : NetworkBehaviour
         {
             Debug.Log("Partcle System Found");
         }
+        else
+        {
+            Debug.Log("Partcle System Not Found");
+        }
         if (GetComponentInChildren<LineRenderer>())
         {
             Debug.Log("LineRenderer System Found");
+        }
+        else
+        {
+            Debug.Log("LineRenderer System Not Found");
         }
         if (GetComponentInChildren<Light>())
         {
             Debug.Log("Light System Found");
         }
+        else
+        {
+            Debug.Log("Light System Not Found");
+        }
         */
-
-        gunParticles = GetComponentInChildren<ParticleSystem>();
-        gunLine = GetComponentInChildren<LineRenderer>();
-        gunLight = GetComponentInChildren<Light>();
+        shootInit();
 
 
-        selectedWeapon.reloading = false;                          //sets reloading to false when a new weapon is enabled.
+        //gunEnd = equippedWeapon.transform.Find("GunEnd").transform;
+
+
+        //Debug.Log("BEBELBEBLEBLEBLLE" + gunEnd);
+
+        //this.transform.parent.GetComponent<ParticleSystem>;
+
+        //selectedWeapon.reloading = false;                          //sets reloading to false when a new weapon is enabled.
     }
 
     // Update is called once per frame
@@ -77,6 +104,10 @@ public class WeaponShooting : NetworkBehaviour
     {
         //Debug.Log(selectedWeapon.currentAmmo);
         if (!isLocalPlayer)
+        {
+            return;
+        }
+        if (!selectedWeapon)
         {
             return;
         }
@@ -172,16 +203,16 @@ public class WeaponShooting : NetworkBehaviour
         //Perform the raycast against game objects, and if it hits...
         if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range, rayLayer))
         {
-            Debug.Log(shootHit.transform.name);
+            //Debug.Log(shootHit.transform.name);
             //line renderer ends where it hits something.
             gunLine.SetPosition(1, shootHit.point);
 
             //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
             if (shootHit.collider.gameObject.GetComponent<AIStats>())
             {
-                Debug.Log("AI Stats found");
+                //Debug.Log("AI Stats found");
                 CmdHit(shootHit.collider.gameObject, 25);
-                Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
+                //Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
             }
 
             // Hit effect goes here !

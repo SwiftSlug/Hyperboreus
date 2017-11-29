@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - RatFood
   - GridCollider
+  - GunEnd
   layers:
   - Default
   - TransparentFX

@@ -162,6 +162,37 @@ ModelImporter:
     4300056: Icosphere.075
     4300058: Icosphere.074
     4300060: Icosphere.099
+    6400000: Cube.035
+    6400002: Cylinder.152
+    6400004: Cylinder.153
+    6400006: Cylinder.154
+    6400008: Cylinder.155
+    6400010: Icosphere.074
+    6400012: Icosphere.075
+    6400014: Icosphere.076
+    6400016: Icosphere.077
+    6400018: Icosphere.078
+    6400020: Icosphere.079
+    6400022: Icosphere.080
+    6400024: Icosphere.081
+    6400026: Icosphere.082
+    6400028: Icosphere.083
+    6400030: Icosphere.084
+    6400032: Icosphere.085
+    6400034: Icosphere.086
+    6400036: Icosphere.087
+    6400038: Icosphere.088
+    6400040: Icosphere.089
+    6400042: Icosphere.090
+    6400044: Icosphere.091
+    6400046: Icosphere.092
+    6400048: Icosphere.093
+    6400050: Icosphere.094
+    6400052: Icosphere.095
+    6400054: Icosphere.096
+    6400056: Icosphere.097
+    6400058: Icosphere.098
+    6400060: Icosphere.099
   materials:
     importMaterials: 1
     materialName: 2
@@ -191,7 +222,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

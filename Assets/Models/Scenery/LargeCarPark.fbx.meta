@@ -622,6 +622,129 @@ ModelImporter:
     4300240: Icosphere.074
     4300242: Icosphere.099
     4300244: Icosphere.100
+    6400000: Cube.004
+    6400002: Cube.013
+    6400004: Cube.024
+    6400006: Cube.035
+    6400008: Cylinder.040
+    6400010: Cylinder.041
+    6400012: Cylinder.042
+    6400014: Cylinder.043
+    6400016: Cylinder.044
+    6400018: Cylinder.045
+    6400020: Cylinder.046
+    6400022: Cylinder.047
+    6400024: Cylinder.138
+    6400026: Cylinder.139
+    6400028: Cylinder.140
+    6400030: Cylinder.141
+    6400032: Cylinder.152
+    6400034: Cylinder.153
+    6400036: Cylinder.154
+    6400038: Cylinder.155
+    6400040: Icosphere
+    6400042: Icosphere.000
+    6400044: Icosphere.001
+    6400046: Icosphere.002
+    6400048: Icosphere.003
+    6400050: Icosphere.004
+    6400052: Icosphere.005
+    6400054: Icosphere.006
+    6400056: Icosphere.007
+    6400058: Icosphere.008
+    6400060: Icosphere.009
+    6400062: Icosphere.010
+    6400064: Icosphere.011
+    6400066: Icosphere.012
+    6400068: Icosphere.013
+    6400070: Icosphere.014
+    6400072: Icosphere.015
+    6400074: Icosphere.016
+    6400076: Icosphere.017
+    6400078: Icosphere.018
+    6400080: Icosphere.019
+    6400082: Icosphere.020
+    6400084: Icosphere.021
+    6400086: Icosphere.022
+    6400088: Icosphere.023
+    6400090: Icosphere.024
+    6400092: Icosphere.025
+    6400094: Icosphere.026
+    6400096: Icosphere.027
+    6400098: Icosphere.028
+    6400100: Icosphere.029
+    6400102: Icosphere.030
+    6400104: Icosphere.031
+    6400106: Icosphere.032
+    6400108: Icosphere.033
+    6400110: Icosphere.034
+    6400112: Icosphere.035
+    6400114: Icosphere.036
+    6400116: Icosphere.037
+    6400118: Icosphere.038
+    6400120: Icosphere.039
+    6400122: Icosphere.040
+    6400124: Icosphere.041
+    6400126: Icosphere.042
+    6400128: Icosphere.043
+    6400130: Icosphere.044
+    6400132: Icosphere.045
+    6400134: Icosphere.046
+    6400136: Icosphere.047
+    6400138: Icosphere.048
+    6400140: Icosphere.049
+    6400142: Icosphere.050
+    6400144: Icosphere.051
+    6400146: Icosphere.052
+    6400148: Icosphere.053
+    6400150: Icosphere.054
+    6400152: Icosphere.055
+    6400154: Icosphere.056
+    6400156: Icosphere.057
+    6400158: Icosphere.058
+    6400160: Icosphere.059
+    6400162: Icosphere.060
+    6400164: Icosphere.061
+    6400166: Icosphere.062
+    6400168: Icosphere.063
+    6400170: Icosphere.064
+    6400172: Icosphere.065
+    6400174: Icosphere.066
+    6400176: Icosphere.067
+    6400178: Icosphere.068
+    6400180: Icosphere.069
+    6400182: Icosphere.070
+    6400184: Icosphere.071
+    6400186: Icosphere.072
+    6400188: Icosphere.073
+    6400190: Icosphere.074
+    6400192: Icosphere.075
+    6400194: Icosphere.076
+    6400196: Icosphere.077
+    6400198: Icosphere.078
+    6400200: Icosphere.079
+    6400202: Icosphere.080
+    6400204: Icosphere.081
+    6400206: Icosphere.082
+    6400208: Icosphere.083
+    6400210: Icosphere.084
+    6400212: Icosphere.085
+    6400214: Icosphere.086
+    6400216: Icosphere.087
+    6400218: Icosphere.088
+    6400220: Icosphere.089
+    6400222: Icosphere.090
+    6400224: Icosphere.091
+    6400226: Icosphere.092
+    6400228: Icosphere.093
+    6400230: Icosphere.094
+    6400232: Icosphere.095
+    6400234: Icosphere.096
+    6400236: Icosphere.097
+    6400238: Icosphere.098
+    6400240: Icosphere.099
+    6400242: Icosphere.100
+    6400244: Plane
   materials:
     importMaterials: 1
     materialName: 2
@@ -651,7 +774,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

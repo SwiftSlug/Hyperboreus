@@ -32,6 +32,11 @@ ModelImporter:
     4300004: Icosphere.001
     4300006: Icosphere
     4300008: Cylinder.001
+    6400000: Cylinder.001
+    6400002: Icosphere
+    6400004: Icosphere.001
+    6400006: Icosphere.002
+    6400008: Icosphere.003
   materials:
     importMaterials: 1
     materialName: 2
@@ -61,7 +66,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

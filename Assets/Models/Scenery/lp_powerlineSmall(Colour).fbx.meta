@@ -32,6 +32,11 @@ ModelImporter:
     4300004: Cylinder.002
     4300006: Cylinder.004
     4300008: Cylinder.005
+    6400000: Cylinder
+    6400002: Cylinder.001
+    6400004: Cylinder.002
+    6400006: Cylinder.004
+    6400008: Cylinder.005
   materials:
     importMaterials: 1
     materialName: 2
@@ -61,7 +66,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1

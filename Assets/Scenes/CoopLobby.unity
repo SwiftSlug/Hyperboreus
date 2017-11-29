@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.054184463, g: 0.045183647, b: 0.027025016, a: 1}
+  m_IndirectSpecularColor: {r: 0.054184183, g: 0.045183554, b: 0.027025014, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -636,6 +636,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 9.097, y: -8.559, z: 2.825}
+--- !u!1001 &1169583542
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9.507305
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -4.8235345
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172946614230220, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114549813210390518, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
+        type: 2}
+      propertyPath: LinkedPlayer
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1182266953
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,6 +729,7 @@ MonoBehaviour:
   - {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749, type: 2}
   - {fileID: 1728472473201530, guid: 2596d80a970f6d348ba7005338aed1a3, type: 2}
   - {fileID: 1462981531308506, guid: f4f15d0cc7fbde34586c25cc46659208, type: 2}
+  - {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:

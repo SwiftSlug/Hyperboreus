@@ -161,7 +161,14 @@ public class PlayerBuildingController : NetworkBehaviour
         PlayerReference = gameObject;
         StructureSpawnerRef.GetComponent<BuildingController>().LinkedPlayer = PlayerReference;
     }
-    
+
+    private void Start()
+    {
+        //LocalSelectStructure();
+        //LocalSelectMaterial();
+        LocalRotateStructure(0);
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -13,7 +13,7 @@ ModelImporter:
     6400000: //RootNode
   materials:
     importMaterials: 1
-    materialName: 2
+    materialName: 0
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -43,8 +43,8 @@ ModelImporter:
     addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

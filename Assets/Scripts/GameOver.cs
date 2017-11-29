@@ -3,6 +3,7 @@ using UnityEngine.Networking;
 
 public class GameOver : NetworkBehaviour
 {
+    [SyncVar]
     public int playersDown = 0;
 
     public GameObject[] players;
@@ -14,7 +15,7 @@ public class GameOver : NetworkBehaviour
         for (int i = 0; i < players.Length; i++)
         {
             players[i].GetComponent<PlayerStats>().manager = gameObject;
-            Debug.Log("Called");
+            Debug.Log("Assigned GameObject " + i);
         }
     }
 
@@ -25,6 +26,7 @@ public class GameOver : NetworkBehaviour
         {
             return;
         }
+
         if (playersDown < players.Length)
         {
             playersDown++;
@@ -45,49 +47,41 @@ public class GameOver : NetworkBehaviour
         }
     }
 
+    public void IncreaseDowned()
+    {
+        if (playersDown < players.Length)
+        {
+            playersDown++;
+        }
+
+        if (playersDown == players.Length)
+        {
+            GameOverlay();
+        }
+    }
+
+    public void DecreaseDowned()
+    {
+        if (playersDown > 0)
+        {
+            playersDown--;
+        }
+    }
+
     public int GetDowned()
     {
         return playersDown;
     }
 
-    [ClientRpc]
-    public void RpcGetDowned()
-    {
-        if (!isClient)
-        {
-            return;
-        }
-
-        Debug.Log(playersDown);
-
-        GetDowned();
-
-        return;
-    }
-
     public int GetPlayerAmount()
     {
-        return players.Length - 1;
+        return players.Length;
     }
 
-    [ClientRpc]
-    public void RpcGetPlayerAmount()
-    {
-        Debug.Log(players.Length - 1);
-
-        GetPlayerAmount();
-
-        return;
-    }  
 
     [ClientRpc]
     public void RpcFinishGame()
     {
-        if (!isClient)
-        {
-            return;
-        }
-
         Network.Disconnect();
         MasterServer.UnregisterHost();
     }
@@ -95,11 +89,21 @@ public class GameOver : NetworkBehaviour
     [ClientRpc]
     public void RpcGameOverlay()
     {
-        if (!isClient)
-        {
-            return;
-        }
+        Debug.Log("RPC Called");
 
-        players[1].GetComponent<PlayerStats>().gameOverOverlay.gameObject.SetActive(true);
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerStats>().gameOverOverlay.gameObject.SetActive(true);
+        }
+    }
+
+    public void GameOverlay()
+    {
+        Debug.Log("RPC Called");
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].GetComponent<PlayerStats>().gameOverOverlay.gameObject.SetActive(true);
+        }
     }
 }

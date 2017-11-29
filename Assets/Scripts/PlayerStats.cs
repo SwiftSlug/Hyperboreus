@@ -175,6 +175,7 @@ public class PlayerStats : NetworkBehaviour
         //If the server player's health reaches 0
 		if (currentHealth <= 0)
 		{
+            doStuff();
             CmdKill(); //Send the command to the server to kill/down the player
         }
 	}
@@ -217,15 +218,6 @@ public class PlayerStats : NetworkBehaviour
         isDead = true; //Set our boolean to show that player is dead
 
         currentHealth = 0; //Set the player's current health to 0 on the server
-
-        if (manager.gameObject.GetComponent<GameOver>(). == manager.gameObject.GetComponent<GameOver>().RpcGetPlayerAmount())
-        {
-            gameOverOverlay.gameObject.GetComponent<GameOver>().RpcGameOverlay();
-        }
-        else
-        {
-            manager.gameObject.GetComponent<GameOver>().CmdIncreaseDowned();
-        }
     }
 
     //Call this command for the player on the server
@@ -285,4 +277,18 @@ public class PlayerStats : NetworkBehaviour
 	{
 		healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
 	}
+
+    void doStuff()
+    {
+        manager.gameObject.GetComponent<GameOver>().IncreaseDowned();
+
+        Debug.Log("Players Down: " + manager.gameObject.GetComponent<GameOver>().GetDowned());
+
+        Debug.Log("Player Length: " + manager.gameObject.GetComponent<GameOver>().GetPlayerAmount());
+
+        //if (manager.gameObject.GetComponent<GameOver>().playersDown == manager.gameObject.GetComponent<GameOver>().players.Length)
+        //{
+        //    manager.gameObject.GetComponent<GameOver>().RpcGameOverlay();
+        //}
+    }
 }

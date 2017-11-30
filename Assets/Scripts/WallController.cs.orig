@@ -129,7 +129,12 @@ public class WallController : NetworkBehaviour
         Doorway_obj.GetComponent<Renderer>().enabled = false;
         Door_obj.GetComponent<Renderer>().enabled = false;*/
 
+<<<<<<< HEAD
         RpcSetMaterial(0);
+        RpcSetStructure(0);
+=======
+        //RpcSetMaterial(0);
+>>>>>>> Networked_combat_rework
     }
 
     // Update is called once per frame

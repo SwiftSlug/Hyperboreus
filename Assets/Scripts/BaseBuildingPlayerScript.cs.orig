@@ -44,6 +44,90 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
  //       StructurePrefab.GetComponent<WallController>().RpcSetStructure(structureSelector);
  //   }
 	
+<<<<<<< HEAD
+	// Update is called once per frame
+	void Update ()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+		if (Input.GetKeyDown ("b"))
+        {
+            CmdSpawnStructure();
+
+            Debug.Log("build mode engaged!!!");
+        }
+
+        if (Input.GetKeyDown("1") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            NeededMaterial = 0;
+            CmdSetMaterial(NeededMaterial);
+            hitpoints = 100;
+
+            Debug.Log("ChangingToWood");
+        }
+        if (Input.GetKeyDown("2") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            NeededMaterial = 1;
+            CmdSetMaterial(NeededMaterial);
+            hitpoints = 200;
+
+            Debug.Log("ChangingToStone");
+        }
+        if (Input.GetKeyDown("3") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            NeededMaterial = 2;
+            CmdSetMaterial(NeededMaterial);
+            hitpoints = 300;
+
+            Debug.Log("ChangingToMetal");
+        }
+
+        if (Input.GetKeyDown("4") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            structureSelector = 0;
+            CmdSetStructure(structureSelector);
+
+            Debug.Log("ChangingToWall");
+        }
+        if (Input.GetKeyDown("5") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            structureSelector = 1;
+            CmdSetStructure(structureSelector);
+
+            Debug.Log("ChangingToStairs");
+        }
+        if (Input.GetKeyDown("6") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            structureSelector = 2;
+            CmdSetStructure(structureSelector);
+
+            Debug.Log("ChangingToDoorway");
+        }
+        if (Input.GetKeyDown("7") && (StructurePrefab.GetComponent<WallController>().placeStatus != true))
+        {
+            structureSelector = 3;
+            CmdSetStructure(structureSelector);
+            Debug.Log("ChangingToDoor");
+        }
+    }
+
+    private void OnTriggerEnter(Collider CollidedAsset)    
+    {
+        //BoxCollider boxColliderComponent = GetComponent<BoxCollider>();
+
+       if (CollidedAsset.CompareTag("GridCollider"))
+       {
+            Debug.Log("ColliderHit!");
+            if (StructurePrefab.GetComponent<WallController>().placeStatus != true)
+            {
+                StructurePrefab.GetComponent<Transform>().position = new Vector3(CollidedAsset.transform.position.x, CollidedAsset.transform.position.y, CollidedAsset.transform.position.z);
+            }
+       }
+    }
+=======
 	//// Update is called once per frame
 	//void Update ()
  //   {
@@ -126,4 +210,5 @@ public class BaseBuildingPlayerScript : NetworkBehaviour
  //           }
  //      }
  //   }
+>>>>>>> Networked_combat_rework
 }

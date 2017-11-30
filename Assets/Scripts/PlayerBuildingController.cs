@@ -32,6 +32,7 @@ public class PlayerBuildingController : NetworkBehaviour
             InbuildMode = true;
             TempStructureGuide = Instantiate(StructureSpawnerRef, PointToSpawnStructure.position, PointToSpawnStructure.rotation);
             TempStructureGuide.transform.eulerAngles = new Vector3(0, RotationToSet, 0);
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
     }
 
@@ -161,6 +162,9 @@ public class PlayerBuildingController : NetworkBehaviour
     {
         PlayerReference = gameObject;
         StructureSpawnerRef.GetComponent<BuildingController>().LinkedPlayer = PlayerReference;
+
+        Debug.Log("I'm not using the test script");
+
     }
 
     private void Start()

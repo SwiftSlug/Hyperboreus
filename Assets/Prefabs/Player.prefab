@@ -30,6 +30,8 @@ GameObject:
   - component: {fileID: 114348478218635018}
   - component: {fileID: 114393970185486974}
   - component: {fileID: 114087570552360672}
+  - component: {fileID: 114331145210374870}
+  - component: {fileID: 114766626577379956}
   m_Layer: 0
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -191,7 +193,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549410023590050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: -1, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4261929151935168}
@@ -235,7 +237,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549410023590050}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -455,6 +457,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77a4809527d8c40a0e9836f30a0eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114331145210374870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47dece07c388aa4787a77d03dac102c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InBuildMode: 0
+  PointToSpawnStructure: {fileID: 4435395771784770}
+  StructureSpawnerRef: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
+    type: 2}
+  buildingTemplate: {fileID: 0}
+  NetworkSpawnedStructure: {fileID: 0}
+  StructureChoice: 0
+  MaterialChoice: 0
+  RotationToSet: 0
 --- !u!114 &114348478218635018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,6 +568,26 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 100
   m_InterpolateMovement: 1
+--- !u!114 &114766626577379956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47dece07c388aa4787a77d03dac102c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InBuildMode: 0
+  PointToSpawnStructure: {fileID: 4435395771784770}
+  StructureSpawnerRef: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
+    type: 2}
+  buildingTemplate: {fileID: 0}
+  NetworkSpawnedStructure: {fileID: 0}
+  StructureChoice: 0
+  MaterialChoice: 0
+  RotationToSet: 0
 --- !u!114 &114821731658639670
 MonoBehaviour:
   m_ObjectHideFlags: 1

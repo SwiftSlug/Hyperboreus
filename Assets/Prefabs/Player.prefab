@@ -199,9 +199,7 @@ GameObject:
   - component: {fileID: 114393970185486974}
   - component: {fileID: 65061811301593610}
   - component: {fileID: 114865795530275024}
-  - component: {fileID: 114182524897530358}
   - component: {fileID: 114448233212435404}
-  - component: {fileID: 114931269030034574}
   - component: {fileID: 114109481225106914}
   m_Layer: 8
   m_Name: Player
@@ -5036,18 +5034,6 @@ MonoBehaviour:
     i15: 13
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114182524897530358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ebcc29f717f96d43a66eeb171e5b6a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeapon: 0
 --- !u!114 &114251673205330040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5261,24 +5247,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6decfd3e164af848980d05e601e07fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114931269030034574
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cec4a1f19dc7604db0b45e6da66ee79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damagePerShot: 10
-  timeBetweenShots: 0.15
-  range: 100
-  reloadTime: 1
-  maxAmmo: 10
-  weaponSwitchTransform: {fileID: 4732414733094308}
-  GunEnd: {fileID: 4657937148490102}
 --- !u!120 &120085920842337142
 LineRenderer:
   m_ObjectHideFlags: 1

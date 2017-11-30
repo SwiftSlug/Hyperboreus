@@ -18,7 +18,14 @@ public class AIStats : NetworkBehaviour
         if (isServer)
         {
             enemyHealth -= damageAmount;
-            RpcSyncHealth(enemyHealth);
+            if(enemyHealth <= 0)
+            {
+                isDead = true;
+            }
+            if (!isDead)
+            {
+                RpcSyncHealth(enemyHealth);
+            }
         }
     }
 
@@ -28,6 +35,7 @@ public class AIStats : NetworkBehaviour
         if(!isServer)
         {
             enemyHealth = newHealth;
+
         }
     }
 

@@ -17,6 +17,8 @@ ModelImporter:
     3300002: SnowCover
     4300000: Rock
     4300002: SnowCover
+    6400000: Rock
+    6400002: SnowCover
   materials:
     importMaterials: 1
     materialName: 0
@@ -46,11 +48,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

@@ -102,6 +102,25 @@ ModelImporter:
     4300032: Cube.002
     4300034: Cube.001
     4300036: Cube
+    6400000: Cube
+    6400002: Cube.001
+    6400004: Cube.002
+    6400006: Cube.003
+    6400008: Cube.004
+    6400010: Cube.005
+    6400012: Cube.006
+    6400014: Cube.007
+    6400016: Cube.008
+    6400018: Cube.009
+    6400020: Cube.010
+    6400022: Cube.011
+    6400024: Cube.012
+    6400026: Cube.013
+    6400028: Cube.014
+    6400030: Cube.015
+    6400032: Cube.016
+    6400034: Cube.020
+    6400036: Cube.023
   materials:
     importMaterials: 1
     materialName: 0
@@ -131,11 +150,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

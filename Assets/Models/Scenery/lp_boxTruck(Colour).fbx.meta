@@ -67,6 +67,18 @@ ModelImporter:
     4300018: Cube.001
     4300020: Cube.002
     4300022: Cube.003
+    6400000: BackWheel.001
+    6400002: BackWheel.002
+    6400004: BackWheel.005
+    6400006: Cab
+    6400008: Cargo
+    6400010: Cube.001
+    6400012: Cube.002
+    6400014: Cube.003
+    6400016: Cylinder
+    6400018: Cylinder.001
+    6400020: FrontWheel
+    6400022: Rename
   materials:
     importMaterials: 1
     materialName: 0
@@ -96,11 +108,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

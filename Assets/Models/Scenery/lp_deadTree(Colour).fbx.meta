@@ -32,6 +32,11 @@ ModelImporter:
     4300004: Branch2
     4300006: Cylinder
     4300008: Cylinder.001
+    6400000: Branch1
+    6400002: Branch2
+    6400004: Cylinder
+    6400006: Cylinder.001
+    6400008: Trunk
   materials:
     importMaterials: 1
     materialName: 0
@@ -61,11 +66,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

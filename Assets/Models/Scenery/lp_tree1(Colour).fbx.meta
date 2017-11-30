@@ -42,6 +42,13 @@ ModelImporter:
     4300008: Torus.003
     4300010: Torus.004
     4300012: Cone
+    6400000: Cone
+    6400002: Cylinder
+    6400004: Torus.000
+    6400006: Torus.001
+    6400008: Torus.002
+    6400010: Torus.003
+    6400012: Torus.004
   materials:
     importMaterials: 1
     materialName: 0
@@ -71,11 +78,11 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1

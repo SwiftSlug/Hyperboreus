@@ -119,7 +119,7 @@ public class WallController : NetworkBehaviour
         currentRot.y = transform.rotation.y;
         currentRot.z = transform.rotation.z;
 
-        //disable colliders for placement actor choices
+        /*//disable colliders for placement actor choices
         Stairs_obj.GetComponent<Collider>().enabled = false;
         Doorway_obj.GetComponent<Collider>().enabled = false;
         Door_obj.GetComponent<Collider>().enabled = false;
@@ -127,9 +127,10 @@ public class WallController : NetworkBehaviour
         //disable renderer for all except Wall
         Stairs_obj.GetComponent<Renderer>().enabled = false;
         Doorway_obj.GetComponent<Renderer>().enabled = false;
-        Door_obj.GetComponent<Renderer>().enabled = false;
+        Door_obj.GetComponent<Renderer>().enabled = false;*/
 
         RpcSetMaterial(0);
+        RpcSetStructure(0);
     }
 
     // Update is called once per frame

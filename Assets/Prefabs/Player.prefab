@@ -1942,7 +1942,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549410023590050}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 3}
+  m_LocalPosition: {x: 0, y: -1.1, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4261929151935168}
@@ -5164,26 +5164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d77a4809527d8c40a0e9836f30a0eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114331145210374870
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47dece07c388aa4787a77d03dac102c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InBuildMode: 0
-  PointToSpawnStructure: {fileID: 4435395771784770}
-  StructureSpawnerRef: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
-    type: 2}
-  buildingTemplate: {fileID: 0}
-  NetworkSpawnedStructure: {fileID: 0}
-  StructureChoice: 0
-  MaterialChoice: 0
-  RotationToSet: 0
 --- !u!114 &114288237550100366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5206,6 +5186,26 @@ MonoBehaviour:
   currentAmmo: 30
   reloading: 0
   timer: 0
+--- !u!114 &114331145210374870
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47dece07c388aa4787a77d03dac102c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InBuildMode: 0
+  PointToSpawnStructure: {fileID: 4435395771784770}
+  StructureSpawnerRef: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
+    type: 2}
+  buildingTemplate: {fileID: 0}
+  NetworkSpawnedStructure: {fileID: 0}
+  StructureChoice: 0
+  MaterialChoice: 0
+  RotationToSet: 0
 --- !u!114 &114348478218635018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5311,26 +5311,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
---- !u!114 &114766626577379956
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a47dece07c388aa4787a77d03dac102c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InBuildMode: 0
-  PointToSpawnStructure: {fileID: 4435395771784770}
-  StructureSpawnerRef: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
-    type: 2}
-  buildingTemplate: {fileID: 0}
-  NetworkSpawnedStructure: {fileID: 0}
-  StructureChoice: 0
-  MaterialChoice: 0
-  RotationToSet: 0
 --- !u!114 &114610521896290780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5353,6 +5333,26 @@ MonoBehaviour:
   currentAmmo: 100
   reloading: 0
   timer: 0
+--- !u!114 &114766626577379956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47dece07c388aa4787a77d03dac102c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InBuildMode: 0
+  PointToSpawnStructure: {fileID: 4435395771784770}
+  StructureSpawnerRef: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
+    type: 2}
+  buildingTemplate: {fileID: 0}
+  NetworkSpawnedStructure: {fileID: 0}
+  StructureChoice: 0
+  MaterialChoice: 0
+  RotationToSet: 0
 --- !u!114 &114821731658639670
 MonoBehaviour:
   m_ObjectHideFlags: 1

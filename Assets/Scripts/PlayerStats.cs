@@ -5,6 +5,8 @@ public class PlayerStats : NetworkBehaviour
 {
 	public RectTransform healthBar; //Store a reference to the health bar transform so it can change in size
 
+    public RectTransform gameOverOverlay; //Game Over screen to be displayed when all players are downed
+
 	[Tooltip("Player maximum health")]
 	[SyncVar]
 	public int maxHealth = 100; //Max health of the player, should only change through
@@ -40,6 +42,8 @@ public class PlayerStats : NetworkBehaviour
     [Tooltip("Store the player we collided with so we can revive them")]
     [SyncVar]
     GameObject collidedPlayer = null; //Placeholder to store a reference with a collided player, we use this to call revive on them
+
+    public GameObject manager = null;
 
     void Start()
 	{
@@ -172,7 +176,7 @@ public class PlayerStats : NetworkBehaviour
 		if (currentHealth <= 0)
 		{
             CmdKill(); //Send the command to the server to kill/down the player
-		}
+        }
 	}
 
     //Call this for the player on the server
@@ -208,6 +212,8 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
+        GetComponent<GameOver>().CmdCheckDead();
+
         GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
 
         isDead = true; //Set our boolean to show that player is dead
@@ -227,6 +233,8 @@ public class PlayerStats : NetworkBehaviour
         GetComponent<PlayerController>().enabled = true; //Enable the player's movement server side
 
         isDead = false; //Reset our boolean so the player is "alive"
+
+        //manager.gameObject.GetComponent<GameOver>().CmdDecreaseDowned();
 
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 
@@ -270,4 +278,9 @@ public class PlayerStats : NetworkBehaviour
 	{
 		healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
 	}
+
+    public void doStuff()
+    {
+        gameOverOverlay.gameObject.SetActive(true);
+    }
 }

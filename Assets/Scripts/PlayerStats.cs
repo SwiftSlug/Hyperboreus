@@ -41,6 +41,23 @@ public class PlayerStats : NetworkBehaviour
     [SyncVar]
     GameObject collidedPlayer = null; //Placeholder to store a reference with a collided player, we use this to call revive on them
 
+    //BaseBuildingRelatedStats
+    //[Tooltip("Current player's amount of wood")]
+    //[SyncVar]
+    public int WoodInInventory = 20; //Player's WoodCount
+
+    //BaseBuildingRelatedStats
+    //[Tooltip("Current player's amount of wood")]
+    //[SyncVar]
+    public int StoneInInventory = 30; //Player's StoneCount
+
+    //BaseBuildingRelatedStats
+    //[Tooltip("Current player's amount of wood")]
+    //[SyncVar]
+    public int MetalInInventory = 70; //Player's MetalCount
+
+    public int ResourceChoice = 0;
+
     void Start()
 	{
         //If we are not the local player then disable all other canvas' so we do not see what they see
@@ -88,6 +105,23 @@ public class PlayerStats : NetworkBehaviour
         if (Input.GetKey(KeyCode.E)) //Interact Key is being held down
         {
             CmdPlayerRevive(); //If the 'E' key is being held down, call the player revival method which will try and revive another player if conditions are met
+        }
+
+        //BaseBuilding resource debug
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            ResourceChoice = 0;
+            CmdDebugResourceValue(ResourceChoice);
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            ResourceChoice = 1;
+            CmdDebugResourceValue(ResourceChoice);
+        }
+        if (Input.GetKeyDown(KeyCode.RightControl))
+        {
+            ResourceChoice = 2;
+            CmdDebugResourceValue(ResourceChoice);
         }
 
         //Check if player is dead locally
@@ -243,6 +277,26 @@ public class PlayerStats : NetworkBehaviour
         }
 
         InvokeRepeating("CmdRegenHealth", 0.0f, regenHealthSpeed); //Call the server regen health method that repeats each tick depending on regenHealthSpeed value
+    }
+
+    [Command]
+    public void CmdDebugResourceValue(int ResourceNeeded)
+    {
+        switch(ResourceNeeded)
+        {
+            case 0:
+                Debug.Log("Amount of wood: " + WoodInInventory);
+                WoodInInventory = WoodInInventory + 10;
+                break;
+            case 1:
+                Debug.Log("Amount of Stone: " + StoneInInventory);
+                StoneInInventory = StoneInInventory + 10;
+                break;
+            case 2:
+                Debug.Log("Amount of Metal: " + MetalInInventory);
+                MetalInInventory = MetalInInventory + 10;
+                break;
+        }
     }
 
     //Regenerate health on the server

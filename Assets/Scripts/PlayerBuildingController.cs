@@ -95,8 +95,6 @@ public class PlayerBuildingController : NetworkBehaviour
         TempStructureGuide.transform.Rotate(0, 10, 0);
     }*/
 
-
-
     [Command]
     void CmdSelectStructure()
     {

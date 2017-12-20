@@ -4,6 +4,8 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour
 {
 	Vector3 playerOrientation; //Player Orientation
+    bool AbleToDestroy = false;
+    public GameObject AssetToDestroy;
 
 	//Update is called once per frame
 	void Update()
@@ -31,5 +33,28 @@ public class PlayerController : NetworkBehaviour
 		transform.LookAt(transform.position + playerDirection, Vector3.up); //Look at the mouse position in screen space
 		transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
 		transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
+
+        
+        if (Input.GetKeyDown("e") && AbleToDestroy == true)
+        {
+            AssetToDestroy.GetComponent<DestructibleAttributes>().PlayerDestroying = gameObject;
+            AssetToDestroy.GetComponent<DestructibleAttributes>().HitCountIncreaseAndCheck();
+        }
 	}
+    private void OnCollisionEnter(Collision collidedAsset)
+    {
+        if(collidedAsset.gameObject.CompareTag("DestructibleScenery"))
+        {
+            AbleToDestroy = true;
+            AssetToDestroy = collidedAsset.gameObject;
+        }
+    }
+    private void OnCollisionExit(Collision collidedAsset)
+    {
+        if (collidedAsset.gameObject.CompareTag("DestructibleScenery"))
+        {
+            AbleToDestroy = false;
+            AssetToDestroy = null;
+        }
+    }
 }

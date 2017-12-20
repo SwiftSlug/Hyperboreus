@@ -10,6 +10,7 @@ TagManager:
   - RatFood
   - GridCollider
   - GunEnd
+  - DestructibleScenery
   layers:
   - Default
   - TransparentFX

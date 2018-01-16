@@ -43,7 +43,9 @@ public class PlayerStats : NetworkBehaviour
     [SyncVar]
     GameObject collidedPlayer = null; //Placeholder to store a reference with a collided player, we use this to call revive on them
 
+<<<<<<< HEAD
     public GameObject manager = null;
+=======
 
     // player inventory //
     //resource inventory
@@ -64,6 +66,7 @@ public class PlayerStats : NetworkBehaviour
     public int shotgunAmmo = 0;
     public int sniperAmmo = 0;
     public int rocketAmmo = 0;
+>>>>>>> AddingResources
 
     void Start()
 	{

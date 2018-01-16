@@ -4,6 +4,10 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour
 {
 	Vector3 playerOrientation; //Player Orientation
+    public bool AbleToDestroy = false;
+    public bool AbleToLoot = false;
+    public GameObject AssetToDestroy;
+    public GameObject AssetToLoot;
 
 	//Update is called once per frame
 	void Update()
@@ -31,5 +35,67 @@ public class PlayerController : NetworkBehaviour
 		transform.LookAt(transform.position + playerDirection, Vector3.up); //Look at the mouse position in screen space
 		transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
 		transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
+
+        
+        if (Input.GetKeyDown("e"))
+        {
+            if (AbleToDestroy == true)
+            {
+                CmdDamageAsset();
+            }
+            else if (AbleToLoot == true)
+            {
+                CmdLootableAmmo();
+            }
+            /*AssetToDestroy.GetComponent<DestructibleAttributes>().PlayerDestroying = gameObject;
+            AssetToDestroy.GetComponent<DestructibleAttributes>().HitCountIncreaseAndCheck();*/
+        }
+
+        //if (Input.GetKeyDown("-") && AbleToDestroy == true)
+        //{
+        //    AssetToDestroy.GetComponent<DestructibleAttributes>().SpawnOnServer();
+        //}
 	}
+
+    //destroyable asset collision
+    private void OnCollisionEnter(Collision collidedAsset)
+    {
+        if(collidedAsset.gameObject.CompareTag("DestructibleScenery"))
+        {
+            AbleToDestroy = true;
+            AssetToDestroy = collidedAsset.gameObject;
+        }
+        if(collidedAsset.gameObject.CompareTag("LootableContainer"))
+        {
+            AbleToLoot = true;
+            AssetToLoot = collidedAsset.gameObject;
+        }
+    }
+    private void OnCollisionExit(Collision collidedAsset)
+    {
+        if (collidedAsset.gameObject.CompareTag("DestructibleScenery"))
+        {
+            AbleToDestroy = false;
+            AssetToDestroy = null;
+        }
+        if (collidedAsset.gameObject.CompareTag("LootableContainer"))
+        {
+            AbleToLoot = false;
+            AssetToLoot = null;
+        }
+    }
+
+    [Command]
+    public void CmdDamageAsset()
+    {
+        AssetToDestroy.GetComponent<DestructibleAttributes>().PlayerDestroying = gameObject;
+        AssetToDestroy.GetComponent<DestructibleAttributes>().HitCountIncreaseAndCheck();
+    }
+
+    [Command]
+    public void CmdLootableAmmo()
+    {
+        AssetToLoot.GetComponent<LootableAmmoScript>().PlayerLooting = gameObject;
+        AssetToLoot.GetComponent<LootableAmmoScript>().HitCountIncreaseAndCheck();
+    }
 }

@@ -95,8 +95,6 @@ public class PlayerBuildingController : NetworkBehaviour
         TempStructureGuide.transform.Rotate(0, 10, 0);
     }*/
 
-
-
     [Command]
     void CmdSelectStructure()
     {
@@ -198,7 +196,30 @@ public class PlayerBuildingController : NetworkBehaviour
         }
         if (Input.GetKeyDown(("space")) && (InbuildMode == true))
         {
-            CmdPlaceStructure();
+            switch (MaterialNeeded)
+            {
+                case 0:
+                    if (gameObject.GetComponent<PlayerStats>().WoodInInventory >= 10)
+                    {
+                        CmdPlaceStructure();
+                        gameObject.GetComponent<PlayerStats>().WoodInInventory = gameObject.GetComponent<PlayerStats>().WoodInInventory - 10;
+                    }
+                    break;
+                case 1:
+                    if (gameObject.GetComponent<PlayerStats>().StoneInInventory >= 10)
+                    {
+                        CmdPlaceStructure();
+                        gameObject.GetComponent<PlayerStats>().StoneInInventory = gameObject.GetComponent<PlayerStats>().StoneInInventory - 10;
+                    }
+                    break;
+                case 2:
+                    if (gameObject.GetComponent<PlayerStats>().MetalInInventory >= 10)
+                    {
+                        CmdPlaceStructure();
+                        gameObject.GetComponent<PlayerStats>().MetalInInventory = gameObject.GetComponent<PlayerStats>().MetalInInventory - 10;
+                    }
+                    break;
+            }
         }
 
         /*

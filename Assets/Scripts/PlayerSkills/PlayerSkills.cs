@@ -6,16 +6,17 @@ using UnityEngine.Networking;
 public class PlayerSkills : NetworkBehaviour
 {
     //  Current equipped player skill
-    public Skill playerSkill;
+    public Skill playerSkill1;
 
     //  Flags if the ability button is held down
-    bool skillButtonDown;
+    bool skillButton1Down;
 
 	void Start () {
         //  Finds the skill attached to the player and assigns that to its equipped skill
-        playerSkill = GetComponent<Skill>();
+        playerSkill1 = GetComponent<Skill>();
         //  Calls the init function of the skill, if needed
-        playerSkill.Init();
+        playerSkill1.playerReference = transform.gameObject;
+        playerSkill1.Init();
 	}
 	
 	// Update is called once per frame
@@ -23,17 +24,23 @@ public class PlayerSkills : NetworkBehaviour
 
         if (Input.GetButton("Skill1"))
         {
-            skillButtonDown = true;
-            playerSkill.buttonDownTime = playerSkill.buttonDownTime + Time.deltaTime;
+            skillButton1Down = true;
+            playerSkill1.buttonDownTime = playerSkill1.buttonDownTime + Time.deltaTime;
         }
         else
         {
-            skillButtonDown = false;
-            playerSkill.buttonDownTime = 0.0f;
+            if (skillButton1Down)
+            {
+                playerSkill1.buttonRelease();
+                skillButton1Down = false;
+            }
+            
+            playerSkill1.buttonDownTime = 0.0f;
         }
-        if (skillButtonDown)
+
+        if (skillButton1Down)
         {
-            playerSkill.SkillAction();
+            playerSkill1.SkillAction();
         }
 
     }

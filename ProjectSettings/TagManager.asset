@@ -11,6 +11,7 @@ TagManager:
   - GridCollider
   - GunEnd
   - DestructibleScenery
+  - LootableContainer
   layers:
   - Default
   - TransparentFX

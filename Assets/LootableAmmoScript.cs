@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class DestructibleAttributes : NetworkBehaviour
+public class LootableAmmoScript : NetworkBehaviour
 {
 
-    public int MaterialType; // 0 = wood, 1 = stone, 2 = metal
+    public int AmmoType; // 0 = pistol, 1 = rifle, 2 = sniper, 3 = rocket ammo
     public int AmountToDrop;
     public int NeededHits;
     public int HitCounter;
-    public GameObject PlayerDestroying;
+    public GameObject PlayerLooting;
     public GameObject NetworkSpawnedAsset;
     public bool Spawned = false;
 
@@ -48,18 +48,26 @@ public class DestructibleAttributes : NetworkBehaviour
         HitCounter = HitCounter + 1;
         if (HitCounter >= NeededHits)
         {
-            switch (MaterialType)
+            switch (AmmoType)
             {
                 case 0:
-                    PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory = PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory + AmountToDrop;
+                    PlayerLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerLooting.GetComponent<PlayerStats>().pistolAmmo + AmountToDrop;
                     RpcDestroyAsset();
                     break;
                 case 1:
-                    PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory + AmountToDrop;
+                    PlayerLooting.GetComponent<PlayerStats>().rifleAmmo = PlayerLooting.GetComponent<PlayerStats>().rifleAmmo + AmountToDrop;
                     RpcDestroyAsset();
                     break;
                 case 2:
-                    PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory = PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory + AmountToDrop;
+                    PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo = PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo + AmountToDrop;
+                    RpcDestroyAsset();
+                    break;
+                case 3:
+                    PlayerLooting.GetComponent<PlayerStats>().sniperAmmo = PlayerLooting.GetComponent<PlayerStats>().sniperAmmo + AmountToDrop;
+                    RpcDestroyAsset();
+                    break;
+                case 4:
+                    PlayerLooting.GetComponent<PlayerStats>().rocketAmmo = PlayerLooting.GetComponent<PlayerStats>().rocketAmmo + AmountToDrop;
                     RpcDestroyAsset();
                     break;
             }

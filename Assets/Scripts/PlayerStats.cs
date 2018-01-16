@@ -41,22 +41,26 @@ public class PlayerStats : NetworkBehaviour
     [SyncVar]
     GameObject collidedPlayer = null; //Placeholder to store a reference with a collided player, we use this to call revive on them
 
-    //BaseBuildingRelatedStats
-    //[Tooltip("Current player's amount of wood")]
-    //[SyncVar]
+
+    // player inventory //
+    //resource inventory
     public int WoodInInventory = 20; //Player's WoodCount
-
-    //BaseBuildingRelatedStats
-    //[Tooltip("Current player's amount of wood")]
-    //[SyncVar]
     public int StoneInInventory = 30; //Player's StoneCount
-
-    //BaseBuildingRelatedStats
-    //[Tooltip("Current player's amount of wood")]
-    //[SyncVar]
     public int MetalInInventory = 70; //Player's MetalCount
-
     public int ResourceChoice = 0;
+
+    //weapon & ammo inventory
+    public bool pistol = false;
+    public bool rifle = false;
+    public bool shotgun = false;
+    public bool sniper = false;
+    public bool rocketLauncher = false;
+
+    public int pistolAmmo = 0;
+    public int rifleAmmo = 0;
+    public int shotgunAmmo = 0;
+    public int sniperAmmo = 0;
+    public int rocketAmmo = 0;
 
     void Start()
 	{

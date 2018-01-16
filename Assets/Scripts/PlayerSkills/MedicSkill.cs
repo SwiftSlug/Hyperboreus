@@ -9,8 +9,17 @@ public class MedicSkill : Skill {
     //  Line renderer used to represent the laser sight of the syringe
     LineRenderer laser;
     //  Time it takes to charge the syringe shot
-    public float chargeTime;    
+    public float chargeTime;
 
+    //GameObject syringe = GameObject.Instantiate((GameObject)Prefebs.Load("MedicalSyringe"));
+
+    //Object syringe = AssetDatabase.LoadAssetAtPath("Assets/something.prefab", typeof(GameObject));
+
+    //GameObject instance = Instantiate(Resources.Load("enemy", )) as GameObject;
+
+    GameObject syringe;
+
+    //public GameObject syringeModel;
 
     public override void Init()
     {
@@ -27,6 +36,13 @@ public class MedicSkill : Skill {
 
         laser = playerReference.AddComponent<LineRenderer>();
         laser.enabled = false;
+
+        syringe = Instantiate(Resources.Load("MedicalSyringe", typeof(GameObject))) as GameObject;
+
+        //syringe = GetComponent<>();
+        //Resources.Load("Assets//Prefabs//MedicalSyringe.prefab");
+        //Instantiate(Resources.Load("MedicalSyringe"), transform.position, transform.rotation);
+        //syringe = Instantiate(Resources.Load("MedicalSyringe"), transform.position, transform.rotation) as GameObject;
     }
 
     public override bool SkillAction()
@@ -40,14 +56,21 @@ public class MedicSkill : Skill {
 
             if (buttonDownTime > chargeTime)
             {
-                Debug.Log("Skill Activate");
-                GetComponent<PlayerStats>().currentHealth = GetComponent<PlayerStats>().currentHealth + 50;
+                //Debug.Log("Skill Activate");
+                //GetComponent<PlayerStats>().currentHealth = GetComponent<PlayerStats>().currentHealth + 50;
+
+                //  Fire a syringe
+                if (syringe)
+                {
+                    Instantiate(syringe, transform.position, transform.rotation);
+                }
 
                 laser.enabled = false;  //  Turn laser off
                 lastUsedTime = Time.time;
                 return true;
             }
 
+            
         }
         return false;
     }

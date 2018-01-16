@@ -16,7 +16,7 @@ public class PlayerSkills : NetworkBehaviour
         playerSkill1 = GetComponent<Skill>();
         //  Calls the init function of the skill, if needed
         playerSkill1.playerReference = transform.gameObject;
-        playerSkill1.Init();
+        playerSkill1.Init();        
 	}
 	
 	// Update is called once per frame

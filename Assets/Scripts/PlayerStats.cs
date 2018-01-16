@@ -50,11 +50,11 @@ public class PlayerStats : NetworkBehaviour
     public int ResourceChoice = 0;
 
     //weapon & ammo inventory
-    public bool pistol = false;
-    public bool rifle = false;
-    public bool shotgun = false;
-    public bool sniper = false;
-    public bool rocketLauncher = false;
+    public GameObject pistol = null;
+    public GameObject rifle = null;
+    public GameObject shotgun = null;
+    public GameObject sniper = null;
+    public GameObject rocketLauncher = null;
 
     public int pistolAmmo = 0;
     public int rifleAmmo = 0;

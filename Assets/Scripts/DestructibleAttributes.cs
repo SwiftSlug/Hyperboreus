@@ -11,8 +11,6 @@ public class DestructibleAttributes : NetworkBehaviour
     public int NeededHits;
     public int HitCounter;
     public GameObject PlayerDestroying;
-    public GameObject NetworkSpawnedAsset;
-    public bool Spawned = false;
 
 
     [ClientRpc]
@@ -52,15 +50,21 @@ public class DestructibleAttributes : NetworkBehaviour
             {
                 case 0:
                     PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory = PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
+                    PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
+                    CmdDestroyAsset();
                     break;
                 case 1:
                     PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
+                    PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
+                    CmdDestroyAsset();
                     break;
                 case 2:
                     PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory = PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
+                    PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
+                    CmdDestroyAsset();
                     break;
             }
         }

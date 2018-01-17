@@ -11,8 +11,6 @@ public class LootableAmmoScript : NetworkBehaviour
     public int NeededHits;
     public int HitCounter;
     public GameObject PlayerLooting;
-    public GameObject NetworkSpawnedAsset;
-    public bool Spawned = false;
 
 
     [ClientRpc]
@@ -52,23 +50,33 @@ public class LootableAmmoScript : NetworkBehaviour
             {
                 case 0:
                     PlayerLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerLooting.GetComponent<PlayerStats>().pistolAmmo + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                    PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                    CmdDestroyAsset();
                     break;
                 case 1:
                     PlayerLooting.GetComponent<PlayerStats>().rifleAmmo = PlayerLooting.GetComponent<PlayerStats>().rifleAmmo + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                    PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                    CmdDestroyAsset();
                     break;
                 case 2:
                     PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo = PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                    PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                    CmdDestroyAsset();
                     break;
                 case 3:
                     PlayerLooting.GetComponent<PlayerStats>().sniperAmmo = PlayerLooting.GetComponent<PlayerStats>().sniperAmmo + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                    PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                    CmdDestroyAsset();
                     break;
                 case 4:
                     PlayerLooting.GetComponent<PlayerStats>().rocketAmmo = PlayerLooting.GetComponent<PlayerStats>().rocketAmmo + AmountToDrop;
-                    RpcDestroyAsset();
+                    PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                    PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                    CmdDestroyAsset();
                     break;
             }
         }

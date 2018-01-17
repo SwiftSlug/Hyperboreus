@@ -47,14 +47,7 @@ public class PlayerController : NetworkBehaviour
             {
                 CmdLootableAmmo();
             }
-            /*AssetToDestroy.GetComponent<DestructibleAttributes>().PlayerDestroying = gameObject;
-            AssetToDestroy.GetComponent<DestructibleAttributes>().HitCountIncreaseAndCheck();*/
         }
-
-        //if (Input.GetKeyDown("-") && AbleToDestroy == true)
-        //{
-        //    AssetToDestroy.GetComponent<DestructibleAttributes>().SpawnOnServer();
-        //}
 	}
 
     //destroyable asset collision
@@ -97,5 +90,20 @@ public class PlayerController : NetworkBehaviour
     {
         AssetToLoot.GetComponent<LootableAmmoScript>().PlayerLooting = gameObject;
         AssetToLoot.GetComponent<LootableAmmoScript>().HitCountIncreaseAndCheck();
+    }
+
+    public void ResetLooting()
+    {
+        AbleToLoot = false;
+        Debug.Log("Able to loot: " +AbleToLoot);
+        AssetToLoot = null;
+        Debug.Log("Asset To Loot: " +AssetToLoot);
+    }
+    public void ResetDestroying()
+    {
+        AbleToDestroy = false;
+        Debug.Log("Able To Destroy: " + AbleToDestroy);
+        AssetToDestroy = null;
+        Debug.Log("Asset To Destroy: " + AssetToDestroy);
     }
 }

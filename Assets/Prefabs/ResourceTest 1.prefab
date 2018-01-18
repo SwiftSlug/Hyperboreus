@@ -109,12 +109,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AmmoType: 0
-  AmountToDrop: 30
-  NeededHits: 2
+  AmountToDrop: 0
+  NeededHits: 0
   HitCounter: 0
+  ContainerEmpty: 0
   PlayerLooting: {fileID: 0}
-  NetworkSpawnedAsset: {fileID: 0}
-  Spawned: 0
 --- !u!114 &114849141122610588
 MonoBehaviour:
   m_ObjectHideFlags: 1

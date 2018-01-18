@@ -10,8 +10,8 @@ public class DestructibleAttributes : NetworkBehaviour
     public int AmountToDrop;
     public int NeededHits;
     public int HitCounter;
-    public bool ResourceUsed = false;
     public GameObject PlayerDestroying;
+
 
     [ClientRpc]
     void RpcDestroyAsset()
@@ -28,10 +28,6 @@ public class DestructibleAttributes : NetworkBehaviour
         RpcDestroyAsset();
     }
 
-    public void LocalDestroyAsset()
-    {
-        CmdDestroyAsset();
-    }
 
     void Start()
     {
@@ -39,6 +35,10 @@ public class DestructibleAttributes : NetworkBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown("*"))
+        {
+            RpcDestroyAsset();
+        }
     }
 
     public void HitCountIncreaseAndCheck()
@@ -52,22 +52,19 @@ public class DestructibleAttributes : NetworkBehaviour
                     PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory = PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory + AmountToDrop;
                     PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
                     PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
-                    ResourceUsed = true;
-                    //CmdDestroyAsset();
+                    CmdDestroyAsset();
                     break;
                 case 1:
                     PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory + AmountToDrop;
                     PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
                     PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
-                    ResourceUsed = true;
-                    //CmdDestroyAsset();
+                    CmdDestroyAsset();
                     break;
                 case 2:
                     PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory = PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory + AmountToDrop;
                     PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
                     PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
-                    ResourceUsed = true;
-                    //CmdDestroyAsset();
+                    CmdDestroyAsset();
                     break;
             }
         }

@@ -5,13 +5,12 @@ using UnityEngine.Networking;
 
 public class LootableAmmoScript : NetworkBehaviour
 {
-
     public int AmmoType; // 0 = pistol, 1 = rifle, 2 = sniper, 3 = rocket ammo
     public int AmountToDrop;
     public int NeededHits;
     public int HitCounter;
-    public GameObject PlayerLooting = null;
-
+    public bool ContainerEmpty = false;
+    public GameObject PlayerLooting;
 
     [ClientRpc]
     void RpcDestroyAsset()
@@ -28,6 +27,26 @@ public class LootableAmmoScript : NetworkBehaviour
         RpcDestroyAsset();
     }
 
+    /*[ClientRpc]
+    void RpcSetEmpty()
+    {
+        ContainerEmpty = true;
+        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+    }
+
+    [Command]
+    void CmdSetEmpty()
+    {
+        ContainerEmpty = true;
+        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+        RpcSetEmpty();
+    }*/
+
+    /*public void CallCmdDestroy()
+    {
+        CmdDestroyAsset();
+    }*/
+
     void Start()
     {
     }
@@ -38,46 +57,44 @@ public class LootableAmmoScript : NetworkBehaviour
 
     public void HitCountIncreaseAndCheck()
     {
-        HitCounter = HitCounter + 1;
-        if (HitCounter >= NeededHits)
+        if (ContainerEmpty == false)
         {
-            switch (AmmoType)
+            HitCounter = HitCounter + 1;
+            if (HitCounter >= NeededHits)
             {
-                case 0:
-                    PlayerLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerLooting.GetComponent<PlayerStats>().pistolAmmo + AmountToDrop;
-                    //PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
-                    //PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
-                    PlayerLooting.GetComponent<PlayerController>().ResetLooting();
-                    RpcDestroyAsset();
-                    break;
-                case 1:
-                    PlayerLooting.GetComponent<PlayerStats>().rifleAmmo = PlayerLooting.GetComponent<PlayerStats>().rifleAmmo + AmountToDrop;
-                    //PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
-                    //PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
-                    PlayerLooting.GetComponent<PlayerController>().ResetLooting();
-                    RpcDestroyAsset();
-                    break;
-                case 2:
-                    PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo = PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo + AmountToDrop;
-                    //PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
-                    //PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
-                    PlayerLooting.GetComponent<PlayerController>().ResetLooting();
-                    RpcDestroyAsset();
-                    break;
-                case 3:
-                    PlayerLooting.GetComponent<PlayerStats>().sniperAmmo = PlayerLooting.GetComponent<PlayerStats>().sniperAmmo + AmountToDrop;
-                    //PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
-                    //PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
-                    PlayerLooting.GetComponent<PlayerController>().ResetLooting();
-                    RpcDestroyAsset();
-                    break;
-                case 4:
-                    PlayerLooting.GetComponent<PlayerStats>().rocketAmmo = PlayerLooting.GetComponent<PlayerStats>().rocketAmmo + AmountToDrop;
-                    //PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
-                    //PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
-                    PlayerLooting.GetComponent<PlayerController>().ResetLooting();
-                    RpcDestroyAsset();
-                    break;
+                switch (AmmoType)
+                {
+                    case 0:
+                        PlayerLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerLooting.GetComponent<PlayerStats>().pistolAmmo + AmountToDrop;
+                        PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                        PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                        CmdDestroyAsset();
+                        break;
+                    case 1:
+                        PlayerLooting.GetComponent<PlayerStats>().rifleAmmo = PlayerLooting.GetComponent<PlayerStats>().rifleAmmo + AmountToDrop;
+                        PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                        PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                        CmdDestroyAsset();
+                        break;
+                    case 2:
+                        PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo = PlayerLooting.GetComponent<PlayerStats>().shotgunAmmo + AmountToDrop;
+                        PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                        PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                        CmdDestroyAsset();
+                        break;
+                    case 3:
+                        PlayerLooting.GetComponent<PlayerStats>().sniperAmmo = PlayerLooting.GetComponent<PlayerStats>().sniperAmmo + AmountToDrop;
+                        PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                        PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                        CmdDestroyAsset();
+                        break;
+                    case 4:
+                        PlayerLooting.GetComponent<PlayerStats>().rocketAmmo = PlayerLooting.GetComponent<PlayerStats>().rocketAmmo + AmountToDrop;
+                        PlayerLooting.GetComponent<PlayerController>().AbleToLoot = false;
+                        PlayerLooting.GetComponent<PlayerController>().AssetToLoot = null;
+                        CmdDestroyAsset();
+                        break;
+                }
             }
         }
     }

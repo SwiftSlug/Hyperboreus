@@ -10,8 +10,8 @@ public class DestructibleAttributes : NetworkBehaviour
     public int AmountToDrop;
     public int NeededHits;
     public int HitCounter;
-    public GameObject PlayerDestroying = null;
-
+    public bool ResourceUsed = false;
+    public GameObject PlayerDestroying;
 
     [ClientRpc]
     void RpcDestroyAsset()
@@ -28,6 +28,12 @@ public class DestructibleAttributes : NetworkBehaviour
         RpcDestroyAsset();
     }
 
+    public void LocalDestroyAsset()
+    {
+        CmdDestroyAsset();
+    }
+
+
     void Start()
     {
     }
@@ -38,32 +44,38 @@ public class DestructibleAttributes : NetworkBehaviour
 
     public void HitCountIncreaseAndCheck()
     {
-        HitCounter = HitCounter + 1;
-        if (HitCounter >= NeededHits)
+        if (ResourceUsed == false)
         {
-            switch (MaterialType)
+            HitCounter = HitCounter + 1;
+            if (HitCounter >= NeededHits)
             {
-                case 0:
-                    PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory = PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory + AmountToDrop;
-                    //PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
-                    //PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
-                    PlayerDestroying.GetComponent<PlayerController>().ResetDestroying();
-                    RpcDestroyAsset();
-                    break;
-                case 1:
-                    PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory + AmountToDrop;
-                    //PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
-                    //PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
-                    PlayerDestroying.GetComponent<PlayerController>().ResetDestroying();
-                    RpcDestroyAsset();
-                    break;
-                case 2:
-                    PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory = PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory + AmountToDrop;
-                    //PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
-                    //PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
-                    PlayerDestroying.GetComponent<PlayerController>().ResetDestroying();
-                    RpcDestroyAsset();
-                    break;
+                switch (MaterialType)
+                {
+                    case 0:
+                        PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory = PlayerDestroying.GetComponent<PlayerStats>().WoodInInventory + AmountToDrop;
+                        PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
+                        PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
+                        ResourceUsed = true;
+                        //HideAsset();
+                        //CmdDestroyAsset();
+                        break;
+                    case 1:
+                        PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroying.GetComponent<PlayerStats>().StoneInInventory + AmountToDrop;
+                        PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
+                        PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
+                        ResourceUsed = true;
+                        //HideAsset();
+                        //CmdDestroyAsset();
+                        break;
+                    case 2:
+                        PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory = PlayerDestroying.GetComponent<PlayerStats>().MetalInInventory + AmountToDrop;
+                        PlayerDestroying.GetComponent<PlayerController>().AbleToDestroy = false;
+                        PlayerDestroying.GetComponent<PlayerController>().AssetToDestroy = null;
+                        ResourceUsed = true;
+                        //HideAsset();
+                        //CmdDestroyAsset();
+                        break;
+                }
             }
         }
     }

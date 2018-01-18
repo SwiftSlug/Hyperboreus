@@ -52,6 +52,7 @@ public class MedicSkill : Skill {
                 //  Fire a syringe
                 if (syringe)
                 {
+
                     //  Create the syringe game object
                     Instantiate(syringe, transform.position, transform.rotation);
                 }

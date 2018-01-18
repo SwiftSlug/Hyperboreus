@@ -34,15 +34,24 @@ public class WeaponShooting : NetworkBehaviour
         }
 
         Debug.Log("Line Rendered Ref Set");
-        
-        gunParticles = GetComponentInChildren<ParticleSystem>();
+
+        //gunParticles = GetComponentInChildren<ParticleSystem>();
         //gunLine = GetComponentInChildren<LineRenderer>();
-        gunLight = GetComponentInChildren<Light>();
-        
-        if (gunLine)
+        //gunLight = GetComponentInChildren<Light>();
+
+        if (equippedWeapon)
+        {
+            gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
+            gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
+            gunLight = equippedWeapon.GetComponentInChildren<Light>();
+        }
+
+        /*
+        if (equippedWeapon)
         {
             gunLine = equippedWeapon.AddComponent<LineRenderer>();
         }
+        */
     }
 
     private void Awake()

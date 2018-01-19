@@ -14,6 +14,10 @@ public class MedicSkill : Skill {
     //  The game object used to instantiate the fired syringe
     GameObject syringe;
 
+    Transform gunPos;
+
+    public bool belp;
+
     public override void Init()
     {
         if(cooldown == 0.0f)
@@ -26,7 +30,9 @@ public class MedicSkill : Skill {
             //  Sets the chargetime to 2 seconds if no other value is set
             chargeTime = 1.0f;
         }
-        
+
+        gunPos = GetComponent<WeaponShooting>().gunEnd;
+
         //  Add the line renderer component to the player
         laser = playerReference.AddComponent<LineRenderer>();
         //  Set the laser to default off
@@ -40,8 +46,12 @@ public class MedicSkill : Skill {
     {
         if (Time.time > lastUsedTime + cooldown)
         {
-            laser.SetPosition(0, playerReference.transform.position);           //  Sets laser start location to player
-            laser.SetPosition(1, playerReference.transform.forward * 1000);     //  Sets laser end to 1000 in front of player
+            //laser.SetPosition(0, playerReference.transform.position);           //  Sets laser start location to player
+            //laser.SetPosition(1, playerReference.transform.forward * 10);     //  Sets laser end to 1000 in front of player
+
+            laser.SetPosition(0, gunPos.position);           //  Sets laser start location to player
+            laser.SetPosition(1, transform.forward * 1000);     //  Sets laser end to 1000 in front of player
+
             laser.enabled = true;   //  Turn laser on
 
             //  Increase the charge time
@@ -52,10 +62,14 @@ public class MedicSkill : Skill {
                 //  Fire a syringe
                 if (syringe)
                 {
-                    GameObject syringeRef = Instantiate(syringe, transform.position, transform.rotation);
-                    //  Create the syringe game object
-                    syringeRef.GetComponent<MedicalSyringeScript>().player = playerReference;
+                    //GameObject syringeRef = Instantiate(syringe, transform.position + (transform.forward * 5.0f ), transform.rotation);
 
+                    //  Create the syringe game object
+                    GameObject syringeRef = Instantiate(syringe, gunPos.position, transform.rotation);
+
+                    //  Assign player reference on scripts
+                    syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = playerReference;
+                    syringeRef.GetComponentInChildren<trackingSphereScript>().player = playerReference;
                 }
                 
                 currentChargeTime = 0.0f;   //  Reset the current charge time

@@ -4,50 +4,63 @@ using UnityEngine;
 
 public class MedicalSyringeScript : MonoBehaviour {
 
-    Collider sphereCollider;
-    public Collider trackingCollider;
+    //Collider sphereCollider;
+    //public Collider trackingCollider;
+
+
+    public Collider physicsCollider;
 
     Rigidbody rb;
+
+    public bool blep;
 
     //  Holds a reference to the player who fired the syringe
     public GameObject player;
 
-    public float speed = 600.0f;
+    public float speed;
+
+    public bool blep1;
+
 
 	// Use this for initialization
 	void Start () {
         //Debug.Log("Syringe Spawned !");
 
-        sphereCollider = GetComponent<SphereCollider>();
-        rb = GetComponent<Rigidbody>();
+        //sphereCollider = GetComponent<SphereCollider>();
+        physicsCollider = transform.parent.GetComponent<Collider>();
 
+        rb = transform.parent.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * speed);
+        Invoke("enableCollisions", 0.5f);
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    void enableCollisions()
+    {
+        if (physicsCollider)
+        {
+            physicsCollider.enabled = true;
+        }
+    }
+
+    // Update is called once per frame
+    void Update () {
 
 	}
 
     void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Collider>() )
-        {
-            Debug.Log("Hit sphereCollider");
-        }
-        if (other.GetComponent<Collider>() == trackingCollider)
-        {
-            Debug.Log("Hit tracking collider");
-        }
+    {        
 
         if (other.CompareTag("NetworkedPlayer") && (other.gameObject))
-        {            
+        {
+            //  Ensure that the syringe does not trigger off the firing player
             if (other.gameObject != player)
             {
+                Debug.Log("Hit Inner Layer, healing");
                 other.GetComponent<PlayerStats>().CmdHeal(50);
-                Debug.Log("Blep");
+                //this.enabled = false;
+                Destroy(transform.gameObject);
             }
-        }
+        }        
         
     }
 }

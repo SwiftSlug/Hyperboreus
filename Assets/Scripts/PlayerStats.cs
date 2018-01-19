@@ -3,32 +3,32 @@ using UnityEngine.Networking;
 
 public class PlayerStats : NetworkBehaviour
 {
-    public RectTransform healthBar; //Store a reference to the health bar transform so it can change in size
+	public RectTransform healthBar; //Store a reference to the health bar transform so it can change in size
 
     public RectTransform gameOverOverlay; //Game Over screen to be displayed when all players are downed
 
-    [Tooltip("Player maximum health")]
-    [SyncVar]
-    public int maxHealth = 100; //Max health of the player, should only change through
+	[Tooltip("Player maximum health")]
+	[SyncVar]
+	public int maxHealth = 100; //Max health of the player, should only change through
 
-    [Tooltip("Current player health")]
-    [SyncVar(hook = "ChangeHealth")]
-    public int currentHealth; //The player's current health, can go down from being damaged or up from being healed or regenerating
+	[Tooltip("Current player health")]
+	[SyncVar(hook = "ChangeHealth")]
+	public int currentHealth; //The player's current health, can go down from being damaged or up from being healed or regenerating
 
-    [Tooltip("Boolean for player death check")]
-    [SyncVar]
-    public bool isDead = false; //Used when determining if the player is dead and if they should be revived or respawned
+	[Tooltip("Boolean for player death check")]
+	[SyncVar]
+	public bool isDead = false; //Used when determining if the player is dead and if they should be revived or respawned
 
-    [Tooltip("Time code at which player was damaged")]
-    [SyncVar]
-    public float timeDamaged = 0.0f; //Time code at which player was damaged
+	[Tooltip("Time code at which player was damaged")]
+	[SyncVar] 
+	public float timeDamaged = 0.0f; //Time code at which player was damaged
 
-    [Tooltip("Regen rate. Quarter of a second Default before each regen tick")]
-    [SyncVar]
-    public float regenHealthSpeed = 0.25f; //Regen rate. Quarter of a second Default before each regen tick
+	[Tooltip("Regen rate. Quarter of a second Default before each regen tick")]
+	[SyncVar]
+	public float regenHealthSpeed = 0.25f; //Regen rate. Quarter of a second Default before each regen tick
 
-    [Tooltip("Time in (seconds) before regen kicks in. 10 Second Default")]
-    [SyncVar]
+	[Tooltip("Time in (seconds) before regen kicks in. 10 Second Default")]
+	[SyncVar]
     public float regenHealthDelay = 10.0f; //Time in (seconds) before regen kicks in. 10 Second Default
 
     [Tooltip("Time taken to revive another player. 5 Second Default")]
@@ -66,31 +66,31 @@ public class PlayerStats : NetworkBehaviour
     public int rocketAmmo = 0;
 
     void Start()
-    {
+	{
         //If we are not the local player then disable all other canvas' so we do not see what they see
-        if (!isLocalPlayer)
-        {
-            Canvas playerUI = gameObject.GetComponentInChildren<Canvas>();
+		if (!isLocalPlayer)
+		{
+			Canvas playerUI = gameObject.GetComponentInChildren<Canvas>();
 
-            if (playerUI != null)
-            {
-                playerUI.enabled = false;
-            }
+			if (playerUI != null)
+			{
+				playerUI.enabled = false;
+			}
 
-            return;
-        }
+			return;
+		}
 
         currentHealth = maxHealth; //Set the player's health to their maximum health locally
 
         CmdStartRegen(); //Invoke our regen function on the server which will check if enough time has passed to start regenerating player health
     }
 
-    void Update()
-    {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
+	void Update()
+	{
+		if (!isLocalPlayer)
+		{
+			return;
+		}
 
         //DEBUG USE
         if (Input.GetKeyDown(KeyCode.O)) //Damage Key
@@ -152,7 +152,7 @@ public class PlayerStats : NetworkBehaviour
             if (otherPlayer.GetComponent<PlayerStats>().isDead == true)
             {
                 collidedPlayer = otherPlayer.gameObject; //Store the other player so we can call revive on them
-
+                    
                 canRevive = true; //Allow this current player to revive them if needed
             }
             else
@@ -170,7 +170,7 @@ public class PlayerStats : NetworkBehaviour
         {
             return;
         }
-
+        
         //If the player trying to revive another is dead, don't allow this
         if (isDead)
         {
@@ -198,32 +198,32 @@ public class PlayerStats : NetworkBehaviour
 
     //Call this for the player on the server
     [Command]
-    public void CmdDamage(int amount)
-    {
-        if (!isServer)
-        {
-            return;
-        }
+	public void CmdDamage(int amount)
+	{
+		if (!isServer)
+		{
+			return;
+		}
 
         currentHealth -= amount; //Set the server player's health to a reduced amount given via argument to the method
 
-        timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
+		timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
 
         //If the server player's health reaches 0
-        if (currentHealth <= 0)
-        {
+		if (currentHealth <= 0)
+		{
             CmdKill(); //Send the command to the server to kill/down the player
         }
-    }
+	}
 
     //Call this for the player on the server
-    [Command]
-    public void CmdHeal(int amount)
-    {
-        if (!isServer)
-        {
-            return;
-        }
+	[Command]
+	public void CmdHeal(int amount)
+	{
+		if (!isServer)
+		{
+			return;
+		}
 
         //If the player is dead then we should not be able to heal them
         if (isDead)
@@ -231,14 +231,14 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
-        currentHealth += amount; //Increase the player's health by incremented amount given via argument to the method
+		currentHealth += amount; //Increase the player's health by incremented amount given via argument to the method
 
         //Make sure the player's health does not exceed their maximum
-        if (currentHealth >= maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
-    }
+		if (currentHealth >= maxHealth)
+		{
+			currentHealth = maxHealth;
+		}
+	}
 
     //Call this command for the player on the server
     [Command]
@@ -293,7 +293,7 @@ public class PlayerStats : NetworkBehaviour
     [Command]
     public void CmdDebugResourceValue(int ResourceNeeded)
     {
-        switch (ResourceNeeded)
+        switch(ResourceNeeded)
         {
             case 0:
                 Debug.Log("Amount of wood: " + WoodInInventory);
@@ -311,9 +311,9 @@ public class PlayerStats : NetworkBehaviour
     }
 
     //Regenerate health on the server
-    [Command]
-    public void CmdRegenHealth()
-    {
+	[Command]
+	public void CmdRegenHealth()
+	{
         if (!isServer)
         {
             return;
@@ -328,13 +328,13 @@ public class PlayerStats : NetworkBehaviour
                 CmdHeal(1); //Heal the player for 1 each call of this method
             }
         }
-    }
+	}
 
     //Using the SyncVar hook, this method is called each time the current health value is synchronized between server and client
-    void ChangeHealth(int currentHealth)
-    {
-        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
-    }
+	void ChangeHealth(int currentHealth)
+	{
+		healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
+	}
 
     public void doStuff()
     {

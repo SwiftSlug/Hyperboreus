@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 65296093520651482}
   - component: {fileID: 23400215396010632}
   - component: {fileID: 135926033061539412}
-  - component: {fileID: 114062447926257892}
   - component: {fileID: 114930917779399844}
   - component: {fileID: 114849141122610588}
+  - component: {fileID: 114604405337056180}
   m_Layer: 0
   m_Name: ResourceTest
   m_TagString: DestructibleScenery
@@ -55,7 +55,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,7 +70,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -99,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114062447926257892
+--- !u!114 &114604405337056180
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,14 +105,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1712353278530652}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba59c65aaea53914ba316d1d85895832, type: 3}
+  m_Script: {fileID: 11500000, guid: d58842a81512dde4e87ad0c170f87fa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaterialType: 0
-  AmountToDrop: 0
-  NeededHits: 0
-  HitCounter: 0
-  PlayerDestroying: {fileID: 0}
+  DestroyOrLoot: 0
+  PlayerColliding: 0
+  PlayerDestroyingOrLooting: {fileID: 0}
+  AmmoType: 0
+  AmountOfAmmoToDrop: 0
+  ResourceType: 0
+  AmountOfResourceToDrop: 0
 --- !u!114 &114849141122610588
 MonoBehaviour:
   m_ObjectHideFlags: 1

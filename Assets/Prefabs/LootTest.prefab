@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 135530635503659646}
   - component: {fileID: 114681639243043256}
   - component: {fileID: 114428297745715076}
-  - component: {fileID: 114414418282990394}
+  - component: {fileID: 114861610872923586}
   m_Layer: 0
   m_Name: LootTest
   m_TagString: LootableContainer
@@ -55,7 +55,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,7 +70,6 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -99,22 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114414418282990394
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1133756600696904}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33895e77c5daa0418df0794dbc15727, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AmmoType: 0
-  AmountToDrop: 0
-  NeededHits: 0
-  HitCounter: 0
-  PlayerLooting: {fileID: 0}
 --- !u!114 &114428297745715076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -168,6 +150,24 @@ MonoBehaviour:
     i15: 84
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114861610872923586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1133756600696904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58842a81512dde4e87ad0c170f87fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyOrLoot: 1
+  PlayerColliding: 0
+  PlayerDestroyingOrLooting: {fileID: 0}
+  AmmoType: 0
+  AmountOfAmmoToDrop: 0
+  ResourceType: 0
+  AmountOfResourceToDrop: 0
 --- !u!135 &135530635503659646
 SphereCollider:
   m_ObjectHideFlags: 1

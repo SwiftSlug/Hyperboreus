@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MedicalSyringeScript : MonoBehaviour {
 
-    Collider sphereCollider;
+    public Collider sphereCollider;
+    public Collider trackingCollider;
+
     Rigidbody rb;
 
     //  Holds a reference to the player who fired the syringe
-    GameObject player;
+    public GameObject player;
 
     public float speed = 600.0f;
 
@@ -29,16 +31,23 @@ public class MedicalSyringeScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        //if (other.GetType() == typeof(NetworkPlayer))
-        if (other.CompareTag("NetworkedPlayer") && (other.gameObject))
+        if (other.GetComponent<Collider>() )
         {
-            Debug.Log("Blep");
-
-            other.GetComponent<PlayerStats>().CmdHeal(50);
+            Debug.Log("Hit sphereCollider");
+        }
+        if (other.GetComponent<Collider>() == trackingCollider)
+        {
+            Debug.Log("Hit tracking collider");
         }
 
+        if (other.CompareTag("NetworkedPlayer") && (other.gameObject))
+        {            
+            if (other.gameObject != player)
+            {
+                other.GetComponent<PlayerStats>().CmdHeal(50);
+                Debug.Log("Blep");
+            }
+        }
         
-        //Destroy(other.gameObject);
     }
-
 }

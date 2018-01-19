@@ -52,9 +52,10 @@ public class MedicSkill : Skill {
                 //  Fire a syringe
                 if (syringe)
                 {
-
+                    GameObject syringeRef = Instantiate(syringe, transform.position, transform.rotation);
                     //  Create the syringe game object
-                    Instantiate(syringe, transform.position, transform.rotation);
+                    syringeRef.GetComponent<MedicalSyringeScript>().player = playerReference;
+
                 }
                 
                 currentChargeTime = 0.0f;   //  Reset the current charge time

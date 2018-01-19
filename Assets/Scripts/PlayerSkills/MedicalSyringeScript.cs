@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MedicalSyringeScript : MonoBehaviour {
 
-    public Collider sphereCollider;
+    Collider sphereCollider;
     public Collider trackingCollider;
 
     Rigidbody rb;

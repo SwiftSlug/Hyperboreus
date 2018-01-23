@@ -20,20 +20,23 @@ public class LootAndDestroy : NetworkBehaviour
     [Command]
     public void CmdDestroy() // destory object on server
     {
-        RpcDestroy();
+        //ResetAllValuesAndDestroy();
+        //RpcDestroy();
         NetworkServer.Destroy(gameObject);
         Destroy(gameObject);
     }
 
-    [ClientRpc]
+    /*[ClientRpc]
     public void RpcDestroy() // destroy object on clients
     {
+        //ResetAllValuesAndDestroy();
         NetworkServer.Destroy(gameObject);
         Destroy(gameObject);
-    }
+    }*/
 
     public void Interacting()
     {
+
         switch (DestroyOrLoot)
         {
             case 0: //Destroy
@@ -83,15 +86,11 @@ public class LootAndDestroy : NetworkBehaviour
 
     public void ResetAllValuesAndDestroy()
     {
-        //player looting reset
-        PlayerDestroyingOrLooting.GetComponent<PlayerController>().AbleToLoot = false;
-        PlayerDestroyingOrLooting.GetComponent<PlayerController>().AssetToLoot = null;
-        //player destroying reset
-        PlayerDestroyingOrLooting.GetComponent<PlayerController>().AbleToDestroy = false;
-        PlayerDestroyingOrLooting.GetComponent<PlayerController>().AssetToDestroy = null;
+        //player reset
+        PlayerDestroyingOrLooting.GetComponent<PlayerController>().ResetStats();
         //self destroy
         PlayerDestroyingOrLooting = null;
-
+        //CmdDestroy();
         CmdDestroy();
     }
 }

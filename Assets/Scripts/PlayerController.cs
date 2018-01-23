@@ -4,7 +4,9 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour
 {
     Vector3 playerOrientation; //Player Orientation
+    [SyncVar]
     public bool AbleToDestroy = false;
+    [SyncVar]
     public bool AbleToLoot = false;
     public GameObject AssetToDestroy;
     public GameObject AssetToLoot;
@@ -40,13 +42,13 @@ public class PlayerController : NetworkBehaviour
 
         if (Input.GetKeyDown("e"))
         {
-            if ((AbleToDestroy == true))
+            if (AbleToDestroy == true)
             {
                 CmdDamageAsset();
             }
-            if ((AbleToLoot == true))
+            if (AbleToLoot == true)
             {
-                CmdLootableAmmo();
+               CmdLootableAmmo();
             }
         }
     }
@@ -58,12 +60,15 @@ public class PlayerController : NetworkBehaviour
         {
             AbleToDestroy = true;
             AssetToDestroy = collidedAsset.gameObject;
+            AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         }
         //lootable asset start collision
         if (collidedAsset.gameObject.CompareTag("LootableContainer"))
         {
             AbleToLoot = true;
             AssetToLoot = collidedAsset.gameObject;
+            AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
+
         }
     }
     private void OnCollisionExit(Collision collidedAsset)
@@ -71,37 +76,37 @@ public class PlayerController : NetworkBehaviour
         //destroyable asset end collision
         if (collidedAsset.gameObject.CompareTag("DestructibleScenery"))
         {
+            AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = null;
             AbleToDestroy = false;
             AssetToDestroy = null;
-            AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = null;
         }
         //lootable asset end collision
         if (collidedAsset.gameObject.CompareTag("LootableContainer"))
         {
+            AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = null;
             AbleToLoot = false;
             AssetToLoot = null;
-            AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = null;
         }
     }
     [Command]
     public void CmdDamageAsset()
     {
-        if (!isServer)
-        {
-            return;
-        }
-        AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
+        //AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         AssetToDestroy.GetComponent<LootAndDestroy>().Interacting();
     }
 
     [Command]
     public void CmdLootableAmmo()
     {
-        if (!isServer)
-        {
-            return;
-        }
-        AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
+       // AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         AssetToLoot.GetComponent<LootAndDestroy>().Interacting();
+    }
+
+    public void ResetStats()
+    {
+        AbleToLoot = false;
+        AbleToDestroy = false;
+        AssetToLoot = null;
+        AssetToDestroy = null;
     }
 }

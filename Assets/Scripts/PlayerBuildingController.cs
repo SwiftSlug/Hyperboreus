@@ -163,7 +163,7 @@ public class PlayerBuildingController : NetworkBehaviour
         PlayerReference = gameObject;
         StructureSpawnerRef.GetComponent<BuildingController>().LinkedPlayer = PlayerReference;
 
-        Debug.Log("I'm not using the test script");
+        //Debug.Log("I'm not using the test script");
 
     }
 

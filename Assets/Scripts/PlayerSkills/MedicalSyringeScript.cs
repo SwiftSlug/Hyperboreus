@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MedicalSyringeScript : MonoBehaviour {
+public class MedicalSyringeScript : NetworkBehaviour {
 
     //Collider sphereCollider;
     //public Collider trackingCollider;
@@ -12,7 +13,7 @@ public class MedicalSyringeScript : MonoBehaviour {
 
     Rigidbody rb;
 
-    public bool blep;
+    //public bool blep;
 
     //  Holds a reference to the player who fired the syringe
     public GameObject player;
@@ -55,12 +56,28 @@ public class MedicalSyringeScript : MonoBehaviour {
             //  Ensure that the syringe does not trigger off the firing player
             if (other.gameObject != player)
             {
-                Debug.Log("Hit Inner Layer, healing");
+                //Debug.Log("Hit Inner Layer, healing");
                 other.GetComponent<PlayerStats>().CmdHeal(50);
                 //this.enabled = false;
-                Destroy(transform.gameObject);
+
+                Destroy(transform.parent.gameObject);
+                NetworkServer.Destroy(transform.parent.gameObject);
+
+                //CmdDestroySyringe(transform.parent.gameObject);
             }
         }        
         
     }
+    [Command]
+    void CmdDestroySyringe(GameObject syringe)
+    {        
+        NetworkServer.Destroy(syringe);
+        RpcDestroySyringe(syringe);
+    }
+    [ClientRpc]
+    void RpcDestroySyringe(GameObject syringe)
+    {
+        Destroy(syringe);
+    }
+
 }

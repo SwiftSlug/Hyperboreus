@@ -33,7 +33,7 @@ public class WeaponShooting : NetworkBehaviour
             selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
         }
 
-        Debug.Log("Line Rendered Ref Set");
+        //Debug.Log("Line Rendered Ref Set");
 
         //gunParticles = GetComponentInChildren<ParticleSystem>();
         //gunLine = GetComponentInChildren<LineRenderer>();

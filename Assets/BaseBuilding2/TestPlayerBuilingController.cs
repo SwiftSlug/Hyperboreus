@@ -31,7 +31,7 @@ public class TestPlayerBuilingController : NetworkBehaviour
 
     private void Awake()
     {
-        Debug.Log("I'm using the test script");
+        //Debug.Log("I'm using the test script");
     }
 
     //Server Functions

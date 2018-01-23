@@ -13,7 +13,7 @@ public class GameOver : NetworkBehaviour
 
     void Start()
     {
-        Debug.Log("Start Called");
+        //Debug.Log("Start Called");
 
         Invoke("CmdPlayerJoin", 2);
     }
@@ -26,7 +26,7 @@ public class GameOver : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Server Called Player Join");
+        //Debug.Log("Server Called Player Join");
 
         players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
 
@@ -43,7 +43,7 @@ public class GameOver : NetworkBehaviour
 
         RpcSyncPlayerTotal(playerTotal);
 
-        Debug.Log("Player Total: " + playerTotal);
+        //Debug.Log("Player Total: " + playerTotal);
     }
 
     [Command]
@@ -54,19 +54,19 @@ public class GameOver : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Server Sync Total");
+        //Debug.Log("Server Sync Total");
 
-        Debug.Log("Total: " + total);
+        //Debug.Log("Total: " + total);
 
         playerTotal = total;
 
-        Debug.Log("Server's Player Total: " + playerTotal);
+        //Debug.Log("Server's Player Total: " + playerTotal);
     }
 
     [ClientRpc]
     public void RpcSyncPlayerTotal(int total)
     {
-        Debug.Log("Client Sync Total");
+        //Debug.Log("Client Sync Total");
 
         playerTotal = total;
     }
@@ -83,14 +83,14 @@ public class GameOver : NetworkBehaviour
 
         if (playersDown < playerTotal)
         {
-            Debug.Log("Player: " + playerTotal);
-            Debug.Log("Players Down: " + playersDown);
+            //Debug.Log("Player: " + playerTotal);
+            //Debug.Log("Players Down: " + playersDown);
 
             playersDown++;
 
-            Debug.Log("Player Down Increase");
+            //Debug.Log("Player Down Increase");
 
-            Debug.Log("Players Down: " + playersDown);
+            //Debug.Log("Players Down: " + playersDown);
 
             CmdSyncPlayersDown(playersDown);
         }
@@ -135,41 +135,41 @@ public class GameOver : NetworkBehaviour
             return;
         }
 
-        Debug.Log("Server Sync Downed");
+        //Debug.Log("Server Sync Downed");
 
-        Debug.Log("Downed: " + downed);
+        //Debug.Log("Downed: " + downed);
 
         //playersDown++;
 
         playersDown = downed;
 
-        Debug.Log("Server Downed Count: " + playersDown);
+        //Debug.Log("Server Downed Count: " + playersDown);
     }
 
     [ClientRpc]
     public void RpcSyncPlayersDown(int downed)
     {
-        Debug.Log("Client Sync Downed");
+        //Debug.Log("Client Sync Downed");
 
-        Debug.Log("Downed: " + downed);
+        //Debug.Log("Downed: " + downed);
 
         //playersDown++;
 
         playersDown = downed;
 
-        Debug.Log("Synced Downed: " + playersDown);
+        //Debug.Log("Synced Downed: " + playersDown);
     }
 
     [ClientRpc]
     public void RpcSyncPlayers(int downed)
     {
-        Debug.Log("Client Sync Downed");
+        //Debug.Log("Client Sync Downed");
 
-        Debug.Log("Downed: " + downed);
+        //Debug.Log("Downed: " + downed);
 
         playersDown = downed;
 
-        Debug.Log("Synced Downed: " + playersDown);
+        //Debug.Log("Synced Downed: " + playersDown);
     }
 
     [Command]
@@ -189,7 +189,7 @@ public class GameOver : NetworkBehaviour
     [ClientRpc]
     public void RpcGameOverlay()
     {
-        Debug.Log("RPC Called");
+        //Debug.Log("RPC Called");
 
         GetComponent<PlayerStats>().gameOverOverlay.gameObject.SetActive(true);
     }

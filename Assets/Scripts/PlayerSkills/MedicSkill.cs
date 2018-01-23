@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class MedicSkill : Skill {
 
@@ -12,7 +13,7 @@ public class MedicSkill : Skill {
     float currentChargeTime;
 
     //  The game object used to instantiate the fired syringe
-    GameObject syringe;
+    //GameObject syringe;
 
     Transform gunPos;
 
@@ -38,46 +39,56 @@ public class MedicSkill : Skill {
         //  Set the laser to default off
         laser.enabled = false;
         //  Load the syringe gameobject
-        syringe = Instantiate(Resources.Load("MedicalSyringe", typeof(GameObject))) as GameObject;
-
+        //syringe = Instantiate(Resources.Load("MedicalSyringe", typeof(GameObject))) as GameObject;
+        //syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
     }
 
     public override bool SkillAction()
     {
-        if (Time.time > lastUsedTime + cooldown)
+        if (isLocalPlayer)
         {
-            //laser.SetPosition(0, playerReference.transform.position);           //  Sets laser start location to player
-            //laser.SetPosition(1, playerReference.transform.forward * 10);     //  Sets laser end to 1000 in front of player
-
-            laser.SetPosition(0, gunPos.position);           //  Sets laser start location to player
-            laser.SetPosition(1, transform.forward * 1000);     //  Sets laser end to 1000 in front of player
-
-            laser.enabled = true;   //  Turn laser on
-
-            //  Increase the charge time
-            currentChargeTime += Time.deltaTime;
-
-            if (currentChargeTime > chargeTime)
+            if (Time.time > lastUsedTime + cooldown)
             {
-                //  Fire a syringe
-                if (syringe)
+                //laser.SetPosition(0, playerReference.transform.position);           //  Sets laser start location to player
+                //laser.SetPosition(1, playerReference.transform.forward * 10);     //  Sets laser end to 1000 in front of player
+
+                laser.SetPosition(0, gunPos.position);           //  Sets laser start location to player
+                laser.SetPosition(1, transform.forward * 1000);     //  Sets laser end to 1000 in front of player
+
+                laser.enabled = true;   //  Turn laser on
+
+                //  Increase the charge time
+                currentChargeTime += Time.deltaTime;
+
+                if (currentChargeTime > chargeTime)
                 {
-                    //GameObject syringeRef = Instantiate(syringe, transform.position + (transform.forward * 5.0f ), transform.rotation);
+                    //  Fire a syringe
+                    //if (syringe)
+                    //{
+                        //GameObject syringeRef = Instantiate(syringe, transform.position + (transform.forward * 5.0f ), transform.rotation);
 
-                    //  Create the syringe game object
-                    GameObject syringeRef = Instantiate(syringe, gunPos.position, transform.rotation);
+                        //Debug.Log("New Syringe spawned");
 
-                    //  Assign player reference on scripts
-                    syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = playerReference;
-                    syringeRef.GetComponentInChildren<trackingSphereScript>().player = playerReference;
+                        /*
+                        //  Create the syringe game object
+                        GameObject syringeRef = Instantiate(syringe, gunPos.position, transform.rotation);
+
+                        //  Assign player reference on scripts
+                        syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = playerReference;
+                        syringeRef.GetComponentInChildren<trackingSphereScript>().player = playerReference;
+                        */
+
+                        CmdSpawnSyringe(gunPos.position, transform.rotation, playerReference);
+                    //}
+
+                    currentChargeTime = 0.0f;   //  Reset the current charge time
+                    laser.enabled = false;      //  Turn laser off
+                    lastUsedTime = Time.time;   //  Set last firing time
+                    return true;
                 }
-                
-                currentChargeTime = 0.0f;   //  Reset the current charge time
-                laser.enabled = false;      //  Turn laser off
-                lastUsedTime = Time.time;   //  Set last firing time
-                return true;    
-            }
 
+
+            }
             
         }
         return false;
@@ -88,6 +99,24 @@ public class MedicSkill : Skill {
         currentChargeTime = 0.0f;       //  Reset the current charge time
         laser.enabled = false;          //  Turn laser off
         //Debug.Log("Button released");
+    }
+
+    
+
+
+
+    [Command]
+    void CmdSpawnSyringe(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
+    {
+        GameObject syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
+
+        GameObject syringeRef = Instantiate(syringe, spawnPosition, spawnRotation);
+
+        //  Assign player reference on scripts
+        syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
+        syringeRef.GetComponentInChildren<trackingSphereScript>().player = currentPlayerReference;
+
+        NetworkServer.Spawn(syringeRef);
     }
 
 }

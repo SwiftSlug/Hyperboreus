@@ -8,10 +8,10 @@ public class trackingSphereScript : MonoBehaviour {
 
     //  Holds a reference to the player who fired the syringe
     public GameObject player;
-
     GameObject targetPlayer;
-
     Rigidbody rb;
+
+    public float blep;
 
     public float trackingForce = 100.0f;
 
@@ -26,7 +26,7 @@ public class trackingSphereScript : MonoBehaviour {
 
         if (targetPlayer)
         {
-            Debug.Log("Tracking Player");
+            //Debug.Log("Tracking Player");
 
             Vector3 vectorToTarget = targetPlayer.transform.position - transform.position;
             //vectorToTarget = Vector3.Scale(vectorToTarget, rb.velocity);
@@ -67,6 +67,7 @@ public class trackingSphereScript : MonoBehaviour {
             if (other.gameObject != player)
             {
                 //Debug.Log("Tracking sphere hit player");
+                transform.parent.GetComponent<CapsuleCollider>().enabled = false;
                 targetPlayer = other.gameObject;
             }
         }

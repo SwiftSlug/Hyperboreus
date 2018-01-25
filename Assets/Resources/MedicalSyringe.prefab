@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4133667513588086}
   - component: {fileID: 114461627567917202}
   - component: {fileID: 135935251590628322}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ImpactCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4374997404529178}
   - component: {fileID: 114529280785466416}
   - component: {fileID: 135644229727253874}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TrackingCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1631028257622744}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.6020901, y: 4.269, z: -6.442408}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4127246124508248}

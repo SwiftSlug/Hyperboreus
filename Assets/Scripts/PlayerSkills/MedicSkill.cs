@@ -17,7 +17,7 @@ public class MedicSkill : Skill {
 
     Transform gunPos;
 
-    public bool belp;
+    //public bool belp;
 
     public override void Init()
     {
@@ -33,6 +33,8 @@ public class MedicSkill : Skill {
         }
 
         gunPos = GetComponent<WeaponShooting>().gunEnd;
+
+        Debug.Log(playerReference);
 
         //  Add the line renderer component to the player
         laser = playerReference.AddComponent<LineRenderer>();

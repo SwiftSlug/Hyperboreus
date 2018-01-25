@@ -21,14 +21,17 @@ public class MedicalSyringeScript : NetworkBehaviour {
     public float speed;
 
     public bool blep1;
+    public bool blep2;
+    public bool blep3;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         //Debug.Log("Syringe Spawned !");
 
         //sphereCollider = GetComponent<SphereCollider>();
         physicsCollider = transform.parent.GetComponent<Collider>();
+
 
         rb = transform.parent.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * speed);

@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class trackingSphereScript : MonoBehaviour {
+public class trackingSphereScript : NetworkBehaviour
+{
 
     Collider trackingCollider;
 
@@ -12,6 +14,8 @@ public class trackingSphereScript : MonoBehaviour {
     Rigidbody rb;
 
     public float blep;
+    public float blep2;
+    public float blep3;
 
     public float trackingForce = 100.0f;
 
@@ -59,19 +63,18 @@ public class trackingSphereScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-
-        //Debug.Log(other.tag);
-
         if (other.CompareTag("NetworkedPlayer") && (other.gameObject))
         {
             if (other.gameObject != player)
             {
+                Debug.Log("Different Player detected.... tracking");
+
+
                 //Debug.Log("Tracking sphere hit player");
                 transform.parent.GetComponent<CapsuleCollider>().enabled = false;
                 targetPlayer = other.gameObject;
             }
         }
-
 
     }
 

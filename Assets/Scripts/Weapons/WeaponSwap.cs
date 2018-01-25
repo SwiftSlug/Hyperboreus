@@ -8,9 +8,6 @@ public class WeaponSwap : NetworkBehaviour
 
     public GameObject[] weaponSlots;
 
-    //public bool belp;
-    //public bool belp1;
-
     // Update is called once per frame
     void Update() {
 

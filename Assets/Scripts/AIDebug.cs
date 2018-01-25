@@ -40,8 +40,9 @@ public class AIDebug : MonoBehaviour {
 
         }
 
-        GameObject[] aibelp = GameObject.FindGameObjectsWithTag("Enemy");
+        //GameObject[] aibelp = GameObject.FindGameObjectsWithTag("Enemy");
 
+        /*
         if (false)
         {
             foreach (GameObject foundAI in aibelp)
@@ -49,6 +50,7 @@ public class AIDebug : MonoBehaviour {
                 Debug.Log("Enemy health = :" + foundAI.GetComponent<AIStats>().enemyHealth);
             }
         }
+        */
         /*
         if (Input.GetKeyDown(KeyCode.))
         {

@@ -16,19 +16,14 @@ public class WeaponShooting : NetworkBehaviour
     Ray shootRay = new Ray();                       //Ray from the gun.
     RaycastHit shootHit;                            //Raycast hit to determine what was hit.
     ParticleSystem gunParticles;                    //Reference to the particle system.
-    LineRenderer gunLine = new LineRenderer();      //Reference to the line renderer.
+    //LineRenderer gunLine = new LineRenderer();      //Reference to the line renderer.
     Light gunLight = new Light();                   //Reference to the guns light source.
-
+    LineRenderer gunLine;
 
     public Transform gunTransform;
     public Transform gunEnd;
 
-    //public bool blep;
-    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL;
-    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL2;
-    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL3;
-    //public bool BEBPLPLBPLELBPELBPEPLBPLEPLBLEPLBPELPBLPELBEPLBLPLEPPBLELPBEPL4;
-
+    
     public void shootInit()
     {
 
@@ -38,10 +33,25 @@ public class WeaponShooting : NetworkBehaviour
             selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
         }
 
-        gunParticles = GetComponentInChildren<ParticleSystem>();
-        gunLine = GetComponentInChildren<LineRenderer>();
-        gunLight = GetComponentInChildren<Light>();
+        //Debug.Log("Line Rendered Ref Set");
 
+        //gunParticles = GetComponentInChildren<ParticleSystem>();
+        //gunLine = GetComponentInChildren<LineRenderer>();
+        //gunLight = GetComponentInChildren<Light>();
+
+        if (equippedWeapon)
+        {
+            gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
+            gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
+            gunLight = equippedWeapon.GetComponentInChildren<Light>();
+        }
+
+        /*
+        if (equippedWeapon)
+        {
+            gunLine = equippedWeapon.AddComponent<LineRenderer>();
+        }
+        */
     }
 
     private void Awake()
@@ -57,46 +67,9 @@ public class WeaponShooting : NetworkBehaviour
 
     void Start()
     {
-        //Starts off game with the magazine at max value.
-        //selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
-        //Debug.Log(selectedWeapon.weaponName);
-        /*
-        if (GetComponentInChildren<ParticleSystem>())
-        {
-            Debug.Log("Partcle System Found");
-        }
-        else
-        {
-            Debug.Log("Partcle System Not Found");
-        }
-        if (GetComponentInChildren<LineRenderer>())
-        {
-            Debug.Log("LineRenderer System Found");
-        }
-        else
-        {
-            Debug.Log("LineRenderer System Not Found");
-        }
-        if (GetComponentInChildren<Light>())
-        {
-            Debug.Log("Light System Found");
-        }
-        else
-        {
-            Debug.Log("Light System Not Found");
-        }
-        */
+
         shootInit();
 
-
-        //gunEnd = equippedWeapon.transform.Find("GunEnd").transform;
-
-
-        //Debug.Log("BEBELBEBLEBLEBLLE" + gunEnd);
-
-        //this.transform.parent.GetComponent<ParticleSystem>;
-
-        //selectedWeapon.reloading = false;                          //sets reloading to false when a new weapon is enabled.
     }
 
     // Update is called once per frame
@@ -189,9 +162,11 @@ public class WeaponShooting : NetworkBehaviour
         gunParticles.Play();
 
         //  Draw Line renderer
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, gunEnd.transform.position);
-
+        if (gunLine)
+        {
+            gunLine.enabled = true;
+            gunLine.SetPosition(0, gunEnd.transform.position);
+        }
         //  Sets the shootRay so it starts at the gun and points forward.
         shootRay.origin = gunTransform.transform.position;
         shootRay.direction = gunEnd.transform.forward;
@@ -205,7 +180,10 @@ public class WeaponShooting : NetworkBehaviour
         {
             //Debug.Log(shootHit.transform.name);
             //line renderer ends where it hits something.
-            gunLine.SetPosition(1, shootHit.point);
+            if (gunLine)
+            {
+                gunLine.SetPosition(1, shootHit.point);
+            }
 
             //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
             if (shootHit.collider.gameObject.GetComponent<AIStats>())
@@ -289,10 +267,15 @@ public class WeaponShooting : NetworkBehaviour
     public void CmdDisableMuzzleEffects()
     {
         // Disable the line renderer and the light.
-        gunLine.enabled = false;
-        gunLight.enabled = false;
-        gunLight.enabled = false;
-
+        if (gunLine)
+        {
+            gunLine.enabled = false;
+        }
+        if (gunLight)
+        {
+            gunLight.enabled = false;
+            gunLight.enabled = false;
+        }
         RpcDisableMuzzleEffects();
     }
 
@@ -300,8 +283,14 @@ public class WeaponShooting : NetworkBehaviour
     public void RpcDisableMuzzleEffects()
     {
         // Disable the line renderer and the light.
-        gunLine.enabled = false;
-        gunLight.enabled = false;
-        gunLight.enabled = false;
+        if (gunLine)
+        {
+            gunLine.enabled = false;
+        }
+        if (gunLight)
+        {
+            gunLight.enabled = false;
+            gunLight.enabled = false;
+        }
     }
 }

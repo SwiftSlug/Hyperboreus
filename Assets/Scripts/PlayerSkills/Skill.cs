@@ -26,4 +26,5 @@ public abstract class Skill : NetworkBehaviour
 
     //  Function call for when the skill button is released
     public abstract void buttonRelease();
+
 }

@@ -20,9 +20,9 @@ public class MedicalSyringeScript : NetworkBehaviour {
 
     public float speed;
 
-    public bool blep1;
-    public bool blep2;
-    public bool blep3;
+    //public bool blep1;
+    //public bool blep2;
+    //public bool blep3;
 
 
     // Use this for initialization

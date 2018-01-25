@@ -6,12 +6,12 @@ using UnityEngine.Networking;
 public class trackingSphereScript : NetworkBehaviour
 {
 
-    Collider trackingCollider;
+    //Collider trackingCollider;
 
     //  Holds a reference to the player who fired the syringe
     public GameObject player;
     GameObject targetPlayer;
-    Rigidbody rb;
+    //Rigidbody rb;
 
     public float blep;
     public float blep2;
@@ -21,8 +21,8 @@ public class trackingSphereScript : NetworkBehaviour
 
     // Use this for initialization
     void Start () {
-        trackingCollider = GetComponent<Collider>();
-        rb = transform.parent.GetComponent<Rigidbody>();
+        //trackingCollider = GetComponent<Collider>();
+        //rb = transform.parent.GetComponent<Rigidbody>();
     }
 	
 	// Update is called once per frame
@@ -30,33 +30,33 @@ public class trackingSphereScript : NetworkBehaviour
 
         if (targetPlayer)
         {
-            //Debug.Log("Tracking Player");
+            if (targetPlayer != player)
+            {
+                //Debug.Log("Tracking Player");
 
-            Vector3 vectorToTarget = targetPlayer.transform.position - transform.position;
-            //vectorToTarget = Vector3.Scale(vectorToTarget, rb.velocity);
+                //Vector3 vectorToTarget = targetPlayer.transform.position - transform.position;
+                //vectorToTarget = Vector3.Scale(vectorToTarget, rb.velocity);
 
-            //Vector3 vectorAddition = vectorToTarget * trackingForce;
+                //Vector3 vectorAddition = vectorToTarget * trackingForce;
 
-            //Vector3 breakingForce;
-            //breakingForce.x = rb.velocity.x * 0.05f;
-            //breakingForce.y = rb.velocity.y * 0.05f;
-            //breakingForce.z = rb.velocity.z * 0.05f;
+                //Vector3 breakingForce;
+                //breakingForce.x = rb.velocity.x * 0.05f;
+                //breakingForce.y = rb.velocity.y * 0.05f;
+                //breakingForce.z = rb.velocity.z * 0.05f;
 
-            //Vector3 newVelocity = Vector3.Lerp(rb.velocity, vectorToTarget, 0.3f);
+                //Vector3 newVelocity = Vector3.Lerp(rb.velocity, vectorToTarget, 0.3f);
 
-            //Vector3 newVelocity = Vector3.Lerp(transform.position, targetPlayer.transform.position, 0.3f);
+                //Vector3 newVelocity = Vector3.Lerp(transform.position, targetPlayer.transform.position, 0.3f);
 
-            //rb.velocity = new Vector3(0, 0, 0);
-            
-            transform.parent.position = Vector3.Lerp(transform.position, targetPlayer.transform.position, 0.2f);
+                //rb.velocity = new Vector3(0, 0, 0);
 
-            //rb.velocity = newVelocity;
+                transform.parent.position = Vector3.Lerp(transform.position, targetPlayer.transform.position, 0.2f);
 
+                //rb.velocity = newVelocity;
 
-
-
-            //rb.AddForce(breakingForce);
-            //rb.AddForce(vectorAddition);
+                //rb.AddForce(breakingForce);
+                //rb.AddForce(vectorAddition);
+            }
         }
 
 	}
@@ -67,8 +67,8 @@ public class trackingSphereScript : NetworkBehaviour
         {
             if (other.gameObject != player)
             {
-                Debug.Log("Different Player detected.... tracking");
-
+                //Debug.Log("Different Player detected.... tracking");
+                Debug.Log("Other player = " + other.gameObject.GetInstanceID() + " " + "Player Ref   = " + player.GetInstanceID());
 
                 //Debug.Log("Tracking sphere hit player");
                 transform.parent.GetComponent<CapsuleCollider>().enabled = false;

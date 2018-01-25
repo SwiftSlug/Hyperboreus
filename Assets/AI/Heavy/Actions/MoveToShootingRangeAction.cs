@@ -16,17 +16,11 @@ public class MoveToAttackRangeAction : Action
         if (controller.target)
         {
 
-            Vector3 vectorToTarget = controller.transform.position - controller.target.transform.position;
+            //Vector3 vectorToTarget = controller.transform.position - controller.target.transform.position;
 
             controller.navMeshAgent.destination = controller.target.transform.position;
-
-            
-
-
-        }
-                
+        }                
 
     }
-
 
 }

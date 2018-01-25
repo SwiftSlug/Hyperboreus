@@ -12,11 +12,11 @@ public class PlayerSkills : NetworkBehaviour
     bool skillButton1Down;
 
 	void Start () {
-        Debug.Log("Start run on playerSkills");
+        //Debug.Log("Start run on playerSkills");
         //  Finds the skill attached to the player and assigns that to its equipped skill
         playerSkill1 = GetComponent<Skill>();
         //  Calls the init function of the skill, if needed
-        playerSkill1.playerReference = transform.gameObject;
+        //playerSkill1.playerReference = transform.gameObject;
         playerSkill1.Init();        
 	}
 	

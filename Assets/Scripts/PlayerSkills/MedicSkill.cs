@@ -32,9 +32,12 @@ public class MedicSkill : Skill {
             chargeTime = 1.0f;
         }
 
+        //playerReference = transform.parent.gameObject;
+        playerReference = this.gameObject;
+
         gunPos = GetComponent<WeaponShooting>().gunEnd;
 
-        Debug.Log(playerReference);
+        //Debug.Log(playerReference);
 
         //  Add the line renderer component to the player
         laser = playerReference.AddComponent<LineRenderer>();

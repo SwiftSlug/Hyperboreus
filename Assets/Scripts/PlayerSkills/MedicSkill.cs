@@ -99,7 +99,7 @@ public class MedicSkill : Skill {
         return false;
     }
 
-    public override void buttonRelease()
+    public override void ButtonRelease()
     {
         currentChargeTime = 0.0f;       //  Reset the current charge time
         laser.enabled = false;          //  Turn laser off

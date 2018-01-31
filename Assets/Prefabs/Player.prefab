@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 114858492855255892}
   - component: {fileID: 114435461862225750}
   - component: {fileID: 114580284045437810}
+  - component: {fileID: 114330262188860022}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -5341,6 +5342,23 @@ MonoBehaviour:
   playersDown: 0
   players: []
   playerTotal: 0
+--- !u!114 &114330262188860022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75df1a9f6288b744bbaad1b0606ba8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReference: {fileID: 0}
+  cooldown: 0
+  buttonDownTime: 0
+  lastUsedTime: 0
+  chargeTime: 0
+  airstrikeTime: 2
 --- !u!114 &114348478218635018
 MonoBehaviour:
   m_ObjectHideFlags: 1

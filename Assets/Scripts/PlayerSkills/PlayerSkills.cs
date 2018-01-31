@@ -32,7 +32,7 @@ public class PlayerSkills : NetworkBehaviour
         {
             if (skillButton1Down)
             {
-                playerSkill1.buttonRelease();
+                playerSkill1.ButtonRelease();
                 skillButton1Down = false;
             }
             

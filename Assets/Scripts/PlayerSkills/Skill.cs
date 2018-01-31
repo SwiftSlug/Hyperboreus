@@ -13,6 +13,7 @@ public abstract class Skill : NetworkBehaviour
 
     //  Cooldown time for skill
     public float cooldown;
+
     //  The time the button has been held for
     public float buttonDownTime;
 
@@ -21,10 +22,11 @@ public abstract class Skill : NetworkBehaviour
 
     //  Init function for each skill
     public abstract void Init();
+
     //  The primary action of the skill, this will run as long as the button is held
     public abstract bool SkillAction();
 
     //  Function call for when the skill button is released
-    public abstract void buttonRelease();
+    public abstract void ButtonRelease();
 
 }

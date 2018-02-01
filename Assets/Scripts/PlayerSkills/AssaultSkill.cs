@@ -16,13 +16,16 @@ public class AssaultSkill : Skill
 
     Transform gunPos;
 
-    void Update()
-    {
-        Vector3 mousePosUpdate = Input.mousePosition;
-    }
+    //void Update()
+    //{
+    //    Debug.Log("INIT");
+    //    Vector3 mousePosUpdate = Input.mousePosition;
+    //}
 
     public override void Init()
     {
+        Debug.Log("INIT");
+
         if (cooldown == 0.0f)
         {
             //  Sets the cooldown to 2 seconds if no other value is set
@@ -32,13 +35,10 @@ public class AssaultSkill : Skill
         if (chargeTime == 0.0f)
         {
             //  Sets the chargetime to 2 seconds if no other value is set
-            chargeTime = 2.0f;
+            chargeTime = 1.0f;
         }
 
-        //playerReference = transform.parent.gameObject;
-        playerReference = this.gameObject;
-
-        gunPos = GetComponent<WeaponShooting>().gunEnd;
+        //gunPos = GetComponent<WeaponShooting>().gunEnd;
     }
 
     public override bool SkillAction()
@@ -47,24 +47,27 @@ public class AssaultSkill : Skill
         {
             if (Time.time > lastUsedTime + cooldown)
             {
-                while (currentChargeTime < chargeTime)
-                {
-                    //draw marker on mouse location update
-                    Debug.Log("drawing marker");
-                }
+                currentChargeTime += Time.deltaTime;
+
+                //draw marker on mouse location update
+                Vector3 mousePosUpdate = Input.mousePosition;
+                Debug.Log("drawing marker");
 
                 if (currentChargeTime > chargeTime)
                 {
                     //get mouse location and draw marker at mouse location
+                    Vector3 mousePos = Input.mousePosition;
                     //wait for air strike time
                     //delete marker
+
+
+                    CmdSpawnStrike();
                     Debug.Log("BOOM");
                     currentChargeTime = 0.0f;   //  Reset the current charge time
                     lastUsedTime = Time.time;   //  Set last firing time
                     return true;
                 }
             }
-
         }
         return false;
     }
@@ -78,17 +81,18 @@ public class AssaultSkill : Skill
 
     //edit for missile from set z value above and so its facing down and velocity is facing down
     [Command]
-    void CmdSpawnStrike(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
+    void CmdSpawnStrike()
     {
-        GameObject syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
+        Debug.Log("strike");
+        //GameObject syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
 
-        GameObject syringeRef = Instantiate(syringe, spawnPosition, spawnRotation);
+        //GameObject syringeRef = Instantiate(syringe, spawnPosition, spawnRotation);
 
-        //  Assign player reference on scripts
-        syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
-        syringeRef.GetComponentInChildren<trackingSphereScript>().player = currentPlayerReference;
+        ////  Assign player reference on scripts
+        //syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
+        //syringeRef.GetComponentInChildren<trackingSphereScript>().player = currentPlayerReference;
 
-        NetworkServer.Spawn(syringeRef);
+        //NetworkServer.Spawn(syringeRef);
     }
 
     //if missile hits something damagable, then damage

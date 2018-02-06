@@ -15,6 +15,8 @@ public class AssaultSkill : Skill
     float currentChargeTime;
 
     Transform gunPos;
+    RaycastHit markerZ;
+    Ray markerRay = new Ray();
 
     //void Update()
     //{
@@ -51,9 +53,22 @@ public class AssaultSkill : Skill
 
                 //draw marker on mouse location update
                 Vector3 mousePosUpdate = Input.mousePosition;
-                Debug.Log("drawing marker");
+                mousePosUpdate.z = mousePosUpdate.z + 50;
+                markerRay.origin = mousePosUpdate;
+                markerRay.direction = -transform.up;
+                if (Physics.Raycast(markerRay.origin, Vector3.down, out markerZ, 100))
+                {
+                    Vector3 targetLocation = markerZ.point;
+                    Debug.Log(targetLocation);
+                }
 
-                if (currentChargeTime > chargeTime)
+
+                    //Debug.Log(mousePosUpdate.x);
+                    //Debug.Log(mousePosUpdate.y);
+                    //Debug.Log(mousePosUpdate.z);
+                    //Debug.Log("drawing marker");
+
+                    if (currentChargeTime > chargeTime)
                 {
                     //get mouse location and draw marker at mouse location
                     Vector3 mousePos = Input.mousePosition;

@@ -107,9 +107,6 @@ public class MedicSkill : Skill {
     }
 
     
-
-
-
     [Command]
     void CmdSpawnSyringe(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
     {

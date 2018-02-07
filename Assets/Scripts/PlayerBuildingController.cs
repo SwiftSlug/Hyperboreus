@@ -12,6 +12,9 @@ public class PlayerBuildingController : NetworkBehaviour
     public GameObject TempStructureGuide;
     public GameObject NetworkSpawnedStructure;
 
+    public AudioClip clipBuildMode;
+    public AudioSource audioSource;
+
     public bool blep = true;
 
     public int StructureNeeded = 0;
@@ -30,6 +33,9 @@ public class PlayerBuildingController : NetworkBehaviour
         else
         {
             InbuildMode = true;
+
+            audioSource.PlayOneShot(clipBuildMode, 1.0f);
+
             TempStructureGuide = Instantiate(StructureSpawnerRef, PointToSpawnStructure.position, PointToSpawnStructure.rotation);
             TempStructureGuide.transform.eulerAngles = new Vector3(0, RotationToSet, 0);
             TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);

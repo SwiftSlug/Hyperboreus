@@ -16,7 +16,6 @@ public class MedicSkill : Skill {
     //GameObject syringe;
 
     Transform gunPos;
-
     //public bool belp;
 
     public override void Init()

@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 114858492855255892}
   - component: {fileID: 114435461862225750}
   - component: {fileID: 114580284045437810}
+  - component: {fileID: 114402234991036968}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -5410,6 +5411,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450f5cdcb2da5a547a94cbee9b588fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114402234991036968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c0e3f37bf68074ab001961d878175c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SyncVarDirtyBits: 0
+  m_LastSendTime: 0
+  m_SyncVarGuard: 0
+  m_MyView: {fileID: 0}
+  playerReference: {fileID: 0}
+  cooldown: 0
+  buttonDownTime: 0
+  lastUsedTime: 0
+  chargeTime: 0
+  currentChargeTime: 0
+  TrapPos: {fileID: 0}
 --- !u!114 &114416670292255994
 MonoBehaviour:
   m_ObjectHideFlags: 1

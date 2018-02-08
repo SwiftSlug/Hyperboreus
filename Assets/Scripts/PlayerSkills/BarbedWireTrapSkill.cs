@@ -10,6 +10,8 @@ public class BarbedWireTrapSkill : Skill
     //  The current time spent charging the barbed wire trap
     float currentChargeTime;
 
+    public bool check = false;
+
     public Transform TrapPos;
 
     //public bool belp;
@@ -26,7 +28,7 @@ public class BarbedWireTrapSkill : Skill
             //  Sets the chargetime to 2 seconds if no other value is set
             chargeTime = 1.0f;
         }
-        playerReference = this.gameObject;
+        //playerReference = this.gameObject;
 
         //        gunPos = GetComponent<WeaponShooting>().gunEnd;
     }
@@ -37,40 +39,16 @@ public class BarbedWireTrapSkill : Skill
         {
             if (Time.time > lastUsedTime + cooldown)
             {
-                //laser.SetPosition(0, gunPos.position);           //  Sets laser start location to player
-                //laser.SetPosition(1, transform.forward * 1000);     //  Sets laser end to 1000 in front of player
-
-                //laser.enabled = true;   //  Turn laser on
-
-                //  Increase the charge time
                 currentChargeTime += Time.deltaTime;
 
                 if (currentChargeTime > chargeTime)
                 {
-                    // Fire a syringe
-                    //if (syringe)
-                    //{
-                    //GameObject syringeRef = Instantiate(syringe, transform.position + (transform.forward * 5.0f ), transform.rotation);
-
-                    //Debug.Log("New Syringe spawned");
-
-                    /*
-                    //Create the syringe game object
-                    GameObject syringeRef = Instantiate(syringe, gunPos.position, transform.rotation);
-
-                    //Assign player reference on scripts
-                    syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = playerReference;
-                    syringeRef.GetComponentInChildren<trackingSphereScript>().player = playerReference;
-                    */
-
-                    CmdSpawnBarbedWireTrap(TrapPos.position, transform.rotation); //, playerReference);
-                    //}
+                    CmdSpawnBarbedWireTrap(TrapPos.position, transform.rotation);                     //, playerReference);
 
                     currentChargeTime = 0.0f;   //  Reset the current charge time
                     lastUsedTime = Time.time;   //  Set last firing time
                     return true;
                 }
-
 
             }
 
@@ -81,8 +59,6 @@ public class BarbedWireTrapSkill : Skill
     public override void buttonRelease()
     {
         currentChargeTime = 0.0f;       //  Reset the current charge time
-        //laser.enabled = false;          //  Turn laser off
-        //Debug.Log("Button released");
     }
 
     [Command]

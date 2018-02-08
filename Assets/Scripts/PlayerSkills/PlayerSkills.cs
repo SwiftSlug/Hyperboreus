@@ -22,9 +22,9 @@ public class PlayerSkills : NetworkBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-
         if (Input.GetButton("Skill1"))
         {
+            Debug.Log("Activating Skill");
             skillButton1Down = true;
             playerSkill1.buttonDownTime = playerSkill1.buttonDownTime + Time.deltaTime;
         }

@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class AIDirector : NetworkBehaviour
 {
-    //public bool blep;
+    public bool blep;
 
     public bool shouldAIDebug = true;           //  Debug flag for all debugging logs
     public bool isDay = true;                   //  Boolean that defines if it is day or night
@@ -84,7 +84,7 @@ public class AIDirector : NetworkBehaviour
         //intensityLastRunTime = Time.time;
         if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
         {
-            Debug.Log("Player Intensity Updating");
+            //Debug.Log("Player Intensity Updating");
             updatePlayerIntensity();
             intensityLastRunTime = Time.time;
         }
@@ -109,18 +109,19 @@ public class AIDirector : NetworkBehaviour
 
     }
 
+
+    //  This calculates and updates the intensity level for all players currently within the game
     void updatePlayerIntensity()
     {
-
-        //Debug.Log("Player Intensity Update -------------");
-
-        int foundAI = 0;
-        int trackingAI = 0;
+        
+        int foundAI = 0;        //  The number of AI that are nearby the player
+        int trackingAI = 0;     //  The number of AI that are currently targetting the player
 
         foreach (GameObject player in players)
         {
             PlayerStats statsRef = player.GetComponent<PlayerStats>();
 
+            //  Find all enemies that are near the player
             Collider[] hitCollider = Physics.OverlapSphere(player.transform.position, playerProximitySize);
             for (int i = 0; i < hitCollider.Length; i++)
             {
@@ -131,31 +132,31 @@ public class AIDirector : NetworkBehaviour
                 }
             }
 
+            //  Find all enemies that are targeting the player
             GameObject[] enemyAI = GameObject.FindGameObjectsWithTag("Enemy");
             for(int i = 0; i < enemyAI.Length; i++)
             {
                 if (enemyAI[i].GetComponent<StateController>().target == player)
                 {
                     //Debug.Log("Enemy Tracking Player");
+                    trackingAI++;
                 }
             }
         
 
 
-            //hitCollider[i].GetComponent<StateController>().target ==
+            float intensityLevel = 0.0f;                                //  Overall intensity level
 
-
-            int intensityLevel = 0; //  Overall intensity level
-
-            int nearbyEnemyIntensity = (foundAI * intensityPerAI);        //  0 - infinity based on number of enemies near player
-            int healthLost = (100 - statsRef.currentHealth);   //  0 - 100 based on how much health has been lost from 100
+            int nearbyEnemyIntensity = (foundAI * intensityPerAI);      //  0 - infinity based on number of enemies near player
+            int healthLost = (100 - statsRef.currentHealth);            //  0 - 100 based on how much health has been lost from 100
             //int ammoIntensity = 
 
-            int healthIntensity = healthLost / 100;
 
-            //Debug.Log(healthIntensity);
+            float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
-            intensityLevel = nearbyEnemyIntensity * (1 + (healthIntensity / 100));    //  Finial intensity level based on above atributes
+            //Debug.Log("Health Intensity = " + healthIntensity);
+
+            intensityLevel = nearbyEnemyIntensity * healthIntensity;    //  Finial intensity level based on above atributes
 
 
             //  Apply Intensity to player
@@ -171,6 +172,12 @@ public class AIDirector : NetworkBehaviour
                 statsRef.intensity -= intensityDecreaseAmount;
             }
 
+            //  Ensure that intensity does not fall below 0
+            if(statsRef.intensity < 0.0f)
+            {
+                statsRef.intensity = 0.0f;
+            }
+
 
         }
 
@@ -183,7 +190,7 @@ public class AIDirector : NetworkBehaviour
         if (shouldAIDebug)
         {
 
-            string text = string.Format("Player Intensity Debug \n");
+            string text = string.Format("Player Intensity Debug \n\n");
             int playerNumber = 0;
 
             foreach (GameObject player in players)
@@ -192,14 +199,19 @@ public class AIDirector : NetworkBehaviour
                 PlayerStats statsRef = player.GetComponent<PlayerStats>();
 
                 //  Add player intensity to the print string
-                text += "Player " + playerNumber.ToString() + " Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
-
+                text += "Player " + playerNumber.ToString() + "\n";
+                text += "-------------------" + "\n";
+                text += "Overall Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
+                //text += "Health Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
 
                 playerNumber++;
             }
 
+            float height = 400;
+            float width = 200;
+            GUI.Label(new Rect(Screen.width - width, 0, width, height), text);
 
-            GUI.Label(new Rect(500, 50, 1000, 1000), text);
+            //GUI.Label(new Rect(500, 50, 1000, 1000), text);
         }
 
     }

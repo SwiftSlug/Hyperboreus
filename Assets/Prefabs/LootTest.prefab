@@ -162,7 +162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOrLoot: 1
-  PlayerColliding: 0
   PlayerDestroyingOrLooting: {fileID: 0}
   AmmoType: 0
   AmountOfAmmoToDrop: 0

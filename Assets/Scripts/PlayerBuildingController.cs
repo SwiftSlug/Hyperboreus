@@ -12,8 +12,10 @@ public class PlayerBuildingController : NetworkBehaviour
     public GameObject TempStructureGuide;
     public GameObject NetworkSpawnedStructure;
 
-    public AudioClip clipBuildMode;
     public AudioSource audioSource;
+    public AudioClip clipBuildMode;
+    public AudioClip clipCombatMode;
+    public AudioClip clipBuildStructure;
 
     public bool blep = true;
 
@@ -27,6 +29,9 @@ public class PlayerBuildingController : NetworkBehaviour
         if (InbuildMode == true)
         {
             InbuildMode = false;
+
+            audioSource.PlayOneShot(clipCombatMode, 1.0f);
+
             DestroyObject(TempStructureGuide);
             TempStructureGuide = null;
         }
@@ -45,6 +50,8 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdPlaceStructure()
     {
+        audioSource.PlayOneShot(clipBuildStructure, 1.0f);
+
         NetworkSpawnedStructure = (GameObject)Instantiate(TempStructureGuide, PointToSpawnStructure.position, TempStructureGuide.transform.rotation); //GetComponent<Transform>().rotation);
         NetworkServer.Spawn(NetworkSpawnedStructure);
         NetworkSpawnedStructure.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);

@@ -35,7 +35,6 @@ public class AIStats : NetworkBehaviour
         if(!isServer)
         {
             enemyHealth = newHealth;
-
         }
     }
 

@@ -23,7 +23,9 @@ public class WeaponShooting : NetworkBehaviour
     public Transform gunTransform;
     public Transform gunEnd;
 
-    
+    public AudioSource audioSource;
+    public AudioClip clipReload;
+
     public void shootInit()
     {
 
@@ -131,6 +133,8 @@ public class WeaponShooting : NetworkBehaviour
         if (selectedWeapon.reloading == false)
         {
             //Debug.Log("Reloading !");
+            audioSource.PlayOneShot(clipReload, 1.0f);
+
             CmdDisableMuzzleEffects();
             Invoke("Reload", selectedWeapon.reloadTime);
         }

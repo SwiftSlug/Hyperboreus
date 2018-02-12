@@ -4923,7 +4923,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 243624682353368454, guid: c5ec88c3d9f0a5b4b9328139d9165db6,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -5249,8 +5249,10 @@ MonoBehaviour:
   TempStructureGuide: {fileID: 1193828947013776, guid: 7bb3f519fa0df994eb5e49b78666b4a9,
     type: 2}
   NetworkSpawnedStructure: {fileID: 0}
-  clipBuildMode: {fileID: 8300000, guid: 646e708c0bb40e746b17f65005c3dc13, type: 3}
   audioSource: {fileID: 82221933458547550}
+  clipBuildMode: {fileID: 8300000, guid: 646e708c0bb40e746b17f65005c3dc13, type: 3}
+  clipCombatMode: {fileID: 8300000, guid: 02152c7c1d466cf47a72f3d9af1b589d, type: 3}
+  clipBuildStructure: {fileID: 8300000, guid: 762c63bf6dc00bc408a103e4452cd031, type: 3}
   blep: 1
   StructureNeeded: 0
   MaterialNeeded: 0
@@ -5411,6 +5413,10 @@ MonoBehaviour:
   AssetToDestroy: {fileID: 0}
   AssetToLoot: {fileID: 0}
   test: 0
+  audioSource: {fileID: 82221933458547550}
+  clipAmmoLoot: {fileID: 8300000, guid: 8e2aaec4d10ccc942bf451ae540ff237, type: 3}
+  clipResourceHit: {fileID: 8300000, guid: 36286e23c9e462a4f8140956a1e947ef, type: 3}
+  clipResourceLoot: {fileID: 8300000, guid: e60bed63face61f4f9d5f3ef7741b32a, type: 3}
 --- !u!114 &114300363803433394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5563,6 +5569,8 @@ MonoBehaviour:
   equippedWeapon: {fileID: 0}
   gunTransform: {fileID: 4732414733094308}
   gunEnd: {fileID: 4657937148490102}
+  audioSource: {fileID: 82221933458547550}
+  clipReload: {fileID: 8300000, guid: fc84b45a72400ed45bd0f90d5e6d01b7, type: 3}
 --- !u!114 &114505928617221474
 MonoBehaviour:
   m_ObjectHideFlags: 1

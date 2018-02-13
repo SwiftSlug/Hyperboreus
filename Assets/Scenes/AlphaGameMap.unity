@@ -5148,7 +5148,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce494983d5538e4cba40c80b200d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blep: 0
+  shouldAIDebug: 1
   isDay: 1
+  enemyToSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
+    type: 2}
+  targetIntensityLevelDay: 20
+  targetIntensityLevelNight: 200
+  playerProximitySize: 50
+  intensityPerAI: 10
+  intensityUpdateInterval: 3
+  spawnInterval: 5
+  spawnLast: 0
+  aiSpawnGroupSizeNight: 10
+  aiSpawnGroupSizeDay: 1
 --- !u!4 &468145143
 Transform:
   m_ObjectHideFlags: 0

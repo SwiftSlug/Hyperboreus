@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class AIDirector : NetworkBehaviour
 {
-    public bool blep;
+    //public bool blep;
 
     public bool shouldAIDebug = true;           //  Debug flag for all debugging logs
     public bool isDay = true;                   //  Boolean that defines if it is day or night
@@ -16,8 +16,8 @@ public class AIDirector : NetworkBehaviour
     List<GameObject> players;                   //  List of all players in the game
 
     //GameObject[] Players;
-    int targetIntensityLevelDay;                //  The intensity level the director aims to keep players at during the day
-    int targetIntensityLevelNight;              //  The intensity level the director aims to keep players at during the night
+    public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
+    public int targetIntensityLevelNight = 200; //  The intensity level the director aims to keep players at during the night
     float waveCooldown;                         //  The cooldown time inbetween waves
 
     public float playerProximitySize = 50;      //  The area size around the player that detects nearby enemies for intensity checks
@@ -26,10 +26,13 @@ public class AIDirector : NetworkBehaviour
     int intensityDecreaseAmount = 2;            //  The amount of intensity that is decreased when its not increasing
         
     //  Timing Varaibles
-    public float intensityUpdateInterval = 3.0f;
-    float intensityLastRunTime = 0.0f;
-    
+    public float intensityUpdateInterval = 3.0f;    //  The time interval between updating the player intensity level
+    float intensityLastRunTime = 0.0f;              //  The last time the intensity update was ran
 
+    public float spawnInterval = 5.0f;      //  The time interval between spawning groups of enemies
+    public float spawnLast = 0.0f;          //  The last time the AI were spawned
+    public int aiSpawnGroupSizeNight = 10;       //  The amount of AI to spawn per group at day
+    public int aiSpawnGroupSizeDay = 1;       //  The amount of AI to spawn per group at night
 
     // Use this for initialization
     void Start () {
@@ -67,31 +70,71 @@ public class AIDirector : NetworkBehaviour
             Debug.Log(playerCount + " Player(s) Found");
         }
 
-
-        //Invoke("updatePlayerIntensity", 1);
-        //Invoke("updatePlayerIntensity", 5);
-        //Invoke("updatePlayerIntensity", 15);
-        //Invoke("updatePlayerIntensity", 20);
-        //Invoke("updatePlayerIntensity", 25);
-
-
-
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        //intensityLastRunTime = Time.time;
+        //  Update List with new enemy count
+        rescanForAI();
+
+        //  Run intensity update if the update interval has been passed   
         if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
         {
             //Debug.Log("Player Intensity Updating");
             updatePlayerIntensity();
             intensityLastRunTime = Time.time;
+        }       
+        //  Spawn enemies if the spawn interval has been passed
+        if(Time.time > (spawnLast + spawnInterval))
+        {
+            spawnEnemies();
+            spawnLast = Time.time;
         }
-        
 
     }
-    
+
+    void rescanForAI()
+    {
+        //  Search for AI units and store their gameobjects in the list
+        enemyUnits.Clear();
+        foreach (AIStats foundAI in FindObjectsOfType<AIStats>())
+        {
+            if (foundAI.CompareTag("Enemy"))
+            {
+                enemyUnits.Add(foundAI.gameObject);
+            }
+        }
+
+    }
+
+    //  Spawn enemies near the players
+    void spawnEnemies()
+    {
+        foreach (GameObject player in players)
+        {            
+            if (isDay)
+            {
+                //  Day time spawning
+                if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelDay)
+                {
+                    spawnUnits(aiSpawnGroupSizeDay, player.transform.position, player);
+                }
+            }            
+            else
+            {
+                //  Night time spawning
+                if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelNight)
+                {
+                    spawnUnits(aiSpawnGroupSizeNight, player.transform.position, player);
+                }
+            }
+
+        }
+    }
+
+
+    //  Spawn a number of AI units around a position and set them to target the provided player
     void spawnUnits(int number, Vector3 position, GameObject targetPlayer)
     {
 
@@ -99,9 +142,9 @@ public class AIDirector : NetworkBehaviour
         for (int i =0; i < number; i++)
         {
             float xOffset = Random.Range(-10.0f, -10.0f);   //  Random x offset
-            float yOffset = Random.Range(-10.0f, -10.0f);   //  Random y offset
+            float zOffset = Random.Range(-10.0f, -10.0f);   //  Random y offset
 
-            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + yOffset, position.y);    //  Generate spawn location
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             NetworkServer.Spawn(spawnedEnemy);  //  Add spawned unit to server list
@@ -150,11 +193,9 @@ public class AIDirector : NetworkBehaviour
             int nearbyEnemyIntensity = (foundAI * intensityPerAI);      //  0 - infinity based on number of enemies near player
             int healthLost = (100 - statsRef.currentHealth);            //  0 - 100 based on how much health has been lost from 100
             //int ammoIntensity = 
-
-
+            
             float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
-            //Debug.Log("Health Intensity = " + healthIntensity);
 
             intensityLevel = nearbyEnemyIntensity * healthIntensity;    //  Finial intensity level based on above atributes
 
@@ -190,7 +231,9 @@ public class AIDirector : NetworkBehaviour
         if (shouldAIDebug)
         {
 
-            string text = string.Format("Player Intensity Debug \n\n");
+            //  Player debug -----------------------------------------------
+
+            string playerText = string.Format("Player Intensity Debug \n\n");
             int playerNumber = 0;
 
             foreach (GameObject player in players)
@@ -199,19 +242,36 @@ public class AIDirector : NetworkBehaviour
                 PlayerStats statsRef = player.GetComponent<PlayerStats>();
 
                 //  Add player intensity to the print string
-                text += "Player " + playerNumber.ToString() + "\n";
-                text += "-------------------" + "\n";
-                text += "Overall Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
+                playerText += "Player " + playerNumber.ToString() + "\n";
+                playerText += "-------------------" + "\n";
+                playerText += "Overall Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
                 //text += "Health Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
 
                 playerNumber++;
             }
 
-            float height = 400;
-            float width = 200;
-            GUI.Label(new Rect(Screen.width - width, 0, width, height), text);
+            float playerHeight = 400;
+            float playerWidth = 200;
+            GUI.Label(new Rect(Screen.width - playerWidth, 0, playerWidth, playerHeight), playerText);
 
-            //GUI.Label(new Rect(500, 50, 1000, 1000), text);
+
+            //  Enemy Debug -----------------------------------------------
+
+            string enemyText = string.Format("Enemy AI Debug \n\n");
+            int enemyNumber = 0;
+
+            foreach (GameObject enemy in enemyUnits)
+            {                            
+                enemyNumber++;
+            }
+
+            enemyText += "Active enemy = " + enemyNumber + "\n";
+
+            float enemyHeight = 400;
+            float enemyWidth = 200;
+
+            GUI.Label(new Rect(Screen.width - enemyWidth - playerWidth, 0, enemyWidth, enemyHeight), enemyText);
+
         }
 
     }
@@ -219,10 +279,10 @@ public class AIDirector : NetworkBehaviour
     //  This does not appear to work with NetworkBehaviour :|
     void OnDrawGizmos()
     {
-
+        /*
         foreach (GameObject player in players)
         {
-            Debug.Log("Drawing Sphere");
+            //Debug.Log("Drawing Sphere");
             //  Get reference to player stats
             PlayerStats statsRef = player.GetComponent<PlayerStats>();
 
@@ -233,7 +293,7 @@ public class AIDirector : NetworkBehaviour
             Gizmos.color = Color.yellow;
             Gizmos.DrawSphere(player.transform.position, 10);
         }
-
+        */
         
 
     }

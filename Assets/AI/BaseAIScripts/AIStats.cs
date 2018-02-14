@@ -3,13 +3,23 @@ using UnityEngine.Networking;
 
 public class AIStats : NetworkBehaviour
 {
+    //bool blep;
+
     [SyncVar]
     public int enemyHealth = 100;
+
+    [SyncVar]
+    public bool isTrapped = false;
 
     [SyncVar]
     public bool isDead = false;
     //[SyncVar]
     //public int enemyAttackDamage = 100;
+
+    public void Start()
+    {
+        isTrapped = false;
+    }
 
     //[ClientRpc]
     [Command]
@@ -63,5 +73,28 @@ public class AIStats : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdSetTrapped(bool trappedValue)
+    {
+        if (isServer)
+        {
+            isTrapped = trappedValue;
+            
+            if (!isDead)
+            {
+                RpcSetTrapped(trappedValue);
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSetTrapped(bool trappedValue)
+    {
+        if (!isServer)
+        {
+            isTrapped = trappedValue;
+
+        }
+    }
 
 }

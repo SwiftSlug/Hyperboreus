@@ -28,9 +28,6 @@ public class BarbedWireTrapSkill : Skill
             //  Sets the chargetime to 2 seconds if no other value is set
             chargeTime = 1.0f;
         }
-        //playerReference = this.gameObject;
-
-        //        gunPos = GetComponent<WeaponShooting>().gunEnd;
     }
 
     public override bool SkillAction()
@@ -66,13 +63,10 @@ public class BarbedWireTrapSkill : Skill
     {
         GameObject BarbedWireTrap = Resources.Load("BarbedWireTrap", typeof(GameObject)) as GameObject;
 
-        GameObject BarbedWireTrapRef = Instantiate(BarbedWireTrap, spawnPosition, spawnRotation);
-
-        //  Assign player reference on scripts
-        //BarbedWireTrapRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
-        //syringeRef.GetComponentInChildren<trackingSphereScript>().player = currentPlayerReference;
+        GameObject BarbedWireTrapRef = (GameObject)Instantiate(BarbedWireTrap, spawnPosition, spawnRotation);
 
         NetworkServer.Spawn(BarbedWireTrapRef);
+        
     }
 
 }

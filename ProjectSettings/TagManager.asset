@@ -12,6 +12,7 @@ TagManager:
   - GunEnd
   - DestructibleScenery
   - LootableContainer
+  - floor
   layers:
   - Default
   - TransparentFX

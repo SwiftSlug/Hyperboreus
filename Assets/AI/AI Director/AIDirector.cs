@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class AIDirector : NetworkBehaviour
 {
-    //public bool blep;
+    public bool blep;
 
     public bool shouldAIDebug = true;           //  Debug flag for all debugging logs
     public bool isDay = true;                   //  Boolean that defines if it is day or night
@@ -14,6 +14,10 @@ public class AIDirector : NetworkBehaviour
 
     List<GameObject> enemyUnits;                //  List of all enemy units within the game
     List<GameObject> players;                   //  List of all players in the game
+
+    List<Vector3> spawnLocations;               //  List of avalible spawn locations for the AI
+
+    float spawnBufferSize = 2.0f;              //  The area size that must be free of objects to count as an AI spawn location
 
     //GameObject[] Players;
     public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
@@ -78,31 +82,162 @@ public class AIDirector : NetworkBehaviour
         //  Update List with new enemy count
         rescanForAI();
 
-        //  Run intensity update if the update interval has been passed   
-        if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
-        {
-            //Debug.Log("Player Intensity Updating");
-            updatePlayerIntensity();
-            intensityLastRunTime = Time.time;
-        }       
-        //  Spawn enemies if the spawn interval has been passed
-        if(Time.time > (spawnLast + spawnInterval))
-        {
-            spawnEnemies();
-            spawnLast = Time.time;
+        bool debugActive = false;
+
+        if (debugActive) {
+            //  Run intensity update if the update interval has been passed   
+            if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
+            {
+                //Debug.Log("Player Intensity Updating");
+                updatePlayerIntensity();
+                intensityLastRunTime = Time.time;
+            }
+            //  Spawn enemies if the spawn interval has been passed
+            if (Time.time > (spawnLast + spawnInterval))
+            {
+                spawnEnemies();
+                spawnLast = Time.time;
+            }
         }
+
+        //  Debug Stuff
+
+        if (Input.GetKeyDown("y"))
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("NetworkedPlayer");
+
+            scanSpawnAreas(player.transform.position, 60, 25, 5);
+        }
+
+
+
+    }
+
+    //  scanSpawnAreas()
+    //
+    //  This function is used to scan a defined area to generate a list of spawnable locations for the AI units. It does this by first generating a random location
+    //  vector within a set area and ignoring the inner part of the area (this stops at from spawning too close to the players). This found area is then checked for
+    //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
+    //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
+
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 10)
+    {
+
+        int maxRunCounter = 0;
+
+        for(int i = 0; i < numberOfSpawnLocatoins; i++)
+        {
+            //  Only run this loop up to maxRunAttemps, prevents an unspawnable area causing an infinite loop
+            while (maxRunCounter < maxRunAttempts)
+            {
+                //  Min values for random spawn location
+                //float spawnAreaXMin = areaCentre.x + centerIgnoreSize;
+                //float spawnAreaZMin = areaCentre.z + centerIgnoreSize;
+                /*
+                //  Min and max values for x
+                float spawnAreaXMin = areaCentre.x - areaSize;
+                float spawnAreaXMax = areaCentre.x + areaSize;
+
+                //  Min and max values for z
+                float spawnAreaZMin = areaCentre.z - areaSize;                
+                float spawnAreaZMax = areaCentre.z + areaSize;
+
+                //  Generate a random position within the above range
+                float xPos = Random.Range(spawnAreaXMin, spawnAreaXMax);
+                float zPos = Random.Range(spawnAreaZMin, spawnAreaZMax);
+                */
+
+
+                //  Generate a random position offset within the above range
+                float xPos = Random.Range(-areaSize, areaSize);
+                float zPos = Random.Range(-areaSize, areaSize);
+
+                // Ensure position cannot be inside of ingore radius
+                // *************** This causes the spawning to ignore a + shape within worldspace
+
+                if (xPos > 0)
+                {
+                    xPos += centerIgnoreSize;
+                }
+                else
+                {
+                    xPos -= centerIgnoreSize;
+                }
+
+                if (zPos > 0)
+                {
+                    zPos += centerIgnoreSize;
+                }
+                else
+                {
+                    zPos -= centerIgnoreSize;
+                }
+
+                xPos += areaCentre.x;
+                zPos += areaCentre.z;
+
+
+                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);
+
+
+
+                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                //  Spawn a debug cube
+                GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+
+                //Destroy(debugCube, 5);
+                /*
+
+                //  Find all colliders at the random location
+                Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
+
+                //  This section may be improved to use a layer mask rather than comparing tags for each hit
+
+                //  Run through all found colliders
+                int hits = 0;
+                while (hits < hitColliders.Length)
+                {
+                    // if anything other than the floor is found then the area is not suitable
+                    if (!hitColliders[i].CompareTag("floor"))
+                    {
+                        //Debug.Log("Hit something that isnt floor, area not clear !");
+                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        //  Spawn a debug cube
+                        GameObject syringeRef = Instantiate(cube, spawnLocation, Quaternion.identity);
+                    }                  
+
+                    hits++;
+                }
+
+                */
+                maxRunCounter++;
+
+            }
+            if(maxRunAttempts == maxRunCounter)
+            {
+                //  Spawnable area list could not be populated 
+                return false;
+            }
+
+            
+
+        }
+
+        return false;
 
     }
 
     void rescanForAI()
     {
         //  Search for AI units and store their gameobjects in the list
-        enemyUnits.Clear();
+
+        enemyUnits.Clear(); //  Clear list so no old objects are kept
+
         foreach (AIStats foundAI in FindObjectsOfType<AIStats>())
         {
             if (foundAI.CompareTag("Enemy"))
             {
-                enemyUnits.Add(foundAI.gameObject);
+                enemyUnits.Add(foundAI.gameObject); //  Add found units to list
             }
         }
 
@@ -192,7 +327,8 @@ public class AIDirector : NetworkBehaviour
 
             int nearbyEnemyIntensity = (foundAI * intensityPerAI);      //  0 - infinity based on number of enemies near player
             int healthLost = (100 - statsRef.currentHealth);            //  0 - 100 based on how much health has been lost from 100
-            //int ammoIntensity = 
+
+            //int ammoIntensity =                                       //  ******************* Ammo values to be added later ****************
             
             float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
@@ -276,7 +412,7 @@ public class AIDirector : NetworkBehaviour
 
     }
 
-    //  This does not appear to work with NetworkBehaviour :|
+    //  OnDrawGizmos do work, but only within the scene view !
     void OnDrawGizmos()
     {
         /*

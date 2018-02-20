@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+//using UnityEditor.AI;
+using UnityEngine.AI;
 
 public class AIDirector : NetworkBehaviour
 {
@@ -189,13 +191,25 @@ public class AIDirector : NetworkBehaviour
                     hits++;
                 }
                 if (areaClear == true)
-                {
+                {                    
+
                     //Debug.Log("Clear spawn area found !");
                     //  Spawn debug cube at spawn location
                     //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                     //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
-                    
-                    //  Add found spawn location to spawn list
+
+                    NavMeshHit navMeshHit;
+                   
+                    //  Scan for a navmesh at the random location
+                    if(NavMesh.SamplePosition(spawnLocation, out navMeshHit, spawnBufferSize, NavMesh.AllAreas))
+                    {
+                        //Debug.Log("Location with navmesh found !");
+                        //NavMesh foundNavMesh = navMeshHit;
+                        
+                    }
+
+
+                    //  All checks passed, add found spawn location to spawn list
                     spawnLocations.Add(spawnLocation);
                     // Break out of while loop as spawn location has been found
                     maxRunCounter = maxRunAttempts;

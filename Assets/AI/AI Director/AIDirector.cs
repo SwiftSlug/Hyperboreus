@@ -22,7 +22,7 @@ public class AIDirector : NetworkBehaviour
     //GameObject[] Players;
     public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
     public int targetIntensityLevelNight = 200; //  The intensity level the director aims to keep players at during the night
-    float waveCooldown;                         //  The cooldown time inbetween waves
+    public float waveCooldown;                  //  The cooldown time inbetween waves
 
     public float playerProximitySize = 50;      //  The area size around the player that detects nearby enemies for intensity checks
     public int intensityPerAI = 10;             //  The amount of intensity each AI unit adds to the player
@@ -38,14 +38,19 @@ public class AIDirector : NetworkBehaviour
     public int aiSpawnGroupSizeNight = 10;       //  The amount of AI to spawn per group at day
     public int aiSpawnGroupSizeDay = 1;       //  The amount of AI to spawn per group at night
 
+    //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);   //  Debug cube used as a marker
+    public GameObject cube; 
+
     // Use this for initialization
     void Start () {
 
         Debug.Log("Director Alive !");
 
+        //  Init all lists ready for use
+
         enemyUnits = new List<GameObject>();    // Init AI list
         players = new List<GameObject>();       // Init player list
-
+        spawnLocations = new List<Vector3>();   // Init spawn Location list
 
         //  Search for AI units and store their gameobjects in the list
         int aiCount = 0;
@@ -113,42 +118,27 @@ public class AIDirector : NetworkBehaviour
 
     }
 
-    //  scanSpawnAreas()
+    //  Scan Spawn Areas
     //
     //  This function is used to scan a defined area to generate a list of spawnable locations for the AI units. It does this by first generating a random location
     //  vector within a set area and ignoring the inner part of the area (this stops at from spawning too close to the players). This found area is then checked for
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 10)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 100)
     {
 
         int maxRunCounter = 0;
+        //  Remove all old spawn locations
+        spawnLocations.Clear();
 
         for(int i = 0; i < numberOfSpawnLocatoins; i++)
         {
             //  Only run this loop up to maxRunAttemps, prevents an unspawnable area causing an infinite loop
+            maxRunCounter = 0;
             while (maxRunCounter < maxRunAttempts)
             {
-                //  Min values for random spawn location
-                //float spawnAreaXMin = areaCentre.x + centerIgnoreSize;
-                //float spawnAreaZMin = areaCentre.z + centerIgnoreSize;
-                /*
-                //  Min and max values for x
-                float spawnAreaXMin = areaCentre.x - areaSize;
-                float spawnAreaXMax = areaCentre.x + areaSize;
-
-                //  Min and max values for z
-                float spawnAreaZMin = areaCentre.z - areaSize;                
-                float spawnAreaZMax = areaCentre.z + areaSize;
-
-                //  Generate a random position within the above range
-                float xPos = Random.Range(spawnAreaXMin, spawnAreaXMax);
-                float zPos = Random.Range(spawnAreaZMin, spawnAreaZMax);
-                */
-
-
-                //  Generate a random position offset within the above range
+                //  Generate a random position offset within the input area size
                 float xPos = Random.Range(-areaSize, areaSize);
                 float zPos = Random.Range(-areaSize, areaSize);
 
@@ -173,20 +163,13 @@ public class AIDirector : NetworkBehaviour
                     zPos -= centerIgnoreSize;
                 }
 
+                //  Add offset positions to the area center
                 xPos += areaCentre.x;
                 zPos += areaCentre.z;
 
-
-                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);
-
-
-
-                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                //  Spawn a debug cube
-                GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
-
-                //Destroy(debugCube, 5);
-                /*
+                //  Create new spawn location from generated values above
+                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);             
+                
 
                 //  Find all colliders at the random location
                 Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
@@ -194,37 +177,40 @@ public class AIDirector : NetworkBehaviour
                 //  This section may be improved to use a layer mask rather than comparing tags for each hit
 
                 //  Run through all found colliders
+                bool areaClear = true;
                 int hits = 0;
                 while (hits < hitColliders.Length)
                 {
                     // if anything other than the floor is found then the area is not suitable
-                    if (!hitColliders[i].CompareTag("floor"))
+                    if (!hitColliders[hits].CompareTag("floor"))
                     {
-                        //Debug.Log("Hit something that isnt floor, area not clear !");
-                        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                        //  Spawn a debug cube
-                        GameObject syringeRef = Instantiate(cube, spawnLocation, Quaternion.identity);
-                    }                  
-
+                        areaClear = false;
+                    }                    
                     hits++;
                 }
+                if (areaClear == true)
+                {
+                    //Debug.Log("Clear spawn area found !");
+                    //  Spawn debug cube at spawn location
+                    //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                    //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
+                    
+                    //  Add found spawn location to spawn list
+                    spawnLocations.Add(spawnLocation);
+                    // Break out of while loop as spawn location has been found
+                    maxRunCounter = maxRunAttempts;
 
-                */
+                }
                 maxRunCounter++;
-
             }
-            if(maxRunAttempts == maxRunCounter)
+            if (maxRunCounter == maxRunAttempts)
             {
                 //  Spawnable area list could not be populated 
+                Debug.Log("Area could not be found !");
                 return false;
             }
-
-            
-
         }
-
         return false;
-
     }
 
     void rescanForAI()
@@ -407,6 +393,24 @@ public class AIDirector : NetworkBehaviour
             float enemyWidth = 200;
 
             GUI.Label(new Rect(Screen.width - enemyWidth - playerWidth, 0, enemyWidth, enemyHeight), enemyText);
+
+
+            //  Spawn Location Debug Printout --------------------------------------
+
+            string spawnLocationText = string.Format("Enemy Spawn Locations \n\n");
+            int locationCount = 0;
+            foreach (Vector3 location in spawnLocations)
+            {
+                spawnLocationText += "Spawn Location " + locationCount + " " + location + "\n";
+
+                locationCount++;
+            }
+
+            float locationHeight = 400;
+            float locationWidth = 250;
+            float locationGap = 200;
+
+            GUI.Label(new Rect(Screen.width - locationWidth - locationGap - playerWidth, 0, locationWidth, locationHeight), spawnLocationText);
 
         }
 

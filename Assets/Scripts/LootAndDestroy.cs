@@ -17,26 +17,17 @@ public class LootAndDestroy : NetworkBehaviour
     public int AmountOfResourceToDrop = 0;
     // Use this for initialization
 
+    public AudioSync audioSync;
+
     [Command]
     public void CmdDestroy() // destory object on server
     {
-        //ResetAllValuesAndDestroy();
-        //RpcDestroy();
         NetworkServer.Destroy(gameObject);
         Destroy(gameObject);
     }
 
-    /*[ClientRpc]
-    public void RpcDestroy() // destroy object on clients
-    {
-        //ResetAllValuesAndDestroy();
-        NetworkServer.Destroy(gameObject);
-        Destroy(gameObject);
-    }*/
-
     public void Interacting()
     {
-
         switch (DestroyOrLoot)
         {
             case 0: //Destroy
@@ -60,6 +51,8 @@ public class LootAndDestroy : NetworkBehaviour
                 switch (AmmoType)
                 {
                     case 0: //pistol
+                        audioSync.PlaySound(0);
+
                         PlayerDestroyingOrLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().pistolAmmo + AmountOfAmmoToDrop; // give 
                         ResetAllValuesAndDestroy();
                         break;
@@ -90,7 +83,7 @@ public class LootAndDestroy : NetworkBehaviour
         PlayerDestroyingOrLooting.GetComponent<PlayerController>().ResetStats();
         //self destroy
         PlayerDestroyingOrLooting = null;
-        //CmdDestroy();
+
         CmdDestroy();
     }
 }

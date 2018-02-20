@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 519092898}
-  m_IndirectSpecularColor: {r: 0.1749624, g: 0.21887252, b: 0.30116212, a: 1}
+  m_IndirectSpecularColor: {r: 0.17496267, g: 0.2188725, b: 0.3011621, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4427,6 +4427,11 @@ Prefab:
     - target: {fileID: 1133756600696904, guid: 0060b8755a2f3cb4db03b465e95e8854, type: 2}
       propertyPath: m_Name
       value: LootTest (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 82365532140956174, guid: 0060b8755a2f3cb4db03b465e95e8854,
+        type: 2}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0060b8755a2f3cb4db03b465e95e8854, type: 2}

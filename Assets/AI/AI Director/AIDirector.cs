@@ -297,7 +297,7 @@ public class AIDirector : NetworkBehaviour
                     {
                         for (int i = 0; i < aiSpawnGroupSizeNight; i++)
                         {
-                            int randomLocation = Random.Range(0, spawnLocations.Count);
+                            int randomLocation = Random.Range(0, spawnLocations.Count-1);
                             if (spawnLocations[randomLocation] != null)
                             {
                                 spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], player);

@@ -39,7 +39,7 @@ public class StateController : MonoBehaviour {
     [HideInInspector] public float lastJumped = 0.0f;   //  Used for timing cooldown between jumps
     [HideInInspector] public float lastAttack = 0.0f;   //  Used for timing cooldown between jumps
 
-    [HideInInspector] public GameObject target;         //  Generic gameobject target for AI
+    public GameObject target;         //  Generic gameobject target for AI
     [HideInInspector] public Vector3 targetLocation;    //  Generic vector location used for AI
 
     [HideInInspector] public Vector3 moveCommandLocation;    //  Movement command vector used for AI

@@ -7134,6 +7134,11 @@ Prefab:
       propertyPath: m_AssetId.i15
       value: 227
       objectReference: {fileID: 0}
+    - target: {fileID: 114240270074868880, guid: 4fc536d37f3a72342bcc36c3846bc1e3,
+        type: 2}
+      propertyPath: intensityDecreaseAmount
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4fc536d37f3a72342bcc36c3846bc1e3, type: 2}
   m_IsPrefabParent: 0

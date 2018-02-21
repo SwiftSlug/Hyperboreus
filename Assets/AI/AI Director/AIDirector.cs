@@ -7,9 +7,9 @@ using UnityEngine.AI;
 
 public class AIDirector : NetworkBehaviour
 {
-    public bool blep;
+    //public bool blep;
 
-    public bool shouldAIDebug = true;           //  Debug flag for all debugging logs
+    public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
     public bool isDay = true;                   //  Boolean that defines if it is day or night
     //GameObject[] EnemyUnits;
     public GameObject enemyToSpawn;             //  Enemy type to spawn, limited to one for this stage of the game
@@ -19,7 +19,9 @@ public class AIDirector : NetworkBehaviour
 
     List<Vector3> spawnLocations;               //  List of avalible spawn locations for the AI
 
-    float spawnBufferSize = 2.0f;              //  The area size that must be free of objects to count as an AI spawn location
+    int maxAiCount = 100;                       //  The max amount of AI that can be active before group spawning stops
+
+    float spawnBufferSize = 2.0f;               //  The area size that must be free of objects to count as an AI spawn location
 
     //GameObject[] Players;
     public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
@@ -29,16 +31,17 @@ public class AIDirector : NetworkBehaviour
     public float playerProximitySize = 50;      //  The area size around the player that detects nearby enemies for intensity checks
     public int intensityPerAI = 10;             //  The amount of intensity each AI unit adds to the player
     float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
-    int intensityDecreaseAmount = 2;            //  The amount of intensity that is decreased when its not increasing
+    public int intensityDecreaseAmount = 20;            //  The amount of intensity that is decreased when its not increasing
         
     //  Timing Varaibles
     public float intensityUpdateInterval = 3.0f;    //  The time interval between updating the player intensity level
     float intensityLastRunTime = 0.0f;              //  The last time the intensity update was ran
 
-    public float spawnInterval = 5.0f;      //  The time interval between spawning groups of enemies
-    public float spawnLast = 0.0f;          //  The last time the AI were spawned
+
+    public float spawnInterval = 5.0f;           //  The time interval between spawning groups of enemies
+    public float spawnLast = 0.0f;               //  The last time the AI were spawned
     public int aiSpawnGroupSizeNight = 10;       //  The amount of AI to spawn per group at day
-    public int aiSpawnGroupSizeDay = 1;       //  The amount of AI to spawn per group at night
+    public int aiSpawnGroupSizeDay = 1;          //  The amount of AI to spawn per group at night
 
     //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);   //  Debug cube used as a marker
     public GameObject cube; 
@@ -81,6 +84,11 @@ public class AIDirector : NetworkBehaviour
             Debug.Log(playerCount + " Player(s) Found");
         }
 
+        
+        
+
+        Debug.Log("Director Init Complete");
+
     }
 	
 	// Update is called once per frame
@@ -88,34 +96,39 @@ public class AIDirector : NetworkBehaviour
 
         //  Update List with new enemy count
         rescanForAI();
+        
+        //  Spawning
 
-        bool debugActive = false;
+        //  Run spawning function if cooldown is up
+        if (Time.time > (spawnLast + spawnInterval))
+        {
+            spawnEnemies();
+            spawnLast = Time.time;
+        }        
 
-        if (debugActive) {
-            //  Run intensity update if the update interval has been passed   
-            if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
-            {
-                //Debug.Log("Player Intensity Updating");
-                updatePlayerIntensity();
-                intensityLastRunTime = Time.time;
-            }
-            //  Spawn enemies if the spawn interval has been passed
-            if (Time.time > (spawnLast + spawnInterval))
-            {
-                spawnEnemies();
-                spawnLast = Time.time;
-            }
+        //  Intensity Updates
+
+        //  Run intensity update if the update interval has been passed   
+        if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
+        {
+            //Debug.Log("Player Intensity Updating");
+            updatePlayerIntensity();
+            intensityLastRunTime = Time.time;
         }
+        //  Spawn enemies if the spawn interval has been passed
+        
+
 
         //  Debug Stuff
 
+        /*
         if (Input.GetKeyDown("y"))
         {
             GameObject player = GameObject.FindGameObjectWithTag("NetworkedPlayer");
 
             scanSpawnAreas(player.transform.position, 60, 25, 5);
         }
-
+        */
 
 
     }
@@ -127,7 +140,7 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 20)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 200)
     {
 
         int maxRunCounter = 0;
@@ -268,24 +281,39 @@ public class AIDirector : NetworkBehaviour
 
     //  Spawn enemies near the players
     void spawnEnemies()
-    {
-        foreach (GameObject player in players)
-        {            
-            if (isDay)
+    {        
+        int activeAICount = enemyUnits.Count;
+
+        if (activeAICount < maxAiCount)
+        {
+            //  Spawn more AI units near the player
+            foreach (GameObject player in players)
             {
-                //  Day time spawning
-                if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelDay)
+                scanSpawnAreas(player.transform.position, 60, 25, 5);
+                if (isDay)
                 {
-                    spawnUnits(aiSpawnGroupSizeDay, player.transform.position, player);
+                    //  Day time spawning
+                    if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelDay)
+                    {
+                        for (int i = 0; i < aiSpawnGroupSizeNight; i++)
+                        {
+                            int randomLocation = Random.Range(0, spawnLocations.Count);
+                            if (spawnLocations[randomLocation] != null)
+                            {
+                                spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], player);
+                            }
+                        }
+                    }
                 }
-            }            
-            else
-            {
-                //  Night time spawning
-                if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelNight)
+                else
                 {
-                    spawnUnits(aiSpawnGroupSizeNight, player.transform.position, player);
+                    //  Night time spawning
+                    if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelNight)
+                    {
+                        spawnUnits(aiSpawnGroupSizeNight, player.transform.position, player);
+                    }
                 }
+
             }
 
         }
@@ -305,6 +333,8 @@ public class AIDirector : NetworkBehaviour
             Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
+            spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetPlayer.transform.position;
+            spawnedEnemy.GetComponent<StateController>().target = targetPlayer;
             NetworkServer.Spawn(spawnedEnemy);  //  Add spawned unit to server list
         }
 

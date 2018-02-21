@@ -223,7 +223,6 @@ GameObject:
   - component: {fileID: 114435461862225750}
   - component: {fileID: 114580284045437810}
   - component: {fileID: 82221933458547550}
-  - component: {fileID: 114974031942597390}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -4923,7 +4922,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243624682353368454, guid: c5ec88c3d9f0a5b4b9328139d9165db6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8e2aaec4d10ccc942bf451ae540ff237, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5414,10 +5413,6 @@ MonoBehaviour:
   AssetToDestroy: {fileID: 0}
   AssetToLoot: {fileID: 0}
   test: 0
-  audioSource: {fileID: 82221933458547550}
-  clipAmmoLoot: {fileID: 8300000, guid: 8e2aaec4d10ccc942bf451ae540ff237, type: 3}
-  clipResourceHit: {fileID: 8300000, guid: 36286e23c9e462a4f8140956a1e947ef, type: 3}
-  clipResourceLoot: {fileID: 8300000, guid: e60bed63face61f4f9d5f3ef7741b32a, type: 3}
 --- !u!114 &114300363803433394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5924,20 +5919,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Game Over
---- !u!114 &114974031942597390
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc8ee1ae4b5b84141a45f6899dff4bcc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 82221933458547550}
-  clipArray:
-  - {fileID: 8300000, guid: 8e2aaec4d10ccc942bf451ae540ff237, type: 3}
 --- !u!120 &120112140514594686
 LineRenderer:
   m_ObjectHideFlags: 1

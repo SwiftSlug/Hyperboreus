@@ -12,11 +12,6 @@ public class PlayerController : NetworkBehaviour
     public GameObject AssetToLoot;
     public bool test = false;
 
-    public AudioSource audioSource;
-    public AudioClip clipAmmoLoot;
-    public AudioClip clipResourceHit;
-    public AudioClip clipResourceLoot;
-
     //Update is called once per frame
     void Update()
     {
@@ -49,12 +44,10 @@ public class PlayerController : NetworkBehaviour
         {
             if (AbleToDestroy == true)
             {
-                audioSource.PlayOneShot(clipResourceHit, 1.0f);
                 CmdDamageAsset();
             }
             if (AbleToLoot == true)
             {
-                audioSource.PlayOneShot(clipAmmoLoot, 1.0f);
                 CmdLootableAmmo();
             }
         }

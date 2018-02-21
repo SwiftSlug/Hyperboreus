@@ -8,8 +8,13 @@ public class AIStats : NetworkBehaviour
 
     [SyncVar]
     public bool isDead = false;
-    //[SyncVar]
-    //public int enemyAttackDamage = 100;
+
+    public AudioSync audioSync;
+
+    void Start()
+    {
+        audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
+    }
 
     //[ClientRpc]
     [Command]
@@ -53,6 +58,8 @@ public class AIStats : NetworkBehaviour
     [Command]
     public void CmdDie()
     {
+        audioSync.PlaySound(2);
+
         if (isServer)
         {
             GetComponent<StateController>().aiActive = false;

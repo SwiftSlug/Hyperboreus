@@ -3,8 +3,22 @@ using UnityEngine.Networking;
 
 public class AudioSync : NetworkBehaviour
 {
-    public AudioSource audioSource;
+    public GameObject[] players;
+    public AudioSource[] audioSources;
     public AudioClip[] clipArray;
+
+    void Start()
+    {
+        players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
+
+        audioSources = new AudioSource[players.Length];
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            audioSources[i] = players[i].GetComponent<AudioSource>();
+        }
+        
+    }
     
     public void PlaySound(int audioID)
     {
@@ -23,6 +37,9 @@ public class AudioSync : NetworkBehaviour
     [ClientRpc]
     public void RpcSyncAudioClient(int audioID)
     {
-        audioSource.PlayOneShot(clipArray[audioID], 1.0f);
+        for (int i = 0; i < players.Length; i++)
+        {
+            audioSources[i].PlayOneShot(clipArray[audioID], 1.0f);
+        }
     }
 }

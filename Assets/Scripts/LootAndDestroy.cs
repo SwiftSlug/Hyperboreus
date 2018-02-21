@@ -19,8 +19,13 @@ public class LootAndDestroy : NetworkBehaviour
 
     public AudioSync audioSync;
 
+    void Start()
+    {
+        audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
+    }
+
     [Command]
-    public void CmdDestroy() // destory object on server
+    public void CmdDestroy() // destroy object on server
     {
         NetworkServer.Destroy(gameObject);
         Destroy(gameObject);
@@ -31,6 +36,8 @@ public class LootAndDestroy : NetworkBehaviour
         switch (DestroyOrLoot)
         {
             case 0: //Destroy
+                audioSync.PlaySound(1);
+
                 switch (ResourceType)
                 {
                     case 0: // wood
@@ -48,11 +55,11 @@ public class LootAndDestroy : NetworkBehaviour
                 }
                 break;
             case 1: //Loot
+                audioSync.PlaySound(0);
+
                 switch (AmmoType)
                 {
                     case 0: //pistol
-                        audioSync.PlaySound(0);
-
                         PlayerDestroyingOrLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().pistolAmmo + AmountOfAmmoToDrop; // give 
                         ResetAllValuesAndDestroy();
                         break;

@@ -127,7 +127,7 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 100)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 20)
     {
 
         int maxRunCounter = 0;
@@ -199,20 +199,43 @@ public class AIDirector : NetworkBehaviour
                     //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
 
                     NavMeshHit navMeshHit;
-                   
-                    //  Scan for a navmesh at the random location
+                    
+
+                    //  Scan for a navmesh position at the random location
                     if(NavMesh.SamplePosition(spawnLocation, out navMeshHit, spawnBufferSize, NavMesh.AllAreas))
                     {
                         //Debug.Log("Location with navmesh found !");
                         //NavMesh foundNavMesh = navMeshHit;
+                        bool canPathToPlayer = true;
+                        //  Can the path reach player 0
+                        NavMeshPath pathToPlayer = new NavMeshPath();
+                        //NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
+
+                        foreach(GameObject player in players)
+                        {
+                            NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
+                            if (pathToPlayer.status != NavMeshPathStatus.PathComplete)
+                            {
+                                canPathToPlayer = false;
+                            }
+    
+                        }
+
+                        if (canPathToPlayer)
+                        {
+                            //Debug.Log("Area can navigate to player");
+                            //  All checks passed, add found spawn location to spawn list
+                            spawnLocations.Add(spawnLocation);
+                            // Break out of while loop as spawn location has been found
+                            maxRunCounter = maxRunAttempts;
+
+                            //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                        }
                         
                     }
 
 
-                    //  All checks passed, add found spawn location to spawn list
-                    spawnLocations.Add(spawnLocation);
-                    // Break out of while loop as spawn location has been found
-                    maxRunCounter = maxRunAttempts;
+                    
 
                 }
                 maxRunCounter++;

@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Name: Moving
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: cb46db974726e2d4c875374967ee40e6, type: 2}
   sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   transitions:
-  - decision: {fileID: 0}
-    trueState: {fileID: 0}
-    falseState: {fileID: 0}
+  - decision: {fileID: 11400000, guid: f3127da51654449428752b32094c55e0, type: 2}
+    trueState: {fileID: 11400000, guid: b14a0152f926470438089dd3bebf8538, type: 2}
+    falseState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
+  - decision: {fileID: 11400000, guid: 8c9ce8c67acc76544aee8ad7360ea56f, type: 2}
+    trueState: {fileID: 11400000, guid: e6dcaaca1f75fc146b891fb45a0aec45, type: 2}
+    falseState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}

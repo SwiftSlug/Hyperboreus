@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/CrawlerBasicPlayerDetection")]
+//[CreateAssetMenu(menuName = "PluggableAI/Decisions/CrawlerBasicPlayerDetection")]
 public class CrawlerBasicPlayerDetectionDecision : Decision {
 
     public float basicDetectionMultiplier = 2.0f;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/BLEBPLBEPLBEPLBEPLArrivedAtMoveLocationDecision")]
+[CreateAssetMenu(menuName = "PluggableAI/Decisions/ArrivedAtMoveLocationDecision")]
 public class ArrivedAtMoveLocationDecision : Decision
 {
 

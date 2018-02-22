@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PluggableAI/Decisions/CrawlerMoveLocationSet")]
+//[CreateAssetMenu(menuName = "PluggableAI/Decisions/CrawlerMoveLocationSet")]
 public class CrawlerMoveLocationSetDecision : Decision {
 
     public override bool Decide(StateController controller)

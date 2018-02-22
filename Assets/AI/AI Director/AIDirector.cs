@@ -7,8 +7,9 @@ using UnityEngine.AI;
 
 public class AIDirector : NetworkBehaviour
 {
-    //public bool blep;
-
+    public bool blep;
+    public bool active = false;
+    
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
     public bool isDay = true;                   //  Boolean that defines if it is day or night
     //GameObject[] EnemyUnits;
@@ -53,6 +54,8 @@ public class AIDirector : NetworkBehaviour
 
         //  Init all lists ready for use
 
+        
+
         enemyUnits = new List<GameObject>();    // Init AI list
         players = new List<GameObject>();       // Init player list
         spawnLocations = new List<Vector3>();   // Init spawn Location list
@@ -94,43 +97,61 @@ public class AIDirector : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        //  Update List with new enemy count
-        rescanForAI();
-        
-        //  Spawning
-
-        //  Run spawning function if cooldown is up
-        if (Time.time > (spawnLast + spawnInterval))
+       
+        if (Input.GetKeyDown("m"))
         {
-            spawnEnemies();
-            spawnLast = Time.time;
-        }        
-
-        //  Intensity Updates
-
-        //  Run intensity update if the update interval has been passed   
-        if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
-        {
-            //Debug.Log("Player Intensity Updating");
-            updatePlayerIntensity();
-            intensityLastRunTime = Time.time;
+            if (active)
+            {
+                active = false;
+                Debug.Log("Director Inactive");
+            }
+            else
+            {
+                active = true;
+                Debug.Log("Director Active");
+            }
         }
-        //  Spawn enemies if the spawn interval has been passed
-        
 
-
-        //  Debug Stuff
-
-        /*
-        if (Input.GetKeyDown("y"))
+            if (active)
         {
-            GameObject player = GameObject.FindGameObjectWithTag("NetworkedPlayer");
 
-            scanSpawnAreas(player.transform.position, 60, 25, 5);
+            //  Update List with new enemy count
+            rescanForAI();
+
+            //  Spawning
+
+            //  Run spawning function if cooldown is up
+            if (Time.time > (spawnLast + spawnInterval))
+            {
+                spawnEnemies();
+                spawnLast = Time.time;
+            }
+
+            //  Intensity Updates
+
+            //  Run intensity update if the update interval has been passed   
+            if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
+            {
+                //Debug.Log("Player Intensity Updating");
+                updatePlayerIntensity();
+                intensityLastRunTime = Time.time;
+            }
+            //  Spawn enemies if the spawn interval has been passed
+
+
+
+            //  Debug Stuff
+
+            /*
+            if (Input.GetKeyDown("y"))
+            {
+                GameObject player = GameObject.FindGameObjectWithTag("NetworkedPlayer");
+
+                scanSpawnAreas(player.transform.position, 60, 25, 5);
+            }
+            */
+
         }
-        */
-
-
     }
 
     //  Scan Spawn Areas

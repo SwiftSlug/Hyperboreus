@@ -6,7 +6,7 @@ public class RatFood : MonoBehaviour {
 
     public bool eaten = false;
     public float regenTime = 10.0f;
-    float lastEaten = 0.0f;
+    public float lastEaten = 0.0f;
 
     public void Eat()
     {

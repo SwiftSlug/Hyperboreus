@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(menuName = "PluggableAI/Decisions/DetectPlayerDecision")]
 public class DetectPlayerDecision : Decision
 {
@@ -38,6 +39,4 @@ public class DetectPlayerDecision : Decision
 
 
 }
-
-
 

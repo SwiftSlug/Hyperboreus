@@ -1,27 +1,31 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class AudioSync : NetworkBehaviour
 {
-    public GameObject[] players;
-    public AudioSource[] audioSources;
+    //public GameObject[] players;
+
+    public AudioSource tempAudioSource;
+
     public AudioClip[] clipArray;
 
     void Start()
     {
-        players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
+        //players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
 
-        audioSources = new AudioSource[players.Length];
+        //audioSources = new List<AudioSource>(players.Length);
 
-        for (int i = 0; i < players.Length; i++)
-        {
-            audioSources[i] = players[i].GetComponent<AudioSource>();
-        }
-        
+        //for (int i = 0; i < players.Length; i++)
+        //{
+        //    audioSources[i] = players[i].GetComponent<AudioSource>();
+        //}
     }
     
-    public void PlaySound(int audioID)
+    public void PlaySound(AudioSource objectSource, int audioID)
     {
+        tempAudioSource = objectSource;
+
         if (audioID >= 0 || audioID < clipArray.Length)
         {
             CmdSyncAudioServer(audioID);
@@ -37,9 +41,6 @@ public class AudioSync : NetworkBehaviour
     [ClientRpc]
     public void RpcSyncAudioClient(int audioID)
     {
-        for (int i = 0; i < players.Length; i++)
-        {
-            audioSources[i].PlayOneShot(clipArray[audioID], 1.0f);
-        }
+        tempAudioSource.PlayOneShot(clipArray[audioID], 1.0f);
     }
 }

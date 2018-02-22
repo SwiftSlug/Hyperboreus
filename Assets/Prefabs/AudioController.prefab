@@ -84,8 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8ee1ae4b5b84141a45f6899dff4bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  audioSources: []
+  tempAudioSource: {fileID: 0}
   clipArray:
   - {fileID: 8300000, guid: 8e2aaec4d10ccc942bf451ae540ff237, type: 3}
   - {fileID: 8300000, guid: e60bed63face61f4f9d5f3ef7741b32a, type: 3}

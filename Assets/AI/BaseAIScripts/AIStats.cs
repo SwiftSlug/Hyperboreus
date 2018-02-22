@@ -58,7 +58,7 @@ public class AIStats : NetworkBehaviour
     [Command]
     public void CmdDie()
     {
-        audioSync.PlaySound(2);
+        audioSync.PlaySound(GetComponent<AudioSource>(), 2);
 
         if (isServer)
         {

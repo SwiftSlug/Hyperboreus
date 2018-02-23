@@ -18,10 +18,20 @@ public class RatEatFoodAction : Action {
     {
         controller.navMeshAgent.destination = controller.transform.position;
 
-        controller.target.GetComponent<RatFood>().Eat();
+        if (controller.target.GetComponent<RatFood>().eaten == false)
+        {
+            controller.target.GetComponent<RatFood>().Eat();
+
+            if (controller.transform.localScale.magnitude < (new Vector3(20.0f, 20.0f, 20.0f).magnitude))
+            {
+                controller.transform.localScale = controller.transform.localScale + new Vector3(0.1f, 0.1f, 0.1f);                
+            }
+        }
 
         //  Rats growing functionality
 
+
+        /*
         //  Make sure rat scale is not larger than the max value
         if (controller.transform.localScale.magnitude < (new Vector3(20.0f, 20.0f, 20.0f).magnitude))
         {
@@ -35,6 +45,9 @@ public class RatEatFoodAction : Action {
                 }
             }
         }
+
+        */
+
         /*
         Collider[] hitColliders = Physics.OverlapSphere(controller.transform.position, controller.detectionRange);
 

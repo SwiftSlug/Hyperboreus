@@ -23,7 +23,7 @@ public class DetectPlayerDecision : Decision
                 if (!hitColliders[i].gameObject.GetComponent<PlayerStats>().isDead)
                 {
                     //Debug.Log("Player Seen Run Away !");
-                    controller.navMeshAgent.speed = controller.runSpeed;
+                    //controller.navMeshAgent.speed = controller.runSpeed;
                     controller.target = hitColliders[i].gameObject;
                     return true;
                 }

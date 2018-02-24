@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 519092898}
-  m_IndirectSpecularColor: {r: 0.17496267, g: 0.2188725, b: 0.3011621, a: 1}
+  m_IndirectSpecularColor: {r: 0.17496274, g: 0.21887289, b: 0.30116317, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -3633,6 +3633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eaten: 0
   regenTime: 10
+  lastEaten: 0
 --- !u!23 &333653590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15012,6 +15013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eaten: 0
   regenTime: 10
+  lastEaten: 0
 --- !u!23 &1412808594
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16971,6 +16973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eaten: 0
   regenTime: 10
+  lastEaten: 0
 --- !u!23 &1669780832
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -19934,6 +19937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eaten: 0
   regenTime: 10
+  lastEaten: 0
 --- !u!1001 &1908642916
 Prefab:
   m_ObjectHideFlags: 0
@@ -20760,6 +20764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eaten: 0
   regenTime: 10
+  lastEaten: 0
 --- !u!23 &1997373812
 MeshRenderer:
   m_ObjectHideFlags: 0

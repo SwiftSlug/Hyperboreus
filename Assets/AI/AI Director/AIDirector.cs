@@ -7,10 +7,11 @@ using UnityEngine.AI;
 
 public class AIDirector : NetworkBehaviour
 {
-    public bool blep;
+    //public bool blep;
     public bool active = false;
     
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
+    public bool shouldAIDrawDebug = true;       //  Debug flag for drawing debug spheres
     public bool isDay = true;                   //  Boolean that defines if it is day or night
     //GameObject[] EnemyUnits;
     public GameObject enemyToSpawn;             //  Enemy type to spawn, limited to one for this stage of the game
@@ -21,18 +22,23 @@ public class AIDirector : NetworkBehaviour
     List<Vector3> spawnLocations;               //  List of avalible spawn locations for the AI
 
     int maxAiCount = 100;                       //  The max amount of AI that can be active before group spawning stops
+    int numerOfSpawnGroups = 5;                 //  The number of groups that are spawned per wave
+    public int aiSpawnGroupSizeNight = 5;      //  The amount of AI to spawn per group at day
+    public int aiSpawnGroupSizeDay = 1;         //  The amount of AI to spawn per group at night
+    public int numberOfSpawnLocations = 10;     //  The number of spawn locaitons generated per search
 
-    float spawnBufferSize = 2.0f;               //  The area size that must be free of objects to count as an AI spawn location
+    //  Area size definitions
+    public float spawnBufferSize = 2.0f;        //  The area size that must be free of objects to count as an AI spawn location
+    public float playerProximitySize = 50;      //  The area size around the player that detects nearby enemies for intensity checks
 
-    //GameObject[] Players;
     public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
     public int targetIntensityLevelNight = 200; //  The intensity level the director aims to keep players at during the night
     public float waveCooldown;                  //  The cooldown time inbetween waves
 
-    public float playerProximitySize = 50;      //  The area size around the player that detects nearby enemies for intensity checks
+    //  Intensity variables
     public int intensityPerAI = 10;             //  The amount of intensity each AI unit adds to the player
     float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
-    public int intensityDecreaseAmount = 20;            //  The amount of intensity that is decreased when its not increasing
+    public int intensityDecreaseAmount = 20;    //  The amount of intensity that is decreased when its not increasing
         
     //  Timing Varaibles
     public float intensityUpdateInterval = 3.0f;    //  The time interval between updating the player intensity level
@@ -41,8 +47,7 @@ public class AIDirector : NetworkBehaviour
 
     public float spawnInterval = 5.0f;           //  The time interval between spawning groups of enemies
     public float spawnLast = 0.0f;               //  The last time the AI were spawned
-    public int aiSpawnGroupSizeNight = 10;       //  The amount of AI to spawn per group at day
-    public int aiSpawnGroupSizeDay = 1;          //  The amount of AI to spawn per group at night
+    
 
     //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);   //  Debug cube used as a marker
     public GameObject cube; 
@@ -97,61 +102,80 @@ public class AIDirector : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
 
-       
-        if (Input.GetKeyDown("m"))
+        if (isServer)
         {
             if (active)
             {
-                active = false;
-                Debug.Log("Director Inactive");
-            }
-            else
+
+                //  Update List with new enemy count
+                rescanForAI();
+
+                //  Intensity updates   ---------------------------------------------
+
+                //  Run intensity update if the update interval has been passed   
+                if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
+                {
+                    //Debug.Log("Player Intensity Updating");
+                    updatePlayerIntensity();
+                    intensityLastRunTime = Time.time;
+                }
+
+
+                //  Spawning    ------------------------------------------------------
+
+
+                //  Run spawning function if cooldown is up
+                if (Time.time > (spawnLast + spawnInterval))
+                {
+                    spawnEnemies();
+                    spawnLast = Time.time;
+                }
+
+                //  Intensity Updates
+
+                
+                
+
+            }            
+
+            //  Debug to disable and enable director
+
+            if (Input.GetKeyDown("m"))
             {
-                active = true;
-                Debug.Log("Director Active");
+                if (active)
+                {
+                    active = false;
+                    Debug.Log("Director Inactive");
+                }
+                else
+                {
+                    active = true;
+                    Debug.Log("Director Active");
+                }
             }
+
+
+            //  Debug change from night to day
+
+            if (Input.GetKeyDown("n"))
+            {
+                if (isDay)
+                {
+                    //  Is currently day so switch to night
+                    isDay = false;
+                    Debug.Log("Switched To Night Time");
+                }
+                else
+                {
+                    //  Is currently night so switch to day
+                    isDay = true;
+                    Debug.Log("Switched To Day Time");
+                }
+            }
+
+
         }
 
-            if (active)
-        {
-
-            //  Update List with new enemy count
-            rescanForAI();
-
-            //  Spawning
-
-            //  Run spawning function if cooldown is up
-            if (Time.time > (spawnLast + spawnInterval))
-            {
-                spawnEnemies();
-                spawnLast = Time.time;
-            }
-
-            //  Intensity Updates
-
-            //  Run intensity update if the update interval has been passed   
-            if (Time.time > (intensityLastRunTime + intensityUpdateInterval))
-            {
-                //Debug.Log("Player Intensity Updating");
-                updatePlayerIntensity();
-                intensityLastRunTime = Time.time;
-            }
-            //  Spawn enemies if the spawn interval has been passed
-
-
-
-            //  Debug Stuff
-
-            /*
-            if (Input.GetKeyDown("y"))
-            {
-                GameObject player = GameObject.FindGameObjectWithTag("NetworkedPlayer");
-
-                scanSpawnAreas(player.transform.position, 60, 25, 5);
-            }
-            */
-
-        }
     }
 
     //  Scan Spawn Areas
@@ -161,7 +185,7 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 200)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 1000)
     {
 
         int maxRunCounter = 0;
@@ -229,8 +253,9 @@ public class AIDirector : NetworkBehaviour
 
                     //Debug.Log("Clear spawn area found !");
                     //  Spawn debug cube at spawn location
-                    //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                    GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                     //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
+                    Destroy(debugCube, 10);
 
                     NavMeshHit navMeshHit;
                     
@@ -305,36 +330,50 @@ public class AIDirector : NetworkBehaviour
     {        
         int activeAICount = enemyUnits.Count;
 
+        //  Ensure spawning stops when AI count is over limit
         if (activeAICount < maxAiCount)
         {
-            //  Spawn more AI units near the player
+            //  Spawn more AI units near each player
             foreach (GameObject player in players)
             {
-                scanSpawnAreas(player.transform.position, 60, 25, 5);
+                //  Find spawn locations near the player
+                scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations);
+
                 if (isDay)
                 {
-                    //  Day time spawning
+                    //  Day time spawning -------------------------------------------------------
                     if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelDay)
                     {
-                        for (int i = 0; i < aiSpawnGroupSizeNight; i++)
+
+                        int randomLocation = Random.Range(0, spawnLocations.Count - 1);
+                        if (spawnLocations[randomLocation] != null)
                         {
-                            int randomLocation = Random.Range(0, spawnLocations.Count-1);
-                            if (spawnLocations[randomLocation] != null)
-                            {
-                                spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], player);
-                            }
+                            //  Spawn units with no target
+                            spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], spawnBufferSize);
                         }
-                    }
-                }
-                else
-                {
-                    //  Night time spawning
-                    if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelNight)
-                    {
-                        spawnUnits(aiSpawnGroupSizeNight, player.transform.position, player);
+
                     }
                 }
 
+                else
+                {
+                    if (player.GetComponent<PlayerStats>().intensity < targetIntensityLevelNight)
+                    {
+                        //  Night time spawning -----------------------------------------------------
+
+                        for (int i = 0; i < numerOfSpawnGroups; i++)
+                        {
+                            Debug.Log("Wave Spawed !");
+                            int randomLocation = Random.Range(0, spawnLocations.Count - 1);
+                            if (spawnLocations[randomLocation] != null)
+                            {
+                                //  Spawn units targeting the player
+                                spawnUnits(aiSpawnGroupSizeNight, spawnLocations[randomLocation], spawnBufferSize, player);
+                            }
+
+                        }
+                    }
+                }
             }
 
         }
@@ -342,14 +381,14 @@ public class AIDirector : NetworkBehaviour
 
 
     //  Spawn a number of AI units around a position and set them to target the provided player
-    void spawnUnits(int number, Vector3 position, GameObject targetPlayer)
+    void spawnUnits(int number, Vector3 position, float spread, GameObject targetPlayer)
     {
 
         // Spawn the units within random locations near the defined position
         for (int i =0; i < number; i++)
         {
-            float xOffset = Random.Range(-10.0f, -10.0f);   //  Random x offset
-            float zOffset = Random.Range(-10.0f, -10.0f);   //  Random y offset
+            float xOffset = Random.Range(-spread, spread);   //  Random x offset
+            float zOffset = Random.Range(-spread, spread);   //  Random y offset
 
             Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
 
@@ -360,6 +399,25 @@ public class AIDirector : NetworkBehaviour
         }
 
     }
+
+    //  Spawn a number of AI units around a position with no target
+    void spawnUnits(int number, Vector3 position, float spread)
+    {
+
+        // Spawn the units within random locations near the defined position
+        for (int i = 0; i < number; i++)
+        {
+            float xOffset = Random.Range(-spread, spread);   //  Random x offset
+            float zOffset = Random.Range(-spread, spread);   //  Random y offset
+
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
+
+            var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
+            NetworkServer.Spawn(spawnedEnemy);  //  Add spawned unit to server list
+        }
+
+    }
+
 
 
     //  This calculates and updates the intensity level for all players currently within the game
@@ -507,22 +565,49 @@ public class AIDirector : NetworkBehaviour
     //  OnDrawGizmos do work, but only within the scene view !
     void OnDrawGizmos()
     {
-        /*
-        foreach (GameObject player in players)
+
+        if (shouldAIDrawDebug)
         {
-            //Debug.Log("Drawing Sphere");
-            //  Get reference to player stats
-            PlayerStats statsRef = player.GetComponent<PlayerStats>();
 
-            //Debug.DrawSphere
-            //GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //  Draw detection range for each enemy unit
+            foreach (AIStats foundAI in FindObjectsOfType<AIStats>())
+            {
+                if (foundAI.CompareTag("Enemy"))
+                {
+                    if (foundAI.GetComponent<StateController>().target != null)
+                    {
+                        //  Red debug if AI has a target
+                        Gizmos.color = Color.red;
+                    }
+                    else
+                    {
+                        //  White debug if AI does not have a target
+                        Gizmos.color = Color.white;
+                    }
+                    Gizmos.DrawWireSphere(foundAI.transform.position, foundAI.GetComponent<StateController>().detectionRange);
+                }
+            }
 
 
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(player.transform.position, 10);
+            /*
+            foreach (GameObject player in players)
+            {
+                //Debug.Log("Drawing Sphere");
+                //  Get reference to player stats
+                PlayerStats statsRef = player.GetComponent<PlayerStats>();
+
+                //Debug.DrawSphere
+                //GameObject.CreatePrimitive(PrimitiveType.Sphere);
+
+
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawSphere(player.transform.position, 10);
+            }
+            */
+
+
+
         }
-        */
-        
 
     }
 

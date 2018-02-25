@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class AIDirector : NetworkBehaviour
 {
-    //public bool blep;
+    public bool blep;
     public bool active = false;
     
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
@@ -28,8 +28,9 @@ public class AIDirector : NetworkBehaviour
     public int numberOfSpawnLocations = 10;     //  The number of spawn locaitons generated per search
 
     //  Area size definitions
-    public float spawnBufferSize = 2.0f;        //  The area size that must be free of objects to count as an AI spawn location
-    public float playerProximitySize = 50;      //  The area size around the player that detects nearby enemies for intensity checks
+    public float spawnBufferSize = 2.0f;             //  The area size that must be free of objects to count as an AI spawn location
+    public float playerProximitySize = 50.0f;        //  The area size around the player that detects nearby enemies for intensity checks
+    public float maxDistanceFromPlayers = 100.0f;    //  The max distance an AI unit can be from the player before being deleted
 
     public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
     public int targetIntensityLevelNight = 200; //  The intensity level the director aims to keep players at during the night
@@ -44,6 +45,8 @@ public class AIDirector : NetworkBehaviour
     public float intensityUpdateInterval = 3.0f;    //  The time interval between updating the player intensity level
     float intensityLastRunTime = 0.0f;              //  The last time the intensity update was ran
 
+    public float cleanupInterval = 10.0f;       //  The time interval between runnning AI cleanups
+    float cleanupLastRunTime = 0.0f;            //  The last time cleanup was ran
 
     public float spawnInterval = 5.0f;           //  The time interval between spawning groups of enemies
     public float spawnLast = 0.0f;               //  The last time the AI were spawned
@@ -57,9 +60,7 @@ public class AIDirector : NetworkBehaviour
 
         Debug.Log("Director Alive !");
 
-        //  Init all lists ready for use
-
-        
+        //  Init all lists ready for use        
 
         enemyUnits = new List<GameObject>();    // Init AI list
         players = new List<GameObject>();       // Init player list
@@ -73,11 +74,6 @@ public class AIDirector : NetworkBehaviour
             aiCount++;
             //Debug.Log("Enemy Unit Found by Director !");
         }
-        if (shouldAIDebug)
-        {
-            Debug.Log(aiCount + " AI Unit(s) Found");
-        }
-
 
         int playerCount = 0;
         foreach (PlayerStats foundAI in FindObjectsOfType<PlayerStats>())
@@ -89,13 +85,10 @@ public class AIDirector : NetworkBehaviour
    
         if (shouldAIDebug)
         {
+            Debug.Log(aiCount + " AI Unit(s) Found");
             Debug.Log(playerCount + " Player(s) Found");
-        }
-
-        
-        
-
-        Debug.Log("Director Init Complete");
+            Debug.Log("Director Init Complete");
+        } 
 
     }
 	
@@ -129,12 +122,18 @@ public class AIDirector : NetworkBehaviour
                 {
                     spawnEnemies();
                     spawnLast = Time.time;
+                }             
+
+                
+                //  AI Cleanup  ------------------------------------------------------
+
+                if(Time.time > (cleanupLastRunTime + cleanupInterval))
+                {
+                    cleaupAI();
+                    cleanupLastRunTime = Time.time;
                 }
 
-                //  Intensity Updates
 
-                
-                
 
             }            
 
@@ -223,6 +222,8 @@ public class AIDirector : NetworkBehaviour
                     zPos -= centerIgnoreSize;
                 }
 
+
+
                 //  Add offset positions to the area center
                 xPos += areaCentre.x;
                 zPos += areaCentre.z;
@@ -253,9 +254,9 @@ public class AIDirector : NetworkBehaviour
 
                     //Debug.Log("Clear spawn area found !");
                     //  Spawn debug cube at spawn location
-                    GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                    //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                     //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
-                    Destroy(debugCube, 10);
+                    //Destroy(debugCube, 10);
 
                     NavMeshHit navMeshHit;
                     
@@ -339,6 +340,7 @@ public class AIDirector : NetworkBehaviour
                 //  Find spawn locations near the player
                 scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations);
 
+
                 if (isDay)
                 {
                     //  Day time spawning -------------------------------------------------------
@@ -346,14 +348,15 @@ public class AIDirector : NetworkBehaviour
                     {
 
                         int randomLocation = Random.Range(0, spawnLocations.Count - 1);
-                        if (spawnLocations[randomLocation] != null)
-                        {
+                        //if (spawnLocations[randomLocation] != null)
+                        //{
                             //  Spawn units with no target
                             spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], spawnBufferSize);
-                        }
+                        //}
 
                     }
                 }
+
 
                 else
                 {
@@ -365,15 +368,19 @@ public class AIDirector : NetworkBehaviour
                         {
                             Debug.Log("Wave Spawed !");
                             int randomLocation = Random.Range(0, spawnLocations.Count - 1);
-                            if (spawnLocations[randomLocation] != null)
-                            {
+                            //if (spawnLocations[randomLocation] != null)
+                            //{
                                 //  Spawn units targeting the player
                                 spawnUnits(aiSpawnGroupSizeNight, spawnLocations[randomLocation], spawnBufferSize, player);
-                            }
+                            //}
 
                         }
+
                     }
                 }
+
+
+
             }
 
         }
@@ -492,6 +499,48 @@ public class AIDirector : NetworkBehaviour
 
     }
 
+
+    //  This will check for any AI units that are too far away from the players and will then remove them
+    //  Mostly for daytime use as the players will not be targeted by default during the day, but also
+    //  for any AI that have got stuck at a location
+    void cleaupAI()
+    {
+
+        foreach(GameObject enemy in enemyUnits)
+        {
+            bool shouldDelete = true;
+            
+            foreach(GameObject player in players)
+            {                
+                float distanceToPlayer = (player.transform.position - enemy.transform.position).magnitude;
+
+            
+                if(distanceToPlayer < maxDistanceFromPlayers)
+                {
+                    //  Prevent AI from being deleted if it is still close to any of the players
+                    shouldDelete = false;
+                }
+
+            }
+            //  If the AI is too far away from any of the players destroy it
+            if (shouldDelete)
+            {
+                Destroy(enemy);
+            }
+
+
+        }
+
+        if (shouldAIDebug)
+        {
+            Debug.Log("AI Cleanup complete !");
+        }
+
+
+    }
+
+
+
     //  Debug functions below ---------------------------------
 
     void OnGUI()
@@ -570,6 +619,7 @@ public class AIDirector : NetworkBehaviour
         {
 
             //  Draw detection range for each enemy unit
+
             foreach (AIStats foundAI in FindObjectsOfType<AIStats>())
             {
                 if (foundAI.CompareTag("Enemy"))
@@ -588,23 +638,34 @@ public class AIDirector : NetworkBehaviour
                 }
             }
 
+            //  Draw player intensity ranges
 
-            /*
-            foreach (GameObject player in players)
-            {
-                //Debug.Log("Drawing Sphere");
-                //  Get reference to player stats
-                PlayerStats statsRef = player.GetComponent<PlayerStats>();
+            foreach (PlayerStats foundPlayer in FindObjectsOfType<PlayerStats>())
+            {                
 
-                //Debug.DrawSphere
-                //GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                if (foundPlayer.CompareTag("NetworkedPlayer"))
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawWireSphere(foundPlayer.transform.position, playerProximitySize);
+                }
 
 
-                Gizmos.color = Color.yellow;
-                Gizmos.DrawSphere(player.transform.position, 10);
             }
-            */
 
+
+            //  Draw player cleanupradius
+
+            foreach (PlayerStats foundPlayer in FindObjectsOfType<PlayerStats>())
+            {
+
+                if (foundPlayer.CompareTag("NetworkedPlayer"))
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawWireSphere(foundPlayer.transform.position, maxDistanceFromPlayers);
+                }
+
+
+            }
 
 
         }

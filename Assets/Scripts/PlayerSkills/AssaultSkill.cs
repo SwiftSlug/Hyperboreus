@@ -17,6 +17,7 @@ public class AssaultSkill : Skill
     
     RaycastHit markerZ;
     Ray markerRay = new Ray();
+    ParticleSystem smokeMarker;
 
     //void Update()
     //{
@@ -39,8 +40,6 @@ public class AssaultSkill : Skill
             //  Sets the chargetime to 2 seconds if no other value is set
             chargeTime = 1.0f;
         }
-
-        //gunPos = GetComponent<WeaponShooting>().gunEnd;
     }
 
     public override bool SkillAction()
@@ -50,32 +49,38 @@ public class AssaultSkill : Skill
             if (Time.time > lastUsedTime + cooldown)
             {
                 currentChargeTime += Time.deltaTime;
-
                 //draw marker on mouse location update
                 Vector3 mousePosUpdate = Input.mousePosition;
-                mousePosUpdate.z = mousePosUpdate.z + 50;
+                mousePosUpdate.z = mousePosUpdate.y + 50;
                 markerRay.origin = mousePosUpdate;
                 markerRay.direction = -(transform.up);
+
+                //markerRay.origin = gunPos.transform.position + new Vector3(0, 50f, 0);
+                //markerRay.direction = -(gunPos.transform.up);
+
                 if (Physics.Raycast(markerRay.origin, markerRay.direction, out markerZ, 100))
                 {
                     Vector3 targetLocation = markerZ.point;
                     Debug.Log(targetLocation);
                 }
 
-                    //Debug.Log(mousePosUpdate.x);
-                    //Debug.Log(mousePosUpdate.y);
-                    //Debug.Log(mousePosUpdate.z);
-                    //Debug.Log("drawing marker");
+                //Debug.Log(mousePosUpdate.x);
+                //Debug.Log(mousePosUpdate.y);
+                //Debug.Log(mousePosUpdate.z);
+                //Debug.Log("drawing marker");
 
-                    if (currentChargeTime > chargeTime)
+                if (currentChargeTime > chargeTime)
                 {
                     //get mouse location and draw marker at mouse location
-                    Vector3 mousePos = Input.mousePosition;
+                    //particleMarker.SetPosition(1, targetLocation);
+                    //particleMarker.Stop();
+                    //particleMarker.Play();
+                    //Vector3 mousePos = Input.mousePosition;
                     //wait for air strike time
                     //delete marker
 
 
-                    CmdSpawnStrike();
+                    CmdSpawnStrike(markerRay.origin, transform.rotation, playerReference);
                     Debug.Log("BOOM");
                     currentChargeTime = 0.0f;   //  Reset the current charge time
                     lastUsedTime = Time.time;   //  Set last firing time
@@ -95,16 +100,15 @@ public class AssaultSkill : Skill
 
     //edit for missile from set z value above and so its facing down and velocity is facing down
     [Command]
-    void CmdSpawnStrike()
+    void CmdSpawnStrike(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
     {
         Debug.Log("strike");
-        //GameObject syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
+        GameObject Missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
 
-        //GameObject syringeRef = Instantiate(syringe, spawnPosition, spawnRotation);
+        GameObject MissileRef = Instantiate(Missile, spawnPosition, spawnRotation);
 
-        ////  Assign player reference on scripts
-        //syringeRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
-        //syringeRef.GetComponentInChildren<trackingSphereScript>().player = currentPlayerReference;
+        //  Assign player reference on scripts
+        //MissileRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
 
         //NetworkServer.Spawn(syringeRef);
     }

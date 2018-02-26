@@ -5236,6 +5236,7 @@ MonoBehaviour:
   lastUsedTime: 0
   chargeTime: 0
   airstrikeTime: 0
+  gunEnd: {fileID: 4657937148490102}
 --- !u!114 &114148089913796268
 MonoBehaviour:
   m_ObjectHideFlags: 1

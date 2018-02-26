@@ -4,43 +4,29 @@ using UnityEngine.Networking;
 
 public class AudioSync : NetworkBehaviour
 {
-    //public GameObject[] players;
-
     public AudioSource tempAudioSource;
 
     public AudioClip[] clipArray;
 
-    void Start()
+    public void PlaySound(GameObject objectSource, int audioID)
     {
-        //players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
-
-        //audioSources = new List<AudioSource>(players.Length);
-
-        //for (int i = 0; i < players.Length; i++)
-        //{
-        //    audioSources[i] = players[i].GetComponent<AudioSource>();
-        //}
-    }
-    
-    public void PlaySound(AudioSource objectSource, int audioID)
-    {
-        tempAudioSource = objectSource;
-
         if (audioID >= 0 || audioID < clipArray.Length)
         {
-            CmdSyncAudioServer(audioID);
+            CmdSyncAudioServer(objectSource, audioID); //Make a request to play a sound via the server from a particular client
         }
     }
 	
     [Command]
-    public void CmdSyncAudioServer(int audioID)
+    public void CmdSyncAudioServer(GameObject objectSource, int audioID)
     {
-        RpcSyncAudioClient(audioID);
+        RpcSyncAudioClient(objectSource, audioID); //Make a call from the server to all connected clients
     }
 
     [ClientRpc]
-    public void RpcSyncAudioClient(int audioID)
+    public void RpcSyncAudioClient(GameObject objectSource, int audioID)
     {
-        tempAudioSource.PlayOneShot(clipArray[audioID], 1.0f);
+        tempAudioSource = objectSource.GetComponent<AudioSource>(); //Set the audio source for all clients to the object being passed in
+
+        tempAudioSource.PlayOneShot(clipArray[audioID], 1.0f); //Play our sound from the array of clips available
     }
 }

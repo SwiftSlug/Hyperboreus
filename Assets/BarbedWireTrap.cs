@@ -10,6 +10,7 @@ public class BarbedWireTrap : NetworkBehaviour {
     float DestructionTimer = 0.0f;
     float InitialRunSpeed;
     public bool EnemyColliding = false;
+    public GameObject CollidedEnemyTest = null;
 
 	// Use this for initialization
 	void Start ()
@@ -25,7 +26,7 @@ public class BarbedWireTrap : NetworkBehaviour {
             //Debug.Log(DestructionTimer);
             if (DamageTimer >= 1.0f)
             {
-                CollidedEnemy.GetComponent<AIStats>().CmdDamage(5);
+                CollidedEnemy.GetComponent<AIStats>().CmdDamage(1);
                 DamageTimer = 0.0f;
             }
             else
@@ -45,23 +46,31 @@ public class BarbedWireTrap : NetworkBehaviour {
 
     }
 
-
     private void OnTriggerEnter(Collider collidedAsset)
     {
         if (collidedAsset.gameObject.CompareTag("Enemy") == true)
         {
             EnemyColliding = true;
             CollidedEnemy = collidedAsset.gameObject;
-            InitialRunSpeed = collidedAsset.gameObject.GetComponent<StateController>().runSpeed;
-            CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = 0.1f;
+            collidedAsset.gameObject.GetComponent<AIStats>().CmdSetTrapped(true);
+            InitialRunSpeed = CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed;
+            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = 1.5f;
         }
     }
     private void OnTriggerExit(Collider collidedAsset)
     {
-        EnemyColliding = false;
-        Debug.Log("Enemy No Longer Colliding");
-        CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
-        collidedAsset = null;
+        if (collidedAsset.gameObject.CompareTag("Enemy") == true)
+        {
+            EnemyColliding = false;
+            Debug.Log("Enemy No Longer Colliding");
+            collidedAsset.gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
+            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
+            CollidedEnemy = null;
+        }
+            /*CollidedEnemyTest = collidedAsset.gameObject;
+            if (collidedAsset == CollidedEnemy)
+            {
+            }*/
     }
 
     [Command]
@@ -70,6 +79,7 @@ public class BarbedWireTrap : NetworkBehaviour {
         if (CollidedEnemy != null)
         {
             CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
+            CollidedEnemy.gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
             CollidedEnemy = null;
         }
         NetworkServer.Destroy(gameObject);
@@ -81,9 +91,9 @@ public class BarbedWireTrap : NetworkBehaviour {
         if (CollidedEnemy != null)
         {
             CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
+            CollidedEnemy.gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
             CollidedEnemy = null;
         }
         Destroy(gameObject);
     }
 }
-

@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyHealth: 100
+  isTrapped: 0
   isDead: 0
 --- !u!114 &114685237175142478
 MonoBehaviour:
@@ -211,8 +212,8 @@ MonoBehaviour:
   currentState: {fileID: 11400000, guid: a2970886c239dd4409a97505e7d5078b, type: 2}
   remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
   detectionRange: 10
-  walkSpeed: 3.5
-  runSpeed: 5
+  walkSpeed: 2
+  runSpeed: 2
   searchWaitTime: 5
   attackCooldown: 1.5
   jumpCooldown: 5

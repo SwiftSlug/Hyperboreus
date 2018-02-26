@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "PluggableAI/Actions/RatEatFood")]
 public class RatEatFoodAction : Action {
 
-    public bool test;
+    //public bool test;
 
     public float arriveTime;
 
@@ -18,9 +18,35 @@ public class RatEatFoodAction : Action {
     {
         controller.navMeshAgent.destination = controller.transform.position;
 
-        controller.target.GetComponent<RatFood>().Eat();
+        if (controller.target.GetComponent<RatFood>().eaten == false)
+        {
+            controller.target.GetComponent<RatFood>().Eat();
+
+            if (controller.transform.localScale.magnitude < (new Vector3(20.0f, 20.0f, 20.0f).magnitude))
+            {
+                controller.transform.localScale = controller.transform.localScale + new Vector3(0.1f, 0.1f, 0.1f);                
+            }
+        }
+
+        //  Rats growing functionality
 
 
+        /*
+        //  Make sure rat scale is not larger than the max value
+        if (controller.transform.localScale.magnitude < (new Vector3(20.0f, 20.0f, 20.0f).magnitude))
+        {
+            //  Only grow if food has been eaten
+            if (controller.target.GetComponent<RatFood>().eaten == true)
+            {
+                //  Only grow if eaten time was not long ago
+                if (controller.target.GetComponent<RatFood>().lastEaten + 0.01 < Time.time)
+                {
+                    controller.transform.localScale = controller.transform.localScale + new Vector3(1.0f, 1.0f, 1.0f);
+                }
+            }
+        }
+
+        */
 
         /*
         Collider[] hitColliders = Physics.OverlapSphere(controller.transform.position, controller.detectionRange);

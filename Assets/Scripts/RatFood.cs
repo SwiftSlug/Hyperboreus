@@ -6,11 +6,18 @@ public class RatFood : MonoBehaviour {
 
     public bool eaten = false;
     public float regenTime = 10.0f;
-    float lastEaten = 0.0f;
+    public float lastEaten = 0.0f;
+    Renderer foodRenderer;
+
+    private void Start()
+    {
+        foodRenderer = GetComponent<Renderer>();
+    }
 
     public void Eat()
     {
         eaten = true;
+        foodRenderer.enabled = false;
         lastEaten = Time.time;
     }
 
@@ -19,6 +26,7 @@ public class RatFood : MonoBehaviour {
         if (Time.time > (lastEaten + regenTime))
         {
             eaten = false;
+            foodRenderer.enabled = true;
         }
     }
 

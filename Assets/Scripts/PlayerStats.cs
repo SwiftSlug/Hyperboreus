@@ -45,6 +45,8 @@ public class PlayerStats : NetworkBehaviour
 
     public GameObject manager = null;
 
+    public float intensity;
+
     // player inventory //
     //resource inventory
     public int WoodInInventory = 20; //Player's WoodCount

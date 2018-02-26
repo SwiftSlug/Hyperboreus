@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//[CreateAssetMenu(menuName = "PluggableAI/Decisions/CrawlerArrivedAtMoveLocationDecision")]
-public class CrawlerArrivedAtMoveLocationDecsion : Decision {
-    
+[CreateAssetMenu(menuName = "PluggableAI/Decisions/ArrivedAtMoveLocationDecision")]
+public class ArrivedAtMoveLocationDecision : Decision
+{
+
     public override bool Decide(StateController controller)
     {
-        return CrawlerArrivedAtMoveLocation(controller);
+        return ArrivedAtMoveLocation(controller);
     }
 
-    private bool CrawlerArrivedAtMoveLocation(StateController controller)
+    private bool ArrivedAtMoveLocation(StateController controller)
     {
         if (controller.navMeshAgent.remainingDistance < controller.stopDistance)
         {

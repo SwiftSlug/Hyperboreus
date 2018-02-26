@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e555c94dce3a624a8b82762331848e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: a2970886c239dd4409a97505e7d5078b, type: 2}
+  currentState: {fileID: 11400000, guid: b14a0152f926470438089dd3bebf8538, type: 2}
   remainState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
   detectionRange: 10
   walkSpeed: 3.5
@@ -222,7 +222,6 @@ MonoBehaviour:
   lastJumped: 0
   lastAttack: 0
   target: {fileID: 0}
-  targetLocation: {x: 0, y: 0, z: 0}
   moveCommandLocation: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
   navMeshAgent: {fileID: 0}
@@ -230,7 +229,7 @@ MonoBehaviour:
   nextWayPoint: 0
   chaseTarget: {fileID: 0}
   stateTimeElapsed: 0
-  aiActive: 0
+  aiActive: 1
 --- !u!114 &114917807030115594
 MonoBehaviour:
   m_ObjectHideFlags: 1

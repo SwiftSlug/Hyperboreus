@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df077eafb9c6b884a93b1cfbfea6b3c7, type: 3}
+  m_Name: Attacking
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 13a86f2b6d1777449bef03f3c77e3947, type: 2}
+  sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  transitions:
+  - decision: {fileID: 11400000, guid: 71faba41db574f64dad19f3b09fbad9b, type: 2}
+    trueState: {fileID: 11400000, guid: b14a0152f926470438089dd3bebf8538, type: 2}
+    falseState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}
+  - decision: {fileID: 11400000, guid: 8c9ce8c67acc76544aee8ad7360ea56f, type: 2}
+    trueState: {fileID: 11400000}
+    falseState: {fileID: 11400000, guid: 047a21933a4d7174b915e8da159b8713, type: 2}

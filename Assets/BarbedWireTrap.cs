@@ -53,7 +53,7 @@ public class BarbedWireTrap : NetworkBehaviour {
             EnemyColliding = true;
             CollidedEnemy = collidedAsset.gameObject;
             InitialRunSpeed = collidedAsset.gameObject.GetComponent<StateController>().runSpeed;
-            CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = 0.1f; //CollidedEnemy.gameObject.GetComponent<StateController>().walkSpeed;
+            CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = 0.1f;
         }
     }
     private void OnTriggerExit(Collider collidedAsset)

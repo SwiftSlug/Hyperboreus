@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class AIDirector : NetworkBehaviour
 {
-    public bool blep;
+    //public bool blep;
     public bool active = false;
     
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
@@ -58,8 +58,10 @@ public class AIDirector : NetworkBehaviour
     // Use this for initialization
     void Start () {
 
-        Debug.Log("Director Alive !");
-
+        if (shouldAIDebug)
+        {
+            Debug.Log("Director Alive !");
+        }
         //  Init all lists ready for use        
 
         enemyUnits = new List<GameObject>();    // Init AI list
@@ -144,12 +146,18 @@ public class AIDirector : NetworkBehaviour
                 if (active)
                 {
                     active = false;
-                    Debug.Log("Director Inactive");
+                    if (shouldAIDebug)
+                    {
+                        Debug.Log("Director Inactive");
+                    }
                 }
                 else
                 {
                     active = true;
-                    Debug.Log("Director Active");
+                    if (shouldAIDebug)
+                    {
+                        Debug.Log("Director Active");
+                    }
                 }
             }
 
@@ -162,13 +170,19 @@ public class AIDirector : NetworkBehaviour
                 {
                     //  Is currently day so switch to night
                     isDay = false;
-                    Debug.Log("Switched To Night Time");
+                    if (shouldAIDebug)
+                    {
+                        Debug.Log("Switched To Night Time");
+                    }
                 }
                 else
                 {
                     //  Is currently night so switch to day
                     isDay = true;
-                    Debug.Log("Switched To Day Time");
+                    if (shouldAIDebug)
+                    {
+                        Debug.Log("Switched To Day Time");
+                    }
                 }
             }
 
@@ -366,7 +380,7 @@ public class AIDirector : NetworkBehaviour
 
                         for (int i = 0; i < numerOfSpawnGroups; i++)
                         {
-                            Debug.Log("Wave Spawed !");
+                            //Debug.Log("Wave Spawed !");
                             int randomLocation = Random.Range(0, spawnLocations.Count - 1);
                             //if (spawnLocations[randomLocation] != null)
                             //{

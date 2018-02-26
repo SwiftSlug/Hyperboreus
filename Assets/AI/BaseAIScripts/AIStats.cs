@@ -8,6 +8,9 @@ public class AIStats : NetworkBehaviour
 
     [SyncVar]
     public bool isDead = false;
+
+    [SyncVar]
+    public bool isTrapped = false;
     //[SyncVar]
     //public int enemyAttackDamage = 100;
 
@@ -63,5 +66,27 @@ public class AIStats : NetworkBehaviour
         }
     }
 
+    [Command]
+    public void CmdSetTrapped(bool trappedValue)
+    {
+        if (isServer)
+        {
+            isTrapped = trappedValue;
 
+            if (!isDead)
+            {
+                RpcSetTrapped(trappedValue);
+            }
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSetTrapped(bool trappedValue)
+    {
+        if (!isServer)
+        {
+            isTrapped = trappedValue;
+
+        }
+    }
 }

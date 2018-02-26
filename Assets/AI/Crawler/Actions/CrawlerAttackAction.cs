@@ -47,24 +47,26 @@ public class CrawlerAttackAction : Action {
 
     private void JumpAttack(StateController controller)
     {
-
-        if (Time.time > (controller.lastJumped + controller.jumpCooldown)) //  Call jump only every 5 seconds
+        if (controller.GetComponent<AIStats>().isTrapped == false)
         {
-            if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max jump range
+            if (Time.time > (controller.lastJumped + controller.jumpCooldown)) //  Call jump only every 5 seconds
             {
-                if ((controller.transform.position - controller.target.transform.position).magnitude > 5.0) //  Check within min jump range
+                if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max jump range
                 {
+                    if ((controller.transform.position - controller.target.transform.position).magnitude > 5.0) //  Check within min jump range
+                    {
 
-                    controller.lastJumped = Time.time;
-                    //controller.jumpAnimation.Play();
+                        controller.lastJumped = Time.time;
+                        //controller.jumpAnimation.Play();
 
-                    controller.navMeshAgent.speed = controller.runSpeed * 100;
-                    controller.animator.SetTrigger("jump");                                  
-                
+                        controller.navMeshAgent.speed = controller.runSpeed * 100;
+                        controller.animator.SetTrigger("jump");
 
-                //Debug.Log("Jump !");
+
+                        //Debug.Log("Jump !");
+                    }
                 }
-            }            
+            }
         }
     }
 

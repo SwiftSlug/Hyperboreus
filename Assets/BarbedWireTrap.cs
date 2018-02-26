@@ -27,7 +27,7 @@ public class BarbedWireTrap : NetworkBehaviour
             //Debug.Log(DestructionTimer);
             if (DamageTimer >= 1.0f)
             {
-                CollidedEnemy.GetComponent<AIStats>().CmdDamage(1);
+                CollidedEnemy.GetComponent<AIStats>().CmdDamage(5);
                 DamageTimer = 0.0f;
             }
             else
@@ -55,7 +55,7 @@ public class BarbedWireTrap : NetworkBehaviour
             CollidedEnemy = collidedAsset.gameObject;
             collidedAsset.gameObject.GetComponent<AIStats>().CmdSetTrapped(true);
             InitialRunSpeed = CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed;
-            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = 1.5f;
+            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = 0.5f;
         }
     }
     private void OnTriggerExit(Collider collidedAsset)
@@ -68,10 +68,6 @@ public class BarbedWireTrap : NetworkBehaviour
             collidedAsset.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
             CollidedEnemy = null;
         }
-        /*CollidedEnemyTest = collidedAsset.gameObject;
-        if (collidedAsset == CollidedEnemy)
-        {
-        }*/
     }
 
     [Command]

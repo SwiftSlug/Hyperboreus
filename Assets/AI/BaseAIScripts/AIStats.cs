@@ -8,9 +8,6 @@ public class AIStats : NetworkBehaviour
 
     [SyncVar]
     public bool isDead = false;
-
-    [SyncVar]
-    public bool isTrapped = false;
     //[SyncVar]
     //public int enemyAttackDamage = 100;
 
@@ -21,7 +18,7 @@ public class AIStats : NetworkBehaviour
         if (isServer)
         {
             enemyHealth -= damageAmount;
-            if(enemyHealth <= 0)
+            if (enemyHealth <= 0)
             {
                 isDead = true;
             }
@@ -35,7 +32,7 @@ public class AIStats : NetworkBehaviour
     [ClientRpc]
     public void RpcSyncHealth(int newHealth)
     {
-        if(!isServer)
+        if (!isServer)
         {
             enemyHealth = newHealth;
 
@@ -66,27 +63,6 @@ public class AIStats : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdSetTrapped(bool trappedValue)
-    {
-        if (isServer)
-        {
-            isTrapped = trappedValue;
 
-            if (!isDead)
-            {
-                RpcSetTrapped(trappedValue);
-            }
-        }
-    }
-
-    [ClientRpc]
-    public void RpcSetTrapped(bool trappedValue)
-    {
-        if (!isServer)
-        {
-            isTrapped = trappedValue;
-
-        }
-    }
 }
+

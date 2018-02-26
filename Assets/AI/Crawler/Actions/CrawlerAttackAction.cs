@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "PluggableAI/Actions/CrawlerAttack")]
-public class CrawlerAttackAction : Action {
+public class CrawlerAttackAction : Action
+{
 
     public override void Act(StateController controller)
     {
@@ -12,13 +13,13 @@ public class CrawlerAttackAction : Action {
 
     private void CrawlerAttack(StateController controller)
     {
-        
+
         controller.navMeshAgent.destination = controller.target.transform.position;
-       
-        if ( (controller.transform.position - controller.target.transform.position).magnitude < controller.stopDistance)
+
+        if ((controller.transform.position - controller.target.transform.position).magnitude < controller.stopDistance)
         {
             controller.navMeshAgent.destination = controller.transform.position;    //  Target close enough stop moving        
-            
+
             if (Time.time > (controller.lastAttack + controller.attackCooldown)) //  Call attack only every 5 seconds
             {
                 controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
@@ -31,7 +32,7 @@ public class CrawlerAttackAction : Action {
         {
             controller.navMeshAgent.destination = controller.target.transform.position; //  Target too far move to target
         }
-        
+
         if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"))   //  Is the jump animation running
         {
             controller.navMeshAgent.speed = controller.runSpeed;
@@ -41,30 +42,28 @@ public class CrawlerAttackAction : Action {
             controller.navMeshAgent.speed = controller.runSpeed * 100;
         }
 
-        JumpAttack(controller);            
+        JumpAttack(controller);
 
     }
 
     private void JumpAttack(StateController controller)
     {
-        if (controller.GetComponent<AIStats>().isTrapped == false)
+
+        if (Time.time > (controller.lastJumped + controller.jumpCooldown)) //  Call jump only every 5 seconds
         {
-            if (Time.time > (controller.lastJumped + controller.jumpCooldown)) //  Call jump only every 5 seconds
+            if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max jump range
             {
-                if ((controller.transform.position - controller.target.transform.position).magnitude < 10.0)    //  Check within max jump range
+                if ((controller.transform.position - controller.target.transform.position).magnitude > 5.0) //  Check within min jump range
                 {
-                    if ((controller.transform.position - controller.target.transform.position).magnitude > 5.0) //  Check within min jump range
-                    {
 
-                        controller.lastJumped = Time.time;
-                        //controller.jumpAnimation.Play();
+                    controller.lastJumped = Time.time;
+                    //controller.jumpAnimation.Play();
 
-                        controller.navMeshAgent.speed = controller.runSpeed * 100;
-                        controller.animator.SetTrigger("jump");
+                    controller.navMeshAgent.speed = controller.runSpeed * 100;
+                    controller.animator.SetTrigger("jump");
 
 
-                        //Debug.Log("Jump !");
-                    }
+                    //Debug.Log("Jump !");
                 }
             }
         }

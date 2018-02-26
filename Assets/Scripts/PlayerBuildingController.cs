@@ -189,12 +189,12 @@ public class PlayerBuildingController : NetworkBehaviour
                // Debug.Log("Placement Ghost Location Before Placement: " + TempStructureGuide.transform.position);
         }
 
-        if (Input.GetKeyDown("b"))
+        if (Input.GetButton("BaseBuilding"))
         {
             EnterOrExitBuildMode();
-            Debug.Log("build mode on/off");
+            //Debug.Log("build mode on/off");
         }
-        if (Input.GetKeyDown(("space")) && (InbuildMode == true))
+        if (Input.GetButton("BuildingPlace") && (InbuildMode == true))
         {
             switch (MaterialNeeded)
             {
@@ -230,7 +230,7 @@ public class PlayerBuildingController : NetworkBehaviour
             //CmdRotateStructure();
         }*/
 
-        if (Input.GetKey(KeyCode.R) && (InbuildMode == true))
+        if (Input.GetButton("BuildingChangeRotation") && (InbuildMode == true))
         {
             if (RotationToSet == 360)
             {
@@ -246,13 +246,13 @@ public class PlayerBuildingController : NetworkBehaviour
                 Debug.Log("RotationValue: " + RotationToSet);
             }
         }
-        if (Input.GetKeyDown("1") && (InbuildMode == true))
+        if (Input.GetButton("BuildingChangeStructure") && (InbuildMode == true))
         {
             CmdSelectStructure();
             LocalSelectStructure();
         }
 
-        if (Input.GetKeyDown("2") && (InbuildMode == true))
+        if (Input.GetButton("BuildingChangeMaterial") && (InbuildMode == true))
         {
             CmdSelectMaterial();
             LocalSelectMaterial();

@@ -40,7 +40,7 @@ public class PlayerController : NetworkBehaviour
         transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
 
 
-        if (Input.GetKeyDown("e"))
+        if (Input.GetButton("Interact"))
         {
             if (AbleToDestroy == true)
             {

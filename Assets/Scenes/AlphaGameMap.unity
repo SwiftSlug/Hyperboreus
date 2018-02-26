@@ -1243,7 +1243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemytoSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
     type: 2}
-  numberToSpawn: 1
+  numberToSpawn: 0
   spawnArea: 20
 --- !u!4 &80962620
 Transform:

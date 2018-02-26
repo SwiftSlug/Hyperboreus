@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class WeaponShooting : NetworkBehaviour
 {
-    public bool blep = true;
+    //public bool blep = true;
     //public WeaponType selectedWeapon;
 
     //  Private reference to the specfic wepaon script
@@ -58,9 +58,7 @@ public class WeaponShooting : NetworkBehaviour
     {
 
         //selectedWeapon.Init();
-
         //Debug.Log("gun name = " + selectedWeapon.weaponName);
-
         //selectedWeapon = gameObject.AddComponent<Bullpup>( );
         
     }
@@ -118,6 +116,14 @@ public class WeaponShooting : NetworkBehaviour
             CmdServerShoot();
         }
 
+        //  Controller Fire Axis Detection
+        if ((Input.GetAxis("Fire1") > 0) && selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
+        {
+            Shoot();
+            CmdServerShoot();
+        }
+
+
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
         if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots * selectedWeapon.effectsDisplayTime)
         {
@@ -130,7 +136,7 @@ public class WeaponShooting : NetworkBehaviour
     {
         if (selectedWeapon.reloading == false)
         {
-            Debug.Log("Reloading !");
+            //Debug.Log("Reloading !");
             CmdDisableMuzzleEffects();
             Invoke("Reload", selectedWeapon.reloadTime);
         }
@@ -139,7 +145,7 @@ public class WeaponShooting : NetworkBehaviour
 
     void Reload()
     {
-        Debug.Log("Reloading Done!");
+        //Debug.Log("Reloading Done!");
         selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
         selectedWeapon.reloading = false;
     }

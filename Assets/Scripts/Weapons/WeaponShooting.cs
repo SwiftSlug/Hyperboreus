@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class WeaponShooting : NetworkBehaviour
 {
-
+    public bool blep = true;
     //public WeaponType selectedWeapon;
 
     //  Private reference to the specfic wepaon script
@@ -105,7 +105,7 @@ public class WeaponShooting : NetworkBehaviour
         }
 
         //If 'r' key is pressed, and ammo is not already at max value...
-        if (Input.GetKeyDown("r") && selectedWeapon.currentAmmo != selectedWeapon.maxAmmo)
+        if (Input.GetButton("Reload") && selectedWeapon.currentAmmo != selectedWeapon.maxAmmo)
         {
             StartReload();
             return;
@@ -130,7 +130,7 @@ public class WeaponShooting : NetworkBehaviour
     {
         if (selectedWeapon.reloading == false)
         {
-            //Debug.Log("Reloading !");
+            Debug.Log("Reloading !");
             CmdDisableMuzzleEffects();
             Invoke("Reload", selectedWeapon.reloadTime);
         }
@@ -139,7 +139,7 @@ public class WeaponShooting : NetworkBehaviour
 
     void Reload()
     {
-        //Debug.Log("Reloading Done!");
+        Debug.Log("Reloading Done!");
         selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
         selectedWeapon.reloading = false;
     }

@@ -51,12 +51,12 @@ public class AssaultSkill : Skill
                 currentChargeTime += Time.deltaTime;
                 //draw marker on mouse location update
                 Vector3 mousePosUpdate = Input.mousePosition;
-                mousePosUpdate.z = mousePosUpdate.y + 50;
-                markerRay.origin = mousePosUpdate;
-                markerRay.direction = -(transform.up);
+                //mousePosUpdate.z = mousePosUpdate.y + 50;
+                //markerRay.origin = mousePosUpdate;
+                //markerRay.direction = -(transform.up);
 
-                //markerRay.origin = gunPos.transform.position + new Vector3(0, 50f, 0);
-                //markerRay.direction = -(gunPos.transform.up);
+                markerRay.origin = gameObject.transform.position + new Vector3(0,350f, 0);
+                markerRay.direction = -(gameObject.transform.up);
 
                 if (Physics.Raycast(markerRay.origin, markerRay.direction, out markerZ, 100))
                 {

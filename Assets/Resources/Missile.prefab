@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1804178892623510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.107767, y: 5.9796095, z: 10.299818}
+  m_LocalPosition: {x: 9.699006, y: 11.811025, z: -31.581827}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4986105440389382}
@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d6fdfc019c5c540861b8de6520ad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missileCollider: {fileID: 0}
+  speed: 2000
 --- !u!114 &114475028740999146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,11 +232,11 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146492732633902}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.5370183
+  m_Center: {x: 0, y: -2.6287436, z: -0.00000071525574}
 --- !u!136 &136913343957527554
 CapsuleCollider:
   m_ObjectHideFlags: 1

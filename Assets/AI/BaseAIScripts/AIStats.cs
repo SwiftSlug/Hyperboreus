@@ -8,21 +8,37 @@ public class AIStats : NetworkBehaviour
 
     [SyncVar]
     public bool isDead = false;
+<<<<<<< HEAD
 
     [SyncVar]
     public bool isTrapped = false;
     //[SyncVar]
     //public int enemyAttackDamage = 100;
+=======
+>>>>>>> Audio
 
-    //[ClientRpc]
+    public AudioSync audioSync;
+
+    void Start()
+    {
+        audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
+    }
+
     [Command]
     public void CmdDamage(int damageAmount)
     {
         if (isServer)
         {
             enemyHealth -= damageAmount;
+<<<<<<< HEAD
             if (enemyHealth <= 0)
+=======
+
+            if(enemyHealth <= 0)
+>>>>>>> Audio
             {
+                audioSync.PlaySound(this.gameObject, 2);
+
                 isDead = true;
             }
             if (!isDead)
@@ -38,7 +54,6 @@ public class AIStats : NetworkBehaviour
         if (!isServer)
         {
             enemyHealth = newHealth;
-
         }
     }
 
@@ -51,7 +66,6 @@ public class AIStats : NetworkBehaviour
                 CmdDie();
             }
         }
-
     }
 
     [Command]
@@ -62,10 +76,8 @@ public class AIStats : NetworkBehaviour
             GetComponent<StateController>().aiActive = false;
             enemyHealth = 0;
             isDead = true;
-            Destroy(this.transform.gameObject);
-        }
-    }
 
+<<<<<<< HEAD
     [Command]
     public void CmdSetTrapped(bool trappedValue)
     {
@@ -90,3 +102,11 @@ public class AIStats : NetworkBehaviour
         }
     }
 }
+=======
+            Destroy(this.transform.gameObject, audioSync.clipArray[2].length);
+
+            audioSync.ResetSound();
+        }
+    }
+}
+>>>>>>> Audio

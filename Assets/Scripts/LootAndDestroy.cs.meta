@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: d58842a81512dde4e87ad0c170f87fa1
-timeCreated: 1516381208
+timeCreated: 1518453416
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - PlayerDestroyingOrLooting: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - clipAmmoLoot: {fileID: 8300000, guid: 8e2aaec4d10ccc942bf451ae540ff237, type: 3}
+  - clipResourceHit: {fileID: 8300000, guid: 36286e23c9e462a4f8140956a1e947ef, type: 3}
+  - clipResourceLoot: {fileID: 8300000, guid: b0a9694d067080e4590843cc97894946, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -48,7 +48,7 @@ public class PlayerController : NetworkBehaviour
             }
             if (AbleToLoot == true)
             {
-               CmdLootableAmmo();
+                CmdLootableAmmo();
             }
         }
     }
@@ -68,7 +68,6 @@ public class PlayerController : NetworkBehaviour
             AbleToLoot = true;
             AssetToLoot = collidedAsset.gameObject;
             AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
-
         }
     }
     private void OnCollisionExit(Collision collidedAsset)
@@ -98,7 +97,7 @@ public class PlayerController : NetworkBehaviour
     [Command]
     public void CmdLootableAmmo()
     {
-       // AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
+        //AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         AssetToLoot.GetComponent<LootAndDestroy>().Interacting();
     }
 

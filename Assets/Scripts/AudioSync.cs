@@ -15,6 +15,11 @@ public class AudioSync : NetworkBehaviour
             CmdSyncAudioServer(objectSource, audioID); //Make a request to play a sound via the server from a particular client
         }
     }
+
+    public void ResetSound()
+    {
+        tempAudioSource = null;
+    }
 	
     [Command]
     public void CmdSyncAudioServer(GameObject objectSource, int audioID)
@@ -25,8 +30,16 @@ public class AudioSync : NetworkBehaviour
     [ClientRpc]
     public void RpcSyncAudioClient(GameObject objectSource, int audioID)
     {
-        tempAudioSource = objectSource.GetComponent<AudioSource>(); //Set the audio source for all clients to the object being passed in
+        if (objectSource != null)
+        {
+            tempAudioSource = objectSource.GetComponent<AudioSource>(); //Set the audio source for all clients to the object being passed in
 
-        tempAudioSource.PlayOneShot(clipArray[audioID], 1.0f); //Play our sound from the array of clips available
+            if (!tempAudioSource.isPlaying)
+            {
+                tempAudioSource.PlayOneShot(clipArray[audioID], 1.0f); //Play our sound from the array of clips available
+            }
+        }
+
+        ResetSound();
     }
 }

@@ -27,8 +27,9 @@ public class LootAndDestroy : NetworkBehaviour
     [Command]
     public void CmdDestroy() // destroy object on server
     {
-        NetworkServer.Destroy(gameObject);
-        Destroy(gameObject);
+        //NetworkServer.Destroy(gameObject);
+        Destroy(gameObject, audioSync.clipArray[1].length);
+        audioSync.ResetSound();
     }
 
     public void Interacting()
@@ -91,6 +92,6 @@ public class LootAndDestroy : NetworkBehaviour
         //self destroy
         PlayerDestroyingOrLooting = null;
 
-        //CmdDestroy();
+        CmdDestroy();
     }
 }

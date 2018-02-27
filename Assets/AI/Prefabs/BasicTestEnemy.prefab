@@ -186,7 +186,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: 100
   isDead: 0
+  audioSync: {fileID: 0}
 --- !u!114 &114685237175142478
 MonoBehaviour:
   m_ObjectHideFlags: 1

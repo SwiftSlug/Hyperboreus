@@ -16,15 +16,17 @@ public class AIStats : NetworkBehaviour
         audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
     }
 
-    //[ClientRpc]
     [Command]
     public void CmdDamage(int damageAmount)
     {
         if (isServer)
         {
             enemyHealth -= damageAmount;
+
             if(enemyHealth <= 0)
             {
+                audioSync.PlaySound(this.gameObject, 2);
+
                 isDead = true;
             }
             if (!isDead)
@@ -52,22 +54,20 @@ public class AIStats : NetworkBehaviour
                 CmdDie();
             }
         }
-
     }
 
     [Command]
     public void CmdDie()
     {
-        //audioSync.PlaySound(this.gameObject, 2);
-
         if (isServer)
         {
             GetComponent<StateController>().aiActive = false;
             enemyHealth = 0;
             isDead = true;
-            Destroy(this.transform.gameObject);
+
+            Destroy(this.transform.gameObject, audioSync.clipArray[2].length);
+
+            audioSync.ResetSound();
         }
     }
-
-
 }

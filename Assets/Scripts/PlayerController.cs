@@ -3,6 +3,7 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
+    public bool blep = true;
     Vector3 playerOrientation; //Player Orientation
     [SyncVar]
     public bool AbleToDestroy = false;
@@ -35,12 +36,28 @@ public class PlayerController : NetworkBehaviour
         float xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f; //Get the input horizontally and save it. "W,S,Up,Down,Joystick Up,Joystick Down"
         float yAxis = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f; //Get the vertical input and and save it. "A,D,Left,Right,Joystick Left, Joystick Right"
 
+        
+
         transform.LookAt(transform.position + playerDirection, Vector3.up); //Look at the mouse position in screen space
         transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
         transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
 
+        //  Controller Aiming
 
-        if (Input.GetKeyDown("e"))
+        Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
+        //Debug.Log(controllerAimingDirection);
+
+        if(controllerAimingDirection.magnitude > 0)
+        {
+            // Controller stick in use
+            transform.LookAt(transform.position + (controllerAimingDirection * 10));
+            //Debug.Log("Controller Direction Set");
+        }
+
+
+
+
+        if (Input.GetButton("Interact"))
         {
             if (AbleToDestroy == true)
             {

@@ -25,8 +25,12 @@ public class PlayerSkills : NetworkBehaviour
 
         if (Input.GetButton("Skill1"))
         {
-            skillButton1Down = true;
-            playerSkill1.buttonDownTime = playerSkill1.buttonDownTime + Time.deltaTime;
+            //  Only allow skill use when not in build mode
+            if (!GetComponent<PlayerBuildingController>().InbuildMode)
+            {                
+                skillButton1Down = true;
+                playerSkill1.buttonDownTime = playerSkill1.buttonDownTime + Time.deltaTime;
+            }
         }
         else
         {

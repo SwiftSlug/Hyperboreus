@@ -5,6 +5,10 @@ using UnityEngine.Networking;
 
 public class WeaponSwap : NetworkBehaviour
 {
+    public bool blep = true;
+    public bool blep2 = true;
+    public bool blep3 = true;
+    public bool blep4 = true;
 
     public GameObject[] weaponSlots;
 
@@ -16,7 +20,9 @@ public class WeaponSwap : NetworkBehaviour
             return;
         }
 
-        if (Input.GetKeyDown("1"))
+        // Keyboard bindings for buttons ----------------------
+
+        if ( (Input.GetButton("Weapon1")) || (Input.GetAxis("Weapon1") > 0) )
         {
             //Debug.Log("1");
             if (weaponSlots[0])
@@ -26,7 +32,7 @@ public class WeaponSwap : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown("2"))
+        if ( (Input.GetButton("Weapon2")) || (Input.GetAxis("Weapon2") > 0) )
         {
             //Debug.Log("2");
             if (weaponSlots[1])
@@ -36,7 +42,7 @@ public class WeaponSwap : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown("3"))
+        if ( (Input.GetButton("Weapon3")) || (Input.GetAxis("Weapon3") > 0) )
         {
             if (weaponSlots[2])
             {
@@ -45,7 +51,7 @@ public class WeaponSwap : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown("4"))
+        if ((Input.GetButton("Weapon4")) || (Input.GetAxis("Weapon4") > 0))
         {
             if (weaponSlots[3])
             {
@@ -53,11 +59,13 @@ public class WeaponSwap : NetworkBehaviour
                 CmdChangeWeapon(3);
             }
         }
+        
+        /*
         if (Input.GetKeyDown("j"))
         {
             GetComponent<WeaponShooting>().equippedWeapon.SetActive(false);
         }
-
+        */
     }
 
     [Command]

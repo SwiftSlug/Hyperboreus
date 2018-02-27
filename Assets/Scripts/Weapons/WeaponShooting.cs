@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 public class WeaponShooting : NetworkBehaviour
 {
-
+    //public bool blep = true;
     //public WeaponType selectedWeapon;
 
     //  Private reference to the specfic wepaon script
@@ -60,9 +60,7 @@ public class WeaponShooting : NetworkBehaviour
     {
 
         //selectedWeapon.Init();
-
         //Debug.Log("gun name = " + selectedWeapon.weaponName);
-
         //selectedWeapon = gameObject.AddComponent<Bullpup>( );
         
     }
@@ -107,7 +105,7 @@ public class WeaponShooting : NetworkBehaviour
         }
 
         //If 'r' key is pressed, and ammo is not already at max value...
-        if (Input.GetKeyDown("r") && selectedWeapon.currentAmmo != selectedWeapon.maxAmmo)
+        if (Input.GetButton("Reload") && selectedWeapon.currentAmmo != selectedWeapon.maxAmmo)
         {
             StartReload();
             return;
@@ -119,6 +117,14 @@ public class WeaponShooting : NetworkBehaviour
             Shoot();
             CmdServerShoot();
         }
+
+        //  Controller Fire Axis Detection
+        if ((Input.GetAxis("Fire1") > 0) && selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
+        {
+            Shoot();
+            CmdServerShoot();
+        }
+
 
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
         if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots * selectedWeapon.effectsDisplayTime)

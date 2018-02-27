@@ -12,11 +12,8 @@ TagManager:
   - GunEnd
   - DestructibleScenery
   - LootableContainer
-<<<<<<< HEAD
-  - floor
-=======
   - AudioController
->>>>>>> Audio
+  - floor
   layers:
   - Default
   - TransparentFX

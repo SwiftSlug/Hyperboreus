@@ -171,7 +171,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileCollider: {fileID: 0}
+  blastRadius: 10
   speed: 2000
+  loser: 1
+  sphereDrawDebug: 1
 --- !u!114 &114475028740999146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,7 +235,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146492732633902}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.5370183

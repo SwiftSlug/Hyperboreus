@@ -9,7 +9,15 @@ public class Impact : NetworkBehaviour
 
     Rigidbody missileRB;
 
+    public float blastRadius = 10;
+
     public float speed;
+
+    public bool loser;
+
+    List<GameObject> enemiesHit;
+
+    public bool sphereDrawDebug = true;       //Debug flag for drawing debug spheres
 
     // Use this for initialization
     void Start()
@@ -23,17 +31,19 @@ public class Impact : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+
         transform.Rotate(Vector3.up, Time.deltaTime, Space.World);
     }
 
-    void OnTriggerEnter()
+    void OnCollisionEnter(Collision collision)
     {
+        //Collider[] hitColliders = Physics.OverlapSphere(missileCollider., blastRadius);
 
-
-        if (Physics.SphereCast(p1, 10, transform.forward, out hit, 10))
-        {
-            distanceToObstacle = hit.distance;
-        }
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point;
+        //Instantiate(explosionPrefab, pos, rot);
+        Debug.Log("explode");
 
         Destroy(transform.parent.gameObject);
         NetworkServer.Destroy(transform.parent.gameObject);

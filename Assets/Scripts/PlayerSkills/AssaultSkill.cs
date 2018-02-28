@@ -14,7 +14,6 @@ public class AssaultSkill : Skill
     //  The current time spent charging the ability
     float currentChargeTime;
 
-    
     RaycastHit markerZ;
     Ray markerRay = new Ray();
     ParticleSystem smokeMarker;
@@ -81,6 +80,9 @@ public class AssaultSkill : Skill
 
 
                     CmdSpawnStrike(markerRay.origin, transform.rotation, playerReference);
+
+
+
                     Debug.Log("BOOM");
                     currentChargeTime = 0.0f;   //  Reset the current charge time
                     lastUsedTime = Time.time;   //  Set last firing time
@@ -91,7 +93,7 @@ public class AssaultSkill : Skill
         return false;
     }
 
-    public override void ButtonRelease()
+    public override void buttonRelease()
     {
         currentChargeTime = 0.0f;       //  Reset the current charge time  
         Debug.Log("release");

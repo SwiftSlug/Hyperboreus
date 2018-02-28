@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 114109481225106914}
   - component: {fileID: 114858492855255892}
   - component: {fileID: 114435461862225750}
-  - component: {fileID: 114196916491280674}
+  - component: {fileID: 114945101429949374}
   - component: {fileID: 82026530849861256}
   m_Layer: 8
   m_Name: Player
@@ -5269,6 +5269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4200f25821a30444294fc186526213e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blep: 1
+  blep2: 1
+  blep3: 1
+  blep4: 1
   weaponSlots:
   - {fileID: 1389021407989494}
   - {fileID: 1915111851799202}
@@ -5370,24 +5374,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Return To Lobby
---- !u!114 &114196916491280674
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1429b8ff6c35f724784efea528c286a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerReference: {fileID: 0}
-  cooldown: 0
-  buttonDownTime: 0
-  lastUsedTime: 0
-  chargeTime: 0
-  check: 0
-  TrapPos: {fileID: 4435395771784770}
 --- !u!114 &114251673205330040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5431,6 +5417,7 @@ MonoBehaviour:
   AssetToDestroy: {fileID: 0}
   AssetToLoot: {fileID: 0}
   test: 0
+  controllerDeadZone: 0.2
 --- !u!114 &114300363803433394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5922,6 +5909,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Game Over
+--- !u!114 &114945101429949374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46f3db9775bf4147a3d36583e826f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReference: {fileID: 0}
+  cooldown: 0
+  buttonDownTime: 0
+  lastUsedTime: 0
+  chargeTime: 0
 --- !u!120 &120112140514594686
 LineRenderer:
   m_ObjectHideFlags: 1

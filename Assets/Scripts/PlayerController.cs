@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
-    public bool blep = true;
+    //public bool blep = true;
     Vector3 playerOrientation; //Player Orientation
     [SyncVar]
     public bool AbleToDestroy = false;
@@ -14,6 +14,7 @@ public class PlayerController : NetworkBehaviour
     public bool test = false;
 
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
+    public float controllerDeadZone = 0.5f;
 
     //Update is called once per frame
     void Update()
@@ -57,13 +58,11 @@ public class PlayerController : NetworkBehaviour
 
         Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
 
-        if(controllerAimingDirection.magnitude > 0)
+        if(controllerAimingDirection.magnitude > controllerDeadZone)
         {
             // Controller stick in use
-            transform.LookAt(transform.position + (controllerAimingDirection * 10));
+            transform.LookAt(transform.position + (controllerAimingDirection * 1000));
         }
-
-
 
 
         if (Input.GetButton("Interact"))

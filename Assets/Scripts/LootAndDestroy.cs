@@ -87,10 +87,10 @@ public class LootAndDestroy : NetworkBehaviour
 
     public void ResetAllValuesAndDestroy()
     {
-        //player reset
-        PlayerDestroyingOrLooting.GetComponent<PlayerController>().ResetStats();
-        //self destroy
-        PlayerDestroyingOrLooting = null;
+        ////player reset
+        //PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdResetStats();
+        ////self destroy
+        //PlayerDestroyingOrLooting = null;
 
         CmdDestroy();
     }

@@ -158,8 +158,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollidedEnemy: {fileID: 0}
+  DamageAmount: 5
   SpeedToSet: 0.5
   EnemyColliding: 0
+  CollidedEnemiesList: []
 --- !u!114 &114879649392878774
 MonoBehaviour:
   m_ObjectHideFlags: 1

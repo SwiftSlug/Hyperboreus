@@ -5,14 +5,23 @@ using UnityEngine.Networking;
 
 public class BarbedWireTrap : NetworkBehaviour
 {
-    public GameObject CollidedEnemy = null;
+    //public GameObject CollidedEnemy = null;
     float DamageTimer = 0.0f;
+    public int DamageAmount;
     float DestructionTimer = 0.0f;
+
+    /*
+    [SyncVar]
     float InitialWalkSpeed;
+    [SyncVar]
     float InitialRunSpeed;
+    [SyncVar]
     float InitialNavMeshAgentSpeed;
+    */
+
     public float SpeedToSet;
     public bool EnemyColliding = false;
+    public int EnemiesInList = 0;
 
     public List<GameObject> CollidedEnemiesList = new List<GameObject>();
 
@@ -25,18 +34,21 @@ public class BarbedWireTrap : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CollidedEnemy != null)
+        EnemiesInList = CollidedEnemiesList.Count;
+        //Debug.Log("Enemies in list: " + EnemiesInList);
+        //if (CollidedEnemy != null)
+        if (CollidedEnemiesList.Count >= 1)
         {
             //Debug.Log(DestructionTimer);
             if (DamageTimer >= 1.0f)
             {
-                CollidedEnemy.GetComponent<AIStats>().CmdDamage(5);
+                //CollidedEnemy.GetComponent<AIStats>().CmdDamage(DamageAmount);
 
                 for (int i = 0; i < CollidedEnemiesList.Count; i++)
                 {
                     if (CollidedEnemiesList[i] != null)
                     {
-                        CollidedEnemiesList[i].GetComponent<AIStats>().CmdDamage(5);
+                        CollidedEnemiesList[i].GetComponent<AIStats>().CmdDamage(DamageAmount);
                     }
                     else
                     {
@@ -64,22 +76,42 @@ public class BarbedWireTrap : NetworkBehaviour
 
     private void OnTriggerEnter(Collider collidedAsset)
     {
+        bool AddToList = true;
         if (collidedAsset.gameObject.CompareTag("Enemy") == true)
         {
-            EnemyColliding = true;
-            CollidedEnemiesList.Add(collidedAsset.gameObject);
+            for (int i = 0; i < CollidedEnemiesList.Count; i++)
+            {
+                if (collidedAsset.gameObject != CollidedEnemiesList[i])
+                {
+                    AddToList = true;
+                }
+                else
+                {
+                    AddToList = false;
+                }
+            }
 
-            CollidedEnemy = collidedAsset.gameObject;
-            collidedAsset.gameObject.GetComponent<AIStats>().CmdSetTrapped(true);
+            //if (collidedAsset.gameObject.GetComponent<AIStats>().isTrapped == false)
+            if(AddToList == true)
+            {
+                EnemyColliding = true;
+                CollidedEnemiesList.Add(collidedAsset.gameObject);
 
-            InitialWalkSpeed = CollidedEnemy.gameObject.GetComponent<StateController>().walkSpeed;
-            InitialRunSpeed = CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed;
-            InitialNavMeshAgentSpeed = CollidedEnemy.gameObject.GetComponent<StateController>().navMeshAgent.speed;
+                //CollidedEnemy = collidedAsset.gameObject;
+                collidedAsset.gameObject.GetComponent<AIStats>().CmdSetTrapped(true);
 
+                //InitialWalkSpeed = CollidedEnemiesList[0].gameObject.GetComponent<StateController>().walkSpeed;
+                //InitialRunSpeed = CollidedEnemiesList[0].gameObject.GetComponent<StateController>().runSpeed;
+                //InitialNavMeshAgentSpeed = CollidedEnemiesList[0].gameObject.GetComponent<StateController>().navMeshAgent.speed;
 
-            collidedAsset.gameObject.GetComponent<StateController>().walkSpeed = SpeedToSet;
-            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = SpeedToSet;
-            collidedAsset.gameObject.GetComponent<StateController>().navMeshAgent.speed = SpeedToSet;
+                collidedAsset.gameObject.GetComponent<StateController>().walkSpeed = SpeedToSet;
+                collidedAsset.gameObject.GetComponent<StateController>().runSpeed = SpeedToSet;
+                collidedAsset.gameObject.GetComponent<StateController>().navMeshAgent.speed = SpeedToSet;
+            }
+            else
+            {
+                Debug.Log("denied motherfucker!");
+            }
         }
     }
     private void OnTriggerExit(Collider collidedAsset)
@@ -90,38 +122,34 @@ public class BarbedWireTrap : NetworkBehaviour
             Debug.Log("Enemy No Longer Colliding");
             collidedAsset.gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
 
-            collidedAsset.gameObject.GetComponent<StateController>().walkSpeed = InitialWalkSpeed;
-            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
-            collidedAsset.gameObject.GetComponent<StateController>().navMeshAgent.speed = InitialNavMeshAgentSpeed;
+            collidedAsset.gameObject.GetComponent<StateController>().walkSpeed = 3.5f;
+            collidedAsset.gameObject.GetComponent<StateController>().runSpeed = 5.0f;
+            collidedAsset.gameObject.GetComponent<StateController>().navMeshAgent.speed = 3.5f;
 
             for(int i = 0; i < CollidedEnemiesList.Count; i++)
             {
-                if (CollidedEnemiesList[i] == collidedAsset)
+                if (CollidedEnemiesList[i].gameObject == collidedAsset.gameObject)
                 {
                     CollidedEnemiesList.RemoveAt(i);
                 }
             }
-
-
-            CollidedEnemy = null;
         }
     }
 
     [Command]
     void CmdDestroyTrap()
     {
-        if (CollidedEnemy != null)
+        if (CollidedEnemiesList.Count >= 1)
         {
             //CollidedEnemy.gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
 
             for (int i = 0; i < CollidedEnemiesList.Count; i++)
             {
-                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().walkSpeed = InitialWalkSpeed;
-                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
-                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().navMeshAgent.speed = InitialNavMeshAgentSpeed;
+                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().walkSpeed = 3.5f;
+                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().runSpeed = 5.0f;
+                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().navMeshAgent.speed = 3.5f;
                 CollidedEnemiesList[i].gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
             }
-            CollidedEnemiesList.Clear();
 
             //CollidedEnemy.gameObject.GetComponent<StateController>().walkSpeed = InitialWalkSpeed;
             //CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
@@ -129,24 +157,24 @@ public class BarbedWireTrap : NetworkBehaviour
 
             //CollidedEnemy = null;
         }
+        CollidedEnemiesList.Clear();
         NetworkServer.Destroy(gameObject);
     }
 
     [ClientRpc]
     void RpcDestroyTrap()
     {
-        if (CollidedEnemy != null)
+        if (CollidedEnemiesList.Count >= 1)
         {
             //CollidedEnemy.gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
 
             for (int i = 0; i < CollidedEnemiesList.Count; i++)
             {
-                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().walkSpeed = InitialWalkSpeed;
-                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
-                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().navMeshAgent.speed = InitialNavMeshAgentSpeed;
+                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().walkSpeed = 3.5f;
+                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().runSpeed = 5.0f;
+                CollidedEnemiesList[i].gameObject.GetComponent<StateController>().navMeshAgent.speed = 3.5f;
                 CollidedEnemiesList[i].gameObject.GetComponent<AIStats>().CmdSetTrapped(false);
             }
-            CollidedEnemiesList.Clear();
 
             //CollidedEnemy.gameObject.GetComponent<StateController>().walkSpeed = InitialWalkSpeed;
             //CollidedEnemy.gameObject.GetComponent<StateController>().runSpeed = InitialRunSpeed;
@@ -154,6 +182,7 @@ public class BarbedWireTrap : NetworkBehaviour
 
             //CollidedEnemy = null;
         }
+        CollidedEnemiesList.Clear();
         Destroy(gameObject);
     }
 }

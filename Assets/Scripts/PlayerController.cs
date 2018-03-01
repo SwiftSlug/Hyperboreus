@@ -36,11 +36,16 @@ public class PlayerController : NetworkBehaviour
         Vector3 playerDirection = playerOrientation - transform.position; //Save a vector based on our players position and the saved orientation
         playerDirection.y = 0; //Get rid of our y portion of the vector because we don't need it
 
+        /*
         float xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f; //Get the input horizontally and save it. "W,S,Up,Down,Joystick Up,Joystick Down"
         float yAxis = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f; //Get the vertical input and and save it. "A,D,Left,Right,Joystick Left, Joystick Right"
 
+        //  Apply character movement
+        transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
+        transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
+        */
 
-        if(Input.mousePosition != previousMousePos)
+        if (Input.mousePosition != previousMousePos)
         {
             //  Only apply mouse movement if mouse has moved since last frame
             transform.LookAt(transform.position + playerDirection, Vector3.up); //Look at the mouse position in screen space
@@ -49,9 +54,7 @@ public class PlayerController : NetworkBehaviour
         //  Save mouse position for next position update check
         previousMousePos = Input.mousePosition;
 
-        //  Apply character movement
-        transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
-        transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
+        
 
 
         //  Controller Aiming
@@ -64,7 +67,7 @@ public class PlayerController : NetworkBehaviour
             transform.LookAt(transform.position + (controllerAimingDirection * 1000));
         }
 
-
+        /*
         if (Input.GetButton("Interact"))
         {
             if (AbleToDestroy == true)
@@ -76,7 +79,38 @@ public class PlayerController : NetworkBehaviour
                 CmdLootableAmmo();
             }
         }
+        */
     }
+
+    public void MouseAim()
+    {
+
+    }
+
+    public void Interact()
+    {
+        if (AbleToDestroy == true)
+        {
+            CmdDamageAsset();
+        }
+        if (AbleToLoot == true)
+        {
+            CmdLootableAmmo();
+        }
+    }
+
+    public void AddHoritonzalMovement(float horizontal)
+    {
+        float xAxis = horizontal * Time.deltaTime * 6.0f;
+        transform.Translate(Vector3.right * xAxis, Space.World);
+    }
+
+    public void AddVerticalMovement(float vertical)    {
+        
+        float yAxis = vertical * Time.deltaTime * 6.0f;
+        transform.Translate(Vector3.forward * yAxis, Space.World);
+    }
+
 
     private void OnCollisionEnter(Collision collidedAsset)
     {

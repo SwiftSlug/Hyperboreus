@@ -21,7 +21,7 @@ public class WeaponSwap : NetworkBehaviour
         }
 
         // Keyboard bindings for buttons ----------------------
-
+        /*
         if ( (Input.GetButton("Weapon1")) || (Input.GetAxis("Weapon1") > 0) )
         {
             //Debug.Log("1");
@@ -31,7 +31,8 @@ public class WeaponSwap : NetworkBehaviour
                 CmdChangeWeapon(0);                
             }
         }
-
+        */
+        /*
         if ( (Input.GetButton("Weapon2")) || (Input.GetAxis("Weapon2") > 0) )
         {
             //Debug.Log("2");
@@ -41,7 +42,8 @@ public class WeaponSwap : NetworkBehaviour
                 CmdChangeWeapon(1);
             }
         }
-
+        */
+        /*
         if ( (Input.GetButton("Weapon3")) || (Input.GetAxis("Weapon3") > 0) )
         {
             if (weaponSlots[2])
@@ -50,7 +52,8 @@ public class WeaponSwap : NetworkBehaviour
                 CmdChangeWeapon(2);
             }
         }
-
+        */
+        /*
         if ((Input.GetButton("Weapon4")) || (Input.GetAxis("Weapon4") > 0))
         {
             if (weaponSlots[3])
@@ -59,7 +62,7 @@ public class WeaponSwap : NetworkBehaviour
                 CmdChangeWeapon(3);
             }
         }
-        
+        */
         /*
         if (Input.GetKeyDown("j"))
         {
@@ -67,6 +70,16 @@ public class WeaponSwap : NetworkBehaviour
         }
         */
     }
+
+    public void changeWeapon(int weaponNumber)
+    {
+        if (weaponSlots[weaponNumber])
+        {
+            //Debug.Log("Swapping to weapon 1");
+            CmdChangeWeapon(weaponNumber);
+        }
+    }
+
 
     [Command]
     void CmdChangeWeapon(int weaponSlot)

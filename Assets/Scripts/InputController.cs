@@ -20,6 +20,7 @@ public class InputController : MonoBehaviour {
     WeaponSwap weaponSwapScript;
     PlayerSkills playerSkillScript;
     PlayerController playerControllerScript;
+    PlayerBuildingController playerBuildingControllerScript;
 
 
 	// Use this for initialization
@@ -28,10 +29,12 @@ public class InputController : MonoBehaviour {
         weaponSwapScript = GetComponent<WeaponSwap>();
         playerSkillScript = GetComponent<PlayerSkills>();
         playerControllerScript = GetComponent<PlayerController>();
+        playerBuildingControllerScript = GetComponent<PlayerBuildingController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         //  Movement -----------------------------------------------------------
 
@@ -50,7 +53,14 @@ public class InputController : MonoBehaviour {
 
         //  Aiming -------------------------------------------------------------
 
+        //  Mouse Aiming
+        playerControllerScript.MouseAim();
 
+        //  Controller Aiming
+        if( (Input.GetAxis("ControllerLookX") > 0) || ((Input.GetAxis("ControllerLookY") > 0)) )
+        {
+            playerControllerScript.ControllerAiming();
+        }
 
 
 
@@ -58,7 +68,7 @@ public class InputController : MonoBehaviour {
 
         if (Input.GetButton("Interact"))
         {
-            playerControllerScript.Interact();
+            playerControllerScript.LootObject();
 
         }
 
@@ -118,10 +128,38 @@ public class InputController : MonoBehaviour {
         }
         */
 
-        
 
+        //  Base Building ------------------------------------------------------
 
+        // Building Mode Switch
+        if (Input.GetButton("BaseBuilding"))
+        {
+            playerBuildingControllerScript.EnterOrExitBuildMode();
+        }
 
+        //  Place Building
+        if (Input.GetButton("BuildingPlace"))
+        {
+            playerBuildingControllerScript.PlaceBuilding();
+        }
+
+        //  Change Rotation
+        if (Input.GetButton("BuildingChangeRotation"))
+        {
+            playerBuildingControllerScript.ChangeRotation();
+        }
+
+        //  Change Structure
+        if (Input.GetButton("BuildingChangeStructure"))
+        {
+            playerBuildingControllerScript.ChangeStructure();
+        }
+
+        //  Change Material
+        if (Input.GetButton("BuildingChangeMaterial"))
+        {
+            playerBuildingControllerScript.ChangeMaterial();
+        }
 
     }
 }

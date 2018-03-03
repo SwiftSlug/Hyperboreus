@@ -24,7 +24,7 @@ public class PlayerBuildingController : NetworkBehaviour
     public int RotationNeeded = 0;
     public float RotationToSet = 0;
 
-    void EnterOrExitBuildMode()
+    public void EnterOrExitBuildMode()
     {
         if (InbuildMode == true)
         {
@@ -201,12 +201,14 @@ public class PlayerBuildingController : NetworkBehaviour
                // Debug.Log("Black blob location Before Placement: " + PointToSpawnStructure.position);
                // Debug.Log("Placement Ghost Location Before Placement: " + TempStructureGuide.transform.position);
         }
-
+        /*
         if (Input.GetButton("BaseBuilding"))
         {
             EnterOrExitBuildMode();
             //Debug.Log("build mode on/off");
         }
+        */
+        /*
         if (Input.GetButton("BuildingPlace") && (InbuildMode == true))
         {
             switch (MaterialNeeded)
@@ -234,7 +236,7 @@ public class PlayerBuildingController : NetworkBehaviour
                     break;
             }
         }
-
+        */
         /*
         if (Input.GetKeyDown(("r")) && (InbuildMode == true))
         {
@@ -242,7 +244,7 @@ public class PlayerBuildingController : NetworkBehaviour
             //RotateStructure();
             //CmdRotateStructure();
         }*/
-
+        /*
         if (Input.GetButton("BuildingChangeRotation") && (InbuildMode == true))
         {
             if (RotationToSet == 360)
@@ -259,18 +261,93 @@ public class PlayerBuildingController : NetworkBehaviour
                 Debug.Log("RotationValue: " + RotationToSet);
             }
         }
+        */
+        /*
         if (Input.GetButton("BuildingChangeStructure") && (InbuildMode == true))
         {
             CmdSelectStructure();
             LocalSelectStructure();
         }
-
+        */
+        /*
         if (Input.GetButton("BuildingChangeMaterial") && (InbuildMode == true))
         {
             CmdSelectMaterial();
             LocalSelectMaterial();
         }
+        */
     }
+
+    public void PlaceBuilding()
+    {
+        if ((InbuildMode == true))
+        {
+            switch (MaterialNeeded)
+            {
+                case 0:
+                    if (gameObject.GetComponent<PlayerStats>().WoodInInventory >= 10)
+                    {
+                        CmdPlaceStructure();
+                        gameObject.GetComponent<PlayerStats>().WoodInInventory = gameObject.GetComponent<PlayerStats>().WoodInInventory - 10;
+                    }
+                    break;
+                case 1:
+                    if (gameObject.GetComponent<PlayerStats>().StoneInInventory >= 10)
+                    {
+                        CmdPlaceStructure();
+                        gameObject.GetComponent<PlayerStats>().StoneInInventory = gameObject.GetComponent<PlayerStats>().StoneInInventory - 10;
+                    }
+                    break;
+                case 2:
+                    if (gameObject.GetComponent<PlayerStats>().MetalInInventory >= 10)
+                    {
+                        CmdPlaceStructure();
+                        gameObject.GetComponent<PlayerStats>().MetalInInventory = gameObject.GetComponent<PlayerStats>().MetalInInventory - 10;
+                    }
+                    break;
+            }
+        }
+    }
+
+    public void ChangeRotation()
+    {
+        if (InbuildMode == true)
+        {
+            if (RotationToSet == 360)
+            {
+                RotationToSet = 0;
+                CmdRotateStructure(RotationToSet);
+                LocalRotateStructure(RotationToSet);
+            }
+            else
+            {
+                RotationToSet = RotationToSet + 0.5f;
+                CmdRotateStructure(RotationToSet);
+                LocalRotateStructure(RotationToSet);
+                Debug.Log("RotationValue: " + RotationToSet);
+            }
+        }
+
+    }
+
+    public void ChangeStructure()
+    {
+        if(InbuildMode == true)
+        {
+            CmdSelectStructure();
+            LocalSelectStructure();
+        }
+    }
+
+    public void ChangeMaterial()
+    {
+        if(InbuildMode == true)
+        {
+            CmdSelectMaterial();
+            LocalSelectMaterial();
+        }
+    }
+
 }
 
 

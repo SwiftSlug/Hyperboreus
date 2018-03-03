@@ -24,6 +24,7 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
+        /*
         Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); //Cast a ray from the main camera relative to the screen position
 
         RaycastHit mouseRayHit; //Reference to the ray hit - used in calculating player orientation
@@ -36,14 +37,7 @@ public class PlayerController : NetworkBehaviour
         Vector3 playerDirection = playerOrientation - transform.position; //Save a vector based on our players position and the saved orientation
         playerDirection.y = 0; //Get rid of our y portion of the vector because we don't need it
 
-        /*
-        float xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f; //Get the input horizontally and save it. "W,S,Up,Down,Joystick Up,Joystick Down"
-        float yAxis = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f; //Get the vertical input and and save it. "A,D,Left,Right,Joystick Left, Joystick Right"
-
-        //  Apply character movement
-        transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
-        transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
-        */
+        
 
         if (Input.mousePosition != previousMousePos)
         {
@@ -53,12 +47,20 @@ public class PlayerController : NetworkBehaviour
 
         //  Save mouse position for next position update check
         previousMousePos = Input.mousePosition;
+        */
+         
+        /*
+        float xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f; //Get the input horizontally and save it. "W,S,Up,Down,Joystick Up,Joystick Down"
+        float yAxis = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f; //Get the vertical input and and save it. "A,D,Left,Right,Joystick Left, Joystick Right"
 
-        
+        //  Apply character movement
+        transform.Translate(Vector3.forward * yAxis, Space.World); //Move horizontally within world space instead of local
+        transform.Translate(Vector3.right * xAxis, Space.World); //Move vertically within world space instead of local
+        */
 
 
         //  Controller Aiming
-
+        /*
         Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
 
         if(controllerAimingDirection.magnitude > controllerDeadZone)
@@ -66,6 +68,7 @@ public class PlayerController : NetworkBehaviour
             // Controller stick in use
             transform.LookAt(transform.position + (controllerAimingDirection * 1000));
         }
+        */
 
         /*
         if (Input.GetButton("Interact"))
@@ -85,9 +88,43 @@ public class PlayerController : NetworkBehaviour
     public void MouseAim()
     {
 
+        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); //Cast a ray from the main camera relative to the screen position
+
+        RaycastHit mouseRayHit; //Reference to the ray hit - used in calculating player orientation
+
+        if (Physics.Raycast(mouseRay, out mouseRayHit, 100)) //If the Ray has hit an object
+        {
+            playerOrientation = mouseRayHit.point; //Make our potential player orientation equal to the location we hit with the ray cast.
+        }
+
+        Vector3 playerDirection = playerOrientation - transform.position; //Save a vector based on our players position and the saved orientation
+        playerDirection.y = 0; //Get rid of our y portion of the vector because we don't need it
+
+
+
+        if (Input.mousePosition != previousMousePos)
+        {
+            //  Only apply mouse movement if mouse has moved since last frame
+            transform.LookAt(transform.position + playerDirection, Vector3.up); //Look at the mouse position in screen space
+        }
+
+        //  Save mouse position for next position update check
+        previousMousePos = Input.mousePosition;
+
     }
 
-    public void Interact()
+    public void ControllerAiming()
+    {
+        Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
+
+        if (controllerAimingDirection.magnitude > controllerDeadZone)
+        {
+            // Controller stick in use
+            transform.LookAt(transform.position + (controllerAimingDirection * 1000));
+        }
+    }
+
+    public void LootObject()
     {
         if (AbleToDestroy == true)
         {

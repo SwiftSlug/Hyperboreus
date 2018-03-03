@@ -6,6 +6,8 @@ public abstract class ControllerState
 {
     public InputController controller;
 
+    protected bool baseBuildingButtonHeld = false;
+
     public ControllerState(InputController controllerRef)
     {
         //  Set the controller reference for the controller state
@@ -16,7 +18,8 @@ public abstract class ControllerState
 }
 
 public class DefaultControllerState : ControllerState
-{
+{    
+
     public DefaultControllerState(InputController controllerRef) : base(controllerRef)
     {        
     }
@@ -46,7 +49,7 @@ public class DefaultControllerState : ControllerState
         controller.playerControllerScript.MouseAim();
 
         //  Controller Aiming
-        if ((Input.GetAxis("ControllerLookX") > 0) || ((Input.GetAxis("ControllerLookY") > 0)))
+        if ((Input.GetAxis("ControllerLookX") != 0) || ((Input.GetAxis("ControllerLookY") != 0)) )
         {
             controller.playerControllerScript.ControllerAiming();
         }
@@ -55,6 +58,7 @@ public class DefaultControllerState : ControllerState
 
         if (Input.GetButton("Interact"))
         {
+            //  Looting to be called when in the default state controller
             controller.playerControllerScript.LootObject();
 
         }
@@ -103,12 +107,19 @@ public class DefaultControllerState : ControllerState
 
         if (Input.GetButton("BaseBuilding"))
         {
-            controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+            if (baseBuildingButtonHeld == false)
+            {
+                baseBuildingButtonHeld = true;
 
-            //  Switch Controller Class to Base Building
-            //controller.currentControllerState = controller.buidlingControllerState;
-            controller.ChangeState(controller.buidlingControllerState);
-            //Debug.Log("State Should Change");
+                //  Switch Controller Class to Base Building
+                //controller.ChangeState(controller.buidlingControllerState);
+
+                controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+            }
+        }
+        else
+        {
+            baseBuildingButtonHeld = false;
         }
 
     }
@@ -155,25 +166,39 @@ public class BaseBuildingControllerState : ControllerState
         if (Input.GetButton("Interact"))
         {
             // Place Object Here
+            controller.playerBuildingControllerScript.PlaceBuilding();
         }
 
         //  Base Building ------------------------------------------------------
 
+
         // Building Mode Switch
         if (Input.GetButton("BaseBuilding"))
         {
-            controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+            if (baseBuildingButtonHeld == false)
+            {
+                baseBuildingButtonHeld = true;                
 
-            //  Swtich back to default controller class
-            //controller.currentControllerState = controller.defaultControllerState;
-            controller.ChangeState(controller.defaultControllerState);
+                //  Swtich back to default controller class
+                controller.ChangeState(controller.defaultControllerState);
+
+                controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+
+            }
+        }
+        else
+        {
+            baseBuildingButtonHeld = false;
         }
 
+        /*
+        Now bound to the action key
         //  Place Building
         if (Input.GetButton("BuildingPlace"))
         {
             controller.playerBuildingControllerScript.PlaceBuilding();
         }
+        */
 
         //  Change Rotation
         if (Input.GetButton("BuildingChangeRotation"))
@@ -215,8 +240,9 @@ public class InputController : MonoBehaviour {
     //  from the desired scripts attached to the player
     //  The actions that can be called are dependants on the current state of the controller
 
-    
+
     //public bool blep = false;    
+    public int WHATTHEFUCK = 1;
 
     public WeaponShooting weaponShootingScript;
     public WeaponSwap weaponSwapScript;
@@ -258,6 +284,7 @@ public class InputController : MonoBehaviour {
     public void ChangeState(ControllerState newState)
     {
         currentControllerState = newState;
+        Debug.Log("State Changed");
     }
 
     void AllInputMethods() { 

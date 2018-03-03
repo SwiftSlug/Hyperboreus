@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ControllerState : MonoBehaviour
+public abstract class ControllerState
 {
     public InputController controller;
 
     public ControllerState(InputController controllerRef)
     {
+        //  Set the controller reference for the controller state
         controller = controllerRef;
-        //controller = GetComponent<InputController>();
     }
 
     public abstract void Update();
 }
 
-public class DefaultController : ControllerState
+public class DefaultControllerState : ControllerState
 {
-    public DefaultController(InputController controllerRef) : base(controllerRef)
+    public DefaultControllerState(InputController controllerRef) : base(controllerRef)
     {        
     }
 
     public override void Update()
     {
 
-        Debug.Log("Default Controller in Use");
+        //Debug.Log("Default Controller in Use");
 
         //  Movement -----------------------------------------------------------
 
@@ -108,22 +108,22 @@ public class DefaultController : ControllerState
             //  Switch Controller Class to Base Building
             //controller.currentControllerState = controller.buidlingControllerState;
             controller.ChangeState(controller.buidlingControllerState);
-            Debug.Log("State Should Change");
+            //Debug.Log("State Should Change");
         }
 
     }
 }
 
-public class BaseBuildingController : ControllerState
+public class BaseBuildingControllerState : ControllerState
 {
-    public BaseBuildingController(InputController controllerRef) : base(controllerRef)
+    public BaseBuildingControllerState(InputController controllerRef) : base(controllerRef)
     {
     }
 
     public override void Update()
     {
 
-        Debug.Log("Base Building Controller in Use");
+        //Debug.Log("Base Building Controller in Use");
 
         //  Movement -----------------------------------------------------------
 
@@ -197,20 +197,26 @@ public class BaseBuildingController : ControllerState
     }
 }
 
+public class DownedControllerState : ControllerState
+{
+    public DownedControllerState(InputController controllerRef) : base(controllerRef)
+    {
+    }
+
+    public override void Update()
+    {
+    }
+}
+
 public class InputController : MonoBehaviour {
 
     //  This class handles all of the player input for the players within the game
     //  It detects the input from the player and then calls the corresponding functionality
     //  from the desired scripts attached to the player
+    //  The actions that can be called are dependants on the current state of the controller
 
     
-    public bool blep = false;
-    
-    public bool blep1 = true;
-    public bool blep2 = true;
-    public bool blep3 = true;
-    public bool blep4 = true;
-    
+    //public bool blep = false;    
 
     public WeaponShooting weaponShootingScript;
     public WeaponSwap weaponSwapScript;
@@ -224,8 +230,8 @@ public class InputController : MonoBehaviour {
     //  Main controller State
     public ControllerState currentControllerState;
 
-    public DefaultController defaultControllerState;
-    public BaseBuildingController buidlingControllerState;
+    public DefaultControllerState defaultControllerState;
+    public BaseBuildingControllerState buidlingControllerState;
     public ControllerState downedControllerState;
 
     // Use this for initialization
@@ -236,8 +242,8 @@ public class InputController : MonoBehaviour {
         playerControllerScript = GetComponent<PlayerController>();
         playerBuildingControllerScript = GetComponent<PlayerBuildingController>();
 
-        defaultControllerState = new DefaultController(this);
-        buidlingControllerState = new BaseBuildingController(this);
+        defaultControllerState = new DefaultControllerState(this);
+        buidlingControllerState = new BaseBuildingControllerState(this);
 
         currentControllerState = defaultControllerState;
     }

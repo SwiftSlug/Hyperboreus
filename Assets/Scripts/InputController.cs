@@ -6,7 +6,7 @@ public abstract class ControllerState
 {
     public InputController controller;
 
-    protected bool baseBuildingButtonHeld = false;
+    //public bool baseBuildingButtonHeld = false;
 
     public ControllerState(InputController controllerRef)
     {
@@ -107,19 +107,20 @@ public class DefaultControllerState : ControllerState
 
         if (Input.GetButton("BaseBuilding"))
         {
-            if (baseBuildingButtonHeld == false)
+            if (controller.baseBuildingButtonHeld == false)
             {
-                baseBuildingButtonHeld = true;
+                controller.baseBuildingButtonHeld = true;
+
 
                 //  Switch Controller Class to Base Building
-                //controller.ChangeState(controller.buidlingControllerState);
+                controller.ChangeState(controller.buidlingControllerState);
 
                 controller.playerBuildingControllerScript.EnterOrExitBuildMode();
             }
         }
         else
         {
-            baseBuildingButtonHeld = false;
+            controller.baseBuildingButtonHeld = false;
         }
 
     }
@@ -165,8 +166,16 @@ public class BaseBuildingControllerState : ControllerState
 
         if (Input.GetButton("Interact"))
         {
-            // Place Object Here
-            controller.playerBuildingControllerScript.PlaceBuilding();
+            if (controller.baseBuildingPlaceBuildingHeld == false)
+            {
+                controller.baseBuildingPlaceBuildingHeld = true;
+
+                controller.playerBuildingControllerScript.PlaceBuilding();
+            }
+        }
+        else
+        {
+            controller.baseBuildingPlaceBuildingHeld = false;
         }
 
         //  Base Building ------------------------------------------------------
@@ -175,9 +184,9 @@ public class BaseBuildingControllerState : ControllerState
         // Building Mode Switch
         if (Input.GetButton("BaseBuilding"))
         {
-            if (baseBuildingButtonHeld == false)
+            if (controller.baseBuildingButtonHeld == false)
             {
-                baseBuildingButtonHeld = true;                
+                controller.baseBuildingButtonHeld = true;                
 
                 //  Swtich back to default controller class
                 controller.ChangeState(controller.defaultControllerState);
@@ -188,7 +197,7 @@ public class BaseBuildingControllerState : ControllerState
         }
         else
         {
-            baseBuildingButtonHeld = false;
+            controller.baseBuildingButtonHeld = false;
         }
 
         /*
@@ -241,8 +250,7 @@ public class InputController : MonoBehaviour {
     //  The actions that can be called are dependants on the current state of the controller
 
 
-    //public bool blep = false;    
-    public int WHATTHEFUCK = 1;
+    //public bool blep = false;
 
     public WeaponShooting weaponShootingScript;
     public WeaponSwap weaponSwapScript;
@@ -260,6 +268,11 @@ public class InputController : MonoBehaviour {
     public BaseBuildingControllerState buidlingControllerState;
     public ControllerState downedControllerState;
 
+
+    //  Button held flags
+    public bool baseBuildingButtonHeld = false;
+    public bool baseBuildingPlaceBuildingHeld = false;
+
     // Use this for initialization
     void Start () {
         weaponShootingScript = GetComponent<WeaponShooting>();
@@ -268,8 +281,11 @@ public class InputController : MonoBehaviour {
         playerControllerScript = GetComponent<PlayerController>();
         playerBuildingControllerScript = GetComponent<PlayerBuildingController>();
 
+
+        //  Set Controller States
         defaultControllerState = new DefaultControllerState(this);
         buidlingControllerState = new BaseBuildingControllerState(this);
+
 
         currentControllerState = defaultControllerState;
     }

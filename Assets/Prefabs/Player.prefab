@@ -5796,12 +5796,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df74f7fee98939b458cd729615c07f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blep: 0
   weaponShootingScript: {fileID: 0}
   weaponSwapScript: {fileID: 0}
   playerSkillScript: {fileID: 0}
   playerControllerScript: {fileID: 0}
   playerBuildingControllerScript: {fileID: 0}
+  baseBuildingButtonHeld: 0
+  baseBuildingPlaceBuildingHeld: 0
 --- !u!114 &114727494672657654
 MonoBehaviour:
   m_ObjectHideFlags: 1

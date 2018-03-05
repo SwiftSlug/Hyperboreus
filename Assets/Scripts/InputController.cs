@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public abstract class ControllerState
 {
@@ -60,6 +61,7 @@ public class DefaultControllerState : ControllerState
         {
             //  Looting to be called when in the default state controller
             controller.playerControllerScript.LootObject();
+            controller.playerStatsScript.CmdPlayerRevive();
 
         }
 
@@ -279,7 +281,8 @@ public class DownedControllerState : ControllerState
     }
 }
 
-public class InputController : MonoBehaviour {
+public class InputController : NetworkBehaviour
+{
 
     //  This class handles all of the player input for the players within the game
     //  It detects the input from the player and then calls the corresponding functionality
@@ -294,6 +297,7 @@ public class InputController : MonoBehaviour {
     public PlayerSkills playerSkillScript;
     public PlayerController playerControllerScript;
     public PlayerBuildingController playerBuildingControllerScript;
+    public PlayerStats playerStatsScript;
 
     
     //  Controller States -------------------------------------------------------
@@ -319,6 +323,7 @@ public class InputController : MonoBehaviour {
         playerSkillScript = GetComponent<PlayerSkills>();
         playerControllerScript = GetComponent<PlayerController>();
         playerBuildingControllerScript = GetComponent<PlayerBuildingController>();
+        playerStatsScript = GetComponent<PlayerStats>();
 
 
         //  Set Controller States
@@ -332,6 +337,11 @@ public class InputController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer || playerStatsScript.isDead)
+        {
+            return;
+        }
+
         currentControllerState.Update();
         //Debug.Log(defaultControllerState.GetType().Name);
     }

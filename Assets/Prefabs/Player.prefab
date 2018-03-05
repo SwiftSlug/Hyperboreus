@@ -221,8 +221,10 @@ GameObject:
   - component: {fileID: 114109481225106914}
   - component: {fileID: 114858492855255892}
   - component: {fileID: 114435461862225750}
+  - component: {fileID: 114945101429949374}
   - component: {fileID: 114606737966560820}
   - component: {fileID: 82026530849861256}
+  - component: {fileID: 114713473014863432}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -5418,6 +5420,7 @@ MonoBehaviour:
   AssetToDestroy: {fileID: 0}
   AssetToLoot: {fileID: 0}
   test: 0
+  controllerDeadZone: 0.2
 --- !u!114 &114300363803433394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5801,6 +5804,24 @@ MonoBehaviour:
     i15: 13
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114713473014863432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df74f7fee98939b458cd729615c07f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponShootingScript: {fileID: 0}
+  weaponSwapScript: {fileID: 0}
+  playerSkillScript: {fileID: 0}
+  playerControllerScript: {fileID: 0}
+  playerBuildingControllerScript: {fileID: 0}
+  baseBuildingButtonHeld: 0
+  baseBuildingPlaceBuildingHeld: 0
 --- !u!114 &114727494672657654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5926,6 +5947,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Game Over
+--- !u!114 &114945101429949374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46f3db9775bf4147a3d36583e826f07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReference: {fileID: 0}
+  cooldown: 0
+  buttonDownTime: 0
+  lastUsedTime: 0
+  chargeTime: 0
 --- !u!120 &120112140514594686
 LineRenderer:
   m_ObjectHideFlags: 1

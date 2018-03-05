@@ -104,27 +104,30 @@ public class WeaponShooting : NetworkBehaviour
             return;
         }
 
+        /*
         //If 'r' key is pressed, and ammo is not already at max value...
         if (Input.GetButton("Reload") && selectedWeapon.currentAmmo != selectedWeapon.maxAmmo)
         {
             StartReload();
             return;
         }
-
+        */
+        /*
         //If 'Fire1' button is pressed, and the time between shots has not exceeded the timer...
         if (Input.GetButton("Fire1") && selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
         {
             Shoot();
             CmdServerShoot();
         }
-
+        */
+        /*
         //  Controller Fire Axis Detection
         if ((Input.GetAxis("Fire1") > 0) && selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
         {
             Shoot();
             CmdServerShoot();
         }
-
+        */
 
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
         if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots * selectedWeapon.effectsDisplayTime)
@@ -134,7 +137,19 @@ public class WeaponShooting : NetworkBehaviour
         }
     }
 
-    void StartReload()
+    public void StartShoot()
+    {
+        if (selectedWeapon != null)
+        {
+            if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
+            {
+                Shoot();
+                CmdServerShoot();
+            }
+        }
+    }
+
+    public void StartReload()
     {
         if (selectedWeapon.reloading == false)
         {

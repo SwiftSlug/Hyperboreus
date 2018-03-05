@@ -46,10 +46,26 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 1000
-    dead: 0.001
+    dead: 0.2
     sensitivity: 1000
     snap: 0
     invert: 1
+    type: 2
+    axis: 2
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: Fire2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: mouse 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: 0.2
+    sensitivity: 1000
+    snap: 0
+    invert: 0
     type: 2
     axis: 2
     joyNum: 0
@@ -236,7 +252,7 @@ InputManager:
     negativeButton: 
     positiveButton: q
     altNegativeButton: 
-    altPositiveButton: joystick button 1
+    altPositiveButton: joystick button 5
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -378,9 +394,9 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: e
+    positiveButton: 1
     altNegativeButton: 
-    altPositiveButton: joystick button 9
+    altPositiveButton: joystick button 5
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -393,10 +409,10 @@ InputManager:
     m_Name: BuildingChangeStructure
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: e
+    negativeButton: 2
+    positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick button 10
+    altPositiveButton: joystick button 4
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -410,7 +426,7 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: e
+    positiveButton: 3
     altNegativeButton: 
     altPositiveButton: joystick button 1
     gravity: 1000
@@ -430,7 +446,7 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
-    dead: 0.15
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 0
@@ -446,7 +462,7 @@ InputManager:
     altNegativeButton: 
     altPositiveButton: 
     gravity: 0
-    dead: 0.15
+    dead: 0
     sensitivity: 1
     snap: 0
     invert: 1

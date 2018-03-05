@@ -3,6 +3,10 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
+<<<<<<< HEAD
+=======
+    //public bool blep = true;
+>>>>>>> Controller-Rework
     Vector3 playerOrientation; //Player Orientation
     [SyncVar]
     public bool AbleToDestroy = false;
@@ -70,6 +74,10 @@ public class PlayerController : NetworkBehaviour
         }
         */
 
+<<<<<<< HEAD
+=======
+        /*
+>>>>>>> Controller-Rework
         if (Input.GetButton("Interact"))
         {
             if (AbleToDestroy == true)

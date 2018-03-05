@@ -23,6 +23,7 @@ public class PlayerSkills : NetworkBehaviour
 	// Update is called once per frame
 	void Update () {
 
+        /*
         if (Input.GetButton("Skill1"))
         {
             //  Only allow skill use when not in build mode
@@ -43,10 +44,30 @@ public class PlayerSkills : NetworkBehaviour
             playerSkill1.buttonDownTime = 0.0f;
         }
 
+        */
         if (skillButton1Down)
         {
             playerSkill1.SkillAction();
         }
+        
 
     }
+
+    public void SkillButtonDown()
+    {
+        skillButton1Down = true;
+        playerSkill1.buttonDownTime = playerSkill1.buttonDownTime + Time.deltaTime;
+    }
+    public void SkillButtonUp()
+    {
+        if (skillButton1Down)
+        {
+            playerSkill1.buttonRelease();
+            skillButton1Down = false;
+        }
+        playerSkill1.buttonDownTime = 0.0f;
+    }
+
 }
+
+

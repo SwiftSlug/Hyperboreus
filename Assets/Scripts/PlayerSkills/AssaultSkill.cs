@@ -107,7 +107,7 @@ public class AssaultSkill : Skill
         Debug.Log("strike");
         GameObject Missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
 
-        //GameObject MissileRef = Instantiate(Missile, spawnPosition, spawnRotation);
+        Instantiate(Missile, spawnPosition, spawnRotation);
 
         //  Assign player reference on scripts
         //MissileRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;

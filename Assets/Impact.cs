@@ -35,30 +35,30 @@ public class Impact : NetworkBehaviour
         transform.Rotate(Vector3.up, Time.deltaTime, Space.World);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter()
     {
         //Collider[] hitColliders = Physics.OverlapSphere(missileCollider., blastRadius);
-
-        ContactPoint contact = collision.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 pos = contact.point;
+        //ContactPoint contact = collision.contacts[0];
+        //Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        //Vector3 pos = contact.point;
         //Instantiate(explosionPrefab, pos, rot);
+
         Debug.Log("explode");
 
         Destroy(transform.parent.gameObject);
         NetworkServer.Destroy(transform.parent.gameObject);
     }
 
-    [Command]
-    void CmdDestroyMissile(GameObject missile)
-    {
-        NetworkServer.Destroy(missile);
-        RpcDestroyMissile(missile);
-    }
+    //[Command]
+    //void CmdDestroyMissile(GameObject missile)
+    //{
+    //    NetworkServer.Destroy(missile);
+    //    RpcDestroyMissile(missile);
+    //}
 
-    [ClientRpc]
-    void RpcDestroyMissile(GameObject missile)
-    {
-        Destroy(missile);
-    }
+    //[ClientRpc]
+    //void RpcDestroyMissile(GameObject missile)
+    //{
+    //    Destroy(missile);
+    //}
 }

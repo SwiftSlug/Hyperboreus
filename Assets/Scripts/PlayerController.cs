@@ -69,7 +69,7 @@ public class PlayerController : NetworkBehaviour
             transform.LookAt(transform.position + (controllerAimingDirection * 1000));
         }
         */
-
+        /*
         if (Input.GetButton("Interact"))
         {
             if (AbleToDestroy == true)

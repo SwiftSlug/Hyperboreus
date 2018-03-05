@@ -77,6 +77,19 @@ public class DefaultControllerState : ControllerState
             controller.weaponShootingScript.StartShoot();
         }
 
+
+        //  Skill 1
+        if (Input.GetButton("Skill1"))
+        {
+            controller.playerSkillScript.SkillButtonDown();
+        }
+        else
+        {
+            controller.playerSkillScript.SkillButtonUp();
+        }
+
+
+
         //  Weapon swapping
 
         //  Weapon 1
@@ -157,26 +170,12 @@ public class BaseBuildingControllerState : ControllerState
         controller.playerControllerScript.MouseAim();
 
         //  Controller Aiming
-        if ((Input.GetAxis("ControllerLookX") > 0) || ((Input.GetAxis("ControllerLookY") > 0)))
+        if ((Input.GetAxis("ControllerLookX") != 0) || ((Input.GetAxis("ControllerLookY") != 0)))
         {
             controller.playerControllerScript.ControllerAiming();
         }
-
-        //  Interaction --------------------------------------------------------
-
-        if (Input.GetButton("Interact"))
-        {
-            if (controller.baseBuildingPlaceBuildingHeld == false)
-            {
-                controller.baseBuildingPlaceBuildingHeld = true;
-
-                controller.playerBuildingControllerScript.PlaceBuilding();
-            }
-        }
-        else
-        {
-            controller.baseBuildingPlaceBuildingHeld = false;
-        }
+        
+        
 
         //  Base Building ------------------------------------------------------
 
@@ -200,6 +199,22 @@ public class BaseBuildingControllerState : ControllerState
             controller.baseBuildingButtonHeld = false;
         }
 
+        //  Plcae Object
+        if (Input.GetButton("Fire1") || (Input.GetAxis("Fire1") > 0))
+        {
+            if (controller.baseBuildingPlaceBuildingHeld == false)
+            {
+                controller.baseBuildingPlaceBuildingHeld = true;
+
+                controller.playerBuildingControllerScript.PlaceBuilding();
+            }
+        }
+        else
+        {
+            controller.baseBuildingPlaceBuildingHeld = false;
+        }
+
+
         /*
         Now bound to the action key
         //  Place Building
@@ -210,7 +225,8 @@ public class BaseBuildingControllerState : ControllerState
         */
 
         //  Change Rotation
-        if (Input.GetButton("BuildingChangeRotation"))
+        //if (Input.GetButton("BuildingChangeRotation"))
+        if (Input.GetButton("Fire2") || (Input.GetAxis("Fire2") > 0))
         {
             controller.playerBuildingControllerScript.ChangeRotation();
         }
@@ -218,14 +234,35 @@ public class BaseBuildingControllerState : ControllerState
         //  Change Structure
         if (Input.GetButton("BuildingChangeStructure"))
         {
-            controller.playerBuildingControllerScript.ChangeStructure();
+            if (controller.baseBuildingChangeStructureHeld == false)
+            {
+                controller.baseBuildingChangeStructureHeld = true;
+
+                controller.playerBuildingControllerScript.ChangeStructure();
+
+            }
+        }
+        else
+        {
+            controller.baseBuildingChangeStructureHeld = false;
         }
 
         //  Change Material
         if (Input.GetButton("BuildingChangeMaterial"))
         {
-            controller.playerBuildingControllerScript.ChangeMaterial();
+            if (controller.baseBuildingChangeMaterialHeld == false)
+            {
+                controller.baseBuildingChangeMaterialHeld = true;
+
+                controller.playerBuildingControllerScript.ChangeMaterial();
+
+            }
         }
+        else
+        {
+            controller.baseBuildingChangeMaterialHeld = false;
+        }         
+
 
 
     }
@@ -250,7 +287,7 @@ public class InputController : MonoBehaviour {
     //  The actions that can be called are dependants on the current state of the controller
 
 
-    //public bool blep = false;
+    public bool blep = false;
 
     public WeaponShooting weaponShootingScript;
     public WeaponSwap weaponSwapScript;
@@ -271,7 +308,9 @@ public class InputController : MonoBehaviour {
 
     //  Button held flags
     public bool baseBuildingButtonHeld = false;
-    public bool baseBuildingPlaceBuildingHeld = false;
+    public bool baseBuildingPlaceBuildingHeld = false;    
+    public bool baseBuildingChangeStructureHeld = false;
+    public bool baseBuildingChangeMaterialHeld = false;
 
     // Use this for initialization
     void Start () {

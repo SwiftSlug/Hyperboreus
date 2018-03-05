@@ -349,7 +349,7 @@ public class InputController : NetworkBehaviour
     public void ChangeState(ControllerState newState)
     {
         currentControllerState = newState;
-        Debug.Log("State Changed");
+        //Debug.Log("State Changed");
     }
 
     void AllInputMethods() { 

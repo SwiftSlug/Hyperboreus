@@ -12,6 +12,11 @@ public class AttackWithJumpAction : Action
 
     private void CrawlerAttackWithJump(StateController controller)
     {
+        //  Ensure that the controller has a target before attempting to move and attack
+        if (controller.target == null)
+        {
+            return;
+        }
 
         controller.navMeshAgent.destination = controller.target.transform.position;
 

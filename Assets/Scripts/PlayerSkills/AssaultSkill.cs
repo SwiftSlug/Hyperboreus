@@ -14,6 +14,8 @@ public class AssaultSkill : Skill
     //  The current time spent charging the ability
     float currentChargeTime;
 
+    public Transform marker;
+
     RaycastHit markerZ;
     Ray markerRay = new Ray();
     ParticleSystem smokeMarker;

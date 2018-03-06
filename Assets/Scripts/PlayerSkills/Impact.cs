@@ -15,9 +15,15 @@ public class Impact : NetworkBehaviour
 
     public bool loser;
 
+    public int damageValue = 150;
+
     List<GameObject> enemiesHit;
 
     public bool sphereDrawDebug = true;       //Debug flag for drawing debug spheres
+
+    float distanceFrom;
+
+    float distanceMultiplier;
 
     // Use this for initialization
     void Start()
@@ -37,11 +43,17 @@ public class Impact : NetworkBehaviour
 
     void OnTriggerEnter()
     {
-        //Collider[] hitColliders = Physics.OverlapSphere(missileCollider., blastRadius);
-        //ContactPoint contact = collision.contacts[0];
-        //Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        //Vector3 pos = contact.point;
-        //Instantiate(explosionPrefab, pos, rot);
+        Collider[] explosionHits = Physics.OverlapSphere(missileCollider.transform.position, blastRadius);
+
+        for (int i = 0; i < explosionHits.Length; i++)
+        {
+            if (explosionHits[i].CompareTag("Enemy"))
+            {
+                distanceFrom = (missileCollider.transform.position - explosionHits[i].transform.position).magnitude;
+                distanceMultiplier = 1 - (distanceFrom / blastRadius);
+                explosionHits[i].GetComponent<AIStats>().CmdDamage(damageValue * Mathf.RoundToInt(distanceMultiplier));
+            }
+        }
 
         Debug.Log("explode");
 

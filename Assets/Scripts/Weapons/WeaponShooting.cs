@@ -196,10 +196,8 @@ public class WeaponShooting : NetworkBehaviour
         shootRay.origin = gunTransform.transform.position;
         shootRay.direction = gunEnd.transform.forward;
 
-        //Debug.Log("Fire the raycast !");
-
         int rayLayer = 1;
-
+        
         //Perform the raycast against game objects, and if it hits...
         if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range, rayLayer))
         {
@@ -269,7 +267,10 @@ public class WeaponShooting : NetworkBehaviour
     [Command]
     void CmdHit(GameObject hitObject, int damageAmount)
     {
-        hitObject.GetComponent<AIStats>().CmdDamage(damageAmount);
+        if (hitObject != null)
+        {
+            hitObject.GetComponent<AIStats>().CmdDamage(damageAmount);
+        }
     }
 
     [Command]

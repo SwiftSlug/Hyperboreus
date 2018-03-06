@@ -305,6 +305,7 @@ MonoBehaviour:
   attackCooldown: 1.5
   jumpCooldown: 5
   stopDistance: 2
+  attackDistance: 2.5
   attackDamage: 5
   wanderRange: 5
   lastJumped: 0

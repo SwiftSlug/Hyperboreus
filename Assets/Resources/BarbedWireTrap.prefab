@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4559374343276104}
   - component: {fileID: 33699136442327214}
   - component: {fileID: 23458667251068326}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114879649392878774}
   - component: {fileID: 114507521774556440}
   - component: {fileID: 114644032935130332}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BarbedWireTrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +83,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -98,6 +99,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -157,10 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fbe5d8eddb66d42bdd574f1d140535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollidedEnemy: {fileID: 0}
   DamageAmount: 5
   SpeedToSet: 0.5
   EnemyColliding: 0
+  EnemiesInList: 0
   CollidedEnemiesList: []
 --- !u!114 &114879649392878774
 MonoBehaviour:

@@ -107,18 +107,13 @@ public class AssaultSkill : Skill
     void CmdSpawnStrike(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
     {
         Debug.Log("strike");
-        GameObject Missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
+        GameObject missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
 
-        Instantiate(Missile, spawnPosition, spawnRotation);
+        GameObject missileRef = Instantiate(missile, spawnPosition, spawnRotation);
 
         //  Assign player reference on scripts
         //MissileRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
 
-        //NetworkServer.Spawn(syringeRef);
+        NetworkServer.Spawn(missileRef);
     }
-
-    //if missile hits something damagable, then damage
-    //else explode on hit
-    //on explode do small shere trace from hit location with less damage
-    //repeat sphere trace getting bigger, but less damage
 }

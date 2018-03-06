@@ -283,48 +283,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1001 &89702182
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 2.296545
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 4.043273
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 20.166805
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4261929151935168, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 4e481e6a112f737408406927f600d80d, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &99376807
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +752,7 @@ MonoBehaviour:
   - {fileID: 1631028257622744, guid: c530836ae1840094792641d7a34e7e94, type: 2}
   - {fileID: 1712353278530652, guid: f93375e268836b247aaf976f49bf5581, type: 2}
   - {fileID: 1956638845934806, guid: d7179a573f7b98b4a903e1e4770e0e03, type: 2}
+  - {fileID: 1804178892623510, guid: 653a8a6baf8fef943b299d9cfb65afb4, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:

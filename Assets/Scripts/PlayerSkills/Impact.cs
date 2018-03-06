@@ -28,7 +28,7 @@ public class Impact : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        missileCollider = transform.parent.GetComponent<Collider>();
+        //missileCollider = transform.parent.GetComponent<Collider>();
         missileRB = transform.parent.GetComponent<Rigidbody>();
 
         missileRB.AddForce((-(transform.up)) * speed);
@@ -38,7 +38,6 @@ public class Impact : NetworkBehaviour
     void Update()
     {
 
-        transform.Rotate(Vector3.up, Time.deltaTime, Space.World);
     }
 
     void OnTriggerEnter()

@@ -172,10 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d6fdfc019c5c540861b8de6520ad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileCollider: {fileID: 0}
+  missileCollider: {fileID: 135999215687272596}
   blastRadius: 10
   speed: 2000
   loser: 1
+  damageValue: 150
   sphereDrawDebug: 1
 --- !u!114 &114475028740999146
 MonoBehaviour:

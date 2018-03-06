@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 82026530849861256}
   - component: {fileID: 114713473014863432}
   - component: {fileID: 114085309944553850}
+  - component: {fileID: 208646752092801228}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -1778,7 +1779,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138322535066456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.296545, y: 4.043273, z: 20.166805}
+  m_LocalPosition: {x: -21.062784, y: 7.2980237, z: -28.266848}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4282745514251646}
@@ -27117,6 +27118,21 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!208 &208646752092801228
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.9, y: 0.9, z: 0.9}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -1.31, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!222 &222225189759777616
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -20,34 +20,47 @@ public class AttackWithJumpAction : Action
 
         controller.navMeshAgent.destination = controller.target.transform.position;
 
+        float distanceToTarget = (controller.transform.position - controller.target.transform.position).magnitude;
+
+        //  AI movement towards target
+        if (distanceToTarget < controller.stopDistance)
+        {
+            //  Target close enough stop moving
+            controller.navMeshAgent.destination = controller.transform.position;
+        }
+        else
+        {
+            //  Target too far away move to target
+            controller.navMeshAgent.destination = controller.target.transform.position;
+        }
+
+        //  AI Attacking
+        if (distanceToTarget < controller.attackDistance)
+        {
+            //  Only attack target if within attack range   
+            if (Time.time > (controller.lastAttack + controller.attackCooldown))
+            {
+                //  Call attack only after attack cooldown
+                controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
+                controller.lastAttack = Time.time;
+                //Debug.Log("Attack");
+            }
+        }
+
+        //  Set speed back to normal running speed if the animation has stopped running
+        if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"))   
+        {
+            controller.navMeshAgent.speed = controller.runSpeed;
+        }
+        //  Set the speed to jump attack speed if the animation is running
+        else
+        {
+            controller.navMeshAgent.speed = controller.runSpeed * 100;
+        }
+
         if (controller.gameObject.GetComponent<AIStats>().isTrapped == false)
         {
-            if ((controller.transform.position - controller.target.transform.position).magnitude < controller.stopDistance)
-            {
-                controller.navMeshAgent.destination = controller.transform.position;    //  Target close enough stop moving        
-
-                if (Time.time > (controller.lastAttack + controller.attackCooldown)) //  Call attack only every 5 seconds
-                {
-                    controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
-                    controller.lastAttack = Time.time;
-                    //Debug.Log("Attack");
-                }
-
-            }
-            else
-            {
-                controller.navMeshAgent.destination = controller.target.transform.position; //  Target too far move to target
-            }
-
-            if (!controller.animator.GetCurrentAnimatorStateInfo(0).IsName("EnemyJumpAnimation"))   //  Is the jump animation running
-            {
-                controller.navMeshAgent.speed = controller.runSpeed;
-            }
-            else
-            {
-                controller.navMeshAgent.speed = controller.runSpeed * 100;
-            }
-
+            //  Only perform the jump attack if the AI is not trapped
             JumpAttack(controller);
         }
         else

@@ -17,8 +17,10 @@ public class AssaultSkill : Skill
     public Transform marker;
 
     RaycastHit markerZ;
+
     Ray markerRay = new Ray();
-    ParticleSystem smokeMarker;
+
+    public ParticleSystem smokeMarker;
 
     //void Update()
     //{
@@ -28,8 +30,6 @@ public class AssaultSkill : Skill
 
     public override void Init()
     {
-        Debug.Log("INIT");
-
         if (cooldown == 0.0f)
         {
             //  Sets the cooldown to 2 seconds if no other value is set
@@ -73,19 +73,17 @@ public class AssaultSkill : Skill
                 if (currentChargeTime > chargeTime)
                 {
                     //get mouse location and draw marker at mouse location
-                    //particleMarker.SetPosition(1, targetLocation);
+                    //smokeMarker.SetPosition(1, targetLocation);
                     //particleMarker.Stop();
                     //particleMarker.Play();
                     //Vector3 mousePos = Input.mousePosition;
                     //wait for air strike time
                     //delete marker
 
-
+                    //RpcSmokeMarker();
                     CmdSpawnStrike(markerRay.origin, transform.rotation, playerReference);
 
-
-
-                    Debug.Log("BOOM");
+                    //Debug.Log("BOOM");
                     currentChargeTime = 0.0f;   //  Reset the current charge time
                     lastUsedTime = Time.time;   //  Set last firing time
                     return true;
@@ -98,7 +96,7 @@ public class AssaultSkill : Skill
     public override void buttonRelease()
     {
         currentChargeTime = 0.0f;       //  Reset the current charge time  
-        Debug.Log("release");
+        //Debug.Log("release");
         //Disable marker after airstrike fires
     }
 
@@ -106,14 +104,31 @@ public class AssaultSkill : Skill
     [Command]
     void CmdSpawnStrike(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
     {
-        Debug.Log("strike");
+        //Debug.Log("strike");
+        //smokeMarker.Play();
+        //RpcSmokeMarker();
         GameObject missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
 
         GameObject missileRef = Instantiate(missile, spawnPosition, spawnRotation);
 
         //  Assign player reference on scripts
         //MissileRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
-
         NetworkServer.Spawn(missileRef);
+    }
+
+    [Command]
+    public void CmdSmokeMarker()
+    {
+        if (isServer)
+        {
+            smokeMarker.Play();
+            RpcSmokeMarker();
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSmokeMarker()
+    {
+        smokeMarker.Play();
     }
 }

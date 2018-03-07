@@ -9,13 +9,13 @@ public class Impact : NetworkBehaviour
 
     Rigidbody missileRB;
 
-    public float blastRadius = 10;
+    public float blastRadius = 50;
 
     public float speed;
 
     public bool loser;
 
-    public int damageValue = 150;
+    public int damageValue = 100;
 
     List<GameObject> enemiesHit;
 
@@ -24,6 +24,8 @@ public class Impact : NetworkBehaviour
     float distanceFrom;
 
     float distanceMultiplier;
+
+    public ParticleSystem explosion;
 
     // Use this for initialization
     void Start()
@@ -49,27 +51,37 @@ public class Impact : NetworkBehaviour
             if (explosionHits[i].CompareTag("Enemy"))
             {
                 distanceFrom = (missileCollider.transform.position - explosionHits[i].transform.position).magnitude;
-                distanceMultiplier = 1 - (distanceFrom / blastRadius);
+                distanceMultiplier = (1 - (distanceFrom / blastRadius));
                 explosionHits[i].GetComponent<AIStats>().CmdDamage(damageValue * Mathf.RoundToInt(distanceMultiplier));
             }
         }
 
-        Debug.Log("explode");
+        //CmdExplode();
+        //Debug.Log("explode");
 
         Destroy(transform.parent.gameObject);
         NetworkServer.Destroy(transform.parent.gameObject);
     }
 
-    //[Command]
-    //void CmdDestroyMissile(GameObject missile)
-    //{
-    //    NetworkServer.Destroy(missile);
-    //    RpcDestroyMissile(missile);
-    //}
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(missileCollider.transform.position, blastRadius);
+    }
 
-    //[ClientRpc]
-    //void RpcDestroyMissile(GameObject missile)
-    //{
-    //    Destroy(missile);
-    //}
+    [Command]
+    public void CmdExplode()
+    {
+        if (isServer)
+        {
+            explosion.Play();
+            RpcExplode();
+        }
+    }
+
+    [ClientRpc]
+    public void RpcExplode()
+    {
+        explosion.Play();
+    }
 }

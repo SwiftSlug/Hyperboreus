@@ -5581,7 +5581,9 @@ MonoBehaviour:
   lastUsedTime: 0
   chargeTime: 0
   airstrikeTime: 0
-  marker: {fileID: 4435395771784770}
+  marker: {fileID: 4071256609770528, guid: b5e36d03b163580439c483bfb8039841, type: 2}
+  smokeMarker: {fileID: 198764251909886664, guid: b5e36d03b163580439c483bfb8039841,
+    type: 2}
 --- !u!114 &114300363803433394
 MonoBehaviour:
   m_ObjectHideFlags: 1

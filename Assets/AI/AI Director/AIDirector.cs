@@ -146,18 +146,18 @@ public class AIDirector : NetworkBehaviour
                 if (active)
                 {
                     active = false;
-                    if (shouldAIDebug)
-                    {
+                    //if (shouldAIDebug)
+                    //{
                         Debug.Log("Director Inactive");
-                    }
+                    //}
                 }
                 else
                 {
                     active = true;
-                    if (shouldAIDebug)
-                    {
+                    //if (shouldAIDebug)
+                    //{
                         Debug.Log("Director Active");
-                    }
+                    //}
                 }
             }
 
@@ -170,19 +170,19 @@ public class AIDirector : NetworkBehaviour
                 {
                     //  Is currently day so switch to night
                     isDay = false;
-                    if (shouldAIDebug)
-                    {
+                    //if (shouldAIDebug)
+                    //{
                         Debug.Log("Switched To Night Time");
-                    }
+                    //}
                 }
                 else
                 {
                     //  Is currently night so switch to day
                     isDay = true;
-                    if (shouldAIDebug)
-                    {
+                    //if (shouldAIDebug)
+                    //{
                         Debug.Log("Switched To Day Time");
-                    }
+                    //}
                 }
             }
 
@@ -317,7 +317,10 @@ public class AIDirector : NetworkBehaviour
             if (maxRunCounter == maxRunAttempts)
             {
                 //  Spawnable area list could not be populated 
-                Debug.Log("Area could not be found !");
+                if (shouldAIDebug)
+                {
+                    Debug.Log("Area could not be found !");
+                }
                 return false;
             }
         }

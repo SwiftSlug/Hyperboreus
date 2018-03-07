@@ -15,6 +15,11 @@ public class TargetDeadDecision : Decision
     private bool TargetDead(StateController controller)
     {
 
+        if (controller.target == null)
+        {
+            return false;
+        }
+
         if (controller.target.GetComponent<PlayerStats>().isDead)
         {
             return true;

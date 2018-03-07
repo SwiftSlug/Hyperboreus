@@ -151,15 +151,18 @@ public class WeaponShooting : NetworkBehaviour
 
     public void StartReload()
     {
-        if (selectedWeapon.reloading == false)
+        if (selectedWeapon != null)
         {
-            //Debug.Log("Reloading !");
-            audioSource.PlayOneShot(clipReload, 1.0f);
+            if (selectedWeapon.reloading == false)
+            {
+                //Debug.Log("Reloading !");
+                audioSource.PlayOneShot(clipReload, 1.0f);
 
-            CmdDisableMuzzleEffects();
-            Invoke("Reload", selectedWeapon.reloadTime);
+                CmdDisableMuzzleEffects();
+                Invoke("Reload", selectedWeapon.reloadTime);
+            }
+            selectedWeapon.reloading = true;
         }
-        selectedWeapon.reloading = true;
     }
 
     void Reload()
@@ -196,10 +199,8 @@ public class WeaponShooting : NetworkBehaviour
         shootRay.origin = gunTransform.transform.position;
         shootRay.direction = gunEnd.transform.forward;
 
-        //Debug.Log("Fire the raycast !");
-
         int rayLayer = 1;
-
+        
         //Perform the raycast against game objects, and if it hits...
         if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range, rayLayer))
         {
@@ -269,7 +270,10 @@ public class WeaponShooting : NetworkBehaviour
     [Command]
     void CmdHit(GameObject hitObject, int damageAmount)
     {
-        hitObject.GetComponent<AIStats>().CmdDamage(damageAmount);
+        if (hitObject != null)
+        {
+            hitObject.GetComponent<AIStats>().CmdDamage(damageAmount);
+        }
     }
 
     [Command]

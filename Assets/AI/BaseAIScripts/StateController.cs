@@ -30,6 +30,9 @@ public class StateController : MonoBehaviour {
     [Tooltip("The distance at which AI stop moving towards their target")]
     public float stopDistance = 1.0f;
 
+    [Tooltip("The distance at which the AI can attack their target")]
+    public float attackDistance = 1.5f;
+
     [Tooltip("The amount of damage the AI unit does per hit")]
     public int attackDamage = 5;
 

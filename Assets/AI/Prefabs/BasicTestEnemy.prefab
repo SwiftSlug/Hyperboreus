@@ -29,6 +29,8 @@ GameObject:
   - component: {fileID: 114985058893909474}
   - component: {fileID: 136442102849146560}
   - component: {fileID: 82409549933997346}
+  - component: {fileID: 136226523402440314}
+  - component: {fileID: 208370618615378996}
   m_Layer: 0
   m_Name: BasicTestEnemy
   m_TagString: Enemy
@@ -62,7 +64,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1332893165969140}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -57.347137, y: -0.833544, z: 37.545143}
+  m_LocalPosition: {x: 4.0010867, y: 4.493, z: -7.5167584}
   m_LocalScale: {x: 0.5, y: 0.3, z: 0.5}
   m_Children:
   - {fileID: 4522784428344394}
@@ -91,6 +93,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -106,6 +109,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -300,7 +304,8 @@ MonoBehaviour:
   searchWaitTime: 5
   attackCooldown: 1.5
   jumpCooldown: 5
-  stopDistance: 1.5
+  stopDistance: 2
+  attackDistance: 2.5
   attackDamage: 5
   wanderRange: 5
   lastJumped: 0
@@ -361,6 +366,19 @@ CapsuleCollider:
   m_Height: 30
   m_Direction: 1
   m_Center: {x: 0, y: 6, z: 0}
+--- !u!136 &136226523402440314
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332893165969140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 6
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.89, z: 0}
 --- !u!136 &136442102849146560
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -408,3 +426,18 @@ NavMeshAgent:
   m_BaseOffset: 0.99999994
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!208 &208370618615378996
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1332893165969140}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1, y: 1, z: 1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

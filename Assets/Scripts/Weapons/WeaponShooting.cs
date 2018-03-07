@@ -151,15 +151,18 @@ public class WeaponShooting : NetworkBehaviour
 
     public void StartReload()
     {
-        if (selectedWeapon.reloading == false)
+        if (selectedWeapon != null)
         {
-            //Debug.Log("Reloading !");
-            audioSource.PlayOneShot(clipReload, 1.0f);
+            if (selectedWeapon.reloading == false)
+            {
+                //Debug.Log("Reloading !");
+                audioSource.PlayOneShot(clipReload, 1.0f);
 
-            CmdDisableMuzzleEffects();
-            Invoke("Reload", selectedWeapon.reloadTime);
+                CmdDisableMuzzleEffects();
+                Invoke("Reload", selectedWeapon.reloadTime);
+            }
+            selectedWeapon.reloading = true;
         }
-        selectedWeapon.reloading = true;
     }
 
     void Reload()

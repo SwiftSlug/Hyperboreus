@@ -38,9 +38,11 @@ public class AIDirector : NetworkBehaviour
 
     //  Intensity variables
     public int intensityPerAI = 10;             //  The amount of intensity each AI unit adds to the player
+    public int intensityPerTrackingAI = 5;      //  The amount of intensity each AI unit tracking the player applies 
     float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
     public int intensityDecreaseAmount = 20;    //  The amount of intensity that is decreased when its not increasing
-        
+    
+
     //  Timing Varaibles
     public float intensityUpdateInterval = 3.0f;    //  The time interval between updating the player intensity level
     float intensityLastRunTime = 0.0f;              //  The last time the intensity update was ran
@@ -52,6 +54,10 @@ public class AIDirector : NetworkBehaviour
     public float spawnLast = 0.0f;               //  The last time the AI were spawned
     
 
+    // Debug Variables
+
+    
+
     //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);   //  Debug cube used as a marker
     public GameObject cube; 
 
@@ -60,7 +66,7 @@ public class AIDirector : NetworkBehaviour
 
         if (shouldAIDebug)
         {
-            Debug.Log("Director Alive !");
+            //Debug.Log("Director Alive !");
         }
         //  Init all lists ready for use        
 
@@ -87,9 +93,9 @@ public class AIDirector : NetworkBehaviour
    
         if (shouldAIDebug)
         {
-            Debug.Log(aiCount + " AI Unit(s) Found");
-            Debug.Log(playerCount + " Player(s) Found");
-            Debug.Log("Director Init Complete");
+            //Debug.Log(aiCount + " AI Unit(s) Found");
+            //Debug.Log(playerCount + " Player(s) Found");
+            //Debug.Log("Director Init Complete");
         } 
 
     }
@@ -198,18 +204,19 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 1000)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 10)
     {
 
         int maxRunCounter = 0;
         //  Remove all old spawn locations
         spawnLocations.Clear();
+        bool areaFound = false;
 
         for(int i = 0; i < numberOfSpawnLocatoins; i++)
         {
             //  Only run this loop up to maxRunAttemps, prevents an unspawnable area causing an infinite loop
             maxRunCounter = 0;
-            while (maxRunCounter < maxRunAttempts)
+            while ((maxRunCounter < maxRunAttempts) && (areaFound == false))
             {
                 //  Generate a random position offset within the input area size
                 float xPos = Random.Range(-areaSize, areaSize);
@@ -217,7 +224,7 @@ public class AIDirector : NetworkBehaviour
 
                 // Ensure position cannot be inside of ingore radius
                 // *************** This causes the spawning to ignore a + shape within worldspace
-
+                /*
                 if (xPos > 0)
                 {
                     xPos += centerIgnoreSize;
@@ -235,7 +242,7 @@ public class AIDirector : NetworkBehaviour
                 {
                     zPos -= centerIgnoreSize;
                 }
-
+                */
 
 
                 //  Add offset positions to the area center
@@ -243,8 +250,11 @@ public class AIDirector : NetworkBehaviour
                 zPos += areaCentre.z;
 
                 //  Create new spawn location from generated values above
-                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);             
-                
+                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);
+                Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;
+                spawnLocation = spawnLocation + innerArea;
+
+                GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
 
                 //  Find all colliders at the random location
                 Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
@@ -302,18 +312,22 @@ public class AIDirector : NetworkBehaviour
                             spawnLocations.Add(spawnLocation);
                             // Break out of while loop as spawn location has been found
                             maxRunCounter = maxRunAttempts;
-
+                            areaFound = true;
+                            if (shouldAIDebug)
+                            {
+                                Debug.Log("Number of runs to find spawn area = " + maxRunCounter);
+                            }
                             //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                         }
                         
-                    }
-
-
-                    
+                    }                    
 
                 }
+                Debug.Log("Run attempt Complete");
                 maxRunCounter++;
+
             }
+
             if (maxRunCounter == maxRunAttempts)
             {
                 //  Spawnable area list could not be populated 
@@ -474,24 +488,41 @@ public class AIDirector : NetworkBehaviour
                 {
                     //Debug.Log("Enemy Tracking Player");
                     trackingAI++;
+                    //Debug.Log("Number of tracking AI found = " + trackingAI);
                 }
             }
         
 
 
-            float intensityLevel = 0.0f;                                //  Overall intensity level
+            float intensityLevel = 0.0f;                                    //  Overall intensity level
 
-            int nearbyEnemyIntensity = (foundAI * intensityPerAI);      //  0 - infinity based on number of enemies near player
-            int healthLost = (100 - statsRef.currentHealth);            //  0 - 100 based on how much health has been lost from 100
+            int nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
+            int trackingIntensity = trackingAI * intensityPerTrackingAI;    //  Intensity level based on the number of enemy tracking the player
+            int healthLost = (100 - statsRef.currentHealth);                //  0 - 100 based on how much health has been lost from 100
 
-            //int ammoIntensity =                                       //  ******************* Ammo values to be added later ****************
+            //int ammoIntensity =                                       //  Ammo intensity not part of current build
             
             float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
 
-            intensityLevel = nearbyEnemyIntensity * healthIntensity;    //  Finial intensity level based on above atributes
+            intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthLost;    //  Finial intensity level based on above atributes
 
 
+
+
+
+            // Set final player intensity
+
+            if (statsRef.intensity < intensityLevel)
+            {
+                statsRef.intensity = intensityLevel;
+            }
+            else
+            {
+                statsRef.intensity = statsRef.intensity * 0.9f;
+            }
+
+            /*
             //  Apply Intensity to player
 
             if (statsRef.intensity < intensityLevel)
@@ -510,7 +541,7 @@ public class AIDirector : NetworkBehaviour
             {
                 statsRef.intensity = 0.0f;
             }
-
+            */
 
         }
 

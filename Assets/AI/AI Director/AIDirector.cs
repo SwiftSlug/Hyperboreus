@@ -12,6 +12,7 @@ public class AIDirector : NetworkBehaviour
     
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
     public bool shouldAIDrawDebug = true;       //  Debug flag for drawing debug spheres
+    public bool shouldAICreateSpawnDebug = true;    //  Debug flag for drawing spawn area cubes
     public bool isDay = true;                   //  Boolean that defines if it is day or night
     //GameObject[] EnemyUnits;
     public GameObject enemyToSpawn;             //  Enemy type to spawn, limited to one for this stage of the game
@@ -54,12 +55,12 @@ public class AIDirector : NetworkBehaviour
     public float spawnLast = 0.0f;               //  The last time the AI were spawned
     
 
-    // Debug Variables
-
-    
+    // Debug Variables    
 
     //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);   //  Debug cube used as a marker
-    public GameObject cube; 
+    public GameObject debugSpawnCube;
+    public GameObject cube;
+
 
     // Use this for initialization
     void Start () {
@@ -130,12 +131,12 @@ public class AIDirector : NetworkBehaviour
                 {
                     spawnEnemies();
                     spawnLast = Time.time;
-                }             
+                }
 
-                
+
                 //  AI Cleanup  ------------------------------------------------------
 
-                if(Time.time > (cleanupLastRunTime + cleanupInterval))
+                if (Time.time > (cleanupLastRunTime + cleanupInterval))
                 {
                     cleaupAI();
                     cleanupLastRunTime = Time.time;
@@ -143,7 +144,7 @@ public class AIDirector : NetworkBehaviour
 
 
 
-            }            
+            }
 
             //  Debug to disable and enable director
 
@@ -154,7 +155,7 @@ public class AIDirector : NetworkBehaviour
                     active = false;
                     //if (shouldAIDebug)
                     //{
-                        Debug.Log("Director Inactive");
+                    Debug.Log("Director Inactive");
                     //}
                 }
                 else
@@ -162,7 +163,7 @@ public class AIDirector : NetworkBehaviour
                     active = true;
                     //if (shouldAIDebug)
                     //{
-                        Debug.Log("Director Active");
+                    Debug.Log("Director Active");
                     //}
                 }
             }
@@ -178,7 +179,7 @@ public class AIDirector : NetworkBehaviour
                     isDay = false;
                     //if (shouldAIDebug)
                     //{
-                        Debug.Log("Switched To Night Time");
+                    Debug.Log("Switched To Night Time");
                     //}
                 }
                 else
@@ -187,12 +188,24 @@ public class AIDirector : NetworkBehaviour
                     isDay = true;
                     //if (shouldAIDebug)
                     //{
-                        Debug.Log("Switched To Day Time");
+                    Debug.Log("Switched To Day Time");
                     //}
                 }
             }
-
-
+            if (Input.GetKeyDown(","))
+            {
+                foreach (GameObject player in players)
+                {
+                    scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations);
+                }
+            }
+            if (Input.GetKeyDown("."))
+            {
+                foreach (DebugCubeScript foundCube in FindObjectsOfType<DebugCubeScript>())
+                {
+                    Destroy(foundCube.transform.gameObject);
+                }
+            }
         }
 
     }
@@ -204,7 +217,7 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 10)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 1)
     {
 
         int maxRunCounter = 0;
@@ -212,49 +225,27 @@ public class AIDirector : NetworkBehaviour
         spawnLocations.Clear();
         bool areaFound = false;
 
-        for(int i = 0; i < numberOfSpawnLocatoins; i++)
+        for(int i = 0; i <= numberOfSpawnLocatoins; i++)
         {
+            areaFound = false;
             //  Only run this loop up to maxRunAttemps, prevents an unspawnable area causing an infinite loop
             maxRunCounter = 0;
             while ((maxRunCounter < maxRunAttempts) && (areaFound == false))
-            {
+            {               
+
                 //  Generate a random position offset within the input area size
                 float xPos = Random.Range(-areaSize, areaSize);
                 float zPos = Random.Range(-areaSize, areaSize);
 
                 // Ensure position cannot be inside of ingore radius
-                // *************** This causes the spawning to ignore a + shape within worldspace
-                /*
-                if (xPos > 0)
-                {
-                    xPos += centerIgnoreSize;
-                }
-                else
-                {
-                    xPos -= centerIgnoreSize;
-                }
-
-                if (zPos > 0)
-                {
-                    zPos += centerIgnoreSize;
-                }
-                else
-                {
-                    zPos -= centerIgnoreSize;
-                }
-                */
-
-
-                //  Add offset positions to the area center
-                xPos += areaCentre.x;
-                zPos += areaCentre.z;
 
                 //  Create new spawn location from generated values above
                 Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);
-                Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;
+                //  Create a vector of distance centreIgnoreLine in the direction of the random vector
+                Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;    
+                //  Add the ignore area to the random location to push spawn points away from the character
                 spawnLocation = spawnLocation + innerArea;
-
-                GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                
 
                 //  Find all colliders at the random location
                 Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
@@ -270,9 +261,18 @@ public class AIDirector : NetworkBehaviour
                     if (!hitColliders[hits].CompareTag("floor"))
                     {
                         areaClear = false;
+                        Debug.Log("Object " + i + " - Hit collider = " + hitColliders[hits].name);
+
+                        //  Debug
+                        if (shouldAICreateSpawnDebug)
+                        {
+                            GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                            debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
+                        }
                     }                    
                     hits++;
                 }
+                
                 if (areaClear == true)
                 {                    
 
@@ -300,7 +300,15 @@ public class AIDirector : NetworkBehaviour
                             NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
                             if (pathToPlayer.status != NavMeshPathStatus.PathComplete)
                             {
+                                //  Cant find path to player
                                 canPathToPlayer = false;
+
+                                //  Debug
+                                if (shouldAICreateSpawnDebug)
+                                {
+                                    GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                                    debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.yellow;
+                                }
                             }
     
                         }
@@ -313,9 +321,18 @@ public class AIDirector : NetworkBehaviour
                             // Break out of while loop as spawn location has been found
                             maxRunCounter = maxRunAttempts;
                             areaFound = true;
+
+                            //  Debug
+                            if (shouldAICreateSpawnDebug)
+                            {
+                                GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                                debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.blue;
+                            }
+
+                            //Debug.Log("Area Found");
                             if (shouldAIDebug)
                             {
-                                Debug.Log("Number of runs to find spawn area = " + maxRunCounter);
+                                //Debug.Log("Number of runs to find spawn area = " + maxRunCounter);
                             }
                             //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                         }
@@ -323,12 +340,12 @@ public class AIDirector : NetworkBehaviour
                     }                    
 
                 }
-                Debug.Log("Run attempt Complete");
+                //Debug.Log("Run attempt Complete");
                 maxRunCounter++;
 
             }
-
-            if (maxRunCounter == maxRunAttempts)
+            
+            if (maxRunCounter > maxRunAttempts)
             {
                 //  Spawnable area list could not be populated 
                 if (shouldAIDebug)
@@ -337,6 +354,7 @@ public class AIDirector : NetworkBehaviour
                 }
                 return false;
             }
+            
         }
         return false;
     }
@@ -715,6 +733,11 @@ public class AIDirector : NetworkBehaviour
 
             }
 
+            foreach (DebugCubeScript foundCube in FindObjectsOfType<DebugCubeScript>())
+            {
+                Gizmos.color = foundCube.gizmoColour;
+                Gizmos.DrawWireSphere(foundCube.transform.position, spawnBufferSize);
+            }
 
         }
 

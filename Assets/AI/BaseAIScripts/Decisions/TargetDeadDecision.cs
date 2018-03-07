@@ -20,8 +20,11 @@ public class TargetDeadDecision : Decision
             return false;
         }
 
-        if (controller.target.GetComponent<PlayerStats>().isDead)
+        if (controller.target.GetComponent<PlayerStats>().isDead)            
         {
+            //  Target is dead so set AI target to null
+            controller.target = null;
+
             return true;
         }
 

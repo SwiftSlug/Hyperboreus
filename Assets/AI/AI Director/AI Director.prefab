@@ -87,6 +87,7 @@ MonoBehaviour:
   active: 0
   shouldAIDebug: 1
   shouldAIDrawDebug: 1
+  shouldAICreateSpawnDebug: 1
   isDay: 1
   enemyToSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
     type: 2}
@@ -106,4 +107,6 @@ MonoBehaviour:
   cleanupInterval: 10
   spawnInterval: 5
   spawnLast: 0
+  debugSpawnCube: {fileID: 1232948171305478, guid: d80c74ea741b2154ebab72e5588a5ea7,
+    type: 2}
   cube: {fileID: 1232948171305478, guid: d80c74ea741b2154ebab72e5588a5ea7, type: 2}

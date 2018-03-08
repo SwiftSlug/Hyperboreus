@@ -217,7 +217,7 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 1)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 10)
     {
 
         int maxRunCounter = 0;
@@ -225,7 +225,7 @@ public class AIDirector : NetworkBehaviour
         spawnLocations.Clear();
         bool areaFound = false;
 
-        for(int i = 0; i <= numberOfSpawnLocatoins; i++)
+        for(int i = 0; i < numberOfSpawnLocatoins; i++)
         {
             areaFound = false;
             //  Only run this loop up to maxRunAttemps, prevents an unspawnable area causing an infinite loop
@@ -261,7 +261,7 @@ public class AIDirector : NetworkBehaviour
                     if (!hitColliders[hits].CompareTag("floor"))
                     {
                         areaClear = false;
-                        Debug.Log("Object " + i + " - Hit collider = " + hitColliders[hits].name);
+                        //Debug.Log("Object " + i + " - Hit collider = " + hitColliders[hits].name);
 
                         //  Debug
                         if (shouldAICreateSpawnDebug)
@@ -322,6 +322,8 @@ public class AIDirector : NetworkBehaviour
                             maxRunCounter = maxRunAttempts;
                             areaFound = true;
 
+                            //Debug.Log("Area found for pos : " + i);
+
                             //  Debug
                             if (shouldAICreateSpawnDebug)
                             {
@@ -344,7 +346,7 @@ public class AIDirector : NetworkBehaviour
                 maxRunCounter++;
 
             }
-            
+            /*
             if (maxRunCounter > maxRunAttempts)
             {
                 //  Spawnable area list could not be populated 
@@ -354,7 +356,7 @@ public class AIDirector : NetworkBehaviour
                 }
                 return false;
             }
-            
+            */
         }
         return false;
     }

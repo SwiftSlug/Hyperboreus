@@ -15,7 +15,7 @@ public class Impact : NetworkBehaviour
 
     public bool loser;
 
-    public int damageValue = 100;
+    public int damageMultiplier = 100;
 
     List<GameObject> enemiesHit;
 
@@ -24,6 +24,8 @@ public class Impact : NetworkBehaviour
     float distanceFrom;
 
     float distanceMultiplier;
+
+    float damageValue;
 
     public ParticleSystem explosion;
 
@@ -51,8 +53,16 @@ public class Impact : NetworkBehaviour
             if (explosionHits[i].CompareTag("Enemy"))
             {
                 distanceFrom = (missileCollider.transform.position - explosionHits[i].transform.position).magnitude;
+                //Debug.Log(distanceFrom);
+
                 distanceMultiplier = (1 - (distanceFrom / blastRadius));
-                explosionHits[i].GetComponent<AIStats>().CmdDamage(damageValue * Mathf.RoundToInt(distanceMultiplier));
+                //Debug.Log(distanceMultiplier);
+
+                damageValue = damageMultiplier * distanceMultiplier;
+                //Debug.Log(damageValue);
+
+                explosionHits[i].GetComponent<AIStats>().CmdDamage(Mathf.RoundToInt(damageValue));
+                //Debug.Log(Mathf.RoundToInt(damageValue));
             }
         }
 

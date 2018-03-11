@@ -12,6 +12,8 @@ public class AIStats : NetworkBehaviour
     [SyncVar]
     public bool isTrapped = false;
 
+    StateController controller;
+
     //[SyncVar]
     //public int enemyAttackDamage = 100;
 
@@ -20,6 +22,7 @@ public class AIStats : NetworkBehaviour
     void Start()
     {
         audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
+        controller = GetComponent<StateController>();
     }
 
     private void Update()
@@ -39,8 +42,15 @@ public class AIStats : NetworkBehaviour
         if (isServer)
         {
             enemyHealth -= damageAmount;
+            //  Set under attack flag to true for state switch
+            controller.underAttack = true;
+            //  If AI has no target set nearest player as target
+            if (controller.target == null)
+            {
+                CmdSetTargetNearestPlayer();
+            }
 
-            if(enemyHealth <= 0)
+            if (enemyHealth <= 0)
             {
                 audioSync.PlaySound(this.gameObject, 2);
 
@@ -99,4 +109,30 @@ public class AIStats : NetworkBehaviour
             isTrapped = trappedValue;
         }
     }
+
+    [Command]
+    public void CmdSetTargetNearestPlayer()
+    {
+        
+        float minDistance = 0.0f;
+        GameObject closestPlayer = null;
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
+        foreach (GameObject player in players)
+        {
+            //  Run through each player and find the clostest to the AI controller
+            float distance = (transform.position - player.transform.position).magnitude;
+
+            if ( distance < minDistance || minDistance == 0.0f)
+            {
+                minDistance = distance;
+                closestPlayer = player;
+            }
+        }
+
+        //  Set the AI to target the closest player
+        controller.target = closestPlayer;
+
+    }
+
 }

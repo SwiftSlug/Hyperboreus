@@ -10,7 +10,6 @@ public class StateController : NetworkBehaviour {
     public State currentState;
     public State remainState;
 
-
     [Tooltip("The default range in which the AI can detect other objects")]
     public float detectionRange = 500.0f;
 
@@ -61,6 +60,7 @@ public class StateController : NetworkBehaviour {
     [HideInInspector] public float stateTimeElapsed;
 
     public bool aiActive;
+    public bool underAttack = false;
 
 
 	void Awake () 

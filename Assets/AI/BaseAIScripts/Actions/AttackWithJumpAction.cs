@@ -17,6 +17,11 @@ public class AttackWithJumpAction : Action
         {
             return;
         }
+        if (!controller.isServer)
+        {
+            //  Do nothing if the call does not come from the server
+            return;
+        }
 
         controller.navMeshAgent.destination = controller.target.transform.position;
 
@@ -41,9 +46,9 @@ public class AttackWithJumpAction : Action
             if (Time.time > (controller.lastAttack + controller.attackCooldown))
             {
                 //  Call attack only after attack cooldown
-                controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
                 controller.lastAttack = Time.time;
-                //Debug.Log("Attack");
+                controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);                
+                //Debug.Log("Attack Called");
             }
         }
 

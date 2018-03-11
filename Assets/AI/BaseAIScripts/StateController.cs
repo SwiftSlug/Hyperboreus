@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 //using Complete;
 
-public class StateController : MonoBehaviour {
+public class StateController : NetworkBehaviour {
 
     public State currentState;
     public State remainState;
+
 
     [Tooltip("The default range in which the AI can detect other objects")]
     public float detectionRange = 500.0f;

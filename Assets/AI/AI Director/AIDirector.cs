@@ -33,13 +33,13 @@ public class AIDirector : NetworkBehaviour
     public float playerProximitySize = 50.0f;        //  The area size around the player that detects nearby enemies for intensity checks
     public float maxDistanceFromPlayers = 100.0f;    //  The max distance an AI unit can be from the player before being deleted
 
-    public int targetIntensityLevelDay = 20;    //  The intensity level the director aims to keep players at during the day
-    public int targetIntensityLevelNight = 200; //  The intensity level the director aims to keep players at during the night
+    public int targetIntensityLevelDay = 40;    //  The intensity level the director aims to keep players at during the day
+    public int targetIntensityLevelNight = 400; //  The intensity level the director aims to keep players at during the night
     public float waveCooldown;                  //  The cooldown time inbetween waves
 
     //  Intensity variables
-    public int intensityPerAI = 10;             //  The amount of intensity each AI unit adds to the player
-    public int intensityPerTrackingAI = 5;      //  The amount of intensity each AI unit tracking the player applies 
+    public int intensityPerAI = 5;             //  The amount of intensity each AI unit adds to the player
+    public int intensityPerTrackingAI = 10;      //  The amount of intensity each AI unit tracking the player applies 
     float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
     public int intensityDecreaseAmount = 20;    //  The amount of intensity that is decreased when its not increasing
     

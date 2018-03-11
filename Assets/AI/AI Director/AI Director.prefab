@@ -95,13 +95,13 @@ MonoBehaviour:
   aiSpawnGroupSizeDay: 1
   numberOfSpawnLocations: 10
   spawnBufferSize: 2
-  playerProximitySize: 50
+  playerProximitySize: 40
   maxDistanceFromPlayers: 100
   targetIntensityLevelDay: 20
   targetIntensityLevelNight: 200
   waveCooldown: 0
-  intensityPerAI: 10
-  intensityPerTrackingAI: 5
+  intensityPerAI: 5
+  intensityPerTrackingAI: 10
   intensityDecreaseAmount: 20
   intensityUpdateInterval: 1
   cleanupInterval: 10

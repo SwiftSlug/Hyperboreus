@@ -61,6 +61,13 @@ public class AIDirector : NetworkBehaviour
     public GameObject debugSpawnCube;
     public GameObject cube;
 
+    int nearbyEnemyIntensity;          //  0 - infinity based on number of enemies near player
+    int trackingIntensity;    //  Intensity level based on the number of enemy tracking the player
+    int healthLost;                //  0 - 100 based on how much health has been lost from 100
+    float healthIntensity;      //  1.0 + value that multiplies the intensity based on how low the players health is
+
+
+
 
     // Use this for initialization
     void Start () {
@@ -482,11 +489,14 @@ public class AIDirector : NetworkBehaviour
     void updatePlayerIntensity()
     {
         
-        int foundAI = 0;        //  The number of AI that are nearby the player
-        int trackingAI = 0;     //  The number of AI that are currently targetting the player
+        //int foundAI = 0;        //  The number of AI that are nearby the player
+        //int trackingAI = 0;     //  The number of AI that are currently targetting the player
 
         foreach (GameObject player in players)
         {
+            int foundAI = 0;        //  The number of AI that are nearby the player
+            int trackingAI = 0;     //  The number of AI that are currently targetting the player
+
             PlayerStats statsRef = player.GetComponent<PlayerStats>();
 
             //  Find all enemies that are near the player
@@ -499,6 +509,7 @@ public class AIDirector : NetworkBehaviour
                     foundAI++;                    
                 }
             }
+            //Debug.Log("Found enemy = " + foundAI);
 
             //  Find all enemies that are targeting the player
             GameObject[] enemyAI = GameObject.FindGameObjectsWithTag("Enemy");
@@ -511,36 +522,49 @@ public class AIDirector : NetworkBehaviour
                     //Debug.Log("Number of tracking AI found = " + trackingAI);
                 }
             }
-        
 
+
+
+            //float intensityLevel = 0.0f;                                    //  Overall intensity level
+
+            //int nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
+            //int trackingIntensity = trackingAI * intensityPerTrackingAI;    //  Intensity level based on the number of enemy tracking the player
+            //int healthLost = (100 - statsRef.currentHealth);                //  0 - 100 based on how much health has been lost from 100
+            ////int ammoIntensity =                                       //  Ammo intensity not part of current build
+
+            //float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
             float intensityLevel = 0.0f;                                    //  Overall intensity level
 
-            int nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
-            int trackingIntensity = trackingAI * intensityPerTrackingAI;    //  Intensity level based on the number of enemy tracking the player
-            int healthLost = (100 - statsRef.currentHealth);                //  0 - 100 based on how much health has been lost from 100
-
+            nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
+            trackingIntensity = trackingAI * intensityPerTrackingAI;    //  Intensity level based on the number of enemy tracking the player
+            healthLost = (100 - statsRef.currentHealth);                //  0 - 100 based on how much health has been lost from 100
             //int ammoIntensity =                                       //  Ammo intensity not part of current build
-            
-            float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
+
+            healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
 
-            intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthLost;    //  Finial intensity level based on above atributes
+            //Debug.Log("Nearby Enemy Intensity =  " + nearbyEnemyIntensity);
+            //Debug.Log("Tracking Enemy Intensity =  " + trackingIntensity);
+            //Debug.Log("Health Lost Intensity =  " + healthLost);
+            //Debug.Log("");
+
+            intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes
 
 
 
-
+            statsRef.intensity = intensityLevel;
 
             // Set final player intensity
 
-            if (statsRef.intensity < intensityLevel)
-            {
-                statsRef.intensity = intensityLevel;
-            }
-            else
-            {
-                statsRef.intensity = statsRef.intensity * 0.9f;
-            }
+            //if (statsRef.intensity < intensityLevel)
+            //{
+            //    statsRef.intensity = intensityLevel;
+            //}
+            //else
+            //{
+            //    statsRef.intensity = statsRef.intensity * 0.9f;
+            //}
 
             /*
             //  Apply Intensity to player
@@ -629,7 +653,12 @@ public class AIDirector : NetworkBehaviour
                 //  Add player intensity to the print string
                 playerText += "Player " + playerNumber.ToString() + "\n";
                 playerText += "-------------------" + "\n";
-                playerText += "Overall Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
+                playerText += "Overall Intensity = " + string.Format(statsRef.intensity.ToString() + "\n\n");
+
+                playerText += "Nearby Enemy Intensity = " + nearbyEnemyIntensity.ToString() + "\n";
+                playerText += "Tracking Enemy Intensity = " + trackingIntensity.ToString() + "\n";
+                playerText += "Health Intensity = " + healthIntensity.ToString() + "\n";
+
                 //text += "Health Intensity = " + string.Format(statsRef.intensity.ToString() + "\n");
 
                 playerNumber++;

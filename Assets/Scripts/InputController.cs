@@ -76,7 +76,7 @@ public class DefaultControllerState : ControllerState
         //  Shooting
         if (Input.GetButton("Fire1") || (Input.GetAxis("Fire1") > 0))
         {
-            controller.weaponShootingScript.StartShoot();
+            controller.weaponShootingScript.Fire();
         }
 
 
@@ -97,19 +97,19 @@ public class DefaultControllerState : ControllerState
         //  Weapon 1
         if ((Input.GetButton("Weapon1")) || (Input.GetAxis("Weapon1") > 0))
         {
-            controller.weaponSwapScript.changeWeapon(0);
+            controller.weaponSwapScript.ChangeWeapon(0);
         }
 
         //  Weapon 2
         if ((Input.GetButton("Weapon2")) || (Input.GetAxis("Weapon2") > 0))
         {
-            controller.weaponSwapScript.changeWeapon(1);
+            controller.weaponSwapScript.ChangeWeapon(1);
         }
 
         //  Weapon 3
         if ((Input.GetButton("Weapon3")) || (Input.GetAxis("Weapon3") > 0))
         {
-            controller.weaponSwapScript.changeWeapon(2);
+            controller.weaponSwapScript.ChangeWeapon(2);
         }
 
         //  Weapon 4 - Not currently in use
@@ -415,7 +415,7 @@ public class InputController : NetworkBehaviour
         //  Shooting
         if (Input.GetButton("Fire1") || (Input.GetAxis("Fire1") > 0))
         {
-            weaponShootingScript.StartShoot();
+            weaponShootingScript.Fire();
         }
 
         //  Weapon swapping
@@ -423,19 +423,19 @@ public class InputController : NetworkBehaviour
         //  Weapon 1
         if ((Input.GetButton("Weapon1")) || (Input.GetAxis("Weapon1") > 0))
         {
-            weaponSwapScript.changeWeapon(0);
+            weaponSwapScript.ChangeWeapon(0);
         }
 
         //  Weapon 2
         if ((Input.GetButton("Weapon2")) || (Input.GetAxis("Weapon2") > 0))
         {
-            weaponSwapScript.changeWeapon(1);
+            weaponSwapScript.ChangeWeapon(1);
         }
 
         //  Weapon 3
         if ((Input.GetButton("Weapon3")) || (Input.GetAxis("Weapon3") > 0))
         {
-            weaponSwapScript.changeWeapon(2);
+            weaponSwapScript.ChangeWeapon(2);
         }
 
         //  Weapon 4 - Not currently in use

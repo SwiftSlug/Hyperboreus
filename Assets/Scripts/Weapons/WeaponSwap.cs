@@ -71,7 +71,7 @@ public class WeaponSwap : NetworkBehaviour
         */
     }
 
-    public void changeWeapon(int weaponNumber)
+    public void ChangeWeapon(int weaponNumber)
     {
         if (weaponSlots[weaponNumber])
         {

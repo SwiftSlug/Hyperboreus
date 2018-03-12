@@ -12,10 +12,11 @@ public class WeaponShooting : NetworkBehaviour
     //  Game object that the weapon script is attached to
     public GameObject equippedWeapon;
 
-   
+
     Ray shootRay = new Ray();                       //Ray from the gun.
     RaycastHit shootHit;                            //Raycast hit to determine what was hit.
     ParticleSystem gunParticles;                    //Reference to the particle system.
+    public ParticleSystem gunShootingParticles;
     //LineRenderer gunLine = new LineRenderer();      //Reference to the line renderer.
     Light gunLight = new Light();                   //Reference to the guns light source.
     LineRenderer gunLine;
@@ -26,50 +27,34 @@ public class WeaponShooting : NetworkBehaviour
     public AudioSource audioSource;
     public AudioClip clipReload;
 
+    //  Init function for 
     public void shootInit()
     {
-
-        //Bullpup gun = new Bullpup();
         if (equippedWeapon)
         {
+            //  Set all starting references if equipped weapon is true
             selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
-        }
 
-        //Debug.Log("Line Rendered Ref Set");
-
-        //gunParticles = GetComponentInChildren<ParticleSystem>();
-        //gunLine = GetComponentInChildren<LineRenderer>();
-        //gunLight = GetComponentInChildren<Light>();
-
-        if (equippedWeapon)
-        {
             gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
             gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
             gunLight = equippedWeapon.GetComponentInChildren<Light>();
+            
+        }
+        if (gunLight)
+        {
+            //  Ensure gunlight is off at start
+            gunLight.enabled = false;
         }
 
-        /*
-        if (equippedWeapon)
-        {
-            gunLine = equippedWeapon.AddComponent<LineRenderer>();
-        }
-        */
     }
 
     private void Awake()
     {
-
-        //selectedWeapon.Init();
-        //Debug.Log("gun name = " + selectedWeapon.weaponName);
-        //selectedWeapon = gameObject.AddComponent<Bullpup>( );
-        
     }
 
     void Start()
     {
-
         shootInit();
-
     }
 
     // Update is called once per frame
@@ -78,17 +63,18 @@ public class WeaponShooting : NetworkBehaviour
         //Debug.Log(selectedWeapon.currentAmmo);
         if (!isLocalPlayer)
         {
+            //  Ensure only local player can run
             return;
         }
         if (!selectedWeapon)
         {
+            //  Ensure script can only run if there is a selected weapon
             return;
         }
 
-        //CmdGunEndCheck();
-
-        //timer to help with weapon rate of fire.
+        //  Increase timer value
         selectedWeapon.timer += Time.deltaTime;
+
         /*
         //stops other statements from running while reloading.
         if (reloading)
@@ -130,23 +116,33 @@ public class WeaponShooting : NetworkBehaviour
         */
 
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
-        if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots * selectedWeapon.effectsDisplayTime)
+        if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots + selectedWeapon.effectsDisplayTime)
         {
             //  Disable Effects
             CmdDisableMuzzleEffects();
         }
     }
 
-    public void StartShoot()
+    public void Fire()
     {
-        if (selectedWeapon != null)
+        //  Ensure that functionality only runs if a weapon is equipped
+        if (selectedWeapon == null)
         {
+            return;
+        }
+
+        if (selectedWeapon.reloading == false)
+        {
+            //  Player is not realoading to continue with firing
+
+            //  Only fire if firing cooldown has been completed
             if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
             {
                 Shoot();
-                CmdServerShoot();
             }
+            
         }
+
     }
 
     public void StartReload()
@@ -179,91 +175,103 @@ public class WeaponShooting : NetworkBehaviour
         selectedWeapon.timer = 0f;
 
         //  Reduce ammo by 1
-        selectedWeapon.currentAmmo--;
+        selectedWeapon.currentAmmo--;        
 
+        //  Draw firing effects
+        CmdShootEffects();
 
-        //gunAudio.Play();
-        gunLight.enabled = true;
+        //  Set the shootRay so it traces in front of the player
+        shootRay.origin = gunTransform.transform.position;
+        shootRay.direction = gunEnd.transform.forward;
 
-        //  Restart particles
-        gunParticles.Stop();
-        gunParticles.Play();
+        //  Set shootray layer to 1
+        int rayLayer = 1;
+        
+        //  Raytrace for hit objects
+        if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range, rayLayer))
+        {
+            if (shootHit.collider.gameObject.GetComponent<AIStats>())
+            {
+                // Raytrace has hit a gameobject with AIStats attached
 
+                CmdHit(shootHit.collider.gameObject, selectedWeapon.weaponDamage);   //  Call damage on the hit AI              
+            }
+
+            // Hit effect goes here !
+            //GameObject impactObject = Instantiate(impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
+        }
+
+    }
+
+    void ShootEffects()
+    {
+        //  Handles all the firing effects without touching the ammo or damage counts
+        //  This stops multiple damage calls and ammo reductions being called per shot
+
+        /*
         //  Draw Line renderer
         if (gunLine)
         {
             gunLine.enabled = true;
             gunLine.SetPosition(0, gunEnd.transform.position);
+            gunLine.SetPosition(1, gunEnd.transform.position + (shootRay.direction * selectedWeapon.range));
         }
-        //  Sets the shootRay so it starts at the gun and points forward.
-        shootRay.origin = gunTransform.transform.position;
-        shootRay.direction = gunEnd.transform.forward;
-
-        int rayLayer = 1;
+        */
+        if (gunParticles)
+        {
+            //  Create Particles for muzzle effect
+            var newParticles = Instantiate(gunParticles, gunEnd.transform.position, Quaternion.identity);
+            newParticles.Play();
+            if (isServer)
+            {
+                //  Only server to destroy the object
+                Destroy(newParticles.gameObject, newParticles.main.duration);   //  Destroy particles after their duration is up        
+            }
+        }
         
-        //Perform the raycast against game objects, and if it hits...
-        if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range, rayLayer))
+        if (gunShootingParticles)
         {
-            //Debug.Log(shootHit.transform.name);
-            //line renderer ends where it hits something.
-            if (gunLine)
+            //  Create Particles for bullet
+            var newBulletParticle = Instantiate(gunShootingParticles, gunEnd.transform.position, gunEnd.transform.rotation);
+            newBulletParticle.Play();
+            if (isServer)
             {
-                gunLine.SetPosition(1, shootHit.point);
+                //  Only server to destroy the object
+                Destroy(newBulletParticle.gameObject, newBulletParticle.main.duration);   //  Destroy particles after their duration is up 
             }
-
-            //shootHit.collider.gameObject.GetComponent<AIStats>().CmdDie();
-            if (shootHit.collider.gameObject.GetComponent<AIStats>())
-            {
-                //Debug.Log("AI Stats found");
-                CmdHit(shootHit.collider.gameObject, 25);
-                //Debug.Log(shootHit.collider.gameObject.GetComponent<AIStats>().enemyHealth);
-            }
-
-            // Hit effect goes here !
-            //GameObject impactObject = Instantiate(impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
+            //Debug.Log(newBulletParticle.main.duration);
+            //gunShootingParticles.Play();
         }
-        //If nothing gets hit by the raycast...
-        else
-        {
-            //Debug.Log("Not hit anything");
-            //...then draw the line render anyway at its max range.
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * selectedWeapon.range);
-        }
+        //  Flash muzzle light
+        float flashDuration = 0.1f;
+
+        gunLight.enabled = true;
+        Invoke("MuzzleFlashToggle", flashDuration);
     }
 
-    void ShootEffect()
+    [Command]
+    void CmdShootEffects()
     {
-        //  Handles all the firing effects without touching the ammo or damage counts
-        //  This stops multiple damage calls and ammo reductions being called per shot
+        ShootEffects();
+        //  Sync effects to all connected clients
+        RpcShootEffects();
+    }
 
-        //gunAudio.Play();
-        gunLight.enabled = true;
+    [ClientRpc]
+    void RpcShootEffects()
+    {
+        ShootEffects();
+    }
 
-        //  Restart particles
-        gunParticles.Stop();
-        gunParticles.Play();
-
-        //  Draw Line renderer
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, gunEnd.transform.position);
-
-        //  Sets the shootRay so it starts at the gun and points forward.
-        shootRay.origin = gunEnd.transform.position;
-        shootRay.direction = gunEnd.transform.forward;
-
-        //Perform the raycast against game objects, and if it hits...
-        if (Physics.Raycast(shootRay, out shootHit, selectedWeapon.range))
+    void MuzzleFlashToggle()
+    {
+        if(gunLight.enabled == true)
         {
-            //Debug.Log("Effect Called !");
-            //line renderer ends where it hits something.
-            gunLine.SetPosition(1, shootHit.point);
-
-            // Hit effect goes here !
-            //GameObject impactObject = Instantiate(impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
+            gunLight.enabled = false;
         }
         else
         {
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * selectedWeapon.range);
+            gunLight.enabled = true;
         }
     }
 
@@ -277,40 +285,21 @@ public class WeaponShooting : NetworkBehaviour
     }
 
     [Command]
-    public void CmdServerShoot()
-    {
-        if (isServer)
-        {
-            ShootEffect();
-            RpcClientsShoot();
-        }
-    }
-
-    [ClientRpc]
-    public void RpcClientsShoot()
-    {
-        ShootEffect();
-    }
-
-    [Command]
     public void CmdDisableMuzzleEffects()
     {
-        // Disable the line renderer and the light.
-        if (gunLine)
-        {
-            gunLine.enabled = false;
-        }
-        if (gunLight)
-        {
-            gunLight.enabled = false;
-            gunLight.enabled = false;
-        }
+        DisableMuzzleEffects();
+        //  Ensure that all clients disable the firing effect
         RpcDisableMuzzleEffects();
     }
 
     [ClientRpc]
     public void RpcDisableMuzzleEffects()
     {
+        DisableMuzzleEffects();
+    }
+
+    void DisableMuzzleEffects()
+    {
         // Disable the line renderer and the light.
         if (gunLine)
         {
@@ -319,7 +308,7 @@ public class WeaponShooting : NetworkBehaviour
         if (gunLight)
         {
             gunLight.enabled = false;
-            gunLight.enabled = false;
         }
     }
+
 }

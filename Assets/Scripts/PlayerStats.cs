@@ -117,6 +117,7 @@ public class PlayerStats : NetworkBehaviour
         }
 
         //BaseBuilding resource debug
+        /*
         if (Input.GetKeyDown(KeyCode.Comma))
         {
             ResourceChoice = 0;
@@ -132,7 +133,7 @@ public class PlayerStats : NetworkBehaviour
             ResourceChoice = 2;
             CmdDebugResourceValue(ResourceChoice);
         }
-
+        */
         //Check if player is dead locally
         if (isDead)
         {

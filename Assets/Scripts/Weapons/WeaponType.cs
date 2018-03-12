@@ -9,7 +9,7 @@ public class WeaponType : MonoBehaviour {
     //public float damagePerShot;                 //Damage each bullet deals to enemies.
     public float timeBetweenShots;              //The time between each shot.
     public float range;                         //The range that the gun can fire.
-    public float weaponDamage;
+    public int weaponDamage;
 
     public float reloadTime;                    //Time taken to reload gun back to max ammo.
     public int maxAmmo;                         //Value for maximum ammo per 'magazine'.

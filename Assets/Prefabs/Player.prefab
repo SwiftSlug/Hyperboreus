@@ -5595,7 +5595,7 @@ MonoBehaviour:
   weaponName: Light Machine Gun
   timeBetweenShots: 0.05
   range: 1000
-  weaponDamage: 10
+  weaponDamage: 20
   reloadTime: 1.5
   maxAmmo: 30
   weaponModel: {fileID: 0}
@@ -5681,6 +5681,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   equippedWeapon: {fileID: 0}
+  gunShootingParticles: {fileID: 198627335161927428, guid: 3f16d70f84f344143be801d8e43da7f0,
+    type: 2}
   gunTransform: {fileID: 4732414733094308}
   gunEnd: {fileID: 4657937148490102}
   audioSource: {fileID: 82026530849861256}
@@ -5845,7 +5847,7 @@ MonoBehaviour:
   weaponName: Light Machine Gun
   timeBetweenShots: 0.1
   range: 1000
-  weaponDamage: 10
+  weaponDamage: 22
   reloadTime: 3
   maxAmmo: 100
   weaponModel: {fileID: 0}
@@ -27080,7 +27082,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: 0.5, y: 1, z: 0.5}

@@ -74,6 +74,7 @@ public class WeaponShooting : NetworkBehaviour
 
         //  Increase timer value
         selectedWeapon.timer += Time.deltaTime;
+
         /*
         //stops other statements from running while reloading.
         if (reloading)
@@ -138,9 +139,8 @@ public class WeaponShooting : NetworkBehaviour
             if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
             {
                 Shoot();
-                //CmdServerShoot();
             }
-
+            
         }
 
     }

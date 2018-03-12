@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 1804178892623510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.699006, y: 11.811025, z: -31.581827}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4986105440389382}
   - {fileID: 4598067789790240}
@@ -204,10 +204,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missileCollider: {fileID: 135999215687272596}
-  blastRadius: 10
+  missileRB: {fileID: 0}
+  blastRadius: 35
   speed: 2000
-  loser: 1
-  damageValue: 150
+  damageMultiplier: 150
   sphereDrawDebug: 1
   explosion: {fileID: 198562167176708058, guid: c655eaad7c770724a8818ce72236c595,
     type: 2}

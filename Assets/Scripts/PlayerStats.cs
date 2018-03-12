@@ -212,7 +212,7 @@ public class PlayerStats : NetworkBehaviour
 		timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
 
         //If the server player's health reaches 0
-		if (currentHealth <= 0)
+		if (currentHealth <= 0 && isDead == false)
 		{
             CmdKill(); //Send the command to the server to kill/down the player
         }
@@ -251,11 +251,11 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
+        isDead = true; //Set our boolean to show that player is dead
+
         GetComponent<GameOver>().CmdCheckDead();
 
         GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
-
-        isDead = true; //Set our boolean to show that player is dead
 
         currentHealth = 0; //Set the player's current health to 0 on the server
     }
@@ -273,8 +273,6 @@ public class PlayerStats : NetworkBehaviour
 
         isDead = false; //Reset our boolean so the player is "alive"
 
-        //manager.gameObject.GetComponent<GameOver>().CmdDecreaseDowned();
-
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 
         currentHealth = 10; //Set the player's revived health
@@ -290,6 +288,32 @@ public class PlayerStats : NetworkBehaviour
         }
 
         InvokeRepeating("CmdRegenHealth", 0.0f, regenHealthSpeed); //Call the server regen health method that repeats each tick depending on regenHealthSpeed value
+    }
+
+    //Regenerate health on the server
+    [Command]
+    public void CmdRegenHealth()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        //If we have a timestamp (prevents regen starting needlessly starting when the game starts)
+        if (timeDamaged != 0.0)
+        {
+            //If; on the server, the player's current health is less than their maximum & the time has increased by the timestamped amount + a specified delay (10 seconds) & the player is not dead
+            if (currentHealth < maxHealth && Time.time > (timeDamaged + regenHealthDelay) && isDead == false)
+            {
+                CmdHeal(1); //Heal the player for 1 each call of this method
+            }
+        }
+    }
+
+    //Using the SyncVar hook, this method is called each time the current health value is synchronized between server and client
+    void ChangeHealth(int currentHealth)
+    {
+        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
     }
 
     [Command]
@@ -310,36 +334,5 @@ public class PlayerStats : NetworkBehaviour
                 MetalInInventory = MetalInInventory + 10;
                 break;
         }
-    }
-
-    //Regenerate health on the server
-	[Command]
-	public void CmdRegenHealth()
-	{
-        if (!isServer)
-        {
-            return;
-        }
-
-        //If we have a timestamp (prevents regen starting needlessly starting when the game starts)
-        if (timeDamaged != 0.0)
-        {
-            //If; on the server, the player's current health is less than their maximum & the time has increased by the timestamped amount + a specified delay (10 seconds) & the player is not dead
-            if (currentHealth < maxHealth && Time.time > (timeDamaged + regenHealthDelay) && isDead == false)
-            {
-                CmdHeal(1); //Heal the player for 1 each call of this method
-            }
-        }
-	}
-
-    //Using the SyncVar hook, this method is called each time the current health value is synchronized between server and client
-	void ChangeHealth(int currentHealth)
-	{
-		healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
-	}
-
-    public void doStuff()
-    {
-        gameOverOverlay.gameObject.SetActive(true);
     }
 }

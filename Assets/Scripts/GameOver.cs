@@ -3,18 +3,16 @@ using UnityEngine.Networking;
 
 public class GameOver : NetworkBehaviour
 {
+    public GameObject[] players;
+
     [SyncVar]
     public int playersDown = 0;
-
-    public GameObject[] players;
 
     [SyncVar]
     public int playerTotal = 0;
 
     void Start()
     {
-        //Debug.Log("Start Called");
-
         Invoke("CmdPlayerJoin", 2);
     }
 
@@ -25,8 +23,6 @@ public class GameOver : NetworkBehaviour
         {
             return;
         }
-
-        //Debug.Log("Server Called Player Join");
 
         players = GameObject.FindGameObjectsWithTag("NetworkedPlayer");
 
@@ -43,7 +39,6 @@ public class GameOver : NetworkBehaviour
 
         RpcSyncPlayerTotal(playerTotal);
 
-        //Debug.Log("Player Total: " + playerTotal);
     }
 
     [Command]
@@ -54,53 +49,13 @@ public class GameOver : NetworkBehaviour
             return;
         }
 
-        //Debug.Log("Server Sync Total");
-
-        //Debug.Log("Total: " + total);
-
         playerTotal = total;
-
-        //Debug.Log("Server's Player Total: " + playerTotal);
     }
 
     [ClientRpc]
     public void RpcSyncPlayerTotal(int total)
     {
-        //Debug.Log("Client Sync Total");
-
         playerTotal = total;
-    }
-
-    [Command]
-    public void CmdIncreaseDowned()
-    {
-        if (!isServer)
-        {
-            return;
-        }
-
-        CmdSyncPlayersDown(playersDown);
-
-        if (playersDown < playerTotal)
-        {
-            //Debug.Log("Player: " + playerTotal);
-            //Debug.Log("Players Down: " + playersDown);
-
-            playersDown++;
-
-            //Debug.Log("Player Down Increase");
-
-            //Debug.Log("Players Down: " + playersDown);
-
-            CmdSyncPlayersDown(playersDown);
-        }
-
-        if (playersDown == playerTotal)
-        {
-            CmdSyncPlayersDown(playersDown);
-
-            RpcGameOverlay();
-        }
     }
 
     [Command]
@@ -121,76 +76,15 @@ public class GameOver : NetworkBehaviour
             }
         }
 
-        if(downTotal == playerTotal - 1)
+        if(downTotal == playerTotal)
         {
             RpcGameOverlay();
-        }
-    }
-
-    [Command]
-    public void CmdSyncPlayersDown(int downed)
-    {
-        if (!isServer)
-        {
-            return;
-        }
-
-        //Debug.Log("Server Sync Downed");
-
-        //Debug.Log("Downed: " + downed);
-
-        //playersDown++;
-
-        playersDown = downed;
-
-        //Debug.Log("Server Downed Count: " + playersDown);
-    }
-
-    [ClientRpc]
-    public void RpcSyncPlayersDown(int downed)
-    {
-        //Debug.Log("Client Sync Downed");
-
-        //Debug.Log("Downed: " + downed);
-
-        //playersDown++;
-
-        playersDown = downed;
-
-        //Debug.Log("Synced Downed: " + playersDown);
-    }
-
-    [ClientRpc]
-    public void RpcSyncPlayers(int downed)
-    {
-        //Debug.Log("Client Sync Downed");
-
-        //Debug.Log("Downed: " + downed);
-
-        playersDown = downed;
-
-        //Debug.Log("Synced Downed: " + playersDown);
-    }
-
-    [Command]
-    public void CmdDecreaseDowned()
-    {
-        if (!isServer)
-        {
-            return;
-        }
-
-        if (playersDown > 0)
-        {
-            playersDown--;
         }
     }
 
     [ClientRpc]
     public void RpcGameOverlay()
     {
-        //Debug.Log("RPC Called");
-
         GetComponent<PlayerStats>().gameOverOverlay.gameObject.SetActive(true);
     }
 

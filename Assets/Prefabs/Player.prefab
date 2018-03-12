@@ -221,9 +221,9 @@ GameObject:
   - component: {fileID: 114109481225106914}
   - component: {fileID: 114858492855255892}
   - component: {fileID: 114435461862225750}
+  - component: {fileID: 114242814352400452}
   - component: {fileID: 82026530849861256}
   - component: {fileID: 114713473014863432}
-  - component: {fileID: 114085309944553850}
   - component: {fileID: 208646752092801228}
   m_Layer: 8
   m_Name: Player
@@ -5344,24 +5344,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114085309944553850
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1429b8ff6c35f724784efea528c286a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerReference: {fileID: 0}
-  cooldown: 0
-  buttonDownTime: 0
-  lastUsedTime: 0
-  chargeTime: 0
-  check: 0
-  TrapPos: {fileID: 4435395771784770}
 --- !u!114 &114087570552360672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5506,6 +5488,25 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Return To Lobby
+--- !u!114 &114242814352400452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75df1a9f6288b744bbaad1b0606ba8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReference: {fileID: 0}
+  cooldown: 0
+  buttonDownTime: 0
+  lastUsedTime: 0
+  chargeTime: 0
+  airstrikeTime: 0
+  smokeMarker: {fileID: 0}
+  MarkerLocation: {fileID: 4435395771784770}
 --- !u!114 &114251673205330040
 MonoBehaviour:
   m_ObjectHideFlags: 1

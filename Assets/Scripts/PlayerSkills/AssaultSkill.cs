@@ -5,18 +5,19 @@ using UnityEngine.Networking;
 
 public class AssaultSkill : Skill
 {
-    //  Time it takes to charge the syringe shot
-    public float chargeTime;
+    public float chargeTime;            // Time it takes to charge the syringe shot
 
-    // Time taken before airstrike hits
-    public float airstrikeTime;
+    public float airstrikeTime;         // Time taken before airstrike hits
 
-    //  The current time spent charging the ability
-    float currentChargeTime;
+    float currentChargeTime;            // The current time spent charging the ability
 
-    RaycastHit markerZ;
-    Ray markerRay = new Ray();
-    ParticleSystem smokeMarker;
+    RaycastHit markerY;                 // Raycast hit point
+
+    Ray markerRay = new Ray();          // Raycast for marker location point
+
+    public ParticleSystem smokeMarker;  // Particle system for smoke marker
+
+    public Transform MarkerLocation;    // Transform of marker location (structure placement object to be used as point)
 
     //void Update()
     //{
@@ -26,8 +27,6 @@ public class AssaultSkill : Skill
 
     public override void Init()
     {
-        Debug.Log("INIT");
-
         if (cooldown == 0.0f)
         {
             //  Sets the cooldown to 2 seconds if no other value is set
@@ -37,7 +36,7 @@ public class AssaultSkill : Skill
         if (chargeTime == 0.0f)
         {
             //  Sets the chargetime to 2 seconds if no other value is set
-            chargeTime = 1.0f;
+            chargeTime = 0.5f;
         }
     }
 
@@ -45,22 +44,24 @@ public class AssaultSkill : Skill
     {
         if (isLocalPlayer)
         {
+            // Check if the cooldown period has finished
             if (Time.time > lastUsedTime + cooldown)
             {
-                currentChargeTime += Time.deltaTime;
-                //draw marker on mouse location update
-                Vector3 mousePosUpdate = Input.mousePosition;
-                //mousePosUpdate.z = mousePosUpdate.y + 50;
+                currentChargeTime += Time.deltaTime;            // Get current time value when charge up starts
+
+                // draw marker on mouse location update
+                //Vector3 mousePosUpdate = Input.mousePosition;
+                //mousePosUpdate = mousePosUpdate.y + 50;
                 //markerRay.origin = mousePosUpdate;
                 //markerRay.direction = -(transform.up);
 
-                markerRay.origin = gameObject.transform.position + new Vector3(0,350f, 0);
-                markerRay.direction = -(gameObject.transform.up);
+                markerRay.origin = MarkerLocation.position + new Vector3(0, 350f, 0);   // Set origin of the raycast to desired X+Z location + large Y value 
+                markerRay.direction = -(gameObject.transform.up);                       // Set raycast direcion downwards
 
-                if (Physics.Raycast(markerRay.origin, markerRay.direction, out markerZ, 100))
+                if (Physics.Raycast(markerRay.origin, markerRay.direction, out markerY, 100))
                 {
-                    Vector3 targetLocation = markerZ.point;
-                    Debug.Log(targetLocation);
+                    Vector3 targetLocation = markerY.point;     // Set raycast hit location for where smoke marker is placed
+                    //Debug.Log(targetLocation);
                 }
 
                 //Debug.Log(mousePosUpdate.x);
@@ -68,22 +69,23 @@ public class AssaultSkill : Skill
                 //Debug.Log(mousePosUpdate.z);
                 //Debug.Log("drawing marker");
 
+
+                // When ability has finished charging
                 if (currentChargeTime > chargeTime)
                 {
-                    //get mouse location and draw marker at mouse location
-                    //particleMarker.SetPosition(1, targetLocation);
+                    //smokeMarker.SetPosition(1, targetLocation);
                     //particleMarker.Stop();
                     //particleMarker.Play();
                     //Vector3 mousePos = Input.mousePosition;
-                    //wait for air strike time
-                    //delete marker
 
+                    // wait for air strike time
+                    // delete marker
 
-                    CmdSpawnStrike(markerRay.origin, transform.rotation, playerReference);
+                    //RpcSmokeMarker();
 
+                    CmdSpawnStrike(markerRay.origin, transform.rotation, playerReference);  // Call command for spawning missile
 
-
-                    Debug.Log("BOOM");
+                    //Debug.Log("BOOM");
                     currentChargeTime = 0.0f;   //  Reset the current charge time
                     lastUsedTime = Time.time;   //  Set last firing time
                     return true;
@@ -96,27 +98,37 @@ public class AssaultSkill : Skill
     public override void buttonRelease()
     {
         currentChargeTime = 0.0f;       //  Reset the current charge time  
-        Debug.Log("release");
-        //Disable marker after airstrike fires
+        //Debug.Log("release");
     }
 
-    //edit for missile from set z value above and so its facing down and velocity is facing down
     [Command]
     void CmdSpawnStrike(Vector3 spawnPosition, Quaternion spawnRotation, GameObject currentPlayerReference)
     {
-        Debug.Log("strike");
-        GameObject Missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
+        //Debug.Log("strike");
+        //smokeMarker.Play();
+        //RpcSmokeMarker();
+        GameObject missile = Resources.Load("Missile", typeof(GameObject)) as GameObject;
 
-        //GameObject MissileRef = Instantiate(Missile, spawnPosition, spawnRotation);
+        GameObject missileRef = Instantiate(missile, spawnPosition, spawnRotation);
 
         //  Assign player reference on scripts
         //MissileRef.GetComponentInChildren<MedicalSyringeScript>().player = currentPlayerReference;
-
-        //NetworkServer.Spawn(syringeRef);
+        NetworkServer.Spawn(missileRef);
     }
 
-    //if missile hits something damagable, then damage
-    //else explode on hit
-    //on explode do small shere trace from hit location with less damage
-    //repeat sphere trace getting bigger, but less damage
+    [Command]
+    public void CmdSmokeMarker()
+    {
+        if (isServer)
+        {
+            smokeMarker.Play();
+            RpcSmokeMarker();
+        }
+    }
+
+    [ClientRpc]
+    public void RpcSmokeMarker()
+    {
+        smokeMarker.Play();
+    }
 }

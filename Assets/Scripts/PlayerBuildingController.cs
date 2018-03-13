@@ -114,12 +114,12 @@ public class PlayerBuildingController : NetworkBehaviour
         if (StructureNeeded == 2)
         {
             StructureNeeded = 0;
-            TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
         else
         {
             StructureNeeded = StructureNeeded + 1;
-            TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
     }
     [Command]
@@ -128,13 +128,13 @@ public class PlayerBuildingController : NetworkBehaviour
         if (MaterialNeeded == 2)
             {
                 MaterialNeeded = 0;
-                TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+                //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
                // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
         else
             {
                 MaterialNeeded = MaterialNeeded + 1;
-                TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+                //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
             // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
     }

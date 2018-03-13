@@ -34,10 +34,10 @@ public class AudioSync : NetworkBehaviour
         {
             tempAudioSource = objectSource.GetComponent<AudioSource>(); //Set the audio source for all clients to the object being passed in
 
-            if (!tempAudioSource.isPlaying)
-            {
+            //if (!tempAudioSource.isPlaying)
+            //{
                 tempAudioSource.PlayOneShot(clipArray[audioID], 1.0f); //Play our sound from the array of clips available
-            }
+            //}
         }
 
         ResetSound();

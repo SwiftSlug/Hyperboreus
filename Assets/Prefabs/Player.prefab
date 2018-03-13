@@ -5541,8 +5541,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef406e32bf72734ab7094274a5aae49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersDown: 0
   players: []
+  playersDown: 0
   playerTotal: 0
 --- !u!114 &114348478218635018
 MonoBehaviour:
@@ -5592,13 +5592,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58bf5833f6f5dca4497e7ec9e5a7bb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Light Machine Gun
+  weaponName: Sub Machine Gun
   timeBetweenShots: 0.05
   range: 1000
   weaponDamage: 20
   reloadTime: 1.5
   maxAmmo: 30
   weaponModel: {fileID: 0}
+  audioSync: {fileID: 0}
   effectsDisplayTime: 0.1
   currentAmmo: 30
   reloading: 0
@@ -5687,6 +5688,7 @@ MonoBehaviour:
   gunEnd: {fileID: 4657937148490102}
   audioSource: {fileID: 82026530849861256}
   clipReload: {fileID: 8300000, guid: fc84b45a72400ed45bd0f90d5e6d01b7, type: 3}
+  audioSync: {fileID: 0}
 --- !u!114 &114505928617221474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5796,6 +5798,7 @@ MonoBehaviour:
   reloadTime: 1.5
   maxAmmo: 25
   weaponModel: {fileID: 0}
+  audioSync: {fileID: 0}
   effectsDisplayTime: 0.1
   currentAmmo: 25
   reloading: 0
@@ -5851,6 +5854,7 @@ MonoBehaviour:
   reloadTime: 3
   maxAmmo: 100
   weaponModel: {fileID: 0}
+  audioSync: {fileID: 0}
   effectsDisplayTime: 0.1
   currentAmmo: 100
   reloading: 0
@@ -5984,8 +5988,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef406e32bf72734ab7094274a5aae49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersDown: 0
   players: []
+  playersDown: 0
   playerTotal: 0
 --- !u!114 &114919934040595350
 MonoBehaviour:

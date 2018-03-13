@@ -27,6 +27,8 @@ public class WeaponShooting : NetworkBehaviour
     public AudioSource audioSource;
     public AudioClip clipReload;
 
+    public AudioSync audioSync;
+
     //  Init function for 
     public void shootInit()
     {
@@ -55,6 +57,8 @@ public class WeaponShooting : NetworkBehaviour
     void Start()
     {
         shootInit();
+
+        audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
     }
 
     // Update is called once per frame
@@ -138,6 +142,20 @@ public class WeaponShooting : NetworkBehaviour
             //  Only fire if firing cooldown has been completed
             if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
             {
+                //Darrell's Non-Modular Audio
+                if (selectedWeapon.weaponName == "Bullpup")
+                {
+                    audioSync.PlaySound(this.gameObject, 3);
+                }
+                else if (selectedWeapon.weaponName == "Light Machine Gun")
+                {
+                    audioSync.PlaySound(this.gameObject, 4);
+                }
+                else if (selectedWeapon.weaponName == "Sub Machine Gun")
+                {
+                    audioSync.PlaySound(this.gameObject, 5);
+                }
+
                 Shoot();
             }
             
@@ -153,6 +171,8 @@ public class WeaponShooting : NetworkBehaviour
             {
                 //Debug.Log("Reloading !");
                 audioSource.PlayOneShot(clipReload, 1.0f);
+
+                audioSync.ResetSound();
 
                 CmdDisableMuzzleEffects();
                 Invoke("Reload", selectedWeapon.reloadTime);

@@ -30,10 +30,10 @@ public class WeaponShooting : NetworkBehaviour
     //  Init function for 
     public void shootInit()
     {
-        if (!isLocalPlayer)
+        if (isLocalPlayer)
         {
             //  Ensure only local player can run
-            return;
+
         }
 
         if (equippedWeapon)
@@ -46,11 +46,9 @@ public class WeaponShooting : NetworkBehaviour
             gunLight = equippedWeapon.GetComponentInChildren<Light>();
             
         }
-        if (gunLight)
-        {
-            //  Ensure gunlight is off at start
-            gunLight.enabled = false;
-        }
+
+        //  Ensure all effects are disabled at start
+        CmdDisableMuzzleEffects();
 
     }
 

@@ -52,7 +52,7 @@ public class AIStats : NetworkBehaviour
 
             if (enemyHealth <= 0)
             {
-                audioSync.PlaySound(this.gameObject, 2);
+                audioSync.PlaySound(this.gameObject, 2, false);
 
                 isDead = true;
             }

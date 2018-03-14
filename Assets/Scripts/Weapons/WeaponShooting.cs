@@ -40,7 +40,9 @@ public class WeaponShooting : NetworkBehaviour
             gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
             gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
             gunLight = equippedWeapon.GetComponentInChildren<Light>();
-            
+
+            audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
+
         }
         if (gunLight)
         {
@@ -57,8 +59,6 @@ public class WeaponShooting : NetworkBehaviour
     void Start()
     {
         shootInit();
-
-        audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
     }
 
     // Update is called once per frame
@@ -145,15 +145,15 @@ public class WeaponShooting : NetworkBehaviour
                 //Darrell's Non-Modular Audio
                 if (selectedWeapon.weaponName == "Bullpup")
                 {
-                    audioSync.PlaySound(this.gameObject, 3);
+                    audioSync.PlaySound(this.gameObject, 3, true);
                 }
                 else if (selectedWeapon.weaponName == "Light Machine Gun")
                 {
-                    audioSync.PlaySound(this.gameObject, 4);
+                    audioSync.PlaySound(this.gameObject, 4, true);
                 }
                 else if (selectedWeapon.weaponName == "Sub Machine Gun")
                 {
-                    audioSync.PlaySound(this.gameObject, 5);
+                    audioSync.PlaySound(this.gameObject, 5, true);
                 }
 
                 Shoot();

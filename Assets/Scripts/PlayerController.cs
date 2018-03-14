@@ -4,17 +4,38 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour
 {
     Vector3 playerOrientation; //Player Orientation
+
     [SyncVar]
     public bool AbleToDestroy = false;
+
     [SyncVar]
     public bool AbleToLoot = false;
+
     [SyncVar]
     public GameObject AssetToDestroy;
+
     [SyncVar]
     public GameObject AssetToLoot;
 
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
     public float controllerDeadZone = 0.5f;
+
+    Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    void FixedUpdate()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        Animator();
+    }
 
     //Update is called once per frame
     void Update()
@@ -48,7 +69,7 @@ public class PlayerController : NetworkBehaviour
         //  Save mouse position for next position update check
         previousMousePos = Input.mousePosition;
         */
-         
+
         /*
         float xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f; //Get the input horizontally and save it. "W,S,Up,Down,Joystick Up,Joystick Down"
         float yAxis = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f; //Get the vertical input and and save it. "A,D,Left,Right,Joystick Left, Joystick Right"
@@ -141,8 +162,8 @@ public class PlayerController : NetworkBehaviour
         transform.Translate(Vector3.right * xAxis, Space.World);
     }
 
-    public void AddVerticalMovement(float vertical)    {
-        
+    public void AddVerticalMovement(float vertical)
+    {
         float yAxis = vertical * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.forward * yAxis, Space.World);
     }
@@ -165,6 +186,7 @@ public class PlayerController : NetworkBehaviour
             AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         }
     }
+
     private void OnCollisionExit(Collision collidedAsset)
     {
         //destroyable asset end collision
@@ -188,6 +210,12 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+
+    void Animator()
+    {
+       
+    }
+
     [Command]
     public void CmdDamageAsset()
     {

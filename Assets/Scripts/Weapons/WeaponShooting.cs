@@ -8,7 +8,7 @@ public class WeaponShooting : NetworkBehaviour
     //public WeaponType selectedWeapon;
 
     //  Private reference to the specfic wepaon script
-    private WeaponType selectedWeapon;
+    public WeaponType selectedWeapon;
     //  Game object that the weapon script is attached to
     public GameObject equippedWeapon;
 
@@ -26,6 +26,8 @@ public class WeaponShooting : NetworkBehaviour
 
     public AudioSource audioSource;
     public AudioClip clipReload;
+
+    //public bool reloading = false;
 
     //  Init function for 
     public void shootInit()

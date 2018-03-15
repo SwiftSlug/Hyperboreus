@@ -20,21 +20,16 @@ public class PlayerController : NetworkBehaviour
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
     public float controllerDeadZone = 0.5f;
 
-    Animator animator;
+    public Animator animator;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
-        Animator();
+        //Animator(horizontal, vertical);
     }
 
     //Update is called once per frame
@@ -132,7 +127,7 @@ public class PlayerController : NetworkBehaviour
         previousMousePos = Input.mousePosition;
 
     }
-
+    //luis check here for turning animations
     public void ControllerAiming()
     {
         Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
@@ -160,12 +155,16 @@ public class PlayerController : NetworkBehaviour
     {
         float xAxis = horizontal * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.right * xAxis, Space.World);
+        Animator(horizontal, 0);
+        Debug.Log("horizontal");
     }
 
     public void AddVerticalMovement(float vertical)
     {
         float yAxis = vertical * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.forward * yAxis, Space.World);
+        Animator(0, yAxis);
+        Debug.Log("vertical");
     }
 
 
@@ -211,9 +210,23 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    void Animator()
+    void Animator(float horizontal, float vertical)
     {
-       
+        bool forward = vertical > 0;
+        animator.SetBool("forward", forward);
+        Debug.Log("forward");
+
+        bool backward = vertical < 0;
+        animator.SetBool("backward", backward);
+        Debug.Log("backward");
+
+        bool left = horizontal < 0;
+        animator.SetBool("left", left);
+        Debug.Log("left");
+
+        bool right = horizontal > 0;
+        animator.SetBool("right", right);
+        Debug.Log("right");
     }
 
     [Command]

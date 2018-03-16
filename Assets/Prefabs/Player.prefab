@@ -6336,7 +6336,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138322535066456}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: c77a274649dc82f48a807f2d4c017575, type: 3}
   m_Controller: {fileID: 9100000, guid: ce525c6bb67ce3b4a9007b025207afe0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -6788,6 +6788,7 @@ MonoBehaviour:
   AssetToDestroy: {fileID: 0}
   AssetToLoot: {fileID: 0}
   controllerDeadZone: 0.2
+  rb: {fileID: 54978155409613628}
 --- !u!114 &114300363803433394
 MonoBehaviour:
   m_ObjectHideFlags: 1

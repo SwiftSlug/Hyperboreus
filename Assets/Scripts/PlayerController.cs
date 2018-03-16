@@ -18,6 +18,7 @@ public class PlayerController : NetworkBehaviour
     public GameObject AssetToLoot;
 
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
+
     public float controllerDeadZone = 0.5f;
 
     Animator animator;
@@ -29,7 +30,19 @@ public class PlayerController : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        //Animator(horizontal, vertical);
+        //Debug.Log("");
+        Vector3 facing = transform.forward;
+        //Vector3 vel = transform.;
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        facing.y = 0;
+        Debug.Log(facing);
+        //Debug.Log(h);
+        //Debug.Log(v);
+
+        // if facing up 
+            //if horizontal = 1 then right
+
     }
 
     //Update is called once per frame
@@ -127,7 +140,7 @@ public class PlayerController : NetworkBehaviour
         previousMousePos = Input.mousePosition;
 
     }
-    //luis check here for turning animations
+    
     public void ControllerAiming()
     {
         Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
@@ -156,7 +169,6 @@ public class PlayerController : NetworkBehaviour
         float xAxis = horizontal * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.right * xAxis, Space.World);
         AnimatorH(xAxis);
-        //Debug.Log("horizontal");
     }
 
     public void AddVerticalMovement(float vertical)
@@ -164,7 +176,6 @@ public class PlayerController : NetworkBehaviour
         float yAxis = vertical * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.forward * yAxis, Space.World);
         AnimatorV(yAxis);
-        //Debug.Log("vertical");
     }
 
 

@@ -20,9 +20,9 @@ public class PlayerController : NetworkBehaviour
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
     public float controllerDeadZone = 0.5f;
 
-    public Animator animator;
+    Animator animator;
 
-    private void Awake()
+    void Start()
     {
         animator = GetComponent<Animator>();
     }
@@ -155,16 +155,16 @@ public class PlayerController : NetworkBehaviour
     {
         float xAxis = horizontal * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.right * xAxis, Space.World);
-        Animator(horizontal, 0);
-        Debug.Log("horizontal");
+        AnimatorH(xAxis);
+        //Debug.Log("horizontal");
     }
 
     public void AddVerticalMovement(float vertical)
     {
         float yAxis = vertical * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.forward * yAxis, Space.World);
-        Animator(0, yAxis);
-        Debug.Log("vertical");
+        AnimatorV(yAxis);
+        //Debug.Log("vertical");
     }
 
 
@@ -210,23 +210,26 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    void Animator(float horizontal, float vertical)
+    void AnimatorH(float horizontal)
     {
-        bool forward = vertical > 0;
-        animator.SetBool("forward", forward);
-        Debug.Log("forward");
-
-        bool backward = vertical < 0;
-        animator.SetBool("backward", backward);
-        Debug.Log("backward");
-
         bool left = horizontal < 0;
         animator.SetBool("left", left);
-        Debug.Log("left");
+        //Debug.Log("left");
 
         bool right = horizontal > 0;
         animator.SetBool("right", right);
-        Debug.Log("right");
+        //Debug.Log("right");
+    }
+
+    void AnimatorV(float vertical)
+    {
+        bool forward = vertical > 0;
+        animator.SetBool("forward", forward);
+        //Debug.Log("forward");
+
+        bool backward = vertical < 0;
+        animator.SetBool("backward", backward);
+        //Debug.Log("backward");
     }
 
     [Command]

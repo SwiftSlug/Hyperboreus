@@ -45,6 +45,8 @@ public class PlayerStats : NetworkBehaviour
 
     public GameObject manager = null;
 
+    Animator animator;
+
     public float intensity;
 
     // player inventory //
@@ -81,6 +83,8 @@ public class PlayerStats : NetworkBehaviour
 
 			return;
 		}
+
+        animator = GetComponent<Animator>();
 
         currentHealth = maxHealth; //Set the player's health to their maximum health locally
 
@@ -136,6 +140,7 @@ public class PlayerStats : NetworkBehaviour
         //Check if player is dead locally
         if (isDead)
         {
+            Animator();
             GetComponent<PlayerController>().enabled = false; //Disable the player's movement locally
         }
         else
@@ -163,6 +168,13 @@ public class PlayerStats : NetworkBehaviour
             }
         }
     }
+
+    void Animator()
+    {
+        animator.SetBool("isDead", true);
+        Debug.Log("dead");
+    }
+
 
     //Call this on the server
     [Command]

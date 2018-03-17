@@ -22,6 +22,9 @@ public class BuildingController : NetworkBehaviour
     public Material DoorWoodMat;
     public Material DoorStoneMat;
     public Material DoorMetalMat;
+    
+    [SyncVar]
+    public int Hitpoints;
 
     public bool StructurePlaced = false;
 
@@ -51,14 +54,17 @@ public class BuildingController : NetworkBehaviour
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
+                Hitpoints = 100;
             }
             else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
+                Hitpoints = 200;
             }
             else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
+                Hitpoints = 300;
             }
         }
         else if (StructureValue == 1) //else if (LocalNeededStructure == 1)
@@ -70,15 +76,18 @@ public class BuildingController : NetworkBehaviour
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorWoodMat;
+                Hitpoints = 100;
             }
             else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorStoneMat;
+                Hitpoints = 200;
             }
             else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
 
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorMetalMat;
+                Hitpoints = 300;
             }
         }
         else if (StructureValue == 2) //else if (LocalNeededStructure == 2)
@@ -91,14 +100,17 @@ public class BuildingController : NetworkBehaviour
 
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorWoodMat;
+                Hitpoints = 100;
             }
             else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorStoneMat;
+                Hitpoints = 200;
             }
             else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorMetalMat;
+                Hitpoints = 300;
             }
         }
     }
@@ -117,14 +129,17 @@ public class BuildingController : NetworkBehaviour
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
+                Hitpoints = 100;
             }
             else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
+                Hitpoints = 200;
             }
             else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
             {
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
+                Hitpoints = 300;
             }
         }
         else if (StructureValue == 1) //else if (LocalNeededStructure == 1)
@@ -136,15 +151,18 @@ public class BuildingController : NetworkBehaviour
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorWoodMat;
+                Hitpoints = 100;
             }
             else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorStoneMat;
+                Hitpoints = 200;
             }
             else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
 
             {
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorMetalMat;
+                Hitpoints = 300;
             }
         }
         else if (StructureValue == 2) //else if (LocalNeededStructure == 2)
@@ -157,14 +175,17 @@ public class BuildingController : NetworkBehaviour
 
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorWoodMat;
+                Hitpoints = 100;
             }
             else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorStoneMat;
+                Hitpoints = 200;
             }
             else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
             {
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorMetalMat;
+                Hitpoints = 300;
             }
         }
     }

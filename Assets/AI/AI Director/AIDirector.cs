@@ -252,102 +252,126 @@ public class AIDirector : NetworkBehaviour
                 Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;    
                 //  Add the ignore area to the random location to push spawn points away from the character
                 spawnLocation = spawnLocation + innerArea;
-                
 
-                //  Find all colliders at the random location
-                Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
+                bool otherPlayerProximity = false;
 
-                //  This section may be improved to use a layer mask rather than comparing tags for each hit
-
-                //  Run through all found colliders
-                bool areaClear = true;
-                int hits = 0;
-                while (hits < hitColliders.Length)
+                foreach (GameObject player in players)
                 {
-                    // if anything other than the floor is found then the area is not suitable
-                    if (!hitColliders[hits].CompareTag("floor"))
-                    {
-                        areaClear = false;
-                        //Debug.Log("Object " + i + " - Hit collider = " + hitColliders[hits].name);
-
-                        //  Debug
-                        if (shouldAICreateSpawnDebug)
-                        {
-                            GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
-                            debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
-                        }
-                    }                    
-                    hits++;
-                }
-                
-                if (areaClear == true)
-                {                    
-
-                    //Debug.Log("Clear spawn area found !");
-                    //  Spawn debug cube at spawn location
-                    //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
-                    //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
-                    //Destroy(debugCube, 10);
-
-                    NavMeshHit navMeshHit;
+                    float distance = (spawnLocation - player.transform.position).magnitude; //  Distance from player to spawn location
                     
-
-                    //  Scan for a navmesh position at the random location
-                    if(NavMesh.SamplePosition(spawnLocation, out navMeshHit, spawnBufferSize, NavMesh.AllAreas))
+                    //  Check if spawn location is too close to other players
+                    if (distance < spawnBufferSize)
                     {
-                        //Debug.Log("Location with navmesh found !");
-                        //NavMesh foundNavMesh = navMeshHit;
-                        bool canPathToPlayer = true;
-                        //  Can the path reach player 0
-                        NavMeshPath pathToPlayer = new NavMeshPath();
-                        //NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
+                        //  Spawn location too close set flag to true
+                        otherPlayerProximity = true;
+                        Debug.Log("Too Close to player");
+                    }
+                }
 
-                        foreach(GameObject player in players)
+                //  Only run the rest of the check if the location is not within the buffer distance of all other players
+                if (otherPlayerProximity != true)
+                {
+
+                    //  Find all colliders at the random location
+                    Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
+
+
+                    //  Run through all found colliders
+                    bool areaClear = true;
+                    int hits = 0;
+                    while (hits < hitColliders.Length)
+                    {
+                        // if anything other than the floor is found then the area is not suitable
+                        if (!hitColliders[hits].CompareTag("floor"))
                         {
-                            NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
-                            if (pathToPlayer.status != NavMeshPathStatus.PathComplete)
-                            {
-                                //  Cant find path to player
-                                canPathToPlayer = false;
-
-                                //  Debug
-                                if (shouldAICreateSpawnDebug)
-                                {
-                                    GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
-                                    debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.yellow;
-                                }
-                            }
-    
-                        }
-
-                        if (canPathToPlayer)
-                        {
-                            //Debug.Log("Area can navigate to player");
-                            //  All checks passed, add found spawn location to spawn list
-                            spawnLocations.Add(spawnLocation);
-                            // Break out of while loop as spawn location has been found
-                            maxRunCounter = maxRunAttempts;
-                            areaFound = true;
-
-                            //Debug.Log("Area found for pos : " + i);
+                            areaClear = false;
+                            //Debug.Log("Object " + i + " - Hit collider = " + hitColliders[hits].name);
 
                             //  Debug
                             if (shouldAICreateSpawnDebug)
                             {
                                 GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
-                                debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.blue;
+                                debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
                             }
-
-                            //Debug.Log("Area Found");
-                            if (shouldAIDebug)
-                            {
-                                //Debug.Log("Number of runs to find spawn area = " + maxRunCounter);
-                            }
-                            //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                         }
-                        
-                    }                    
+                        hits++;
+                    }
 
+                    if (areaClear == true)
+                    {
+
+                        //Debug.Log("Clear spawn area found !");
+                        //  Spawn debug cube at spawn location
+                        //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                        //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
+                        //Destroy(debugCube, 10);
+
+                        NavMeshHit navMeshHit;
+
+
+                        //  Scan for a navmesh position at the random location
+                        if (NavMesh.SamplePosition(spawnLocation, out navMeshHit, spawnBufferSize, NavMesh.AllAreas))
+                        {
+                            //Debug.Log("Location with navmesh found !");
+                            //NavMesh foundNavMesh = navMeshHit;
+                            bool canPathToPlayer = true;
+                            //  Can the path reach player 0
+                            NavMeshPath pathToPlayer = new NavMeshPath();
+                            //NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
+
+                            foreach (GameObject player in players)
+                            {
+                                NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
+                                if (pathToPlayer.status != NavMeshPathStatus.PathComplete)
+                                {
+                                    //  Cant find path to player
+                                    canPathToPlayer = false;
+
+                                    //  Debug
+                                    if (shouldAICreateSpawnDebug)
+                                    {
+                                        GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                                        debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.yellow;
+                                    }
+                                }
+
+                            }
+
+                            if (canPathToPlayer)
+                            {
+                                //Debug.Log("Area can navigate to player");
+                                //  All checks passed, add found spawn location to spawn list
+                                spawnLocations.Add(spawnLocation);
+                                // Break out of while loop as spawn location has been found
+                                maxRunCounter = maxRunAttempts;
+                                areaFound = true;
+
+                                //Debug.Log("Area found for pos : " + i);
+
+                                //  Debug
+                                if (shouldAICreateSpawnDebug)
+                                {
+                                    GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                                    debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.blue;
+                                }
+
+                                //Debug.Log("Area Found");
+                                if (shouldAIDebug)
+                                {
+                                    //Debug.Log("Number of runs to find spawn area = " + maxRunCounter);
+                                }
+                                //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
+                            }
+
+                        }
+
+                    }
+                }
+                //  Debug
+                if (shouldAICreateSpawnDebug)
+                {
+                    GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                    debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
                 }
                 //Debug.Log("Run attempt Complete");
                 maxRunCounter++;

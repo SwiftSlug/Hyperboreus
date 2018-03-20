@@ -258,13 +258,15 @@ public class AIDirector : NetworkBehaviour
                 foreach (GameObject player in players)
                 {
                     float distance = (spawnLocation - player.transform.position).magnitude; //  Distance from player to spawn location
-                    
+
+                    //Debug.Log("Distance From player " + player + " = " + distance);
+
                     //  Check if spawn location is too close to other players
-                    if (distance < spawnBufferSize)
+                    if (distance < playerProximitySize)
                     {
                         //  Spawn location too close set flag to true
                         otherPlayerProximity = true;
-                        Debug.Log("Too Close to player");
+                        //Debug.Log("Too Close to player");
                     }
                 }
 

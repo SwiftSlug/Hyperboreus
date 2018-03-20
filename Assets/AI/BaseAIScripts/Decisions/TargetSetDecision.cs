@@ -14,7 +14,7 @@ public class TargetSetDecision : Decision
     private bool MoveLocationSet(StateController controller)
     {
 
-        if (controller.target != false) //  May be better to use a move to bool instead of the zero comparison
+        if (controller.target != false)
         {
             //Debug.Log("MoveLocation Set !");
             return true;

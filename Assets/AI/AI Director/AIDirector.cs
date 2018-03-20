@@ -259,14 +259,11 @@ public class AIDirector : NetworkBehaviour
                 {
                     float distance = (spawnLocation - player.transform.position).magnitude; //  Distance from player to spawn location
 
-                    //Debug.Log("Distance From player " + player + " = " + distance);
-
                     //  Check if spawn location is too close to other players
                     if (distance < playerProximitySize)
                     {
                         //  Spawn location too close set flag to true
                         otherPlayerProximity = true;
-                        //Debug.Log("Too Close to player");
                     }
                 }
 
@@ -277,17 +274,17 @@ public class AIDirector : NetworkBehaviour
                     //  Find all colliders at the random location
                     Collider[] hitColliders = Physics.OverlapSphere(spawnLocation, spawnBufferSize);
 
+                    bool areaClear = true;  //  Flag used to determine if there are any other objects within the area
 
                     //  Run through all found colliders
-                    bool areaClear = true;
+
                     int hits = 0;
                     while (hits < hitColliders.Length)
                     {
-                        // if anything other than the floor is found then the area is not suitable
+                        //  If anything other than the floor is found then the area is not suitable
                         if (!hitColliders[hits].CompareTag("floor"))
                         {
                             areaClear = false;
-                            //Debug.Log("Object " + i + " - Hit collider = " + hitColliders[hits].name);
 
                             //  Debug
                             if (shouldAICreateSpawnDebug)
@@ -301,25 +298,14 @@ public class AIDirector : NetworkBehaviour
 
                     if (areaClear == true)
                     {
-
-                        //Debug.Log("Clear spawn area found !");
-                        //  Spawn debug cube at spawn location
-                        //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
-                        //debugCube.GetComponent<SphereCollider>().radius = spawnBufferSize;
-                        //Destroy(debugCube, 10);
-
                         NavMeshHit navMeshHit;
-
 
                         //  Scan for a navmesh position at the random location
                         if (NavMesh.SamplePosition(spawnLocation, out navMeshHit, spawnBufferSize, NavMesh.AllAreas))
                         {
-                            //Debug.Log("Location with navmesh found !");
-                            //NavMesh foundNavMesh = navMeshHit;
                             bool canPathToPlayer = true;
-                            //  Can the path reach player 0
+                            //  Can the path reach player
                             NavMeshPath pathToPlayer = new NavMeshPath();
-                            //NavMesh.CalculatePath(navMeshHit.position, players[0].transform.position, NavMesh.AllAreas, pathToPlayer);
 
                             foreach (GameObject player in players)
                             {
@@ -341,28 +327,36 @@ public class AIDirector : NetworkBehaviour
 
                             if (canPathToPlayer)
                             {
-                                //Debug.Log("Area can navigate to player");
                                 //  All checks passed, add found spawn location to spawn list
                                 spawnLocations.Add(spawnLocation);
                                 // Break out of while loop as spawn location has been found
                                 maxRunCounter = maxRunAttempts;
                                 areaFound = true;
 
-                                //Debug.Log("Area found for pos : " + i);
 
                                 //  Debug
                                 if (shouldAICreateSpawnDebug)
                                 {
+                                    //  Create a debug cube at the found area
                                     GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
                                     debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.blue;
                                 }
 
-                                //Debug.Log("Area Found");
-                                if (shouldAIDebug)
+                            }
+                            else
+                            {
+                                //  Cant find a path to the player from current location so search for nearby base building objects to target
+
+                                foreach (Collider hit in hitColliders)
                                 {
-                                    //Debug.Log("Number of runs to find spawn area = " + maxRunCounter);
+                                    if (hit.GetComponent<TestBuildingController>())
+                                    {
+                                        //  Target area can reach a player built object so add location to the spawn list
+                                        spawnLocations.Add(spawnLocation);
+                                        areaFound = true;
+                                        break;  //  Target already found so no need to keep looking
+                                    }
                                 }
-                                //GameObject debugCube = Instantiate(cube, spawnLocation, Quaternion.identity);
                             }
 
                         }
@@ -375,21 +369,11 @@ public class AIDirector : NetworkBehaviour
                     GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
                     debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
                 }
-                //Debug.Log("Run attempt Complete");
+
                 maxRunCounter++;
 
             }
-            /*
-            if (maxRunCounter > maxRunAttempts)
-            {
-                //  Spawnable area list could not be populated 
-                if (shouldAIDebug)
-                {
-                    Debug.Log("Area could not be found !");
-                }
-                return false;
-            }
-            */
+
         }
         return false;
     }

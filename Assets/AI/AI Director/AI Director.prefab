@@ -87,7 +87,7 @@ MonoBehaviour:
   active: 0
   shouldAIDebug: 1
   shouldAIDrawDebug: 1
-  shouldAICreateSpawnDebug: 1
+  shouldAICreateSpawnDebug: 0
   isDay: 1
   enemyToSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
     type: 2}

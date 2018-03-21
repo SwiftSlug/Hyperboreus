@@ -34,6 +34,9 @@ public class StateController : NetworkBehaviour {
     [Tooltip("The distance at which the AI can attack their target")]
     public float attackDistance = 1.5f;
 
+    [Tooltip("The distance at which the AI can attack buildings")]
+    public float buildingAttackDistance = 5.0f;
+
     [Tooltip("The amount of damage the AI unit does per hit")]
     public int attackDamage = 5;
 

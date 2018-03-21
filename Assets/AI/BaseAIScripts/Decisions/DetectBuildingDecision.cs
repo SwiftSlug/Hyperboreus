@@ -16,15 +16,19 @@ public class DetectBuildingDecision : Decision
 
         Collider[] hitColliders = Physics.OverlapSphere(controller.transform.position, controller.detectionRange);
 
-        foreach (Collider hits in hitColliders)
+        foreach (Collider hit in hitColliders)
         {
-            if (hits.GetComponent<AIStats>())
+            //Debug.Log(hit.name);
+            if (hit.gameObject.GetComponentInParent<TestBuildingController>())
             {
-
+                //Debug.Log("Found Building Controller");
+                
+                controller.target = hit.gameObject;
+                Debug.Log("Target Set to " + controller.target);
+                return true;
             }
-
         }
-
+        //Debug.Log("No building controller found");
 
         return false;
     }

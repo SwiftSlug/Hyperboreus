@@ -8,21 +8,23 @@ public class TargetSetDecision : Decision
 
     public override bool Decide(StateController controller)
     {
-        return MoveLocationSet(controller);
+        return TargetSet(controller);
     }
 
-    private bool MoveLocationSet(StateController controller)
+    private bool TargetSet(StateController controller)
     {
 
         if (controller.target != false)
         {
-            //Debug.Log("MoveLocation Set !");
-            return true;
+            
+            if (controller.target.GetComponent<PlayerStats>() || controller.target.GetComponent<TestBuildingController>())
+            {
+                return true;
+            }
+            
         }
-        else
-        {
-            return false;
-        }
+        return false;
+
 
     }
 }

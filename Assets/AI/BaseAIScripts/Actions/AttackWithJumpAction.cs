@@ -39,16 +39,35 @@ public class AttackWithJumpAction : Action
             controller.navMeshAgent.destination = controller.target.transform.position;
         }
 
-        //  AI Attacking
-        if (distanceToTarget < controller.attackDistance)
+        //  AI Attacking players
+        if (controller.target.GetComponent<PlayerStats>())
         {
-            //  Only attack target if within attack range   
-            if (Time.time > (controller.lastAttack + controller.attackCooldown))
+
+            if (distanceToTarget < controller.attackDistance)
             {
-                //  Call attack only after attack cooldown
-                controller.lastAttack = Time.time;
-                controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);                
-                //Debug.Log("Attack Called");
+                //  Only attack target if within attack range   
+                if (Time.time > (controller.lastAttack + controller.attackCooldown))
+                {
+                    //  Call attack after cooldown
+                    controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
+                    controller.lastAttack = Time.time;
+                }
+            }
+        }
+        //  AI attack for buildings
+        else if (controller.target.GetComponent<TestBuildingController>())
+        {
+            Debug.Log("Targetted building for attack");
+            if (distanceToTarget < controller.buildingAttackDistance)
+            {
+                //  Only attack target if within attack range   
+                if (Time.time > (controller.lastAttack + controller.attackCooldown))
+                {
+                    //  Call attack after cooldown
+                    controller.target.GetComponent<TestBuildingController>().CmdDamage(controller.attackDamage);
+                    controller.lastAttack = Time.time;
+                    Debug.Log("Damage Called on building !");
+                }
             }
         }
 

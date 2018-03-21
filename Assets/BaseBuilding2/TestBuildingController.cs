@@ -21,6 +21,9 @@ public class TestBuildingController : NetworkBehaviour
     public Material DoorStoneMat;
     public Material DoorMetalMat;
 
+    [SyncVar]
+    public int hitPoints = 100;
+
     //Client Functions
     //ChooseStructureAndMaterial
     public void RpcChooseStructureAndMaterial(int StructureChoice, int MaterialChoice)
@@ -38,12 +41,15 @@ public class TestBuildingController : NetworkBehaviour
             {
                 case 0:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat; // S = 0, M = 0: Wooden Wall
+                    hitPoints = 20;
                     break;
                 case 1:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat; // S = 0, M = 1: Stone Wall
+                    hitPoints = 40;
                     break;
                 case 2:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat; // S = 0, M = 2: Metal Wall
+                    hitPoints = 80;
                     break;
             }
         }
@@ -58,12 +64,15 @@ public class TestBuildingController : NetworkBehaviour
             {
                 case 0:
                     gameObject.transform.GetChild(1).GetComponent<Renderer>().material = WallWoodMat; // S = 1, M = 0: Wooden Floor
+                    hitPoints = 20;
                     break;
                 case 1:
                     gameObject.transform.GetChild(1).GetComponent<Renderer>().material = WallStoneMat; // S = 1, M = 1: Stone Floor
+                    hitPoints = 40;
                     break;
                 case 2:
                     gameObject.transform.GetChild(1).GetComponent<Renderer>().material = WallMetalMat; // S = 1, M = 2: Metal Floor
+                    hitPoints = 80;
                     break;
             }
         }
@@ -78,12 +87,15 @@ public class TestBuildingController : NetworkBehaviour
             {
                 case 0:
                     gameObject.transform.GetChild(2).GetComponent<Renderer>().material = WallWoodMat; // S = 2, M = 0: Wooden Door
+                    hitPoints = 20;
                     break;
                 case 1:
                     gameObject.transform.GetChild(2).GetComponent<Renderer>().material = WallStoneMat; // S = 2, M = 1: Stone Door
+                    hitPoints = 40;
                     break;
                 case 2:
                     gameObject.transform.GetChild(2).GetComponent<Renderer>().material = WallMetalMat; // S = 2, M = 2: Metal Door
+                    hitPoints = 80;
                     break;
             }
         }
@@ -104,12 +116,15 @@ public class TestBuildingController : NetworkBehaviour
             {
                 case 0:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat; // S = 0, M = 0: Wooden Wall
+                    hitPoints = 20;
                     break;
                 case 1:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat; // S = 0, M = 1: Stone Wall
+                    hitPoints = 40;
                     break;
                 case 2:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat; // S = 0, M = 2: Metal Wall
+                    hitPoints = 80;
                     break;
             }
         }
@@ -124,12 +139,15 @@ public class TestBuildingController : NetworkBehaviour
             {
                 case 0:
                     gameObject.transform.GetChild(1).GetComponent<Renderer>().material = WallWoodMat; // S = 1, M = 0: Wooden Floor
+                    hitPoints = 20;
                     break;
                 case 1:
                     gameObject.transform.GetChild(1).GetComponent<Renderer>().material = WallStoneMat; // S = 1, M = 1: Stone Floor
+                    hitPoints = 40;
                     break;
                 case 2:
                     gameObject.transform.GetChild(1).GetComponent<Renderer>().material = WallMetalMat; // S = 1, M = 2: Metal Floor
+                    hitPoints = 80;
                     break;
             }
         }
@@ -144,16 +162,37 @@ public class TestBuildingController : NetworkBehaviour
             {
                 case 0:
                     gameObject.transform.GetChild(2).GetComponent<Renderer>().material = WallWoodMat; // S = 2, M = 0: Wooden Door
+                    hitPoints = 20;
                     break;
                 case 1:
                     gameObject.transform.GetChild(2).GetComponent<Renderer>().material = WallStoneMat; // S = 2, M = 1: Stone Door
+                    hitPoints = 40;
                     break;
                 case 2:
                     gameObject.transform.GetChild(2).GetComponent<Renderer>().material = WallMetalMat; // S = 2, M = 2: Metal Door
+                    hitPoints = 80;
                     break;
             }
         }
-    }    
+    }
+
+    [Command]
+    public void CmdDamage(int amount)
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        hitPoints -= amount;
+
+        if (hitPoints <= 0)
+        {
+            Debug.Log("FUCK THE CANT");
+            Network.Destroy(this.gameObject);
+        }
+    }
+
 
     // Use this for initialization
     void Start ()

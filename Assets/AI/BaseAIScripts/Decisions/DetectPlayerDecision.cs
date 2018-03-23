@@ -20,7 +20,7 @@ public class DetectPlayerDecision : Decision
         {
             if (hitColliders[i].gameObject.CompareTag("NetworkedPlayer"))
             {
-                if (!hitColliders[i].gameObject.GetComponent<PlayerStats>().isDead)
+                if (hitColliders[i].gameObject.GetComponent<PlayerStats>().isDead == false)
                 {
                     //Debug.Log("Player Seen Run Away !");
                     //controller.navMeshAgent.speed = controller.runSpeed;
@@ -33,6 +33,16 @@ public class DetectPlayerDecision : Decision
                     }
                     else
                     {
+                        if (controller.target != null)
+                        {
+                            if (controller.target.GetComponent<PlayerStats>())
+                            {
+                                //  AI has a player target and cant reach it so set to null
+                                //Debug.Log("Target set to null by DetectPlayerDecision as cant find path");
+                                controller.target = null;
+                                return false;
+                            }
+                        }
                         //controller.target = null;
                         return false;
                     }

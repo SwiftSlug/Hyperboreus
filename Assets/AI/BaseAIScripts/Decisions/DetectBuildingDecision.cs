@@ -23,8 +23,8 @@ public class DetectBuildingDecision : Decision
             {
                 //Debug.Log("Found Building Controller");
                 
-                controller.target = hit.gameObject;
-                Debug.Log("Target Set to " + controller.target);
+                controller.target = hit.transform.parent.gameObject;
+                //Debug.Log("Target Set to " + controller.target);
                 return true;
             }
         }

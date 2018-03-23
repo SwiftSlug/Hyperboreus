@@ -28,19 +28,27 @@ public class TargetDeadDecision : Decision
 
                 return true;
             }
+            else
+            {
+                return false;
+            }
         }
         else if (controller.target.GetComponent<TestPlayerBuilingController>())
         {
-            /*
-            if(controller.target.GetComponent<TestPlayerBuilingController>().buildingTemplate.GetComponent<BuildingController>().Hitpoints <= 0)
+            
+            if(controller.target.GetComponent<TestBuildingController>().hitPoints <= 0)
             {
                 controller.target = null;
                 return true;
             }
-            */
-        }       
+            else
+            {
+                return false;
+            }
+            
+        }
 
-        return false;
+        return true;
 
     }
 

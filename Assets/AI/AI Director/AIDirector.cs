@@ -29,10 +29,12 @@ public class AIDirector : NetworkBehaviour
     public int numberOfSpawnLocations = 10;     //  The number of spawn locaitons generated per search
 
     //  Area size definitions
-    public float spawnBufferSize = 2.0f;             //  The area size that must be free of objects to count as an AI spawn location
-    public float playerProximitySize = 50.0f;        //  The area size around the player that detects nearby enemies for intensity checks
-    public float maxDistanceFromPlayers = 100.0f;    //  The max distance an AI unit can be from the player before being deleted
-
+    public float spawnBufferSize = 2.0f;            //  The area size that must be free of objects to count as an AI spawn location
+    public float playerProximitySize = 50.0f;       //  The area size around the player that detects nearby enemies for intensity checks
+    public float maxDistanceFromPlayers = 100.0f;   //  The max distance an AI unit can be from the player before being deleted
+    public float buildingScanDisance = 100.0f;      //  The area size around the players that is checked for buildings if no path to players
+                                                    //  can be found
+    
     public int targetIntensityLevelDay = 40;    //  The intensity level the director aims to keep players at during the day
     public int targetIntensityLevelNight = 400; //  The intensity level the director aims to keep players at during the night
     public float waveCooldown;                  //  The cooldown time inbetween waves
@@ -346,16 +348,43 @@ public class AIDirector : NetworkBehaviour
                             else
                             {
                                 //  Cant find a path to the player from current location so search for nearby base building objects to target
+                                //Debug.Log("Cant find path to player, looking for buildings !");
 
-                                foreach (Collider hit in hitColliders)
+                                foreach (GameObject player in players)
                                 {
-                                    if (hit.GetComponent<TestBuildingController>())
+                                    //  Check through all players for building locations
+                                    Collider[] buildingSearchColliders = Physics.OverlapSphere(player.transform.position, buildingScanDisance); //   Find colliders near players
+
+                                    foreach (Collider hit in buildingSearchColliders)
                                     {
-                                        //  Target area can reach a player built object so add location to the spawn list
-                                        spawnLocations.Add(spawnLocation);
-                                        areaFound = true;
-                                        break;  //  Target already found so no need to keep looking
+                                        if (areaFound)
+                                        {
+                                            //  Area already found so ignore other hits
+                                            break;
+                                        }
+                                        if (hit.gameObject.GetComponentInParent<TestBuildingController>())
+                                        {
+                                            //Debug.Log("Director Found a building !");
+
+                                            //  Check if there is a path from the spawnLocation to the found building
+                                            NavMeshPath pathToBuilding = new NavMeshPath();
+                                            NavMesh.CalculatePath(spawnLocation, hit.transform.position, NavMesh.AllAreas, pathToBuilding);
+
+                                            if (pathToBuilding.status != NavMeshPathStatus.PathComplete)
+                                            {
+                                                //Debug.Log("Can path to building !");
+                                                //  Target area can reach a player built object so add location to the spawn list
+                                                spawnLocations.Add(spawnLocation);
+                                                areaFound = true;
+                                                break;  //  Target already found so no need to keep looking
+                                            }
+                                            else
+                                            {
+                                                //Debug.Log("Cant path to found building :(");
+                                            }
+                                        }
                                     }
+
                                 }
                             }
 
@@ -407,6 +436,13 @@ public class AIDirector : NetworkBehaviour
             {
                 //  Find spawn locations near the player
                 scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations);
+
+                if(spawnLocations.Count != numberOfSpawnLocations)
+                {
+                    //  Do not allow spawning if spawn list is not fully populated
+                    Debug.Log("***********Director spawn location list not fully populated, can't spawn !***********");
+                    return;
+                }
 
 
                 if (isDay)

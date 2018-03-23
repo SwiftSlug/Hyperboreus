@@ -106,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1193828947013776}
   m_LocalRotation: {x: 0, y: 0.9807853, z: 0, w: 0.19509037}
-  m_LocalPosition: {x: 1.1923134, y: 0.65, z: -14.832123}
+  m_LocalPosition: {x: 8.012577, y: 0.649999, z: -3.8920102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311921656852550}
@@ -322,7 +322,7 @@ MonoBehaviour:
   DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
   DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
   DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
-  hitPoints: 100
+  hitPoints: 10
 --- !u!114 &114549813210390518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LinkedPlayer: {fileID: 0}
-  PlayerStructureGuide: {fileID: 0}
+  PlayerStructureGuide: {fileID: 1193828947013776}
   LocalNeededStructure: 0
   LocalNeededMaterial: 0
   WallWoodMat: {fileID: 2100000, guid: f34cda7f78d214b408b33a9e2ba48681, type: 2}

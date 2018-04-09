@@ -23,26 +23,52 @@ public class PlayerController : NetworkBehaviour
 
     Animator animator;
 
+    Transform cam;
+
+    Vector3 forward;
+
+    Vector3 move;
+
+    Vector3 moveInput;
+
+    float yValue;
+
+    float xValue;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        cam = Camera.main.transform;
     }
 
     private void FixedUpdate()
     {
         //Debug.Log("");
-        Vector3 facing = transform.forward;
+        //Vector3 facing = transform.forward;
         //Vector3 vel = transform.;
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        facing.y = 0;
-        Debug.Log(facing);
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        //facing.y = 0;
+        //Debug.Log(facing);
         //Debug.Log(h);
         //Debug.Log(v);
 
-        // if facing up 
-            //if horizontal = 1 then right
+        if (cam != null)
+        {
+            forward = Vector3.Scale(cam.up, new Vector3(1, 0, 1)).normalized;
+            move = v * forward + h * cam.right;
+        }
+        else
+        {
+            move = v * Vector3.forward + h * Vector3.right;
+        }
 
+        if (move.magnitude > 1)
+        {
+            move.Normalize();
+        }
+
+        Move (move);
     }
 
     //Update is called once per frame
@@ -168,14 +194,12 @@ public class PlayerController : NetworkBehaviour
     {
         float xAxis = horizontal * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.right * xAxis, Space.World);
-        AnimatorH(xAxis);
     }
 
     public void AddVerticalMovement(float vertical)
     {
         float yAxis = vertical * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.forward * yAxis, Space.World);
-        AnimatorV(yAxis);
     }
 
 
@@ -221,28 +245,6 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    void AnimatorH(float horizontal)
-    {
-        bool left = horizontal < 0;
-        animator.SetBool("left", left);
-        //Debug.Log("left");
-
-        bool right = horizontal > 0;
-        animator.SetBool("right", right);
-        //Debug.Log("right");
-    }
-
-    void AnimatorV(float vertical)
-    {
-        bool forward = vertical > 0;
-        animator.SetBool("forward", forward);
-        //Debug.Log("forward");
-
-        bool backward = vertical < 0;
-        animator.SetBool("backward", backward);
-        //Debug.Log("backward");
-    }
-
     [Command]
     public void CmdDamageAsset()
     {
@@ -280,5 +282,33 @@ public class PlayerController : NetworkBehaviour
         AbleToDestroy = false;
         AssetToLoot = null;
         AssetToDestroy = null;
+    }
+
+    void Move(Vector3 move)
+    {
+        if (move.magnitude > 1)
+        {
+            move.Normalize();
+        }
+
+        this.moveInput = move;
+
+        ConvertMovementInput();
+        UpdateAnimator();
+    }
+
+    //converts movement input depending on player rotation for animations
+    void ConvertMovementInput()
+    {
+        Vector3 localMove = transform.InverseTransformDirection(moveInput);
+        xValue = localMove.x;
+        yValue = localMove.z;
+    }
+    
+    //updates animator on player movement animation values
+    void UpdateAnimator()
+    {
+        animator.SetFloat("velX", xValue, 0.1f, Time.deltaTime);
+        animator.SetFloat("velY", yValue, 0.1f, Time.deltaTime);
     }
 }

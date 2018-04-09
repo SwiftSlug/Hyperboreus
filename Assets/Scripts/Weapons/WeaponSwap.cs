@@ -102,7 +102,7 @@ public class WeaponSwap : NetworkBehaviour
         //  Show new weapon
         weaponShootingScript.equippedWeapon = weaponSlots[weaponSlot];
         weaponShootingScript.equippedWeapon.SetActive(true);
-        weaponShootingScript.shootInit();
+        weaponShootingScript.ShootInit();
     }
 
 }

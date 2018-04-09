@@ -140,11 +140,11 @@ public class PlayerStats : NetworkBehaviour
         //Check if player is dead locally
         if (isDead)
         {
-            Animator();
             GetComponent<PlayerController>().enabled = false; //Disable the player's movement locally
         }
         else
         {
+            //animator.SetBool("alive", true);
             GetComponent<PlayerController>().enabled = true; //Enable the player's movement locally
         }
     }
@@ -167,12 +167,6 @@ public class PlayerStats : NetworkBehaviour
                 canRevive = false;
             }
         }
-    }
-
-    void Animator()
-    {
-        animator.SetBool("isDead", true);
-        Debug.Log("dead");
     }
 
 
@@ -263,6 +257,8 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
+        animator.SetTrigger("die");
+
         GetComponent<GameOver>().CmdCheckDead();
 
         GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
@@ -290,6 +286,8 @@ public class PlayerStats : NetworkBehaviour
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 
         currentHealth = 10; //Set the player's revived health
+
+        animator.SetTrigger("revived");
     }
 
     //Call the regen on the server for the player

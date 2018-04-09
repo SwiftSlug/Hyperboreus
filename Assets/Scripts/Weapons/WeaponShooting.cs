@@ -26,7 +26,9 @@ public class WeaponShooting : NetworkBehaviour
     public AudioSource audioSource;
     public AudioClip clipReload;
 
-    public void shootInit()
+    Animator animator;
+
+    public void ShootInit()
     {
 
         //Bullpup gun = new Bullpup();
@@ -67,9 +69,9 @@ public class WeaponShooting : NetworkBehaviour
 
     void Start()
     {
+        ShootInit();
 
-        shootInit();
-
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -160,6 +162,7 @@ public class WeaponShooting : NetworkBehaviour
 
                 CmdDisableMuzzleEffects();
                 Invoke("Reload", selectedWeapon.reloadTime);
+                //animator.SetBool("isReloading", true);
             }
             selectedWeapon.reloading = true;
         }
@@ -170,6 +173,7 @@ public class WeaponShooting : NetworkBehaviour
         //Debug.Log("Reloading Done!");
         selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
         selectedWeapon.reloading = false;
+        //animator.SetBool("isReloading", false);
     }
 
 

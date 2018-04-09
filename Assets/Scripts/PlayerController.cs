@@ -31,8 +31,10 @@ public class PlayerController : NetworkBehaviour
 
     Vector3 moveInput;
 
+    [SyncVar]
     float yValue;
 
+    [SyncVar]
     float xValue;
 
     void Start()
@@ -52,6 +54,15 @@ public class PlayerController : NetworkBehaviour
         //Debug.Log(facing);
         //Debug.Log(h);
         //Debug.Log(v);
+
+        if (h == 0 & v == 0)
+        {
+            animator.SetBool("moving", false);
+        }
+        else
+        {
+            animator.SetBool("moving", true);
+        }
 
         if (cam != null)
         {
@@ -308,6 +319,11 @@ public class PlayerController : NetworkBehaviour
     //updates animator on player movement animation values
     void UpdateAnimator()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         animator.SetFloat("velX", xValue, 0.1f, Time.deltaTime);
         animator.SetFloat("velY", yValue, 0.1f, Time.deltaTime);
     }

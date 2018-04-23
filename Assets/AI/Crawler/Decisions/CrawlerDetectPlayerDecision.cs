@@ -22,7 +22,8 @@ public class CrawlerDetectPlayerDecision : Decision {
                 {
                     //Debug.Log("Player Seen Run Away !");
                     controller.navMeshAgent.speed = controller.runSpeed;
-                    controller.target = hitColliders[i].gameObject;
+                    //controller.target = hitColliders[i].gameObject;
+                    controller.setTarget(hitColliders[i].gameObject);
                     return true;
                 }
             }

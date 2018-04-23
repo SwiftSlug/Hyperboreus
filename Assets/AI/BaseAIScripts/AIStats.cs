@@ -131,8 +131,8 @@ public class AIStats : NetworkBehaviour
         }
 
         //  Set the AI to target the closest player
-        controller.target = closestPlayer;
-
+        // controller.target = closestPlayer;
+        controller.setTarget(closestPlayer);
     }
 
 }

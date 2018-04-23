@@ -25,7 +25,8 @@ public class TargetDeadDecision : Decision
             if (controller.target.GetComponent<PlayerStats>().isDead)
             {
                 //  Target is dead so set AI target to null
-                controller.target = null;
+                //controller.target = null;
+                controller.setTarget(null);
                 return true;
             }
             else
@@ -39,7 +40,8 @@ public class TargetDeadDecision : Decision
             if(controller.target.GetComponent<TestBuildingController>().hitPoints <= 0)
             {
                 //  Target has no hit points left so set target to null
-                controller.target = null;
+                //controller.target = null;
+                controller.setTarget(null);
                 return true;
             }
             else

@@ -28,12 +28,19 @@ public class CanReachPlayerDecision : Decision
 
                     if (pathToPlayer.status == NavMeshPathStatus.PathComplete)
                     {
-                        Debug.Log("can reach player");
+                        //Debug.Log("can reach player");
+                        //  Can reach the player
+
+
                         return true;
                     }
                     else
                     {
-                        Debug.Log("Can't reach player");
+                        //Debug.Log("Can't reach player");
+                        //  Can't reach the player
+
+                        controller.setTarget(null);
+                        return false;
                     }
                 }
 

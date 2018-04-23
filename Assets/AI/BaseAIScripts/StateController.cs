@@ -46,6 +46,7 @@ public class StateController : NetworkBehaviour {
     [HideInInspector] public float lastJumped = 0.0f;   //  Used for timing cooldown between jumps
     [HideInInspector] public float lastAttack = 0.0f;   //  Used for timing cooldown between jumps
 
+    public GameObject previousPlayerTarget;    //  The player the AI will target if able
     public GameObject target;         //  Generic gameobject target for AI
     //[HideInInspector] public Vector3 targetLocation;    //  Generic vector location used for AI
 
@@ -55,7 +56,6 @@ public class StateController : NetworkBehaviour {
 
     //[HideInInspector] public float searchTimeStart;     //  Reference to when AI starts searching
 
-    //  Alot of these below may not be needed for this games context
 	[HideInInspector] public NavMeshAgent navMeshAgent;
 	[HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
@@ -119,7 +119,27 @@ public class StateController : NetworkBehaviour {
         stateTimeElapsed = 0;
     }
 
+    public void setTarget(GameObject newTarget)
+    {
 
+        //  Remember the previous target if it was a player
+
+        if (target != null)
+        {
+            //  Target has been previously set
+
+            if (target.GetComponent<PlayerStats>())
+            {
+                //  The current target is a player
+
+                previousPlayerTarget = target;  //  Remember previous player target
+            }
+        }
+
+        target = newTarget;
+
+
+    }
 
 
 }

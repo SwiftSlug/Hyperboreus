@@ -47,8 +47,9 @@ public class DetectBuildingDecision : Decision
             if (hit.gameObject.GetComponentInParent<TestBuildingController>())
             {
                 //Debug.Log("Building set as AI target by DetectBuildingDecision");
-                
-                controller.target = hit.transform.parent.gameObject;
+
+                //controller.target = hit.transform.parent.gameObject;
+                controller.setTarget(hit.transform.parent.gameObject);
                 //Debug.Log("Target Set to " + controller.target);
                 return true;
             }

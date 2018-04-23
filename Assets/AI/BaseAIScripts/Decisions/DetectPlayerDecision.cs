@@ -22,13 +22,12 @@ public class DetectPlayerDecision : Decision
             {
                 if (hitColliders[i].gameObject.GetComponent<PlayerStats>().isDead == false)
                 {
-                    //Debug.Log("Player Seen Run Away !");
-                    //controller.navMeshAgent.speed = controller.runSpeed;
 
                     //  Ensure there is a path to the player before setting it as a target
                     if (CanPathToPlayer(controller, hitColliders[i].gameObject))
                     {
-                        controller.target = hitColliders[i].gameObject;
+                        //controller.target = hitColliders[i].gameObject;
+                        controller.setTarget(hitColliders[i].gameObject);
                         return true;
                     }
                     else
@@ -39,7 +38,8 @@ public class DetectPlayerDecision : Decision
                             {
                                 //  AI has a player target and cant reach it so set to null
                                 //Debug.Log("Target set to null by DetectPlayerDecision as cant find path");
-                                controller.target = null;
+                                //controller.target = null;
+                                controller.setTarget(null);
                                 return false;
                             }
                         }
@@ -50,7 +50,6 @@ public class DetectPlayerDecision : Decision
             }
         }
 
-        //Debug.Log("Speed Set");
 
         controller.navMeshAgent.speed = controller.walkSpeed;
         return false;

@@ -372,7 +372,6 @@ public class AIDirector : NetworkBehaviour
 
                                             if (pathToBuilding.status != NavMeshPathStatus.PathComplete)
                                             {
-                                                //Debug.Log("Can path to building !");
                                                 //  Target area can reach a player built object so add location to the spawn list
                                                 spawnLocations.Add(spawnLocation);
                                                 areaFound = true;
@@ -474,8 +473,11 @@ public class AIDirector : NetworkBehaviour
                             int randomLocation = Random.Range(0, spawnLocations.Count - 1);
                             //if (spawnLocations[randomLocation] != null)
                             //{
-                                //  Spawn units targeting the player
-                                spawnUnits(aiSpawnGroupSizeNight, spawnLocations[randomLocation], spawnBufferSize, player);
+                            //  Spawn units targeting the player
+                            spawnUnits(aiSpawnGroupSizeNight, spawnLocations[randomLocation], spawnBufferSize, player);
+
+                            //  Spawn units with their move location set to the players location
+                            //spawnUnits(aiSpawnGroupSizeNight, spawnLocations[randomLocation], spawnBufferSize, player.transform.position);
                             //}
 
                         }
@@ -505,7 +507,28 @@ public class AIDirector : NetworkBehaviour
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetPlayer.transform.position;
-            spawnedEnemy.GetComponent<StateController>().target = targetPlayer;
+            //spawnedEnemy.GetComponent<StateController>().target = targetPlayer;
+            spawnedEnemy.GetComponent<StateController>().setTarget(targetPlayer);
+            NetworkServer.Spawn(spawnedEnemy);  //  Add spawned unit to server list
+        }
+
+    }
+
+    //  Spawn a number of AI units around a position and set them to move to a specific area
+    void spawnUnits(int number, Vector3 position, float spread, Vector3 targetLocation)
+    {
+
+        // Spawn the units within random locations near the defined position
+        for (int i = 0; i < number; i++)
+        {
+            float xOffset = Random.Range(-spread, spread);   //  Random x offset
+            float zOffset = Random.Range(-spread, spread);   //  Random y offset
+
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
+
+            var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
+            spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetLocation;
+            //spawnedEnemy.GetComponent<StateController>().target = targetPlayer;
             NetworkServer.Spawn(spawnedEnemy);  //  Add spawned unit to server list
         }
 

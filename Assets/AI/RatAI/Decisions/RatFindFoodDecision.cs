@@ -21,7 +21,8 @@ public class RatFindFoodDecision : Decision
             {
                 if (!hitColliders[i].GetComponent<RatFood>().eaten)
                 {
-                    controller.target = hitColliders[i].gameObject;
+                    //controller.target = hitColliders[i].gameObject;
+                    controller.setTarget(hitColliders[i].gameObject);
                     return true;
                 }
             }

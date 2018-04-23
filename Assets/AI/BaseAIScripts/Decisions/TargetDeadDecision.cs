@@ -17,14 +17,16 @@ public class TargetDeadDecision : Decision
 
         if (controller.target == null)
         {
-            return false;
+            //  There is no target to it must have already been destroyed
+            return true;
         }
         if (controller.target.GetComponent<PlayerStats>())
         {
             //  Target is a player
             if (controller.target.GetComponent<PlayerStats>().isDead)
             {
-                //  Target is dead so set AI target to null
+                //  Target was a player and is dead so set AI target to null
+
                 //controller.target = null;
                 controller.setTarget(null);
                 return true;
@@ -39,10 +41,20 @@ public class TargetDeadDecision : Decision
             //  Target is a building
             if(controller.target.GetComponent<TestBuildingController>().hitPoints <= 0)
             {
-                //  Target has no hit points left so set target to null
-                //controller.target = null;
-                controller.setTarget(null);
+                //  Target was a building so set target back to previously targeted player if possible
+
+                if (controller.previousPlayerTarget != null)
+                {
+                    controller.setTarget(controller.previousPlayerTarget);
+                }
+                else
+                {
+
+                    //controller.target = null;
+                    controller.setTarget(null);
+                }
                 return true;
+
             }
             else
             {

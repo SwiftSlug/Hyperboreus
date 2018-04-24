@@ -817,7 +817,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1138322535066456, guid: 4e481e6a112f737408406927f600d80d,
     type: 2}
   m_LobbyScene: CoopLobby
-  m_PlayScene: AlphaGameMap
+  m_PlayScene: CityGameMapBlockOut
   lobbySlots: []
 --- !u!4 &1182266955
 Transform:

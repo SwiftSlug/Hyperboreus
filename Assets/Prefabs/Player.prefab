@@ -5724,6 +5724,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCamera: {fileID: 1400124946779370, guid: 64531fe4dd336fb4684aec9123f5080f, type: 2}
+  heightOffset: {x: 0, y: 30, z: 0}
+  verticalOffset: {x: 0, y: 0, z: -8}
 --- !u!114 &114527254494738076
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -42,7 +42,7 @@ public class AIDirector : NetworkBehaviour
     //  Intensity variables
     public int intensityPerAI = 5;             //  The amount of intensity each AI unit adds to the player
     public int intensityPerTrackingAI = 10;      //  The amount of intensity each AI unit tracking the player applies 
-    float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
+    //float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
     public int intensityDecreaseAmount = 20;    //  The amount of intensity that is decreased when its not increasing
     
 

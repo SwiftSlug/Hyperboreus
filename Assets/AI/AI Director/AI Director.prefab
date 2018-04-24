@@ -91,21 +91,22 @@ MonoBehaviour:
   isDay: 1
   enemyToSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
     type: 2}
-  aiSpawnGroupSizeNight: 10
+  aiSpawnGroupSizeNight: 2
   aiSpawnGroupSizeDay: 1
   numberOfSpawnLocations: 10
   spawnBufferSize: 2
   playerProximitySize: 40
   maxDistanceFromPlayers: 100
+  buildingScanDisance: 100
   targetIntensityLevelDay: 20
-  targetIntensityLevelNight: 200
+  targetIntensityLevelNight: 100
   waveCooldown: 0
   intensityPerAI: 5
   intensityPerTrackingAI: 10
   intensityDecreaseAmount: 20
   intensityUpdateInterval: 1
   cleanupInterval: 10
-  spawnInterval: 5
+  spawnInterval: 1
   spawnLast: 0
   debugSpawnCube: {fileID: 1232948171305478, guid: d80c74ea741b2154ebab72e5588a5ea7,
     type: 2}

@@ -53,7 +53,7 @@ public class TargetDeadDecision : Decision
 
                     //controller.target = null;
                     controller.setTarget(null);
-                    Debug.Log("AI Target set to null");
+                    //Debug.Log("AI Target set to null");
                 }
                 return true;
 

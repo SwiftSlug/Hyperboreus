@@ -132,11 +132,15 @@ public class StateController : NetworkBehaviour {
         {
             //  Target has been previously set
 
-            if (target.GetComponent<PlayerStats>())
-            {
-                //  The current target is a player
+            if (target.GetComponent<PlayerStats>()) {
+                //  Target is a player
+                
+                if (target.GetComponent<PlayerStats>().isDead != true)
+                {
+                    //  The current target is a player and is not dead
 
-                previousPlayerTarget = target;  //  Remember previous player target
+                    previousPlayerTarget = target;  //  Remember previous player target
+                }
             }
         }
 

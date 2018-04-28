@@ -188,7 +188,7 @@ public class TestBuildingController : NetworkBehaviour
 
         if (hitPoints <= 0)
         {
-            Debug.Log("Building Destroyed by AI Attack");
+            //Debug.Log("Building Destroyed by AI Attack");
             //Network.Destroy(this.gameObject);
             Destroy(this.gameObject);
         }

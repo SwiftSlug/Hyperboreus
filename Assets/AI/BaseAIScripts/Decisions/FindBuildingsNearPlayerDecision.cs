@@ -23,8 +23,19 @@ public class FindBuildingsNearPlayerDecision : Decision
         //int numberOfRuns = 0;
 
 
-        //  Get a building target from the director for the target player and set that as target
-        controller.setTarget(controller.directorReference.GetTargetableBuilding(controller.previousPlayerTarget));
+        //  Get a building target from the director for the target player   
+
+        GameObject newTarget = controller.directorReference.GetTargetableBuilding(controller.previousPlayerTarget);
+
+        if(newTarget == null)
+        {
+            //Debug.Log("Null value returned by director");
+            return false;
+        }
+
+        controller.setTarget(newTarget);
+
+        //Debug.Log()
 
         if (controller.target.GetComponent<TestBuildingController>())
         {

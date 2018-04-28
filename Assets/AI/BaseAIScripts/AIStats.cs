@@ -26,7 +26,7 @@ public class AIStats : NetworkBehaviour
         audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
         controller = GetComponent<StateController>();
 
-        directorReference = FindObjectOfType<AIDirector>();
+            
 
     }
 

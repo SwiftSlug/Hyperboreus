@@ -12,8 +12,8 @@ public class AIDirector : NetworkBehaviour
 
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
     public bool shouldAIDrawDebug = true;       //  Debug flag for drawing debug spheres
-    public bool shouldAICreateSpawnDebug = true;    //  Debug flag for drawing spawn area cubes
-    public bool shouldDebugBuildingLocations = true;    //  Debug flag for drawing cubes at targetable buildings
+    public bool shouldAICreateSpawnDebug = false;    //  Debug flag for drawing spawn area cubes
+    public bool shouldDebugBuildingLocations = false;    //  Debug flag for drawing cubes at targetable buildings
 
 
     public bool isDay = true;                   //  Boolean that defines if it is day or night
@@ -149,7 +149,7 @@ public class AIDirector : NetworkBehaviour
                 if (Time.time > (spawnLast + spawnInterval))
                 {
                     spawnEnemies();
-                    updateTargetableBuildings();
+                    UpdateTargetableBuildings();
                     spawnLast = Time.time;
                 }
 
@@ -717,8 +717,10 @@ public class AIDirector : NetworkBehaviour
     //  each building that is located will have a path checked from its location to the current spawn locations
     //  this list will then be used by the AI to find targets to attack when they cant reacdh players
     //  There will be a list for each player
-    void updateTargetableBuildings()
+    void UpdateTargetableBuildings()
     {
+        double startTime = Time.realtimeSinceStartup;
+
 
         //  Remove all current references from the list
         foreach(List<GameObject> playerList in playerBuildingTargets)
@@ -792,8 +794,12 @@ public class AIDirector : NetworkBehaviour
                 }
 
             }
+            playerNumber++;
         }
-        playerNumber++;
+
+        double timeSpentInFunction = (Time.realtimeSinceStartup - startTime);
+
+        //Debug.Log("Time spent findinf buildings = " + timeSpentInFunction.ToString());
 
     }
 
@@ -806,26 +812,11 @@ public class AIDirector : NetworkBehaviour
         //  Run through list to ensure all references still exist
         foreach (List<GameObject> playerList in playerBuildingTargets)
         {
-
             playerList.RemoveAll(item => item == null);
-
-
-            //int listPos = 0;
-            //foreach (GameObject buildingReference in playerList)
-            //{
-            //    if(buildingReference == null)
-            //    {
-            //        Debug.Log("Empty reference found, deleting...");
-            //        playerList.RemoveAt(listPos);
-            //    }
-            //    listPos++;
-            //}
         }
 
-
-
             if (playerObject.GetComponent<PlayerStats>())
-        {
+            {
             //  Object type is inface a player
 
             int playerNumber = 0;
@@ -836,9 +827,27 @@ public class AIDirector : NetworkBehaviour
                 {
                     //  Found matching player
 
-                    int randomPosition = Random.Range(0, playerBuildingTargets[playerNumber].Count);
+                    int randomPosition = Random.Range(0, playerBuildingTargets[playerNumber].Count-1);
 
-                    return playerBuildingTargets[playerNumber][randomPosition];
+                    //GameObject returnBuiilding = playerBuildingTargets.Find(player)
+
+                    //return playerBuildingTargets[playerNumber][randomPosition];
+
+                    //Debug.Log("Number of Players = " + playerBuildingTargets.Count);
+                    //Debug.Log("Number of P1 buildings = " + playerBuildingTargets[0].Count);
+                    //Debug.Log("Number of P2 buildings = " + playerBuildingTargets[1].Count);
+
+                    //Debug.Log("Building found = " + playerBuildingTargets[playerNumber][randomPosition].name);
+
+                    //Debug.Log("Player Number = " + playerNumber);
+                    //Debug.Log("Random Position = " + randomPosition);
+
+                    //  Ensure that list has items in it to return
+                    if((playerBuildingTargets.Count > 0) && (playerBuildingTargets[playerNumber].Count > 0)) {
+                        return playerBuildingTargets[playerNumber][randomPosition];
+                    }
+
+                                       
                     
                 }
 
@@ -847,6 +856,7 @@ public class AIDirector : NetworkBehaviour
             }
 
         }
+        //Debug.Log("No buildings found");
         return null;
 
     }

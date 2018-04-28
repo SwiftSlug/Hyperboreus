@@ -20,8 +20,22 @@ public class FindBuildingsNearPlayerDecision : Decision
             //return false;
         }
 
-        int numberOfRuns = 0;
-    
+        //int numberOfRuns = 0;
+
+
+        //  Get a building target from the director for the target player and set that as target
+        controller.setTarget(controller.directorReference.GetTargetableBuilding(controller.previousPlayerTarget));
+
+        if (controller.target.GetComponent<TestBuildingController>())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+        /*
 
         Collider[] hitColliders = Physics.OverlapSphere(controller.previousPlayerTarget.transform.position, controller.detectionRange);
 
@@ -70,7 +84,12 @@ public class FindBuildingsNearPlayerDecision : Decision
 
         }
         Debug.Log("None found with number of runs = " + numberOfRuns);
+
+        
+
         return false;
+
+    */
 
     }
 

@@ -10,6 +10,8 @@ public class StateController : NetworkBehaviour {
     public State currentState;
     public State remainState;
 
+    public AIDirector directorReference;
+
     [Tooltip("The default range in which the AI can detect other objects")]
     public float detectionRange = 500.0f;
 
@@ -73,6 +75,8 @@ public class StateController : NetworkBehaviour {
         animator = GetComponentInChildren<Animator>();
 
         moveCommandLocation = Vector3.zero;
+
+        directorReference = FindObjectOfType<AIDirector>();
 
         aiActive = true;
 	}

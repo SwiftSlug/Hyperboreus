@@ -19,10 +19,15 @@ public class AIStats : NetworkBehaviour
 
     public AudioSync audioSync;
 
+    public AIDirector directorReference;
+
     void Start()
     {
         audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
         controller = GetComponent<StateController>();
+
+        directorReference = FindObjectOfType<AIDirector>();
+
     }
 
     private void Update()

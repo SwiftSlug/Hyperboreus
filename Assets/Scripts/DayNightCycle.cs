@@ -38,6 +38,8 @@ public class DayNightCycle : NetworkBehaviour
     [SyncVar]
     public bool isNight = false;
 
+    bool directorUpdated = false;    //  Flag to stop director calls triggering per frame
+
     AIDirector directorReference;    //  Reference to director
 
 	// Use this for initialization
@@ -60,7 +62,10 @@ public class DayNightCycle : NetworkBehaviour
         UpdateLighting();
 
         UpdateTime();
-	}
+
+        DirectorUpdate();
+
+    }
 
     void UpdateLighting()
     {
@@ -99,16 +104,12 @@ public class DayNightCycle : NetworkBehaviour
             isDay = true;
             isNight = false;
 
-            //  Set director spawn mode
-            directorReference.SetDay();
         }
         else if (currentTime > 0.75f || currentTime < 0.25f)
         {
             isNight = true;
             isDay = false;
 
-            //  Set director spawn mode
-            directorReference.SetNight();
         }
         else
         {
@@ -129,5 +130,34 @@ public class DayNightCycle : NetworkBehaviour
         }
     }
 
+    void DirectorUpdate()
+    {
+
+        //Debug.Log("Director isDay = " + directorReference.isDay);
+        //Debug.Log("isDay = " + isDay);
+        //Debug.Log("isNIght = " + isNight);
+
+        if (isDay)
+        {
+            //  Day time
+
+            if (directorReference.isDay != isDay)
+            {
+                //  Director not set to day so update
+                directorReference.SetDay();
+            }
+        }
+        else
+        {
+            //  Night time
+
+            if(directorReference.isDay != isDay)
+            {
+                //  Director is still set to day so switch to night 
+                directorReference.SetNight();
+            }
+        }
+        
+    }
 
 }

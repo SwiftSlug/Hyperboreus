@@ -15,6 +15,7 @@ public class AIDirector : NetworkBehaviour
     public bool shouldAICreateSpawnDebug = false;    //  Debug flag for drawing spawn area cubes
     public bool shouldDebugBuildingLocations = false;    //  Debug flag for drawing cubes at targetable buildings
 
+    public float difficulyMultiplier = 1.2f;    //  The amount the target intensity is increased per day
 
     public bool isDay = true;                   //  Boolean that defines if it is day or night
     //GameObject[] EnemyUnits;
@@ -848,13 +849,29 @@ public class AIDirector : NetworkBehaviour
 
     public void SetDay()
     {
-        isDay = true;
+        //  Set is day
+        isDay = true;        
+
+        if (shouldAIDebug)
+        {
+            Debug.Log("Director : Day Time - Intensity = " + targetIntensityLevelNight.ToString());
+        }
     }
 
     public void SetNight()
     {
         isDay = false;
-    }
+
+        //  Increase target intensity (increase difficulty per day)
+        targetIntensityLevelNight = (int)(targetIntensityLevelNight * difficulyMultiplier);
+
+
+        if (shouldAIDebug)
+        {
+            Debug.Log("Director : Night Time - Intensity = " + targetIntensityLevelNight.ToString());
+        }
+
+        }
 
 
     //  Debug functions below ---------------------------------

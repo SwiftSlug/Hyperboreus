@@ -49,6 +49,9 @@ public class StateController : NetworkBehaviour {
     [HideInInspector] public float lastAttack = 0.0f;   //  Used for timing cooldown between jumps
 
     public GameObject previousPlayerTarget;    //  The player the AI will target if able
+
+    public Vector3 previousMoveLocation;    //  The move location that the AI was moving to last frame
+
     public GameObject target;         //  Generic gameobject target for AI
     //[HideInInspector] public Vector3 targetLocation;    //  Generic vector location used for AI
 

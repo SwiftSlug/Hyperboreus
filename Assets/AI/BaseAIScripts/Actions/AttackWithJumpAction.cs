@@ -23,7 +23,11 @@ public class AttackWithJumpAction : Action
             return;
         }
 
-        controller.navMeshAgent.destination = controller.target.transform.position;
+        if (controller.target.transform.position != controller.previousMoveLocation)
+        {
+            //  Only update and generate a new path if the destination has changed
+            controller.navMeshAgent.destination = controller.target.transform.position;
+        }
 
         float distanceToTarget = (controller.transform.position - controller.target.transform.position).magnitude;
 

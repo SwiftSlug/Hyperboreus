@@ -829,25 +829,10 @@ public class AIDirector : NetworkBehaviour
 
                     int randomPosition = Random.Range(0, playerBuildingTargets[playerNumber].Count-1);
 
-                    //GameObject returnBuiilding = playerBuildingTargets.Find(player)
-
-                    //return playerBuildingTargets[playerNumber][randomPosition];
-
-                    //Debug.Log("Number of Players = " + playerBuildingTargets.Count);
-                    //Debug.Log("Number of P1 buildings = " + playerBuildingTargets[0].Count);
-                    //Debug.Log("Number of P2 buildings = " + playerBuildingTargets[1].Count);
-
-                    //Debug.Log("Building found = " + playerBuildingTargets[playerNumber][randomPosition].name);
-
-                    //Debug.Log("Player Number = " + playerNumber);
-                    //Debug.Log("Random Position = " + randomPosition);
-
                     //  Ensure that list has items in it to return
                     if((playerBuildingTargets.Count > 0) && (playerBuildingTargets[playerNumber].Count > 0)) {
                         return playerBuildingTargets[playerNumber][randomPosition];
-                    }
-
-                                       
+                    }                                       
                     
                 }
 
@@ -856,9 +841,19 @@ public class AIDirector : NetworkBehaviour
             }
 
         }
-        //Debug.Log("No buildings found");
-        return null;
 
+        return null;
+    }
+
+
+    public void SetDay()
+    {
+        isDay = true;
+    }
+
+    public void SetNight()
+    {
+        isDay = false;
     }
 
 

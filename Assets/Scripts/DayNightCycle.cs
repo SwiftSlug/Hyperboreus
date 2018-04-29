@@ -38,16 +38,24 @@ public class DayNightCycle : NetworkBehaviour
     [SyncVar]
     public bool isNight = false;
 
+    AIDirector directorReference;    //  Reference to director
+
 	// Use this for initialization
 	void Start ()
     {
 
         lightColor = directionalLight.color;
         lightIntensity = directionalLight.intensity;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    }
+
+    private void Awake()
+    {
+        directorReference = FindObjectOfType<AIDirector>(); //  Find and set director reference
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         UpdateLighting();
 
@@ -90,11 +98,17 @@ public class DayNightCycle : NetworkBehaviour
         {
             isDay = true;
             isNight = false;
+
+            //  Set director spawn mode
+            directorReference.SetDay();
         }
         else if (currentTime > 0.75f || currentTime < 0.25f)
         {
             isNight = true;
             isDay = false;
+
+            //  Set director spawn mode
+            directorReference.SetNight();
         }
         else
         {
@@ -114,4 +128,6 @@ public class DayNightCycle : NetworkBehaviour
             Debug.LogError("Error in DayNightCycle. Time is neither day or night.");
         }
     }
+
+
 }

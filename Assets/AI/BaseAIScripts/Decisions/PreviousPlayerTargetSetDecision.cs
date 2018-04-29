@@ -15,14 +15,20 @@ public class PreviousPlayerTargetSetDecision : Decision
     {
         if (controller.previousPlayerTarget != null)
         {
-            //  Set target to previous target and return true
-            controller.setTarget(controller.previousPlayerTarget);
-            return true;
+            if (controller.previousPlayerTarget.GetComponent<PlayerStats>())
+            {
+                if (controller.previousPlayerTarget.GetComponent<PlayerStats>().isDead == false)
+                {
+                    //  Set target to previous target and return true if previous target is alive
+                    controller.setTarget(controller.previousPlayerTarget);
+                    return true;
+                }
+
+            }
+            
         }
-        else
-        {
-            return false;
-        }
+        return false;
+
 
 
     }

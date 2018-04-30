@@ -45,6 +45,8 @@ public class PlayerStats : NetworkBehaviour
 
     public GameObject manager = null;
 
+    Animator animator;
+
     public float intensity;
 
     // player inventory //
@@ -81,6 +83,8 @@ public class PlayerStats : NetworkBehaviour
 
 			return;
 		}
+
+        animator = GetComponent<Animator>();
 
         currentHealth = maxHealth; //Set the player's health to their maximum health locally
 
@@ -141,6 +145,7 @@ public class PlayerStats : NetworkBehaviour
         }
         else
         {
+            //animator.SetBool("alive", true);
             GetComponent<PlayerController>().enabled = true; //Enable the player's movement locally
         }
     }
@@ -164,6 +169,7 @@ public class PlayerStats : NetworkBehaviour
             }
         }
     }
+
 
     //Call this on the server
     [Command]
@@ -259,6 +265,8 @@ public class PlayerStats : NetworkBehaviour
         GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
 
         currentHealth = 0; //Set the player's current health to 0 on the server
+
+        //animator.SetTrigger("die");
     }
 
     //Call this command for the player on the server
@@ -277,6 +285,9 @@ public class PlayerStats : NetworkBehaviour
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 
         currentHealth = 10; //Set the player's revived health
+
+        animator.SetTrigger("revived");
+        animator.ResetTrigger("die");
     }
 
     //Call the regen on the server for the player

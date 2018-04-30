@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114679358160344642}
   - component: {fileID: 114068269643554602}
   - component: {fileID: 208167594616914858}
+  - component: {fileID: 114990874756967604}
   m_Layer: 0
   m_Name: StructurePlacementObject
   m_TagString: Untagged
@@ -105,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1193828947013776}
   m_LocalRotation: {x: 0, y: 0.9807853, z: 0, w: 0.19509037}
-  m_LocalPosition: {x: 6.020091, y: 0.6500002, z: -6.1564083}
+  m_LocalPosition: {x: 6.722744, y: 0.6500002, z: -1.1263773}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4311921656852550}
@@ -321,6 +322,7 @@ MonoBehaviour:
   DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
   DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
   DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
+  hitPoints: 10
 --- !u!114 &114549813210390518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +334,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f30df8e88eb6c12428cd11e882fafa1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SyncVarDirtyBits: 0
+  m_LastSendTime: 0
+  m_SyncVarGuard: 0
+  m_MyView: {fileID: 0}
   LinkedPlayer: {fileID: 0}
   PlayerStructureGuide: {fileID: 1193828947013776}
   LocalNeededStructure: 0
@@ -345,6 +351,7 @@ MonoBehaviour:
   DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
   DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
   DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
+  Hitpoints: 0
   StructurePlaced: 0
 --- !u!114 &114679358160344642
 MonoBehaviour:
@@ -399,6 +406,32 @@ MonoBehaviour:
     i15: 169
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114990874756967604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1193828947013776}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99da6c9a7582d342a2327ac34292aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LinkedPlayer: {fileID: 0}
+  PlayerStructureGuide: {fileID: 1193828947013776}
+  LocalNeededStructure: 0
+  LocalNeededMaterial: 0
+  WallWoodMat: {fileID: 2100000, guid: f34cda7f78d214b408b33a9e2ba48681, type: 2}
+  WallStoneMat: {fileID: 2100000, guid: f25edeb57738ab940959c45a04080c02, type: 2}
+  WallMetalMat: {fileID: 2100000, guid: 73aff67290e51f94fa7523bfcea959bf, type: 2}
+  FloorWoodMat: {fileID: 2100000, guid: 3fab533a3969f514495c8a978d6559fb, type: 2}
+  FloorStoneMat: {fileID: 2100000, guid: 69cfc44e7dd8d4b439eb0599abb43f48, type: 2}
+  FloorMetalMat: {fileID: 2100000, guid: 823fbd8424a2a954688cc4b563c877b9, type: 2}
+  DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
+  DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
+  DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
+  Hitpoints: 0
+  StructurePlaced: 0
 --- !u!208 &208167594616914858
 NavMeshObstacle:
   m_ObjectHideFlags: 1

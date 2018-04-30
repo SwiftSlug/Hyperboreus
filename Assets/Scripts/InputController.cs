@@ -19,10 +19,11 @@ public abstract class ControllerState
 }
 
 public class DefaultControllerState : ControllerState
-{    
+{
 
     public DefaultControllerState(InputController controllerRef) : base(controllerRef)
-    {        
+    {
+
     }
 
     public override void Update()

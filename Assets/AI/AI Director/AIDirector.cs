@@ -176,7 +176,7 @@ public class AIDirector : NetworkBehaviour
                     active = false;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Director Inactive");
+                    Debug.Log("Director : Director Inactive");
                     //}
                 }
                 else
@@ -184,7 +184,7 @@ public class AIDirector : NetworkBehaviour
                     active = true;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Director Active");
+                    Debug.Log("Director : Director Active");
                     //}
                 }
             }
@@ -200,7 +200,7 @@ public class AIDirector : NetworkBehaviour
                     isDay = false;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Switched To Night Time");
+                    Debug.Log("Director : Switched To Night Time");
                     //}
                 }
                 else
@@ -209,7 +209,7 @@ public class AIDirector : NetworkBehaviour
                     isDay = true;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Switched To Day Time");
+                    Debug.Log("Director : Switched To Day Time");
                     //}
                 }
             }
@@ -261,7 +261,7 @@ public class AIDirector : NetworkBehaviour
                 // Ensure position cannot be inside of ingore radius
 
                 //  Create new spawn location from generated values above
-                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);
+                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos) + new Vector3(areaCentre.x, 0.0f, areaCentre.z);
                 //  Create a vector of distance centreIgnoreLine in the direction of the random vector
                 Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;
                 //  Add the ignore area to the random location to push spawn points away from the character
@@ -303,7 +303,7 @@ public class AIDirector : NetworkBehaviour
                             //  Debug
                             if (shouldAICreateSpawnDebug)
                             {
-                                GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                                GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation + new Vector3(0, 20, 0), Quaternion.identity);
                                 debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
                             }
                         }
@@ -450,8 +450,11 @@ public class AIDirector : NetworkBehaviour
 
                 if (spawnLocations.Count != numberOfSpawnLocations)
                 {
-                    //  Do not allow spawning if spawn list is not fully populated
-                    Debug.Log("***********Director spawn location list not fully populated, can't spawn !***********");
+                    if (shouldAIDebug)
+                    {
+                        //  Do not allow spawning if spawn list is not fully populated
+                        Debug.Log("Director : spawn location list not fully populated, can't spawn !");
+                    }
                     return;
                 }
 
@@ -667,7 +670,7 @@ public class AIDirector : NetworkBehaviour
 
         if (shouldAIDebug)
         {
-            Debug.Log("AI Cleanup complete !");
+            Debug.Log("Director : AI Cleanup complete !");
         }
 
 
@@ -770,16 +773,23 @@ public class AIDirector : NetworkBehaviour
 
     public GameObject GetTargetableBuilding(GameObject playerObject)
     {
-        
+
+        if(playerObject == null)
+        {
+            //  Player object reference is not set 
+            return null;
+        }
+
         //  Run through list to ensure all references still exist
         foreach (List<GameObject> playerList in playerBuildingTargets)
         {
+            //  Remove all null values from list
             playerList.RemoveAll(item => item == null);
         }
 
             if (playerObject.GetComponent<PlayerStats>())
             {
-            //  Object type is inface a player
+            //  Object type is a player
 
             int playerNumber = 0;
 

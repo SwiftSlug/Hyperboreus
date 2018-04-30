@@ -58,7 +58,7 @@ MonoBehaviour:
   dayLength: 180
   nightLength: 180
   currentTime: 0.4
-  daySpeed: 20
-  nightSpeed: 20
+  daySpeed: 1
+  nightSpeed: 1
   isDay: 1
   isNight: 0

@@ -85,8 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  shouldAIDebug: 1
-  shouldAIDrawDebug: 1
+  shouldAIDebug: 0
+  shouldAIDrawDebug: 0
   shouldAICreateSpawnDebug: 0
   shouldDebugBuildingLocations: 0
   difficulyMultiplier: 1.2
@@ -96,7 +96,7 @@ MonoBehaviour:
   numerOfSpawnGroups: 2
   aiSpawnGroupSizeNight: 5
   aiSpawnGroupSizeDay: 1
-  numberOfSpawnLocations: 10
+  numberOfSpawnLocations: 5
   spawnBufferSize: 2
   playerProximitySize: 40
   maxDistanceFromPlayers: 100

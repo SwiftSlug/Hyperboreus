@@ -133,6 +133,18 @@ public class DayNightCycle : NetworkBehaviour
     void DirectorUpdate()
     {
 
+        //if (!isServer)
+        //{
+        //    //  Only the server should update the director
+        //    return;
+        //}
+
+        if(directorReference == null)
+        {
+            //  Clients will not be able to get a director reference so do not continue
+            return;
+        }
+
         //Debug.Log("Director isDay = " + directorReference.isDay);
         //Debug.Log("isDay = " + isDay);
         //Debug.Log("isNIght = " + isNight);

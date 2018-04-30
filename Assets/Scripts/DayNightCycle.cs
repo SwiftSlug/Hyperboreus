@@ -38,21 +38,34 @@ public class DayNightCycle : NetworkBehaviour
     [SyncVar]
     public bool isNight = false;
 
+    bool directorUpdated = false;    //  Flag to stop director calls triggering per frame
+
+    AIDirector directorReference;    //  Reference to director
+
 	// Use this for initialization
 	void Start ()
     {
 
         lightColor = directionalLight.color;
         lightIntensity = directionalLight.intensity;
-	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    }
+
+    private void Awake()
+    {
+        directorReference = FindObjectOfType<AIDirector>(); //  Find and set director reference
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         UpdateLighting();
 
         UpdateTime();
-	}
+
+        DirectorUpdate();
+
+    }
 
     void UpdateLighting()
     {
@@ -90,11 +103,13 @@ public class DayNightCycle : NetworkBehaviour
         {
             isDay = true;
             isNight = false;
+
         }
         else if (currentTime > 0.75f || currentTime < 0.25f)
         {
             isNight = true;
             isDay = false;
+
         }
         else
         {
@@ -114,4 +129,47 @@ public class DayNightCycle : NetworkBehaviour
             Debug.LogError("Error in DayNightCycle. Time is neither day or night.");
         }
     }
+
+    void DirectorUpdate()
+    {
+
+        //if (!isServer)
+        //{
+        //    //  Only the server should update the director
+        //    return;
+        //}
+
+        if(directorReference == null)
+        {
+            //  Clients will not be able to get a director reference so do not continue
+            return;
+        }
+
+        //Debug.Log("Director isDay = " + directorReference.isDay);
+        //Debug.Log("isDay = " + isDay);
+        //Debug.Log("isNIght = " + isNight);
+
+        if (isDay)
+        {
+            //  Day time
+
+            if (directorReference.isDay != isDay)
+            {
+                //  Director not set to day so update
+                directorReference.SetDay();
+            }
+        }
+        else
+        {
+            //  Night time
+
+            if(directorReference.isDay != isDay)
+            {
+                //  Director is still set to day so switch to night 
+                directorReference.SetNight();
+            }
+        }
+        
+    }
+
 }

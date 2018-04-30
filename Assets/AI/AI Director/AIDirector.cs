@@ -9,10 +9,14 @@ public class AIDirector : NetworkBehaviour
 {
     //public bool blep;
     public bool active = false;
-    
+
     public bool shouldAIDebug = false;          //  Debug flag for all debugging logs
     public bool shouldAIDrawDebug = true;       //  Debug flag for drawing debug spheres
-    public bool shouldAICreateSpawnDebug = true;    //  Debug flag for drawing spawn area cubes
+    public bool shouldAICreateSpawnDebug = false;    //  Debug flag for drawing spawn area cubes
+    public bool shouldDebugBuildingLocations = false;    //  Debug flag for drawing cubes at targetable buildings
+
+    public float difficulyMultiplier = 1.2f;    //  The amount the target intensity is increased per day
+
     public bool isDay = true;                   //  Boolean that defines if it is day or night
     //GameObject[] EnemyUnits;
     public GameObject enemyToSpawn;             //  Enemy type to spawn, limited to one for this stage of the game
@@ -20,10 +24,14 @@ public class AIDirector : NetworkBehaviour
     List<GameObject> enemyUnits;                //  List of all enemy units within the game
     List<GameObject> players;                   //  List of all players in the game
 
-    List<Vector3> spawnLocations;               //  List of avalible spawn locations for the AI
+    List<Vector3> spawnLocations;               //  An array of Lists of avalible spawn locations for the AI (One for each player)
+
+    List<List<GameObject>> playerBuildingTargets;     //  A list of lists of potential player built targets that can be targetted by the AI units
+
+    float playerBuildingTargetsScanSize = 50.0f;    //  The size of the area that is checked for buildings around the player
 
     int maxAiCount = 100;                       //  The max amount of AI that can be active before group spawning stops
-    int numerOfSpawnGroups = 5;                 //  The number of groups that are spawned per wave
+    public int numerOfSpawnGroups = 5;                 //  The number of groups that are spawned per wave
     public int aiSpawnGroupSizeNight = 5;      //  The amount of AI to spawn per group at day
     public int aiSpawnGroupSizeDay = 1;         //  The amount of AI to spawn per group at night
     public int numberOfSpawnLocations = 10;     //  The number of spawn locaitons generated per search
@@ -34,7 +42,7 @@ public class AIDirector : NetworkBehaviour
     public float maxDistanceFromPlayers = 100.0f;   //  The max distance an AI unit can be from the player before being deleted
     public float buildingScanDisance = 100.0f;      //  The area size around the players that is checked for buildings if no path to players
                                                     //  can be found
-    
+
     public int targetIntensityLevelDay = 40;    //  The intensity level the director aims to keep players at during the day
     public int targetIntensityLevelNight = 400; //  The intensity level the director aims to keep players at during the night
     public float waveCooldown;                  //  The cooldown time inbetween waves
@@ -42,9 +50,9 @@ public class AIDirector : NetworkBehaviour
     //  Intensity variables
     public int intensityPerAI = 5;             //  The amount of intensity each AI unit adds to the player
     public int intensityPerTrackingAI = 10;      //  The amount of intensity each AI unit tracking the player applies 
-    float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
+    //float intensityIncreasePercentage = 0.2f;   //  The percentage of the new intensity level added per update
     public int intensityDecreaseAmount = 20;    //  The amount of intensity that is decreased when its not increasing
-    
+
 
     //  Timing Varaibles
     public float intensityUpdateInterval = 3.0f;    //  The time interval between updating the player intensity level
@@ -55,7 +63,7 @@ public class AIDirector : NetworkBehaviour
 
     public float spawnInterval = 5.0f;           //  The time interval between spawning groups of enemies
     public float spawnLast = 0.0f;               //  The last time the AI were spawned
-    
+
 
     // Debug Variables    
 
@@ -72,7 +80,7 @@ public class AIDirector : NetworkBehaviour
 
 
     // Use this for initialization
-    void Start () {
+    void Start() {
 
         if (shouldAIDebug)
         {
@@ -84,6 +92,8 @@ public class AIDirector : NetworkBehaviour
         players = new List<GameObject>();       // Init player list
         spawnLocations = new List<Vector3>();   // Init spawn Location list
 
+        playerBuildingTargets = new List<List<GameObject>>(); //  Init list for base building targets
+
         //  Search for AI units and store their gameobjects in the list
         int aiCount = 0;
         foreach (AIStats foundAI in FindObjectsOfType<AIStats>())
@@ -94,24 +104,25 @@ public class AIDirector : NetworkBehaviour
         }
 
         int playerCount = 0;
-        foreach (PlayerStats foundAI in FindObjectsOfType<PlayerStats>())
+        foreach (PlayerStats foundPlayer in FindObjectsOfType<PlayerStats>())
         {
-            players.Add(foundAI.gameObject);
+            players.Add(foundPlayer.gameObject);    //  Add found player to list
+            playerBuildingTargets.Add(new List<GameObject>());  //  Add a building list for each player
             playerCount++;
             //Debug.Log("Player Found by director !");
         }
-   
+
         if (shouldAIDebug)
         {
             //Debug.Log(aiCount + " AI Unit(s) Found");
             //Debug.Log(playerCount + " Player(s) Found");
             //Debug.Log("Director Init Complete");
-        } 
+        }
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update() {
 
         if (isServer)
         {
@@ -139,6 +150,7 @@ public class AIDirector : NetworkBehaviour
                 if (Time.time > (spawnLast + spawnInterval))
                 {
                     spawnEnemies();
+                    UpdateTargetableBuildings();
                     spawnLast = Time.time;
                 }
 
@@ -164,7 +176,7 @@ public class AIDirector : NetworkBehaviour
                     active = false;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Director Inactive");
+                    Debug.Log("Director : Director Inactive");
                     //}
                 }
                 else
@@ -172,7 +184,7 @@ public class AIDirector : NetworkBehaviour
                     active = true;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Director Active");
+                    Debug.Log("Director : Director Active");
                     //}
                 }
             }
@@ -188,7 +200,7 @@ public class AIDirector : NetworkBehaviour
                     isDay = false;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Switched To Night Time");
+                    Debug.Log("Director : Switched To Night Time");
                     //}
                 }
                 else
@@ -197,7 +209,7 @@ public class AIDirector : NetworkBehaviour
                     isDay = true;
                     //if (shouldAIDebug)
                     //{
-                    Debug.Log("Switched To Day Time");
+                    Debug.Log("Director : Switched To Day Time");
                     //}
                 }
             }
@@ -234,13 +246,13 @@ public class AIDirector : NetworkBehaviour
         spawnLocations.Clear();
         bool areaFound = false;
 
-        for(int i = 0; i < numberOfSpawnLocatoins; i++)
+        for (int i = 0; i < numberOfSpawnLocatoins; i++)
         {
             areaFound = false;
             //  Only run this loop up to maxRunAttemps, prevents an unspawnable area causing an infinite loop
             maxRunCounter = 0;
             while ((maxRunCounter < maxRunAttempts) && (areaFound == false))
-            {               
+            {
 
                 //  Generate a random position offset within the input area size
                 float xPos = Random.Range(-areaSize, areaSize);
@@ -249,9 +261,9 @@ public class AIDirector : NetworkBehaviour
                 // Ensure position cannot be inside of ingore radius
 
                 //  Create new spawn location from generated values above
-                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos);
+                Vector3 spawnLocation = new Vector3(xPos, 0.0f, zPos) + new Vector3(areaCentre.x, 0.0f, areaCentre.z);
                 //  Create a vector of distance centreIgnoreLine in the direction of the random vector
-                Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;    
+                Vector3 innerArea = Vector3.Normalize(spawnLocation) * centerIgnoreSize;
                 //  Add the ignore area to the random location to push spawn points away from the character
                 spawnLocation = spawnLocation + innerArea;
 
@@ -291,7 +303,7 @@ public class AIDirector : NetworkBehaviour
                             //  Debug
                             if (shouldAICreateSpawnDebug)
                             {
-                                GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                                GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation + new Vector3(0, 20, 0), Quaternion.identity);
                                 debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
                             }
                         }
@@ -424,7 +436,7 @@ public class AIDirector : NetworkBehaviour
 
     //  Spawn enemies near the players
     void spawnEnemies()
-    {        
+    {
         int activeAICount = enemyUnits.Count;
 
         //  Ensure spawning stops when AI count is over limit
@@ -436,10 +448,13 @@ public class AIDirector : NetworkBehaviour
                 //  Find spawn locations near the player
                 scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations);
 
-                if(spawnLocations.Count != numberOfSpawnLocations)
+                if (spawnLocations.Count != numberOfSpawnLocations)
                 {
-                    //  Do not allow spawning if spawn list is not fully populated
-                    Debug.Log("***********Director spawn location list not fully populated, can't spawn !***********");
+                    if (shouldAIDebug)
+                    {
+                        //  Do not allow spawning if spawn list is not fully populated
+                        Debug.Log("Director : spawn location list not fully populated, can't spawn !");
+                    }
                     return;
                 }
 
@@ -453,8 +468,8 @@ public class AIDirector : NetworkBehaviour
                         int randomLocation = Random.Range(0, spawnLocations.Count - 1);
                         //if (spawnLocations[randomLocation] != null)
                         //{
-                            //  Spawn units with no target
-                            spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], spawnBufferSize);
+                        //  Spawn units with no target
+                        spawnUnits(aiSpawnGroupSizeDay, spawnLocations[randomLocation], spawnBufferSize);
                         //}
 
                     }
@@ -498,7 +513,7 @@ public class AIDirector : NetworkBehaviour
     {
 
         // Spawn the units within random locations near the defined position
-        for (int i =0; i < number; i++)
+        for (int i = 0; i < number; i++)
         {
             float xOffset = Random.Range(-spread, spread);   //  Random x offset
             float zOffset = Random.Range(-spread, spread);   //  Random y offset
@@ -557,7 +572,7 @@ public class AIDirector : NetworkBehaviour
     //  This calculates and updates the intensity level for all players currently within the game
     void updatePlayerIntensity()
     {
-        
+
         //int foundAI = 0;        //  The number of AI that are nearby the player
         //int trackingAI = 0;     //  The number of AI that are currently targetting the player
 
@@ -575,33 +590,24 @@ public class AIDirector : NetworkBehaviour
                 if (hitCollider[i].CompareTag("Enemy"))
                 {
                     //Debug.Log("Enemy Found Near Player");
-                    foundAI++;                    
+                    foundAI++;
                 }
             }
             //Debug.Log("Found enemy = " + foundAI);
 
             //  Find all enemies that are targeting the player
             GameObject[] enemyAI = GameObject.FindGameObjectsWithTag("Enemy");
-            for(int i = 0; i < enemyAI.Length; i++)
+            for (int i = 0; i < enemyAI.Length; i++)
             {
-                if (enemyAI[i].GetComponent<StateController>().target == player)
+                if ((enemyAI[i].GetComponent<StateController>().target == player) || (enemyAI[i].GetComponent<StateController>().previousPlayerTarget == player) )
                 {
+                    //  AI either has player as a target or as a previoustarget
                     //Debug.Log("Enemy Tracking Player");
                     trackingAI++;
                     //Debug.Log("Number of tracking AI found = " + trackingAI);
                 }
             }
 
-
-
-            //float intensityLevel = 0.0f;                                    //  Overall intensity level
-
-            //int nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
-            //int trackingIntensity = trackingAI * intensityPerTrackingAI;    //  Intensity level based on the number of enemy tracking the player
-            //int healthLost = (100 - statsRef.currentHealth);                //  0 - 100 based on how much health has been lost from 100
-            ////int ammoIntensity =                                       //  Ammo intensity not part of current build
-
-            //float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
             float intensityLevel = 0.0f;                                    //  Overall intensity level
 
@@ -618,43 +624,13 @@ public class AIDirector : NetworkBehaviour
             //Debug.Log("Health Lost Intensity =  " + healthLost);
             //Debug.Log("");
 
-            intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes
+            //intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes (Using Nearby enemies)
 
 
+            intensityLevel = (trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes   (Only Using tracking)
 
             statsRef.intensity = intensityLevel;
 
-            // Set final player intensity
-
-            //if (statsRef.intensity < intensityLevel)
-            //{
-            //    statsRef.intensity = intensityLevel;
-            //}
-            //else
-            //{
-            //    statsRef.intensity = statsRef.intensity * 0.9f;
-            //}
-
-            /*
-            //  Apply Intensity to player
-
-            if (statsRef.intensity < intensityLevel)
-            {
-                //  Increase intensity up to intensityLevel per update
-                statsRef.intensity += intensityIncreasePercentage * intensityLevel;
-            }
-            else if (statsRef.intensity > 0)
-            {
-                //  Decrease instensity gradually back to 0
-                statsRef.intensity -= intensityDecreaseAmount;
-            }
-
-            //  Ensure that intensity does not fall below 0
-            if(statsRef.intensity < 0.0f)
-            {
-                statsRef.intensity = 0.0f;
-            }
-            */
 
         }
 
@@ -667,16 +643,16 @@ public class AIDirector : NetworkBehaviour
     void cleaupAI()
     {
 
-        foreach(GameObject enemy in enemyUnits)
+        foreach (GameObject enemy in enemyUnits)
         {
             bool shouldDelete = true;
-            
-            foreach(GameObject player in players)
-            {                
+
+            foreach (GameObject player in players)
+            {
                 float distanceToPlayer = (player.transform.position - enemy.transform.position).magnitude;
 
-            
-                if(distanceToPlayer < maxDistanceFromPlayers)
+
+                if (distanceToPlayer < maxDistanceFromPlayers)
                 {
                     //  Prevent AI from being deleted if it is still close to any of the players
                     shouldDelete = false;
@@ -694,12 +670,179 @@ public class AIDirector : NetworkBehaviour
 
         if (shouldAIDebug)
         {
-            Debug.Log("AI Cleanup complete !");
+            Debug.Log("Director : AI Cleanup complete !");
         }
 
 
     }
 
+
+
+    //  This will search for player built buildings near each of the players within the game
+    //  each building that is located will have a path checked from its location to the current spawn locations
+    //  this list will then be used by the AI to find targets to attack when they cant reacdh players
+    //  There will be a list for each player
+    void UpdateTargetableBuildings()
+    {
+        double startTime = Time.realtimeSinceStartup;
+
+
+        //  Remove all current references from the list
+        foreach(List<GameObject> playerList in playerBuildingTargets)
+        {
+            playerList.Clear();
+        }
+
+
+        int playerNumber = 0;
+
+        foreach (GameObject player in players)
+        {
+            //  Find buildings that can be pathed to from the spawn points
+            
+            int numberOfRuns = 0;
+
+            Collider[] hitColliders = Physics.OverlapSphere(player.transform.position, playerBuildingTargetsScanSize);  //  Get list of colliders around the player
+
+            foreach (Collider hit in hitColliders)
+            {
+
+                if (hit.gameObject.GetComponentInParent<TestBuildingController>())
+                {
+                    //  Found a building object near the player
+
+                    float offset = 10.0f;    //  Offset multiplier
+
+                    Vector3 spawnLocation = spawnLocations[Random.Range(0, spawnLocations.Count)];    //  Random spawn location from array
+
+                    Vector3 vectorToSpawn = (hit.gameObject.transform.position - spawnLocation).normalized;    //  Vector from the buidling to the spawn location
+
+                    Vector3 positionOffset = vectorToSpawn * offset;   //  Vector used to offset building pathing position for AI pathfinding
+
+                    Vector3 searchLocation = positionOffset + hit.transform.position;   //  Position to use for pathing to object
+
+                    //  Check if AI can path to buidling
+                    NavMeshHit navMeshHit;
+                    NavMeshPath pathToBuilding = new NavMeshPath();
+
+                    if (NavMesh.SamplePosition(spawnLocation, out navMeshHit, playerBuildingTargetsScanSize, NavMesh.AllAreas))
+                    {
+
+                        //NavMesh.CalculatePath(navMeshHit.position, controller.previousPlayerTarget.transform.position, NavMesh.AllAreas, pathToBuilding);
+                        NavMesh.CalculatePath(navMeshHit.position, searchLocation, NavMesh.AllAreas, pathToBuilding);
+
+                        numberOfRuns++;
+
+                        if (pathToBuilding.status == NavMeshPathStatus.PathComplete)
+                        {
+                            //  Can path to building so set as a targetable building
+
+                            playerBuildingTargets[playerNumber].Add(hit.transform.parent.gameObject);
+
+
+
+                            if (shouldDebugBuildingLocations)
+                            {
+                                GameObject debugCube = Instantiate(debugSpawnCube, (hit.gameObject.transform.position + new Vector3(0,10,0)), Quaternion.identity);
+                                debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.green;
+                            }
+
+
+                            //Debug.Log("Found a building near the player");
+
+                            //Debug.Log("One found with number of runs = " + numberOfRuns);
+
+                            
+                        }
+                    }
+
+                }
+
+            }
+            playerNumber++;
+        }
+
+        double timeSpentInFunction = (Time.realtimeSinceStartup - startTime);
+
+        //Debug.Log("Time spent findinf buildings = " + timeSpentInFunction.ToString());
+
+    }
+
+
+    //  Returns a random building near the defined player parameter passed in
+
+    public GameObject GetTargetableBuilding(GameObject playerObject)
+    {
+
+        if(playerObject == null)
+        {
+            //  Player object reference is not set 
+            return null;
+        }
+
+        //  Run through list to ensure all references still exist
+        foreach (List<GameObject> playerList in playerBuildingTargets)
+        {
+            //  Remove all null values from list
+            playerList.RemoveAll(item => item == null);
+        }
+
+            if (playerObject.GetComponent<PlayerStats>())
+            {
+            //  Object type is a player
+
+            int playerNumber = 0;
+
+            foreach(GameObject player in players){
+
+                if(playerObject == player)
+                {
+                    //  Found matching player
+
+                    int randomPosition = Random.Range(0, playerBuildingTargets[playerNumber].Count-1);
+
+                    //  Ensure that list has items in it to return
+                    if((playerBuildingTargets.Count > 0) && (playerBuildingTargets[playerNumber].Count > 0)) {
+                        return playerBuildingTargets[playerNumber][randomPosition];
+                    }                                       
+                    
+                }
+
+                playerNumber++;
+
+            }
+
+        }
+
+        return null;
+    }
+
+
+    public void SetDay()
+    {
+        //  Set is day
+        isDay = true;        
+
+        if (shouldAIDebug)
+        {
+            Debug.Log("Director : Day Time - Intensity = " + targetIntensityLevelNight.ToString());
+        }
+    }
+
+    public void SetNight()
+    {
+        isDay = false;
+
+        //  Increase target intensity (increase difficulty per day)
+        targetIntensityLevelNight = (int)(targetIntensityLevelNight * difficulyMultiplier);
+
+
+        if (shouldAIDebug)
+        {
+            Debug.Log("Director : Night Time - Intensity = " + targetIntensityLevelNight.ToString());
+        }
+
+        }
 
 
     //  Debug functions below ---------------------------------

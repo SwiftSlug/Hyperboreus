@@ -46,11 +46,11 @@ public class TargetDeadDecision : Decision
                 if (controller.previousPlayerTarget != null)
                 {
                     controller.setTarget(controller.previousPlayerTarget);
+                    //Debug.Log("AI Target set back to previous player");
                 }
                 else
                 {
-
-                    //controller.target = null;
+                    
                     controller.setTarget(null);
                 }
                 return true;

@@ -10,6 +10,8 @@ public class StateController : NetworkBehaviour {
     public State currentState;
     public State remainState;
 
+    public AIDirector directorReference;
+
     [Tooltip("The default range in which the AI can detect other objects")]
     public float detectionRange = 500.0f;
 
@@ -47,6 +49,9 @@ public class StateController : NetworkBehaviour {
     [HideInInspector] public float lastAttack = 0.0f;   //  Used for timing cooldown between jumps
 
     public GameObject previousPlayerTarget;    //  The player the AI will target if able
+
+    public Vector3 previousMoveLocation;    //  The move location that the AI was moving to last frame
+
     public GameObject target;         //  Generic gameobject target for AI
     //[HideInInspector] public Vector3 targetLocation;    //  Generic vector location used for AI
 
@@ -73,6 +78,8 @@ public class StateController : NetworkBehaviour {
         animator = GetComponentInChildren<Animator>();
 
         moveCommandLocation = Vector3.zero;
+
+        directorReference = FindObjectOfType<AIDirector>();
 
         aiActive = true;
 	}
@@ -128,11 +135,15 @@ public class StateController : NetworkBehaviour {
         {
             //  Target has been previously set
 
-            if (target.GetComponent<PlayerStats>())
-            {
-                //  The current target is a player
+            if (target.GetComponent<PlayerStats>()) {
+                //  Target is a player
+                
+                if (target.GetComponent<PlayerStats>().isDead != true)
+                {
+                    //  The current target is a player and is not dead
 
-                previousPlayerTarget = target;  //  Remember previous player target
+                    previousPlayerTarget = target;  //  Remember previous player target
+                }
             }
         }
 

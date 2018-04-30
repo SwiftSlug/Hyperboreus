@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.Networking;
+﻿using UnityEngine.Networking;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerBuildingController : NetworkBehaviour
 {
@@ -16,6 +15,17 @@ public class PlayerBuildingController : NetworkBehaviour
     public AudioClip clipBuildMode;
     public AudioClip clipCombatMode;
     public AudioClip clipBuildStructure;
+
+	//Images used for player HUD resources
+	public Image WoodResourceColour;
+	public Image WoodResourceNoColour;
+	public Image StoneResourceColour;
+	public Image StoneResourceNoColour;
+	public Image MetalResourceColour;
+	public Image MetalResourceNoColour;
+	public Image WoodSelector;
+	public Image StoneSelector;
+	public Image MetalSelector;
 
     public bool blep = true;
 
@@ -32,12 +42,41 @@ public class PlayerBuildingController : NetworkBehaviour
 
             audioSource.PlayOneShot(clipCombatMode, 1.0f);
 
-            DestroyObject(TempStructureGuide);
+			WoodResourceColour.enabled = false;
+			StoneResourceColour.enabled = false;
+			MetalResourceColour.enabled = false;
+			WoodResourceNoColour.enabled = true;
+			StoneResourceNoColour.enabled = true;
+			MetalResourceNoColour.enabled = true;
+			WoodSelector.enabled = false;
+			StoneSelector.enabled = false;
+			MetalSelector.enabled = false;
+
+			DestroyObject(TempStructureGuide);
             TempStructureGuide = null;
         }
         else
         {
             InbuildMode = true;
+
+			if (MaterialNeeded == 0)
+			{
+				WoodSelector.enabled = true;
+				WoodResourceColour.enabled = true;
+				WoodResourceNoColour.enabled = false;
+			}
+			else if (MaterialNeeded == 1)
+			{
+				StoneSelector.enabled = true;
+				StoneResourceColour.enabled = true;
+				StoneResourceNoColour.enabled = false;
+			}
+			else if (MaterialNeeded == 2)
+			{
+				MetalSelector.enabled = true;
+				MetalResourceColour.enabled = true;
+				MetalResourceNoColour.enabled = false;
+			}
 
             audioSource.PlayOneShot(clipBuildMode, 1.0f);
 
@@ -130,6 +169,8 @@ public class PlayerBuildingController : NetworkBehaviour
                 MaterialNeeded = 0;
                 //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
                // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+
+				
         }
         else
             {
@@ -158,13 +199,51 @@ public class PlayerBuildingController : NetworkBehaviour
         {
             MaterialNeeded = 0;
             TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
-            // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
-        }
+			// LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+
+			WoodSelector.enabled = true;
+			WoodResourceColour.enabled = true;
+			WoodResourceNoColour.enabled = false;
+
+			StoneSelector.enabled = false;
+			StoneResourceColour.enabled = false;
+			StoneResourceNoColour.enabled = true;
+			MetalSelector.enabled = false;
+			MetalResourceColour.enabled = false;
+			MetalResourceNoColour.enabled = true;
+		}
         else
         {
             MaterialNeeded = MaterialNeeded + 1;
             TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
             // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+
+			if (MaterialNeeded == 1)
+			{
+				StoneSelector.enabled = true;
+				StoneResourceColour.enabled = true;
+				StoneResourceNoColour.enabled = false;
+
+				WoodSelector.enabled = false;
+				WoodResourceColour.enabled = false;
+				WoodResourceNoColour.enabled = true;
+				MetalSelector.enabled = false;
+				MetalResourceColour.enabled = false;
+				MetalResourceNoColour.enabled = true;
+			}
+			else if (MaterialNeeded == 2)
+			{
+				MetalSelector.enabled = true;
+				MetalResourceColour.enabled = true;
+				MetalResourceNoColour.enabled = false;
+
+				WoodSelector.enabled = false;
+				WoodResourceColour.enabled = false;
+				WoodResourceNoColour.enabled = true;
+				StoneSelector.enabled = false;
+				StoneResourceColour.enabled = false;
+				StoneResourceNoColour.enabled = true;
+			}
         }
     }
 
@@ -174,9 +253,19 @@ public class PlayerBuildingController : NetworkBehaviour
         PlayerReference = gameObject;
         StructureSpawnerRef.GetComponent<BuildingController>().LinkedPlayer = PlayerReference;
 
-        //Debug.Log("I'm not using the test script");
+		WoodResourceColour.enabled = false;
+		StoneResourceColour.enabled = false;
+		MetalResourceColour.enabled = false;
+		WoodResourceNoColour.enabled = true;
+		StoneResourceNoColour.enabled = true;
+		MetalResourceNoColour.enabled = true;
+		WoodSelector.enabled = false;
+		StoneSelector.enabled = false;
+		MetalSelector.enabled = false;
 
-    }
+		//Debug.Log("I'm not using the test script");
+
+	}
 
     private void Start()
     {
@@ -289,21 +378,27 @@ public class PlayerBuildingController : NetworkBehaviour
                     {
                         CmdPlaceStructure();
                         gameObject.GetComponent<PlayerStats>().WoodInInventory = gameObject.GetComponent<PlayerStats>().WoodInInventory - 10;
-                    }
+						GetComponent<PlayerStats>().WoodText.text = "" + GetComponent<PlayerStats>().WoodInInventory;
+						GetComponent<PlayerStats>().WoodTextBackground.text = "" + GetComponent<PlayerStats>().WoodInInventory;
+					}
                     break;
                 case 1:
                     if (gameObject.GetComponent<PlayerStats>().StoneInInventory >= 10)
                     {
                         CmdPlaceStructure();
                         gameObject.GetComponent<PlayerStats>().StoneInInventory = gameObject.GetComponent<PlayerStats>().StoneInInventory - 10;
-                    }
+						GetComponent<PlayerStats>().StoneText.text = "" + GetComponent<PlayerStats>().StoneInInventory;
+						GetComponent<PlayerStats>().StoneTextBackground.text = "" + GetComponent<PlayerStats>().StoneInInventory;
+					}
                     break;
                 case 2:
                     if (gameObject.GetComponent<PlayerStats>().MetalInInventory >= 10)
                     {
                         CmdPlaceStructure();
                         gameObject.GetComponent<PlayerStats>().MetalInInventory = gameObject.GetComponent<PlayerStats>().MetalInInventory - 10;
-                    }
+						GetComponent<PlayerStats>().MetalText.text = "" + GetComponent<PlayerStats>().MetalInInventory;
+						GetComponent<PlayerStats>().MetalTextBackground.text = "" + GetComponent<PlayerStats>().MetalInInventory;
+					}
                     break;
             }
         }

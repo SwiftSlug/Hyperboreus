@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c77a274649dc82f48a807f2d4c017575
-timeCreated: 1521051729
+guid: d4fa6efbaf190074d9721a39a618edee
+timeCreated: 1521058883
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -100,7 +100,7 @@ ModelImporter:
     2100012: Mouth
     2100014: Eyes
     4300000: Cube
-    7400000: mixamo.com
+    7400000: Run Right
     9500000: //RootNode
     13700000: Cube
   externalObjects: {}
@@ -129,7 +129,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Run Right
+      takeName: mixamo.com
+      firstFrame: 0
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

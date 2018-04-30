@@ -4,17 +4,83 @@ using UnityEngine.Networking;
 public class PlayerController : NetworkBehaviour
 {
     Vector3 playerOrientation; //Player Orientation
+
     [SyncVar]
     public bool AbleToDestroy = false;
+
     [SyncVar]
     public bool AbleToLoot = false;
+
     [SyncVar]
     public GameObject AssetToDestroy;
+
     [SyncVar]
     public GameObject AssetToLoot;
 
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
+
     public float controllerDeadZone = 0.5f;
+
+    Animator animator;
+
+    Transform cam;
+
+    Vector3 forward;
+
+    Vector3 move;
+
+    Vector3 moveInput;
+
+    [SyncVar]
+    float yValue;
+
+    [SyncVar]
+    float xValue;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+        cam = Camera.main.transform;
+    }
+
+    private void FixedUpdate()
+    {
+        //Debug.Log("");
+        //Vector3 facing = transform.forward;
+        //Vector3 vel = transform.;
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        //facing.y = 0;
+        //Debug.Log(facing);
+        //Debug.Log(h);
+        //Debug.Log(v);
+
+        if (h == 0 & v == 0)
+        {
+            animator.SetBool("moving", false);
+        }
+        else
+        {
+            animator.SetBool("moving", true);
+        }
+
+        if (cam != null)
+        {
+            forward = Vector3.Scale(cam.up, new Vector3(1, 0, 1)).normalized;
+            move = v * forward + h * cam.right;
+        }
+        else
+        {
+            move = v * Vector3.forward + h * Vector3.right;
+        }
+
+        if (move.magnitude > 1)
+        {
+            move.Normalize();
+        }
+
+        Move (move);
+    }
 
     //Update is called once per frame
     void Update()
@@ -48,7 +114,7 @@ public class PlayerController : NetworkBehaviour
         //  Save mouse position for next position update check
         previousMousePos = Input.mousePosition;
         */
-         
+
         /*
         float xAxis = Input.GetAxis("Horizontal") * Time.deltaTime * 6.0f; //Get the input horizontally and save it. "W,S,Up,Down,Joystick Up,Joystick Down"
         float yAxis = Input.GetAxis("Vertical") * Time.deltaTime * 6.0f; //Get the vertical input and and save it. "A,D,Left,Right,Joystick Left, Joystick Right"
@@ -111,7 +177,7 @@ public class PlayerController : NetworkBehaviour
         previousMousePos = Input.mousePosition;
 
     }
-
+    
     public void ControllerAiming()
     {
         Vector3 controllerAimingDirection = new Vector3(Input.GetAxis("ControllerLookX"), 0, Input.GetAxis("ControllerLookY"));
@@ -141,8 +207,8 @@ public class PlayerController : NetworkBehaviour
         transform.Translate(Vector3.right * xAxis, Space.World);
     }
 
-    public void AddVerticalMovement(float vertical)    {
-        
+    public void AddVerticalMovement(float vertical)
+    {
         float yAxis = vertical * Time.deltaTime * 6.0f;
         transform.Translate(Vector3.forward * yAxis, Space.World);
     }
@@ -165,6 +231,7 @@ public class PlayerController : NetworkBehaviour
             AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         }
     }
+
     private void OnCollisionExit(Collision collidedAsset)
     {
         //destroyable asset end collision
@@ -188,6 +255,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
     }
+
     [Command]
     public void CmdDamageAsset()
     {
@@ -225,5 +293,38 @@ public class PlayerController : NetworkBehaviour
         AbleToDestroy = false;
         AssetToLoot = null;
         AssetToDestroy = null;
+    }
+
+    void Move(Vector3 move)
+    {
+        if (move.magnitude > 1)
+        {
+            move.Normalize();
+        }
+
+        this.moveInput = move;
+
+        ConvertMovementInput();
+        UpdateAnimator();
+    }
+
+    //converts movement input depending on player rotation for animations
+    void ConvertMovementInput()
+    {
+        Vector3 localMove = transform.InverseTransformDirection(moveInput);
+        xValue = localMove.x;
+        yValue = localMove.z;
+    }
+    
+    //updates animator on player movement animation values
+    void UpdateAnimator()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        animator.SetFloat("velX", xValue, 0.1f, Time.deltaTime);
+        animator.SetFloat("velY", yValue, 0.1f, Time.deltaTime);
     }
 }

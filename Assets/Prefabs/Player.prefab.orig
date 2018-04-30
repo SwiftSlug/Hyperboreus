@@ -5382,14 +5382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4200f25821a30444294fc186526213e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blep: 1
-  blep2: 1
-  blep3: 1
-  blep4: 1
   weaponSlots:
   - {fileID: 1389021407989494}
   - {fileID: 1915111851799202}
   - {fileID: 1627478069241758}
+  weaponShootingScript: {fileID: 0}
 --- !u!114 &114148089913796268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5541,8 +5538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef406e32bf72734ab7094274a5aae49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersDown: 0
   players: []
+  playersDown: 0
   playerTotal: 0
 --- !u!114 &114348478218635018
 MonoBehaviour:
@@ -5567,7 +5564,7 @@ MonoBehaviour:
   canRevive: 0
   manager: {fileID: 0}
   intensity: 0
-  WoodInInventory: 20
+  WoodInInventory: 2000
   StoneInInventory: 30
   MetalInInventory: 70
   ResourceChoice: 0
@@ -5595,7 +5592,7 @@ MonoBehaviour:
   weaponName: Light Machine Gun
   timeBetweenShots: 0.05
   range: 1000
-  weaponDamage: 10
+  weaponDamage: 20
   reloadTime: 1.5
   maxAmmo: 30
   weaponModel: {fileID: 0}
@@ -5680,7 +5677,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 937c969015268a5439ddf1c39d4aa92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedWeapon: {fileID: 0}
   equippedWeapon: {fileID: 0}
+  gunShootingParticles: {fileID: 198627335161927428, guid: 3f16d70f84f344143be801d8e43da7f0,
+    type: 2}
   gunTransform: {fileID: 4732414733094308}
   gunEnd: {fileID: 4657937148490102}
   audioSource: {fileID: 82026530849861256}
@@ -5845,7 +5845,7 @@ MonoBehaviour:
   weaponName: Light Machine Gun
   timeBetweenShots: 0.1
   range: 1000
-  weaponDamage: 10
+  weaponDamage: 22
   reloadTime: 3
   maxAmmo: 100
   weaponModel: {fileID: 0}
@@ -5982,8 +5982,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef406e32bf72734ab7094274a5aae49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playersDown: 0
   players: []
+  playersDown: 0
   playerTotal: 0
 --- !u!114 &114919934040595350
 MonoBehaviour:
@@ -27080,7 +27080,7 @@ NavMeshObstacle:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 0
   m_Extents: {x: 0.5, y: 1, z: 0.5}

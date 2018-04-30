@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class MedicSkill : Skill {
 
@@ -17,9 +16,12 @@ public class MedicSkill : Skill {
 
     Transform gunPos;
 
-    //public bool belp;
+	public Image BuilderIcon;
+	public Image AssaultIcon;
+	public Image MedicIcon;
+	public Image SkillRecharge;
 
-    public override void Init()
+	public override void Init()
     {
         if(cooldown == 0.0f)
         {
@@ -43,9 +45,21 @@ public class MedicSkill : Skill {
         laser = playerReference.AddComponent<LineRenderer>();
         //  Set the laser to default off
         laser.enabled = false;
-        //  Load the syringe gameobject
-        //syringe = Instantiate(Resources.Load("MedicalSyringe", typeof(GameObject))) as GameObject;
-        //syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
+		//  Load the syringe gameobject
+		//syringe = Instantiate(Resources.Load("MedicalSyringe", typeof(GameObject))) as GameObject;
+		//syringe = Resources.Load("MedicalSyringe", typeof(GameObject)) as GameObject;
+
+		MedicIcon.enabled = true;
+		BuilderIcon.enabled = false;
+		AssaultIcon.enabled = false;
+	}
+
+	void Update()
+	{
+		if (SkillRecharge.fillAmount <= 1.0f)
+		{
+			SkillRecharge.fillAmount = (Time.time - (lastUsedTime + cooldown));
+		}
     }
 
     public override bool SkillAction()

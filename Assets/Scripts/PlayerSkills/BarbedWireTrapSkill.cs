@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class BarbedWireTrapSkill : Skill
 {
@@ -14,7 +13,10 @@ public class BarbedWireTrapSkill : Skill
 
     public Transform TrapPos;
 
-    //public bool belp;
+	public Image BuilderIcon;
+	public Image AssaultIcon;
+	public Image MedicIcon;
+	public Image SkillRecharge;
 
     public override void Init()
     {
@@ -28,9 +30,21 @@ public class BarbedWireTrapSkill : Skill
             //  Sets the chargetime to 2 seconds if no other value is set
             chargeTime = 1.0f;
         }
+
+		BuilderIcon.enabled = true;
+		AssaultIcon.enabled = false;
+		MedicIcon.enabled = false;
     }
 
-    public override bool SkillAction()
+	void Update()
+	{
+		if (SkillRecharge.fillAmount <= 1.0f)
+		{
+			SkillRecharge.fillAmount = (Time.time - (lastUsedTime + cooldown));
+		}
+	}
+
+	public override bool SkillAction()
     {
         if (isLocalPlayer)
         {

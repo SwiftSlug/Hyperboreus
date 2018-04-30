@@ -31,7 +31,7 @@ public class AIDirector : NetworkBehaviour
     float playerBuildingTargetsScanSize = 50.0f;    //  The size of the area that is checked for buildings around the player
 
     int maxAiCount = 100;                       //  The max amount of AI that can be active before group spawning stops
-    int numerOfSpawnGroups = 5;                 //  The number of groups that are spawned per wave
+    public int numerOfSpawnGroups = 5;                 //  The number of groups that are spawned per wave
     public int aiSpawnGroupSizeNight = 5;      //  The amount of AI to spawn per group at day
     public int aiSpawnGroupSizeDay = 1;         //  The amount of AI to spawn per group at night
     public int numberOfSpawnLocations = 10;     //  The number of spawn locaitons generated per search
@@ -606,16 +606,6 @@ public class AIDirector : NetworkBehaviour
             }
 
 
-
-            //float intensityLevel = 0.0f;                                    //  Overall intensity level
-
-            //int nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
-            //int trackingIntensity = trackingAI * intensityPerTrackingAI;    //  Intensity level based on the number of enemy tracking the player
-            //int healthLost = (100 - statsRef.currentHealth);                //  0 - 100 based on how much health has been lost from 100
-            ////int ammoIntensity =                                       //  Ammo intensity not part of current build
-
-            //float healthIntensity = ((float)healthLost / 100) + 1;      //  1.0 + value that multiplies the intensity based on how low the players health is
-
             float intensityLevel = 0.0f;                                    //  Overall intensity level
 
             nearbyEnemyIntensity = (foundAI * intensityPerAI);          //  0 - infinity based on number of enemies near player
@@ -631,43 +621,13 @@ public class AIDirector : NetworkBehaviour
             //Debug.Log("Health Lost Intensity =  " + healthLost);
             //Debug.Log("");
 
-            intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes
+            //intensityLevel = (nearbyEnemyIntensity + trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes (Using Nearby enemies)
 
 
+            intensityLevel = (trackingIntensity) * healthIntensity;    //  Finial intensity level based on above atributes   (Only Using tracking)
 
             statsRef.intensity = intensityLevel;
 
-            // Set final player intensity
-
-            //if (statsRef.intensity < intensityLevel)
-            //{
-            //    statsRef.intensity = intensityLevel;
-            //}
-            //else
-            //{
-            //    statsRef.intensity = statsRef.intensity * 0.9f;
-            //}
-
-            /*
-            //  Apply Intensity to player
-
-            if (statsRef.intensity < intensityLevel)
-            {
-                //  Increase intensity up to intensityLevel per update
-                statsRef.intensity += intensityIncreasePercentage * intensityLevel;
-            }
-            else if (statsRef.intensity > 0)
-            {
-                //  Decrease instensity gradually back to 0
-                statsRef.intensity -= intensityDecreaseAmount;
-            }
-
-            //  Ensure that intensity does not fall below 0
-            if(statsRef.intensity < 0.0f)
-            {
-                statsRef.intensity = 0.0f;
-            }
-            */
 
         }
 

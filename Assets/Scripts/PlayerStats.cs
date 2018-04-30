@@ -257,8 +257,6 @@ public class PlayerStats : NetworkBehaviour
             return;
         }
 
-        animator.SetTrigger("die");
-
         GetComponent<GameOver>().CmdCheckDead();
 
         GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
@@ -266,6 +264,8 @@ public class PlayerStats : NetworkBehaviour
         isDead = true; //Set our boolean to show that player is dead
 
         currentHealth = 0; //Set the player's current health to 0 on the server
+
+        //animator.SetTrigger("die");
     }
 
     //Call this command for the player on the server
@@ -288,6 +288,7 @@ public class PlayerStats : NetworkBehaviour
         currentHealth = 10; //Set the player's revived health
 
         animator.SetTrigger("revived");
+        animator.ResetTrigger("die");
     }
 
     //Call the regen on the server for the player

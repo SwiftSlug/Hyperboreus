@@ -596,8 +596,9 @@ public class AIDirector : NetworkBehaviour
             GameObject[] enemyAI = GameObject.FindGameObjectsWithTag("Enemy");
             for (int i = 0; i < enemyAI.Length; i++)
             {
-                if (enemyAI[i].GetComponent<StateController>().target == player)
+                if ((enemyAI[i].GetComponent<StateController>().target == player) || (enemyAI[i].GetComponent<StateController>().previousPlayerTarget == player) )
                 {
+                    //  AI either has player as a target or as a previoustarget
                     //Debug.Log("Enemy Tracking Player");
                     trackingAI++;
                     //Debug.Log("Number of tracking AI found = " + trackingAI);

@@ -50,10 +50,8 @@ public class TargetDeadDecision : Decision
                 }
                 else
                 {
-
-                    //controller.target = null;
+                    
                     controller.setTarget(null);
-                    //Debug.Log("AI Target set to null");
                 }
                 return true;
 

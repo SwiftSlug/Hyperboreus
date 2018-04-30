@@ -769,6 +769,25 @@ public class AIDirector : NetworkBehaviour
     }
 
 
+    //  This function cycle through all enemies spawn within the game, checks if they currently have a target and if not removes them
+    //  This will act as a basic cleanup before the night spawning starts
+
+    void HandleDaySpawnedEnemies()
+    {
+
+        foreach(GameObject enemy in enemyUnits)
+        {
+            if(enemy.GetComponent<StateController>().target == null)
+            {
+                Destroy(enemy);
+            }
+
+        }
+
+    }
+
+
+
     //  Returns a random building near the defined player parameter passed in
 
     public GameObject GetTargetableBuilding(GameObject playerObject)
@@ -832,6 +851,9 @@ public class AIDirector : NetworkBehaviour
     public void SetNight()
     {
         isDay = false;
+
+        //  Destroy all active AI that do not have a target
+        HandleDaySpawnedEnemies();
 
         //  Increase target intensity (increase difficulty per day)
         targetIntensityLevelNight = (int)(targetIntensityLevelNight * difficulyMultiplier);

@@ -8,12 +8,17 @@ public class PlayerStats : NetworkBehaviour
 	public Text healthText; //The text displayed for player's current health
 	public Text healthBackground; //The white stroke to our text makes it stand out some more
 
+	public Image TimerHand;
+	public Image CenterPoint;
+
 	public Text WoodText; //The text displayed for player's current wood amount
 	public Text WoodTextBackground; //The white stroke to our text makes it stand out some more
 	public Text StoneText; //The text displayed for player's current stone amount
 	public Text StoneTextBackground; //The white stroke to our text makes it stand out some more
 	public Text MetalText; //The text displayed for player's current metal amount
 	public Text MetalTextBackground; //The white stroke to our text makes it stand out some more
+
+	private GameObject DayNightController;
 
 	public RectTransform gameOverOverlay; //Game Over screen to be displayed when all players are downed
 
@@ -96,6 +101,8 @@ public class PlayerStats : NetworkBehaviour
 
         CmdStartRegen(); //Invoke our regen function on the server which will check if enough time has passed to start regenerating player health
 
+		DayNightController = GameObject.FindGameObjectWithTag("DayNightController");
+
 		WoodText.text = "" + WoodInInventory;
 		WoodTextBackground.text = "" + WoodInInventory;
 		StoneText.text = "" + StoneInInventory;
@@ -111,8 +118,13 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        //DEBUG USE
-        if (Input.GetKeyDown(KeyCode.O)) //Damage Key
+		if (DayNightController != null)
+		{
+			TimerHand.rectTransform.RotateAround(CenterPoint.rectTransform.position, Vector3.back, DayNightController.GetComponent<DayNightCycle>().globalSpeed * Time.deltaTime);
+		}
+
+		//DEBUG USE
+		if (Input.GetKeyDown(KeyCode.O)) //Damage Key
         {
             CmdDamage(20); //Call the damage method on the server to damage the player by 20
         }
@@ -132,6 +144,8 @@ public class PlayerStats : NetworkBehaviour
         {
             CmdPlayerRevive(); //If the 'E' key is being held down, call the player revival method which will try and revive another player if conditions are met
         }
+
+
 
         //Check if player is dead locally
         if (isDead)

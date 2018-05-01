@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class DayNightCycle : NetworkBehaviour
 {
@@ -32,11 +31,16 @@ public class DayNightCycle : NetworkBehaviour
     public float daySpeed = 1.0f;
     [SyncVar]
     public float nightSpeed = 1.0f;
+	[SyncVar]
+	public float globalSpeed = 1.0f;
 
     [SyncVar]
     public bool isDay = true;
     [SyncVar]
     public bool isNight = false;
+
+	[SyncVar]
+	private bool dirtyFlag = true;
 
 	// Use this for initialization
 	void Start ()
@@ -82,17 +86,23 @@ public class DayNightCycle : NetworkBehaviour
     {
         if (currentTime >= 1.0f)
         {
-            daysSurvived++;
             currentTime = 0.0f;
         }
 
         if (currentTime >= 0.25f && currentTime <= 0.75f)
         {
-            isDay = true;
+			if (!dirtyFlag)
+			{
+				daysSurvived++;
+				dirtyFlag = true;
+			}
+
+			isDay = true;
             isNight = false;
         }
         else if (currentTime > 0.75f || currentTime < 0.25f)
         {
+			dirtyFlag = false;
             isNight = true;
             isDay = false;
         }
@@ -103,11 +113,11 @@ public class DayNightCycle : NetworkBehaviour
 
         if (isDay)
         {
-            currentTime += ((Time.deltaTime / dayLength) / 2) * daySpeed;
+            currentTime += (((Time.deltaTime / dayLength) / 2) * daySpeed) * globalSpeed;
         }
         else if (isNight)
         {
-            currentTime += ((Time.deltaTime / nightLength) / 2) * nightSpeed;
+            currentTime += (((Time.deltaTime / nightLength) / 2) * nightSpeed) * globalSpeed;
         }
         else
         {

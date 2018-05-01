@@ -19,6 +19,8 @@ public class WeaponType : MonoBehaviour {
 
     public GameObject weaponModel;
 
+    
+
     public float effectsDisplayTime;           //The proportion of the timeBetweenShots that the effects which display for.
     public int currentAmmo;                    //Value for the ammo currently in the magazine.
     public bool reloading;                     //Bool showing if the player is reloading or not.

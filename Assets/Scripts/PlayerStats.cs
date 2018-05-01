@@ -227,9 +227,19 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
+
         currentHealth -= amount; //Set the server player's health to a reduced amount given via argument to the method
 
-		timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
+
+        timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
 
         //If the server player's health reaches 0
 		if (currentHealth <= 0 && isDead == false)

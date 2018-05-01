@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class WeaponShooting : NetworkBehaviour
 {
@@ -11,7 +11,6 @@ public class WeaponShooting : NetworkBehaviour
     public WeaponType selectedWeapon;
     //  Game object that the weapon script is attached to
     public GameObject equippedWeapon;
-
 
     Ray shootRay = new Ray();                       //Ray from the gun.
     RaycastHit shootHit;                            //Raycast hit to determine what was hit.
@@ -27,6 +26,12 @@ public class WeaponShooting : NetworkBehaviour
     public AudioSource audioSource;
     public AudioClip clipReload;
 
+	public Text CurrentAmmo; //Text displaying the current ammo of the weapon to the player
+	public Text CurrentAmmoBackground; //White text background of ammo
+	public Image RifleIcon;
+	public Image SMGIcon;
+	public Image LMGIcon;
+
     //  Init function for 
     public void shootInit()
     {
@@ -41,7 +46,10 @@ public class WeaponShooting : NetworkBehaviour
             //  Set all starting references if equipped weapon is true
             selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
 
-            gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
+			CurrentAmmo.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
+			CurrentAmmoBackground.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
+
+			gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
             gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
             gunLight = equippedWeapon.GetComponentInChildren<Light>();
             
@@ -149,7 +157,11 @@ public class WeaponShooting : NetworkBehaviour
     {
         //Debug.Log("Reloading Done!");
         selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
-        selectedWeapon.reloading = false;
+
+		CurrentAmmo.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
+		CurrentAmmoBackground.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
+
+		selectedWeapon.reloading = false;
     }
 
 
@@ -165,10 +177,12 @@ public class WeaponShooting : NetworkBehaviour
         selectedWeapon.timer = 0f;
 
         //  Reduce ammo by 1
-        selectedWeapon.currentAmmo--;        
+        selectedWeapon.currentAmmo--;
+		CurrentAmmo.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
+		CurrentAmmoBackground.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
 
-        //  Draw firing effects
-        CmdShootEffects();
+		//  Draw firing effects
+		CmdShootEffects();
 
         //  Set the shootRay so it traces in front of the player
         shootRay.origin = gunTransform.transform.position;

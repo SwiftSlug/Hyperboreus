@@ -14,6 +14,7 @@ TagManager:
   - LootableContainer
   - AudioController
   - floor
+  - DayNightController
   layers:
   - Default
   - TransparentFX

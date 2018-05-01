@@ -50,7 +50,6 @@ public class PlayerSkills : NetworkBehaviour
             playerSkill1.SkillAction();
         }
         
-
     }
 
     public void SkillButtonDown()

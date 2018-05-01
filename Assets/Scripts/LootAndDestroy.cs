@@ -37,7 +37,7 @@ public class LootAndDestroy : NetworkBehaviour
         switch (DestroyOrLoot)
         {
             case 0: //Destroy
-                audioSync.PlaySound(this.gameObject, 1, false);
+                audioSync.PlaySound(this.gameObject, 1);
 
                 switch (ResourceType)
                 {
@@ -62,7 +62,7 @@ public class LootAndDestroy : NetworkBehaviour
                 }
                 break;
             case 1: //Loot
-                audioSync.PlaySound(this.gameObject, 0, false);
+                audioSync.PlaySound(this.gameObject, 0);
 
                 switch (AmmoType)
                 {

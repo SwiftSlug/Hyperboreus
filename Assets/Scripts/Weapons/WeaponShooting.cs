@@ -26,11 +26,15 @@ public class WeaponShooting : NetworkBehaviour
     public AudioSource audioSource;
     public AudioClip clipReload;
 
+<<<<<<< HEAD
 	public Text CurrentAmmo; //Text displaying the current ammo of the weapon to the player
 	public Text CurrentAmmoBackground; //White text background of ammo
 	public Image RifleIcon;
 	public Image SMGIcon;
 	public Image LMGIcon;
+=======
+    public AudioSync audioSync;
+>>>>>>> WeaponAudio
 
     //  Init function for 
     public void shootInit()
@@ -52,7 +56,9 @@ public class WeaponShooting : NetworkBehaviour
 			gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
             gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
             gunLight = equippedWeapon.GetComponentInChildren<Light>();
-            
+
+            audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
+
         }
 
         //  Ensure all effects are disabled at start
@@ -123,6 +129,20 @@ public class WeaponShooting : NetworkBehaviour
             //  Only fire if firing cooldown has been completed
             if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
             {
+                //Darrell's Non-Modular Audio
+                if (selectedWeapon.weaponName == "Bullpup")
+                {
+                    audioSync.PlaySound(this.gameObject, 3, true);
+                }
+                else if (selectedWeapon.weaponName == "Light Machine Gun")
+                {
+                    audioSync.PlaySound(this.gameObject, 4, true);
+                }
+                else if (selectedWeapon.weaponName == "Sub Machine Gun")
+                {
+                    audioSync.PlaySound(this.gameObject, 5, true);
+                }
+
                 Shoot();
             }
             
@@ -145,6 +165,8 @@ public class WeaponShooting : NetworkBehaviour
                 selectedWeapon.reloading = true;
                 //Debug.Log("Reloading !");
                 audioSource.PlayOneShot(clipReload, 1.0f);
+
+                audioSync.ResetSound();
 
                 CmdDisableMuzzleEffects();
                 Invoke("Reload", selectedWeapon.reloadTime);

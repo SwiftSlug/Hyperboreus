@@ -15,6 +15,7 @@ TagManager:
   - AudioController
   - floor
   - DayNightController
+  - Director
   layers:
   - Default
   - TransparentFX

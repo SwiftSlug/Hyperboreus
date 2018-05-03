@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114019118720387988}
   m_Layer: 0
   m_Name: AI Director
-  m_TagString: Untagged
+  m_TagString: Director
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
     i13: 107
     i14: 193
     i15: 227
-  m_ServerOnly: 0
+  m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!114 &114240270074868880
 MonoBehaviour:

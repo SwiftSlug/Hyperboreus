@@ -82,6 +82,10 @@ public class AIDirector : NetworkBehaviour
     // Use this for initialization
     void Start() {
 
+
+        //Debug.LogError("Director Online");
+
+
         if (shouldAIDebug)
         {
             //Debug.Log("Director Alive !");
@@ -228,6 +232,8 @@ public class AIDirector : NetworkBehaviour
                 }
             }
         }
+
+        DayNightCheck();
 
     }
 
@@ -771,9 +777,12 @@ public class AIDirector : NetworkBehaviour
 
     //  This function cycle through all enemies spawn within the game, checks if they currently have a target and if not removes them
     //  This will act as a basic cleanup before the night spawning starts
+    //
 
     void HandleDaySpawnedEnemies()
     {
+
+        //Debug.LogError("HandleDaySpawnedEnemies Script Ran");
 
         foreach(GameObject enemy in enemyUnits)
         {
@@ -840,7 +849,7 @@ public class AIDirector : NetworkBehaviour
     public void SetDay()
     {
         //  Set is day
-        isDay = true;        
+        isDay = true;
 
         if (shouldAIDebug)
         {
@@ -851,6 +860,8 @@ public class AIDirector : NetworkBehaviour
     public void SetNight()
     {
         isDay = false;
+
+        //Debug.LogError("SetNight Script Ran");
 
         //  Destroy all active AI that do not have a target
         HandleDaySpawnedEnemies();
@@ -864,7 +875,35 @@ public class AIDirector : NetworkBehaviour
             Debug.Log("Director : Night Time - Intensity = " + targetIntensityLevelNight.ToString());
         }
 
+    }
+
+    void DayNightCheck()
+    {
+        DayNightCycle dayNightRef = FindObjectOfType<DayNightCycle>();
+
+        bool isDayRef = false;
+
+        if (dayNightRef.isDay)
+        {
+            isDayRef = true;
         }
+        else
+        {
+            isDayRef = false;
+        }
+
+        if (isDay != isDayRef)
+        {
+            isDay = isDayRef;
+
+            if(isDay == false)
+            {
+                SetNight();
+            }
+        }
+
+
+    }
 
 
     //  Debug functions below ---------------------------------

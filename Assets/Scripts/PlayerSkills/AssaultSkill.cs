@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class AssaultSkill : Skill
 {
@@ -18,18 +19,13 @@ public class AssaultSkill : Skill
 
     public Transform MarkerLocation;    // Transform of marker location (structure placement object to be used as point)
 
-	public Image BuilderIcon;
-	public Image AssaultIcon;
-	public Image MedicIcon;
-	public Image SkillRecharge;
+    //void Update()
+    //{
+    //    Debug.Log("INIT");
+    //    Vector3 mousePosUpdate = Input.mousePosition;
+    //}
 
-	//void Update()
-	//{
-	//    Debug.Log("INIT");
-	//    Vector3 mousePosUpdate = Input.mousePosition;
-	//}
-
-	public override void Init()
+    public override void Init()
     {
         if (cooldown == 0.0f)
         {
@@ -42,20 +38,9 @@ public class AssaultSkill : Skill
             //  Sets the chargetime to 2 seconds if no other value is set
             chargeTime = 0.5f;
         }
+    }
 
-		AssaultIcon.enabled = true;
-		MedicIcon.enabled = false;
-		BuilderIcon.enabled = false;
-	}
-	void Update()
-	{
-		if (SkillRecharge.fillAmount <= 1.0f)
-		{
-			SkillRecharge.fillAmount = (Time.time - (lastUsedTime + cooldown));
-		}
-	}
-
-	public override bool SkillAction()
+    public override bool SkillAction()
     {
         if (isLocalPlayer)
         {

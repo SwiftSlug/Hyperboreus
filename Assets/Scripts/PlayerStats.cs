@@ -1,30 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class PlayerStats : NetworkBehaviour
 {
-	public Image healthBar; //Store a reference to the health bar transform so it can change in fill amount
-	public Text healthText; //The text displayed for player's current health
-	public Text healthBackground; //The white stroke to our text makes it stand out some more
+	public RectTransform healthBar; //Store a reference to the health bar transform so it can change in size
 
-	public Image TimerHand;
-	public Image CenterPoint;
-
-	public Text WoodText; //The text displayed for player's current wood amount
-	public Text WoodTextBackground; //The white stroke to our text makes it stand out some more
-	public Text StoneText; //The text displayed for player's current stone amount
-	public Text StoneTextBackground; //The white stroke to our text makes it stand out some more
-	public Text MetalText; //The text displayed for player's current metal amount
-	public Text MetalTextBackground; //The white stroke to our text makes it stand out some more
-
-	private GameObject DayNightController;
-
-	public RectTransform gameOverOverlay; //Game Over screen to be displayed when all players are downed
+    public RectTransform gameOverOverlay; //Game Over screen to be displayed when all players are downed
 
 	[Tooltip("Player maximum health")]
 	[SyncVar]
-	public int maxHealth = 100; //Max health of the player, should only change through framework
+	public int maxHealth = 100; //Max health of the player, should only change through
 
 	[Tooltip("Current player health")]
 	[SyncVar(hook = "ChangeHealth")]
@@ -60,15 +45,13 @@ public class PlayerStats : NetworkBehaviour
 
     public GameObject manager = null;
 
-    Animator animator;
-
     public float intensity;
 
-	// player inventory //
-	//resource inventory
-	public int WoodInInventory = 20; //Player's WoodCount
-	public int StoneInInventory = 30; //Player's StoneCount
-	public int MetalInInventory = 70; //Player's MetalCount
+    // player inventory //
+    //resource inventory
+    public int WoodInInventory = 20; //Player's WoodCount
+    public int StoneInInventory = 30; //Player's StoneCount
+    public int MetalInInventory = 70; //Player's MetalCount
     public int ResourceChoice = 0;
 
     //weapon & ammo inventory
@@ -99,21 +82,10 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        animator = GetComponent<Animator>();
-
         currentHealth = maxHealth; //Set the player's health to their maximum health locally
 
         CmdStartRegen(); //Invoke our regen function on the server which will check if enough time has passed to start regenerating player health
-
-		DayNightController = GameObject.FindGameObjectWithTag("DayNightController");
-
-		WoodText.text = "" + WoodInInventory;
-		WoodTextBackground.text = "" + WoodInInventory;
-		StoneText.text = "" + StoneInInventory;
-		StoneTextBackground.text = "" + StoneInInventory;
-		MetalText.text = "" + MetalInInventory;
-		MetalTextBackground.text = "" + MetalInInventory;
-	}
+    }
 
 	void Update()
 	{
@@ -122,13 +94,8 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-		if (DayNightController != null)
-		{
-			TimerHand.rectTransform.RotateAround(CenterPoint.rectTransform.position, Vector3.back, DayNightController.GetComponent<DayNightCycle>().globalSpeed * Time.deltaTime);
-		}
-
-		//DEBUG USE
-		if (Input.GetKeyDown(KeyCode.O)) //Damage Key
+        //DEBUG USE
+        if (Input.GetKeyDown(KeyCode.O)) //Damage Key
         {
             CmdDamage(20); //Call the damage method on the server to damage the player by 20
         }
@@ -149,8 +116,24 @@ public class PlayerStats : NetworkBehaviour
             CmdPlayerRevive(); //If the 'E' key is being held down, call the player revival method which will try and revive another player if conditions are met
         }
 
-
-
+        //BaseBuilding resource debug
+        /*
+        if (Input.GetKeyDown(KeyCode.Comma))
+        {
+            ResourceChoice = 0;
+            CmdDebugResourceValue(ResourceChoice);
+        }
+        if (Input.GetKeyDown(KeyCode.Period))
+        {
+            ResourceChoice = 1;
+            CmdDebugResourceValue(ResourceChoice);
+        }
+        if (Input.GetKeyDown(KeyCode.RightControl))
+        {
+            ResourceChoice = 2;
+            CmdDebugResourceValue(ResourceChoice);
+        }
+        */
         //Check if player is dead locally
         if (isDead)
         {
@@ -158,7 +141,6 @@ public class PlayerStats : NetworkBehaviour
         }
         else
         {
-            //animator.SetBool("alive", true);
             GetComponent<PlayerController>().enabled = true; //Enable the player's movement locally
         }
     }
@@ -182,7 +164,6 @@ public class PlayerStats : NetworkBehaviour
             }
         }
     }
-
 
     //Call this on the server
     [Command]
@@ -227,19 +208,9 @@ public class PlayerStats : NetworkBehaviour
 			return;
 		}
 
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-        }
-
         currentHealth -= amount; //Set the server player's health to a reduced amount given via argument to the method
 
-        if (currentHealth <= 0)
-        {
-            currentHealth = 0;
-        }
-
-        timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
+		timeDamaged = Time.time; //Set a timestamp at current time for the server player, used for calculating regen time.
 
         //If the server player's health reaches 0
 		if (currentHealth <= 0 && isDead == false)
@@ -288,8 +259,6 @@ public class PlayerStats : NetworkBehaviour
         GetComponent<PlayerController>().enabled = false; //Disable the player's movement server side
 
         currentHealth = 0; //Set the player's current health to 0 on the server
-
-        //animator.SetTrigger("die");
     }
 
     //Call this command for the player on the server
@@ -308,9 +277,6 @@ public class PlayerStats : NetworkBehaviour
         timeDamaged = Time.time; //Timestamp this so we can start regeneration when needed
 
         currentHealth = 10; //Set the player's revived health
-
-        animator.SetTrigger("revived");
-        animator.ResetTrigger("die");
     }
 
     //Call the regen on the server for the player
@@ -348,12 +314,10 @@ public class PlayerStats : NetworkBehaviour
     //Using the SyncVar hook, this method is called each time the current health value is synchronized between server and client
     void ChangeHealth(int currentHealth)
     {
-		healthBar.fillAmount = currentHealth / 100.0f; //Update the health bar for the player, this will change the radial fill of the image
-		healthText.text = "" + currentHealth;
-		healthBackground.text = "" + currentHealth;
-	}
+        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y); //Update the health bar size for the player, getting smaller or larger as needed
+    }
 
-	[Command]
+    [Command]
     public void CmdDebugResourceValue(int ResourceNeeded)
     {
         switch(ResourceNeeded)

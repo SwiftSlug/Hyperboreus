@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114019118720387988}
   m_Layer: 0
   m_Name: AI Director
-  m_TagString: Director
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
     i13: 107
     i14: 193
     i15: 227
-  m_ServerOnly: 1
+  m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!114 &114240270074868880
 MonoBehaviour:
@@ -84,32 +84,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce494983d5538e4cba40c80b200d285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 1
-  shouldAIDebug: 0
-  shouldAIDrawDebug: 0
+  active: 0
+  shouldAIDebug: 1
+  shouldAIDrawDebug: 1
   shouldAICreateSpawnDebug: 0
-  shouldDebugBuildingLocations: 0
-  difficulyMultiplier: 1.2
   isDay: 1
   enemyToSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
     type: 2}
-  numerOfSpawnGroups: 2
-  aiSpawnGroupSizeNight: 5
+  aiSpawnGroupSizeNight: 10
   aiSpawnGroupSizeDay: 1
-  numberOfSpawnLocations: 5
+  numberOfSpawnLocations: 10
   spawnBufferSize: 2
   playerProximitySize: 40
   maxDistanceFromPlayers: 100
-  buildingScanDisance: 100
   targetIntensityLevelDay: 20
-  targetIntensityLevelNight: 100
+  targetIntensityLevelNight: 200
   waveCooldown: 0
   intensityPerAI: 5
   intensityPerTrackingAI: 10
   intensityDecreaseAmount: 20
   intensityUpdateInterval: 1
   cleanupInterval: 10
-  spawnInterval: 1
+  spawnInterval: 5
   spawnLast: 0
   debugSpawnCube: {fileID: 1232948171305478, guid: d80c74ea741b2154ebab72e5588a5ea7,
     type: 2}

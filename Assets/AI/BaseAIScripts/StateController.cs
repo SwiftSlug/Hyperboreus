@@ -10,8 +10,6 @@ public class StateController : NetworkBehaviour {
     public State currentState;
     public State remainState;
 
-    public AIDirector directorReference;
-
     [Tooltip("The default range in which the AI can detect other objects")]
     public float detectionRange = 500.0f;
 
@@ -36,9 +34,6 @@ public class StateController : NetworkBehaviour {
     [Tooltip("The distance at which the AI can attack their target")]
     public float attackDistance = 1.5f;
 
-    [Tooltip("The distance at which the AI can attack buildings")]
-    public float buildingAttackDistance = 5.0f;
-
     [Tooltip("The amount of damage the AI unit does per hit")]
     public int attackDamage = 5;
 
@@ -47,10 +42,6 @@ public class StateController : NetworkBehaviour {
 
     [HideInInspector] public float lastJumped = 0.0f;   //  Used for timing cooldown between jumps
     [HideInInspector] public float lastAttack = 0.0f;   //  Used for timing cooldown between jumps
-
-    public GameObject previousPlayerTarget;    //  The player the AI will target if able
-
-    public Vector3 previousMoveLocation;    //  The move location that the AI was moving to last frame
 
     public GameObject target;         //  Generic gameobject target for AI
     //[HideInInspector] public Vector3 targetLocation;    //  Generic vector location used for AI
@@ -61,6 +52,7 @@ public class StateController : NetworkBehaviour {
 
     //[HideInInspector] public float searchTimeStart;     //  Reference to when AI starts searching
 
+    //  Alot of these below may not be needed for this games context
 	[HideInInspector] public NavMeshAgent navMeshAgent;
 	[HideInInspector] public List<Transform> wayPointList;
     [HideInInspector] public int nextWayPoint;
@@ -78,8 +70,6 @@ public class StateController : NetworkBehaviour {
         animator = GetComponentInChildren<Animator>();
 
         moveCommandLocation = Vector3.zero;
-
-        directorReference = FindObjectOfType<AIDirector>();
 
         aiActive = true;
 	}
@@ -126,31 +116,7 @@ public class StateController : NetworkBehaviour {
         stateTimeElapsed = 0;
     }
 
-    public void setTarget(GameObject newTarget)
-    {
 
-        //  Remember the previous target if it was a player
-
-        if (target != null)
-        {
-            //  Target has been previously set
-
-            if (target.GetComponent<PlayerStats>()) {
-                //  Target is a player
-                
-                if (target.GetComponent<PlayerStats>().isDead != true)
-                {
-                    //  The current target is a player and is not dead
-
-                    previousPlayerTarget = target;  //  Remember previous player target
-                }
-            }
-        }
-
-        target = newTarget;
-
-
-    }
 
 
 }

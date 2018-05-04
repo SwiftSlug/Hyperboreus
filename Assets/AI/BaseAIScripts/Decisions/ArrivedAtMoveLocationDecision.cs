@@ -18,9 +18,6 @@ public class ArrivedAtMoveLocationDecision : Decision
             controller.moveCommandLocation = Vector3.zero;
             return true;
         }
-
-
-
         else
         {
             return false;

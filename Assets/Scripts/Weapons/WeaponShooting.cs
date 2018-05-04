@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class WeaponShooting : NetworkBehaviour
 {
@@ -8,9 +8,10 @@ public class WeaponShooting : NetworkBehaviour
     //public WeaponType selectedWeapon;
 
     //  Private reference to the specfic wepaon script
-    public WeaponType selectedWeapon;
+    private WeaponType selectedWeapon;
     //  Game object that the weapon script is attached to
     public GameObject equippedWeapon;
+
 
     Ray shootRay = new Ray();                       //Ray from the gun.
     RaycastHit shootHit;                            //Raycast hit to determine what was hit.
@@ -26,37 +27,24 @@ public class WeaponShooting : NetworkBehaviour
     public AudioSource audioSource;
     public AudioClip clipReload;
 
-	public Text CurrentAmmo; //Text displaying the current ammo of the weapon to the player
-	public Text CurrentAmmoBackground; //White text background of ammo
-	public Image RifleIcon;
-	public Image SMGIcon;
-	public Image LMGIcon;
-
     //  Init function for 
     public void shootInit()
     {
-        if (isLocalPlayer)
-        {
-            //  Ensure only local player can run
-
-        }
-
         if (equippedWeapon)
         {
             //  Set all starting references if equipped weapon is true
             selectedWeapon = equippedWeapon.GetComponent<WeaponType>();
 
-			CurrentAmmo.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
-			CurrentAmmoBackground.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
-
-			gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
+            gunParticles = equippedWeapon.GetComponentInChildren<ParticleSystem>();
             gunLine = equippedWeapon.GetComponentInChildren<LineRenderer>();
             gunLight = equippedWeapon.GetComponentInChildren<Light>();
             
         }
-
-        //  Ensure all effects are disabled at start
-        CmdDisableMuzzleEffects();
+        if (gunLight)
+        {
+            //  Ensure gunlight is off at start
+            gunLight.enabled = false;
+        }
 
     }
 
@@ -87,12 +75,45 @@ public class WeaponShooting : NetworkBehaviour
         //  Increase timer value
         selectedWeapon.timer += Time.deltaTime;
 
+        /*
+        //stops other statements from running while reloading.
+        if (reloading)
+        {
+            //return;
+            ReloadCheck();
+        }
+        */
         //If the guns current ammo is less than or equal to nothing...
         if (selectedWeapon.currentAmmo <= 0)
         {
             StartReload();
             return;
         }
+
+        /*
+        //If 'r' key is pressed, and ammo is not already at max value...
+        if (Input.GetButton("Reload") && selectedWeapon.currentAmmo != selectedWeapon.maxAmmo)
+        {
+            StartReload();
+            return;
+        }
+        */
+        /*
+        //If 'Fire1' button is pressed, and the time between shots has not exceeded the timer...
+        if (Input.GetButton("Fire1") && selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
+        {
+            Shoot();
+            CmdServerShoot();
+        }
+        */
+        /*
+        //  Controller Fire Axis Detection
+        if ((Input.GetAxis("Fire1") > 0) && selectedWeapon.timer >= selectedWeapon.timeBetweenShots && Time.timeScale != 0)
+        {
+            Shoot();
+            CmdServerShoot();
+        }
+        */
 
         // If the timer has exceeded the proportion of timeBetweenBullets and the effects...
         if (selectedWeapon.timer >= selectedWeapon.timeBetweenShots + selectedWeapon.effectsDisplayTime)
@@ -104,12 +125,6 @@ public class WeaponShooting : NetworkBehaviour
 
     public void Fire()
     {
-        if (!isLocalPlayer)
-        {
-            //  Ensure only local player can run
-            return;
-        }
-
         //  Ensure that functionality only runs if a weapon is equipped
         if (selectedWeapon == null)
         {
@@ -132,24 +147,17 @@ public class WeaponShooting : NetworkBehaviour
 
     public void StartReload()
     {
-        if (!isLocalPlayer)
-        {
-            //  Ensure only local player can run
-            return;
-        }
-
         if (selectedWeapon != null)
         {
             if (selectedWeapon.reloading == false)
             {
-                selectedWeapon.reloading = true;
                 //Debug.Log("Reloading !");
                 audioSource.PlayOneShot(clipReload, 1.0f);
 
                 CmdDisableMuzzleEffects();
                 Invoke("Reload", selectedWeapon.reloadTime);
             }
-            
+            selectedWeapon.reloading = true;
         }
     }
 
@@ -157,32 +165,20 @@ public class WeaponShooting : NetworkBehaviour
     {
         //Debug.Log("Reloading Done!");
         selectedWeapon.currentAmmo = selectedWeapon.maxAmmo;
-
-		CurrentAmmo.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
-		CurrentAmmoBackground.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
-
-		selectedWeapon.reloading = false;
+        selectedWeapon.reloading = false;
     }
 
 
     void Shoot()
     {
-        if (!isLocalPlayer)
-        {
-            //  Ensure only local player can run
-            return;
-        }
-
         //  Resets the timer.
         selectedWeapon.timer = 0f;
 
         //  Reduce ammo by 1
-        selectedWeapon.currentAmmo--;
-		CurrentAmmo.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
-		CurrentAmmoBackground.text = "" + selectedWeapon.currentAmmo; //Set text displaying player's current ammo count
+        selectedWeapon.currentAmmo--;        
 
-		//  Draw firing effects
-		CmdShootEffects();
+        //  Draw firing effects
+        CmdShootEffects();
 
         //  Set the shootRay so it traces in front of the player
         shootRay.origin = gunTransform.transform.position;
@@ -249,12 +245,8 @@ public class WeaponShooting : NetworkBehaviour
         //  Flash muzzle light
         float flashDuration = 0.1f;
 
-        if (gunLight)
-        {
-            gunLight.enabled = true;
-            Invoke("MuzzleFlashToggle", flashDuration);
-        }
-
+        gunLight.enabled = true;
+        Invoke("MuzzleFlashToggle", flashDuration);
     }
 
     [Command]

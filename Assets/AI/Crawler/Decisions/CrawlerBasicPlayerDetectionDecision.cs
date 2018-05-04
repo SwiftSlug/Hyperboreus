@@ -22,8 +22,7 @@ public class CrawlerBasicPlayerDetectionDecision : Decision {
             {
                 if (!hitColliders[i].gameObject.GetComponent<PlayerStats>().isDead)
                 {
-                    //controller.target = hitColliders[i].gameObject;
-                    controller.setTarget(hitColliders[i].gameObject);
+                    controller.target = hitColliders[i].gameObject;
                     return true;
                 }
                 

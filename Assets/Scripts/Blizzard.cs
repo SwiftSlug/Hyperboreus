@@ -107,7 +107,6 @@ public class Blizzard : MonoBehaviour {
 
         //  **************** Debug **************************
 
-        /*
         if (Input.GetButtonDown("Debug2"))
         {
             if (blizzardActive)
@@ -133,7 +132,7 @@ public class Blizzard : MonoBehaviour {
             RenderSettings.fogDensity -= 0.1f;
             Debug.Log("Fog Density = " + RenderSettings.fogDensity);
         }
-        */
+
         // ***************************************************
 
     }

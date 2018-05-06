@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 4767127439329758}
   - component: {fileID: 114529480377708942}
   - component: {fileID: 114638938638382632}
+  - component: {fileID: 65893138415045766}
   m_Layer: 0
   m_Name: PoliceCarV2Coloured
   m_TagString: Untagged
@@ -305,7 +306,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824079499040500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2570.2, y: 1.67, z: -124.3}
+  m_LocalPosition: {x: -2355.23, y: 1.67, z: 7.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4635660126736090}
@@ -704,6 +705,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934408445323418}
   m_Mesh: {fileID: 4300006, guid: 345a8c93ab9e5b24f800c068b6771bd8, type: 3}
+--- !u!65 &65893138415045766
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1824079499040500}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.75, y: 2, z: 6.5}
+  m_Center: {x: 0, y: -0.5, z: 3.15}
 --- !u!114 &114529480377708942
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4058667645715336}
   - component: {fileID: 114790497443653498}
   - component: {fileID: 114289879039124776}
+  - component: {fileID: 65586828033081916}
   m_Layer: 0
   m_Name: FireEngineColoured
   m_TagString: Untagged
@@ -1012,8 +1013,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1020061005156242}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2526.2, y: 1.522907e-17, z: -126.7}
+  m_LocalRotation: {x: -0, y: -0.9939451, z: -0, w: -0.109877616}
+  m_LocalPosition: {x: -2079.1, y: 1.522907e-17, z: -146.2}
   m_LocalScale: {x: 0.8, y: 0.7, z: 0.9}
   m_Children:
   - {fileID: 4533474761985402}
@@ -1074,7 +1075,7 @@ Transform:
   - {fileID: 4698350124653474}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -192.61699, z: 0}
 --- !u!4 &4100665826017970
 Transform:
   m_ObjectHideFlags: 1
@@ -4078,6 +4079,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1464031395607934}
   m_Mesh: {fileID: 4300056, guid: ab5b1def3ace8364a8da5b6bcb761a6a, type: 3}
+--- !u!65 &65586828033081916
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020061005156242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.5, y: 5.1, z: 4.6}
+  m_Center: {x: 0.25, y: 2.75, z: -0.2}
 --- !u!114 &114289879039124776
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4305923491055874}
   - component: {fileID: 114073861481112404}
   - component: {fileID: 114746437310570850}
+  - component: {fileID: 65993240137421776}
   m_Layer: 0
   m_Name: Fountain (2)
   m_TagString: Untagged
@@ -159,7 +160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1500784669573112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2193.7554, y: 0.53245354, z: 4.1181755}
+  m_LocalPosition: {x: -2196, y: 0.53245354, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4087520011233238}
@@ -401,6 +402,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1621942514445480}
   m_Mesh: {fileID: 4300008, guid: 9a0e0239d18454845bd472786ddc160b, type: 3}
+--- !u!65 &65993240137421776
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1500784669573112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.5, y: 3.25, z: 15.5}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &114073861481112404
 MonoBehaviour:
   m_ObjectHideFlags: 1

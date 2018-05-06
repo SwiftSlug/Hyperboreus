@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4544911619192588}
   - component: {fileID: 114046610618319652}
   - component: {fileID: 114493213670533298}
+  - component: {fileID: 65942722757633700}
   m_Layer: 0
   m_Name: Digger
   m_TagString: Untagged
@@ -112,7 +113,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1648374370502508}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2569.3218, y: 28.11942, z: -134.81596}
+  m_LocalPosition: {x: -1847.4, y: 0.98, z: -162.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4687739808057906}
@@ -259,6 +260,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1316703740448848}
   m_Mesh: {fileID: 4300002, guid: 6355352cf06901340bbe16174136831a, type: 3}
+--- !u!65 &65942722757633700
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648374370502508}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.4, y: 6.5, z: 8}
+  m_Center: {x: 1.85, y: 2.5, z: 0.75}
 --- !u!114 &114046610618319652
 MonoBehaviour:
   m_ObjectHideFlags: 1

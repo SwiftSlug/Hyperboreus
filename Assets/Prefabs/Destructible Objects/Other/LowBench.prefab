@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23186871923387722}
   - component: {fileID: 114299630506254226}
   - component: {fileID: 114935081071480244}
+  - component: {fileID: 65002037427328292}
   m_Layer: 0
   m_Name: LowBench
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372168692148728}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -2188.0063, y: 0.9545456, z: 105.53465}
+  m_LocalPosition: {x: -2190.198, y: 0.9545456, z: 59.103817}
   m_LocalScale: {x: 35, y: 150, z: 4.5454545}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,6 +86,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372168692148728}
   m_Mesh: {fileID: 4300000, guid: dbf4eee6c68c08b47932a825375f88b6, type: 3}
+--- !u!65 &65002037427328292
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1372168692148728}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.03, y: 0.019999994, z: 0.109999985}
+  m_Center: {x: 0, y: 0, z: -0.04}
 --- !u!114 &114299630506254226
 MonoBehaviour:
   m_ObjectHideFlags: 1

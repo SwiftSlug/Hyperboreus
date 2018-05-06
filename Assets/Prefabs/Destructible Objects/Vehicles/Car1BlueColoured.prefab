@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4112502817272224}
   - component: {fileID: 114948184711059482}
   - component: {fileID: 114903352042381756}
+  - component: {fileID: 65742314360711502}
   m_Layer: 0
   m_Name: Car1BlueColoured
   m_TagString: Untagged
@@ -86,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1792917152566234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2571.31, y: 1.62, z: -141}
+  m_LocalPosition: {x: -2360.02, y: 1.62, z: -86.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4448385070430404}
@@ -269,6 +270,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1687453346465556}
   m_Mesh: {fileID: 4300000, guid: c5bdf3b9f2e245b47b824a09a016d5d6, type: 3}
+--- !u!65 &65742314360711502
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792917152566234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.75, y: 2, z: 6.5}
+  m_Center: {x: 0, y: -0.5, z: 3.15}
 --- !u!114 &114903352042381756
 MonoBehaviour:
   m_ObjectHideFlags: 1

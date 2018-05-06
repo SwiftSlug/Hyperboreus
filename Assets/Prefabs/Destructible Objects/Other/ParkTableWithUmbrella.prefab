@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4392459986182806}
   - component: {fileID: 114411126420266986}
   - component: {fileID: 114022083615297046}
+  - component: {fileID: 65309027345013568}
   m_Layer: 0
   m_Name: ParkTableWithUmbrella
   m_TagString: Untagged
@@ -125,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1393518068844790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2188.7854, y: 1.4468493, z: 115.275444}
+  m_LocalPosition: {x: -2187.5115, y: 1.315, z: 59.33141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4335136180442570}
@@ -258,6 +259,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1826445315107174}
   m_Mesh: {fileID: 4300000, guid: 5909ff23854d09b489f35e9e78563243, type: 3}
+--- !u!65 &65309027345013568
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1393518068844790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1, z: 4}
+  m_Center: {x: -1.425, y: -0.25, z: 0}
 --- !u!114 &114022083615297046
 MonoBehaviour:
   m_ObjectHideFlags: 1

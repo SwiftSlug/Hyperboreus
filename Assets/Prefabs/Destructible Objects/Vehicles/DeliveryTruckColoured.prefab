@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 4852690128619358}
   - component: {fileID: 114867702651675184}
   - component: {fileID: 114314117548310920}
+  - component: {fileID: 65054084935835696}
   m_Layer: 0
   m_Name: DeliveryTruckColoured
   m_TagString: Untagged
@@ -712,7 +713,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780163302578492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2526.87, y: 1.5027544e-17, z: -135.95}
+  m_LocalPosition: {x: -2145, y: 1.5027544e-17, z: 153.04}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4245381176658048}
@@ -1702,6 +1703,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1146595404705162}
   m_Mesh: {fileID: 4300042, guid: 70e0f4d369b6f1f4f8b770f92cff94f9, type: 3}
+--- !u!65 &65054084935835696
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1780163302578492}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.5, y: 3.5, z: 4}
+  m_Center: {x: -0.25, y: 2.1, z: 0}
 --- !u!114 &114314117548310920
 MonoBehaviour:
   m_ObjectHideFlags: 1

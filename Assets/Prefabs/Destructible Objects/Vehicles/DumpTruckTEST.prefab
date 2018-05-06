@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23491990567793188}
   - component: {fileID: 114767389205981798}
   - component: {fileID: 114628175295651070}
+  - component: {fileID: 65564710181387826}
   m_Layer: 0
   m_Name: DumpTruckTEST
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1565184060105048}
   m_LocalRotation: {x: -0.49991274, y: 0.50008726, z: 0.49991274, w: 0.50008726}
-  m_LocalPosition: {x: -2586.94, y: 2.06, z: -125.6}
+  m_LocalPosition: {x: -1864.96, y: 2.06, z: -164.48}
   m_LocalScale: {x: 215.33673, y: 369.14868, z: 61.52478}
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,6 +90,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1565184060105048}
   m_Mesh: {fileID: 4300000, guid: a6fbd5100bcea0d4aae5743f4b4a24f3, type: 3}
+--- !u!65 &65564710181387826
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1565184060105048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.027491039, y: 0.022816697, z: 0.085129306}
+  m_Center: {x: -0.000011791475, y: -0.0009781508, z: 0.0072543705}
 --- !u!114 &114628175295651070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,7 +118,7 @@ MonoBehaviour:
   AmmoType: 0
   AmountOfAmmoToDrop: 0
   ResourceType: 2
-  AmountOfResourceToDrop: 100
+  AmountOfResourceToDrop: 90
   audioSync: {fileID: 0}
 --- !u!114 &114767389205981798
 MonoBehaviour:

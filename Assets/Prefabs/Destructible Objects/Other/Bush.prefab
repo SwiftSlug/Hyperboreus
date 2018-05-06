@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23720142566453274}
   - component: {fileID: 114812694406197332}
   - component: {fileID: 114237927829741274}
+  - component: {fileID: 65525190811346868}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450800657272898}
   m_LocalRotation: {x: -0.19724578, y: -0.34838632, z: 0.42489454, w: 0.8119025}
-  m_LocalPosition: {x: -2516.52, y: 0.61, z: -142.5}
+  m_LocalPosition: {x: -2198.077, y: 1.1199312, z: 69.66262}
   m_LocalScale: {x: 58.968002, y: 58.968006, z: 58.968006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,6 +86,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450800657272898}
   m_Mesh: {fileID: 4300000, guid: 30dfaf3e42308bb4291ae1c2435227fc, type: 3}
+--- !u!65 &65525190811346868
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450800657272898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.027153967, y: 0.030479128, z: 0.033156916}
+  m_Center: {x: 0.0005320576, y: -0.00038322012, z: 0.00014744888}
 --- !u!114 &114237927829741274
 MonoBehaviour:
   m_ObjectHideFlags: 1

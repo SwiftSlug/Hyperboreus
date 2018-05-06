@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4860923043031808}
   - component: {fileID: 114691420848115792}
   - component: {fileID: 114484223547366424}
+  - component: {fileID: 65012033570641706}
   m_Layer: 0
   m_Name: Van1Black
   m_TagString: Untagged
@@ -111,8 +112,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1476911666312384}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2530.9, y: 0.53, z: -142.2}
+  m_LocalRotation: {x: 0, y: 0.6755903, z: -0, w: -0.73727727}
+  m_LocalPosition: {x: -2068.58, y: 0.53, z: 159.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4736675566029912}
@@ -120,7 +121,7 @@ Transform:
   - {fileID: 4045741105665200}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 275, z: 0}
 --- !u!4 &4889616645961858
 Transform:
   m_ObjectHideFlags: 1
@@ -266,6 +267,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1569891435771224}
   m_Mesh: {fileID: 4300004, guid: bf57b1eb3049b6143938c96783d6bb56, type: 3}
+--- !u!65 &65012033570641706
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1476911666312384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5, y: 3, z: 7.1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &114484223547366424
 MonoBehaviour:
   m_ObjectHideFlags: 1

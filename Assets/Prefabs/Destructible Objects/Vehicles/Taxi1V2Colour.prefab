@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 4177031809697064}
   - component: {fileID: 114607887090030042}
   - component: {fileID: 114201375445763992}
+  - component: {fileID: 65116888288135528}
   m_Layer: 0
   m_Name: Taxi1V2Colour
   m_TagString: Untagged
@@ -145,8 +146,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1408374510480148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2554.7, y: 1.6604818, z: -126.1}
+  m_LocalRotation: {x: -0, y: -0.047589436, z: -0, w: 0.998867}
+  m_LocalPosition: {x: -2354.26, y: 1.6604818, z: -98.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4583820212636046}
@@ -156,7 +157,7 @@ Transform:
   - {fileID: 4071110643021198}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -5.4550004, z: 0}
 --- !u!4 &4583820212636046
 Transform:
   m_ObjectHideFlags: 1
@@ -414,6 +415,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1374962127284800}
   m_Mesh: {fileID: 4300008, guid: 19fb80e7e68ed9e4caa80afc9b5c26f1, type: 3}
+--- !u!65 &65116888288135528
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1408374510480148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.75, y: 2, z: 6.5}
+  m_Center: {x: 0, y: -0.5, z: 3.15}
 --- !u!114 &114201375445763992
 MonoBehaviour:
   m_ObjectHideFlags: 1

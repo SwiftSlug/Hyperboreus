@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4970859190598112}
   - component: {fileID: 114076929228694250}
   - component: {fileID: 114359591438475188}
+  - component: {fileID: 65971927076639524}
   m_Layer: 0
   m_Name: ParkSpringToyRedColoured
   m_TagString: Untagged
@@ -95,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1425604531659736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2577.9, y: 0.53462315, z: -142.02}
+  m_LocalPosition: {x: -2161.4585, y: 0.92499995, z: 65.098495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4475522466021702}
@@ -186,6 +187,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1821486032380590}
   m_Mesh: {fileID: 4300002, guid: 31cb3b9c4f096194cbdf628f6264b34c, type: 3}
+--- !u!65 &65971927076639524
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1425604531659736}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114076929228694250
 MonoBehaviour:
   m_ObjectHideFlags: 1

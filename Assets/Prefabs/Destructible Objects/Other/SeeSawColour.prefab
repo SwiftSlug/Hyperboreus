@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4689754414642864}
   - component: {fileID: 114631043270471502}
   - component: {fileID: 114616703445993038}
+  - component: {fileID: 65462720515048652}
   m_Layer: 0
   m_Name: SeeSawColour
   m_TagString: Untagged
@@ -171,8 +172,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738616245342472}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2566.2, y: 0.12677383, z: -115.37}
+  m_LocalRotation: {x: -0, y: 0.2559495, z: -0, w: 0.9666902}
+  m_LocalPosition: {x: -2151.5461, y: 0.5, z: 109.43025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4063938284044112}
@@ -182,7 +183,7 @@ Transform:
   - {fileID: 4096820396496858}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 29.660002, z: 0}
 --- !u!4 &4956768206126102
 Transform:
   m_ObjectHideFlags: 1
@@ -403,6 +404,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1995236759754442}
   m_Mesh: {fileID: 4300002, guid: 23f95b99aadb36c4ab4602d0692e71bd, type: 3}
+--- !u!65 &65462720515048652
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1738616245342472}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &114616703445993038
 MonoBehaviour:
   m_ObjectHideFlags: 1

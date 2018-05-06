@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 4880274246516618}
   - component: {fileID: 114190873906041680}
   - component: {fileID: 114809002058036446}
+  - component: {fileID: 65627529615968464}
   m_Layer: 0
   m_Name: SwingsColoured
   m_TagString: Untagged
@@ -373,7 +374,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1550275187277578}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2549.5, y: 0.20535469, z: -140.13}
+  m_LocalPosition: {x: -2143.0105, y: 0.5070505, z: 76.924446}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4638531133688014}
@@ -977,6 +978,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1347519600666388}
   m_Mesh: {fileID: 4300010, guid: 7442f150d52b36f4abad6e55a22965a8, type: 3}
+--- !u!65 &65627529615968464
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1550275187277578}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 3, z: 5.5}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &114190873906041680
 MonoBehaviour:
   m_ObjectHideFlags: 1

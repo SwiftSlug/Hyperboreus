@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4369668743685988}
   - component: {fileID: 114791988601645892}
   - component: {fileID: 114041829893057928}
+  - component: {fileID: 65404473857148462}
   m_Layer: 0
   m_Name: RoadSigns
   m_TagString: Untagged
@@ -81,15 +82,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1785824073384630}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2545.95, y: 1.7755352e-17, z: -142.97}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -1856.9, y: 0.049999952, z: -166.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4265910441915996}
   - {fileID: 4547624023331576}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4547624023331576
 Transform:
   m_ObjectHideFlags: 1
@@ -185,6 +186,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1245635292938498}
   m_Mesh: {fileID: 4300000, guid: 78cbf3fdaa9b9ff4e9ee6fc84dc0d33c, type: 3}
+--- !u!65 &65404473857148462
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1785824073384630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 2.5, z: 0.2}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &114041829893057928
 MonoBehaviour:
   m_ObjectHideFlags: 1

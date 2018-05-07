@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23320817583241498}
   - component: {fileID: 114917824857908680}
   - component: {fileID: 114420274159881022}
+  - component: {fileID: 65852382245510884}
   m_Layer: 0
   m_Name: PhoneBox1Coloured
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762180084707556}
   m_LocalRotation: {x: 0, y: 0.7072302, z: 0.7069834, w: 0}
-  m_LocalPosition: {x: -2569.5, y: 1.3, z: -142.4}
+  m_LocalPosition: {x: -2201.72, y: 1.3, z: -131.32}
   m_LocalScale: {x: 49.999977, y: 49.999977, z: 120.00001}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,6 +87,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762180084707556}
   m_Mesh: {fileID: 4300000, guid: b75a1bf06068a4b478f0c49d09ef983a, type: 3}
+--- !u!65 &65852382245510884
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762180084707556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.021000015, y: 0.02071384, z: 0.020177959}
+  m_Center: {x: -0.0000000013969845, y: -0.00035691034, z: 0.000088977664}
 --- !u!114 &114420274159881022
 MonoBehaviour:
   m_ObjectHideFlags: 1

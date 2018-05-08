@@ -43,21 +43,15 @@ public class LootAndDestroy : NetworkBehaviour
                 {
                     case 0: // wood
                         PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodInInventory = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodInInventory + AmountOfResourceToDrop;
-						PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodText.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodInInventory;
-						PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodTextBackground.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodInInventory;
-						ResetAllValuesAndDestroy();
+                        ResetAllValuesAndDestroy();
                         break;
                     case 1: //stone
                         PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneInInventory + AmountOfResourceToDrop;
-						PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneText.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneInInventory;
-						PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneTextBackground.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneInInventory;
-						ResetAllValuesAndDestroy();
+                        ResetAllValuesAndDestroy();
                         break;
                     case 2: //metal
                         PlayerDestroyingOrLooting.GetComponent<PlayerStats>().MetalInInventory = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().MetalInInventory + AmountOfResourceToDrop;
-						PlayerDestroyingOrLooting.GetComponent<PlayerStats>().MetalText.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().MetalInInventory;
-						PlayerDestroyingOrLooting.GetComponent<PlayerStats>().MetalTextBackground.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().MetalInInventory;
-						ResetAllValuesAndDestroy();
+                        ResetAllValuesAndDestroy();
                         break;
                 }
                 break;

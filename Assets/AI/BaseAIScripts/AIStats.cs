@@ -19,15 +19,10 @@ public class AIStats : NetworkBehaviour
 
     public AudioSync audioSync;
 
-    public AIDirector directorReference;
-
     void Start()
     {
         audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
         controller = GetComponent<StateController>();
-
-            
-
     }
 
     private void Update()
@@ -136,8 +131,8 @@ public class AIStats : NetworkBehaviour
         }
 
         //  Set the AI to target the closest player
-        // controller.target = closestPlayer;
-        controller.setTarget(closestPlayer);
+        controller.target = closestPlayer;
+
     }
 
 }

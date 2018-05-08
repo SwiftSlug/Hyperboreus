@@ -16,12 +16,11 @@ public class MoveLocationSetDecision : Decision
 
         if (controller.moveCommandLocation != Vector3.zero) //  May be better to use a move to bool instead of the zero comparison
         {
-            //Debug.Log("MoveLocation is Set !");
+            //Debug.Log("MoveLocation Set !");
             return true;
         }
         else
         {
-            //Debug.Log("MoveLocation is not Set !");
             return false;
         }
 

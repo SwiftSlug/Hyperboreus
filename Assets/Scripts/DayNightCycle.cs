@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
 public class DayNightCycle : NetworkBehaviour
 {
@@ -31,19 +32,11 @@ public class DayNightCycle : NetworkBehaviour
     public float daySpeed = 1.0f;
     [SyncVar]
     public float nightSpeed = 1.0f;
-	[SyncVar]
-	public float globalSpeed = 1.0f;
 
     [SyncVar]
     public bool isDay = true;
     [SyncVar]
     public bool isNight = false;
-
-    bool directorUpdated = false;    //  Flag to stop director calls triggering per frame
-
-    AIDirector directorReference;    //  Reference to director
-	[SyncVar]
-	private bool dirtyFlag = true;
 
 	// Use this for initialization
 	void Start ()
@@ -51,24 +44,15 @@ public class DayNightCycle : NetworkBehaviour
 
         lightColor = directionalLight.color;
         lightIntensity = directionalLight.intensity;
-
-    }
-
-    private void Awake()
-    {
-        directorReference = FindObjectOfType<AIDirector>(); //  Find and set director reference
-    }
-
-    // Update is called once per frame
-    void Update ()
+	}
+	
+	// Update is called once per frame
+	void Update ()
     {
         UpdateLighting();
 
         UpdateTime();
-
-        DirectorUpdate();
-
-    }
+	}
 
     void UpdateLighting()
     {
@@ -98,27 +82,19 @@ public class DayNightCycle : NetworkBehaviour
     {
         if (currentTime >= 1.0f)
         {
+            daysSurvived++;
             currentTime = 0.0f;
         }
 
         if (currentTime >= 0.25f && currentTime <= 0.75f)
         {
-			if (!dirtyFlag)
-			{
-				daysSurvived++;
-				dirtyFlag = true;
-			}
-
-			isDay = true;
+            isDay = true;
             isNight = false;
-
         }
         else if (currentTime > 0.75f || currentTime < 0.25f)
         {
-			dirtyFlag = false;
             isNight = true;
             isDay = false;
-
         }
         else
         {
@@ -127,61 +103,15 @@ public class DayNightCycle : NetworkBehaviour
 
         if (isDay)
         {
-            currentTime += (((Time.deltaTime / dayLength) / 2) * daySpeed) * globalSpeed;
+            currentTime += ((Time.deltaTime / dayLength) / 2) * daySpeed;
         }
         else if (isNight)
         {
-            currentTime += (((Time.deltaTime / nightLength) / 2) * nightSpeed) * globalSpeed;
+            currentTime += ((Time.deltaTime / nightLength) / 2) * nightSpeed;
         }
         else
         {
             Debug.LogError("Error in DayNightCycle. Time is neither day or night.");
         }
     }
-
-    void DirectorUpdate()
-    {
-
-        //Debug.LogError("DirectorUpdate Script Ran");
-
-        //if (!isServer)
-        //{
-        //    //  Only the server should update the director
-        //    return;
-        //}
-
-        if (directorReference == null)
-        {
-            //  Clients will not be able to get a director reference so do not continue
-            return;
-        }
-
-        //Debug.Log("Director isDay = " + directorReference.isDay);
-        //Debug.Log("isDay = " + isDay);
-        //Debug.Log("isNIght = " + isNight);
-
-        if (isDay)
-        {
-            //  Day time
-
-            if (directorReference.isDay != isDay)
-            {
-                //  Director not set to day so update
-                directorReference.SetDay();
-            }
-        }
-        else
-        {
-            //  Night time
-
-            if(directorReference.isDay != isDay)
-            {
-                //  Director is still set to day so switch to night 
-                
-                directorReference.SetNight();
-            }
-        }
-        
-    }
-
 }

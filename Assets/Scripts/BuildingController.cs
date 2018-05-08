@@ -22,7 +22,7 @@ public class BuildingController : NetworkBehaviour
     public Material DoorWoodMat;
     public Material DoorStoneMat;
     public Material DoorMetalMat;
-
+    
     [SyncVar]
     public int Hitpoints;
 
@@ -194,22 +194,5 @@ public class BuildingController : NetworkBehaviour
     {
         gameObject.transform.eulerAngles = new Vector3(0, Rotation, 0);
     }
-
-
-    [Command]
-    public void CmdDamage(int amount)
-    {
-        if (!isServer)
-        {
-            return;
-        }
-
-        Hitpoints -= amount;
-
-        if (Hitpoints <= 0 )
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
 }
+

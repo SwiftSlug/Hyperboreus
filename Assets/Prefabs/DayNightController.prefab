@@ -22,11 +22,11 @@ GameObject:
   - component: {fileID: 114600411360003296}
   m_Layer: 0
   m_Name: DayNightController
-  m_TagString: DayNightController
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4544160781380134
 Transform:
   m_ObjectHideFlags: 1
@@ -52,14 +52,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalLight: {fileID: 0}
-  lightColor: {r: 1, g: 1, b: 1, a: 1}
-  lightIntensity: 1
+  lightColor: {r: 0, g: 0, b: 0, a: 0}
+  lightIntensity: 0
   daysSurvived: 0
-  dayLength: 125
-  nightLength: 235
-  currentTime: 0.25
+  dayLength: 180
+  nightLength: 180
+  currentTime: 0.4
   daySpeed: 1
   nightSpeed: 1
-  globalSpeed: 1
   isDay: 1
   isNight: 0

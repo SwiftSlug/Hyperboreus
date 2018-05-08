@@ -23,11 +23,7 @@ public class AttackWithJumpAction : Action
             return;
         }
 
-        if (controller.target.transform.position != controller.previousMoveLocation)
-        {
-            //  Only update and generate a new path if the destination has changed
-            controller.navMeshAgent.destination = controller.target.transform.position;
-        }
+        controller.navMeshAgent.destination = controller.target.transform.position;
 
         float distanceToTarget = (controller.transform.position - controller.target.transform.position).magnitude;
 
@@ -43,35 +39,16 @@ public class AttackWithJumpAction : Action
             controller.navMeshAgent.destination = controller.target.transform.position;
         }
 
-        //  AI Attacking players
-        if (controller.target.GetComponent<PlayerStats>())
+        //  AI Attacking
+        if (distanceToTarget < controller.attackDistance)
         {
-
-            if (distanceToTarget < controller.attackDistance)
+            //  Only attack target if within attack range   
+            if (Time.time > (controller.lastAttack + controller.attackCooldown))
             {
-                //  Only attack target if within attack range   
-                if (Time.time > (controller.lastAttack + controller.attackCooldown))
-                {
-                    //  Call attack after cooldown
-                    controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);
-                    controller.lastAttack = Time.time;
-                }
-            }
-        }
-        //  AI attack for buildings
-        else if (controller.target.GetComponent<TestBuildingController>())
-        {
-            //Debug.Log("Targetted building for attack");
-            if (distanceToTarget < controller.buildingAttackDistance)
-            {
-                //  Only attack target if within attack range   
-                if (Time.time > (controller.lastAttack + controller.attackCooldown))
-                {
-                    //  Call attack after cooldown
-                    controller.target.GetComponent<TestBuildingController>().CmdDamage(controller.attackDamage);
-                    controller.lastAttack = Time.time;
-                    //Debug.Log("Damage Called on building !");
-                }
+                //  Call attack only after attack cooldown
+                controller.lastAttack = Time.time;
+                controller.target.GetComponent<PlayerStats>().CmdDamage(controller.attackDamage);                
+                //Debug.Log("Attack Called");
             }
         }
 

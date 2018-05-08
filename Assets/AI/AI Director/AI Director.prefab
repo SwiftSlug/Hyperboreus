@@ -35,7 +35,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1905591368327312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.456257, y: 34.789413, z: -53.992493}
+  m_LocalPosition: {x: -2196.5, y: 34.2, z: 3.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   aiSpawnGroupSizeNight: 5
   aiSpawnGroupSizeDay: 1
   numberOfSpawnLocations: 5
-  spawnBufferSize: 2
+  spawnBufferSize: 1
   playerProximitySize: 40
   maxDistanceFromPlayers: 100
   buildingScanDisance: 100
@@ -110,7 +110,7 @@ MonoBehaviour:
   intensityUpdateInterval: 1
   cleanupInterval: 10
   spawnInterval: 1
-  spawnLast: 0
+  spawnLast: 68.26504
   debugSpawnCube: {fileID: 1232948171305478, guid: d80c74ea741b2154ebab72e5588a5ea7,
     type: 2}
   cube: {fileID: 1232948171305478, guid: d80c74ea741b2154ebab72e5588a5ea7, type: 2}

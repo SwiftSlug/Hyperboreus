@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 82136622809333086}
   - component: {fileID: 65277230038828412}
   - component: {fileID: 114977272262028476}
-  - component: {fileID: 114483021251467000}
   m_Layer: 0
   m_Name: BaseballDugout (1)
   m_TagString: DestructibleScenery
@@ -297,38 +296,6 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 0
 --- !u!114 &114348170975416494
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1236097549315586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 43
-    i1: 96
-    i2: 208
-    i3: 24
-    i4: 74
-    i5: 218
-    i6: 104
-    i7: 84
-    i8: 10
-    i9: 173
-    i10: 16
-    i11: 7
-    i12: 193
-    i13: 134
-    i14: 58
-    i15: 236
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &114483021251467000
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

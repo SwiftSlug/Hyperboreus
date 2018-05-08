@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 65605160586415722}
   m_Layer: 0
   m_Name: MetalRailingsWithoutEnd1Colour
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1350684377828376}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2048.45, y: 2.41, z: 89.75}
+  m_LocalPosition: {x: -2048.45, y: 2.41, z: 101.75}
   m_LocalScale: {x: 10, y: 600, z: 5}
   m_Children: []
   m_Father: {fileID: 0}

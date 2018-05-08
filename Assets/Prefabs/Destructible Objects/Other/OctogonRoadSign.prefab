@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 82713480562759586}
   m_Layer: 0
   m_Name: OctogonRoadSign
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1765534295095132}
   m_LocalRotation: {x: -0, y: 0.72919106, z: -0, w: 0.68431026}
-  m_LocalPosition: {x: -1785.55, y: 0.049999952, z: -145.16048}
+  m_LocalPosition: {x: -2090.8, y: 0.049999952, z: -145.16048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4462754108890354}

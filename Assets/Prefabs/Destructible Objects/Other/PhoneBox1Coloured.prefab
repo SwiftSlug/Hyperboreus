@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82215418157442432}
   m_Layer: 0
   m_Name: PhoneBox1Coloured
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762180084707556}
   m_LocalRotation: {x: 0, y: 0.7072302, z: 0.7069834, w: 0}
-  m_LocalPosition: {x: -1940.1, y: 1.3, z: -131.32}
+  m_LocalPosition: {x: -2110.28, y: 1.3, z: -131.32}
   m_LocalScale: {x: 49.999977, y: 49.999977, z: 120.00001}
   m_Children: []
   m_Father: {fileID: 0}

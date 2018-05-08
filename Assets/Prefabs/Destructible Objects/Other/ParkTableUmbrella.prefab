@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 82099428090190824}
   m_Layer: 0
   m_Name: ParkTableUmbrella
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

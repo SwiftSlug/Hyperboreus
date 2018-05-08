@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 82274285527873838}
   m_Layer: 0
   m_Name: DeliveryTruckColoured
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,8 +713,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1780163302578492}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1980.4, y: 1.5027544e-17, z: -158.5}
+  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: -2343.38, y: 1.5027544e-17, z: -111.329994}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 4245381176658048}
@@ -742,7 +742,7 @@ Transform:
   - {fileID: 4131213461007738}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!4 &4967698887577708
 Transform:
   m_ObjectHideFlags: 1

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 82503014110932214}
   m_Layer: 0
   m_Name: MiniGolf1
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

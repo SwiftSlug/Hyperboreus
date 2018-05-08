@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 82588652980170350}
   m_Layer: 0
   m_Name: Taxi1V2Colour
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

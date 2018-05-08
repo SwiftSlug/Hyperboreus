@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82803024413426034}
   m_Layer: 0
   m_Name: SmallTree
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1094514806664736}
   m_LocalRotation: {x: -0.6318793, y: 0.3173776, z: 0.31737766, w: 0.63187927}
-  m_LocalPosition: {x: -2282.5225, y: 3.5314286, z: -24.701492}
+  m_LocalPosition: {x: -2187.8438, y: 3.5314286, z: 91.87644}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}

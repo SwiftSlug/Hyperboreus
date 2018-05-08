@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82285529388962938}
   m_Layer: 0
   m_Name: LowBench
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372168692148728}
-  m_LocalRotation: {x: -0.49991274, y: 0.50008726, z: 0.49991274, w: 0.50008726}
-  m_LocalPosition: {x: -1830.19, y: 0.57, z: -138.25}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: -2190.198, y: 0.9545456, z: 73.78}
   m_LocalScale: {x: 35, y: 150, z: 4.5454545}
   m_Children: []
   m_Father: {fileID: 0}

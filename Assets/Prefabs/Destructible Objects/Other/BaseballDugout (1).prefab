@@ -23,9 +23,12 @@ GameObject:
   - component: {fileID: 114770064916617910}
   - component: {fileID: 114348170975416494}
   - component: {fileID: 82136622809333086}
+  - component: {fileID: 65277230038828412}
+  - component: {fileID: 114977272262028476}
+  - component: {fileID: 114483021251467000}
   m_Layer: 0
   m_Name: BaseballDugout (1)
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,8 +73,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236097549315586}
-  m_LocalRotation: {x: -0, y: -0.70710677, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1789.51, y: 2, z: 125.29}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1776.6, y: 2, z: 108.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4746957874130506}
@@ -200,6 +203,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.5, y: 3, z: 6.5}
   m_Center: {x: 0, y: 0.2, z: 0}
+--- !u!65 &65277230038828412
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236097549315586}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5, y: 3, z: 6.5}
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!82 &82136622809333086
 AudioSource:
   m_ObjectHideFlags: 1
@@ -313,7 +328,57 @@ MonoBehaviour:
     i15: 236
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114483021251467000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236097549315586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 43
+    i1: 96
+    i2: 208
+    i3: 24
+    i4: 74
+    i5: 218
+    i6: 104
+    i7: 84
+    i8: 10
+    i9: 173
+    i10: 16
+    i11: 7
+    i12: 193
+    i13: 134
+    i14: 58
+    i15: 236
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114770064916617910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236097549315586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58842a81512dde4e87ad0c170f87fa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyOrLoot: 0
+  PlayerDestroyingOrLooting: {fileID: 0}
+  AmmoType: 0
+  AmountOfAmmoToDrop: 0
+  ResourceType: 2
+  AmountOfResourceToDrop: 20
+  audioSync: {fileID: 0}
+--- !u!114 &114977272262028476
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

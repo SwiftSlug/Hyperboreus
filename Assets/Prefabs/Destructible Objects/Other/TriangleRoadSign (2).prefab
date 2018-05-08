@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 82816817940732776}
   m_Layer: 0
   m_Name: TriangleRoadSign (2)
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333894095695522}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1944.93, y: 0.05, z: -131.78}
+  m_LocalPosition: {x: -2004.96, y: 0.05, z: -131.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4421088986101528}

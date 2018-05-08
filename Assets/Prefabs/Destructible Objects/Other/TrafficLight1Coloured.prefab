@@ -106,9 +106,10 @@ GameObject:
   - component: {fileID: 4677465827739534}
   - component: {fileID: 114065218247598548}
   - component: {fileID: 114176807019056270}
+  - component: {fileID: 65497671113512394}
   m_Layer: 0
   m_Name: TrafficLight1Coloured
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,8 +262,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1570507007275490}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2525.25, y: 0.052, z: -142.16}
+  m_LocalRotation: {x: -0, y: -0.9950721, z: -0, w: 0.09915381}
+  m_LocalPosition: {x: -2362.8528, y: 0.049999952, z: -145.27443}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 4070175141495398}
@@ -275,7 +276,7 @@ Transform:
   - {fileID: 4806132102966666}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -168.619, z: 0}
 --- !u!4 &4806132102966666
 Transform:
   m_ObjectHideFlags: 1
@@ -617,6 +618,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1718003346220136}
   m_Mesh: {fileID: 4300012, guid: 7385b1e4165df2f4088ceb5138fbcf5c, type: 3}
+--- !u!65 &65497671113512394
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570507007275490}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 2.5, z: 0.3}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &114065218247598548
 MonoBehaviour:
   m_ObjectHideFlags: 1

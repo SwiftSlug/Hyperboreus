@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 82622015655650112}
   m_Layer: 0
   m_Name: NewspaperStand
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -135,7 +135,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1187482566679108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1896.2, y: 1.55, z: -138}
+  m_LocalPosition: {x: -2047.61, y: 1.55, z: -131.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4336043686880592}

@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 23356358548824096}
   - component: {fileID: 114261596800286722}
   - component: {fileID: 114565035326655664}
+  - component: {fileID: 65921050682546800}
   m_Layer: 0
   m_Name: OpenDumpster
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1654880083365188}
   m_LocalRotation: {x: 0.41837397, y: 0.57005554, z: -0.57005537, w: -0.418374}
-  m_LocalPosition: {x: -2516.9885, y: 0.4430685, z: -138.92001}
+  m_LocalPosition: {x: -2370.7131, y: 0.4342016, z: -103.41}
   m_LocalScale: {x: 101.8705, y: 101.87049, z: 101.8705}
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,6 +86,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1654880083365188}
   m_Mesh: {fileID: 4300000, guid: cc443515e1b143e489a0ad1d0c47b9ed, type: 3}
+--- !u!65 &65921050682546800
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1654880083365188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04511361, y: 0.03001986, z: 0.022299048}
+  m_Center: {x: 0.016195599, y: 0.000012315888, z: -0.0019734174}
 --- !u!114 &114261596800286722
 MonoBehaviour:
   m_ObjectHideFlags: 1

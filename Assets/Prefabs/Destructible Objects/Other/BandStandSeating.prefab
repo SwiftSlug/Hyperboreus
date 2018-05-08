@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82265710911393544}
   m_Layer: 0
   m_Name: BandStandSeating
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,13 +38,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1066344884870982}
-  m_LocalRotation: {x: 0.2705981, y: 0.6532816, z: 0.6532814, w: -0.270598}
-  m_LocalPosition: {x: -2315.73, y: 2.5, z: 110.47}
+  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.6532815, w: 0.27059805}
+  m_LocalPosition: {x: -2315.89, y: 2.5, z: 79.2}
   m_LocalScale: {x: 49.999996, y: 500, z: 200}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -89.99999, y: 180, z: 45}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 135}
 --- !u!23 &23635738687742820
 MeshRenderer:
   m_ObjectHideFlags: 1

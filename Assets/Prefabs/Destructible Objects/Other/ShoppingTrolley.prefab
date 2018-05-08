@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 82635883941734930}
   m_Layer: 0
   m_Name: ShoppingTrolley
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

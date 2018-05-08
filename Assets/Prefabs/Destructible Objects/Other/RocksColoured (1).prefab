@@ -30,7 +30,7 @@ GameObject:
   m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4341413219790436
 Transform:
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1997087205318912}
   m_LocalRotation: {x: -0.6659531, y: 0.23771085, z: 0.23771085, w: 0.6659531}
-  m_LocalPosition: {x: -2155.9644, y: -0.26, z: 92.2}
+  m_LocalPosition: {x: -2155.9644, y: 0.70850575, z: 81.570724}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}

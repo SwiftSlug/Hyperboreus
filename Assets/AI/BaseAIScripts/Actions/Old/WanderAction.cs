@@ -18,7 +18,10 @@ public class WanderAction : Action {
         if (controller.navMeshAgent.remainingDistance < 2)
         {
             var randomPosition = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
-            controller.navMeshAgent.SetDestination(randomPosition);
+
+            Vector3 newPost = controller.transform.position + randomPosition;
+
+            controller.navMeshAgent.SetDestination(newPost);
             
             //Debug.Log("Wandering to new location");
         }

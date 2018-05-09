@@ -524,7 +524,7 @@ public class AIDirector : NetworkBehaviour
             float xOffset = Random.Range(-spread, spread);   //  Random x offset
             float zOffset = Random.Range(-spread, spread);   //  Random y offset
 
-            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 1.0f, position.z + zOffset);    //  Generate spawn location
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, 0.9f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetPlayer.transform.position;
@@ -545,7 +545,7 @@ public class AIDirector : NetworkBehaviour
             float xOffset = Random.Range(-spread, spread);   //  Random x offset
             float zOffset = Random.Range(-spread, spread);   //  Random y offset
 
-            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 10.0f, position.z + zOffset);    //  Generate spawn location
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, 0.9f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetLocation;

@@ -40,15 +40,21 @@ public class TestBuildingController : NetworkBehaviour
             switch (LocalMaterialChoice)
             {
                 case 0:
-                    gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat; // S = 0, M = 0: Wooden Wall
+                    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true; //material = WallWoodMat; // S = 0, M = 0: Wooden Wall
+                    gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                    gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                     hitPoints = 20;
                     break;
                 case 1:
-                    gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat; // S = 0, M = 1: Stone Wall
+                    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // material = WallStoneMat; // S = 0, M = 1: Stone Wall
+                    gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+                    gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                     hitPoints = 40;
                     break;
                 case 2:
-                    gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat; // S = 0, M = 2: Metal Wall
+                    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // material = WallMetalMat; // S = 0, M = 2: Metal Wall
+                    gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                    gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
                     hitPoints = 80;
                     break;
             }
@@ -114,7 +120,7 @@ public class TestBuildingController : NetworkBehaviour
 
             switch (LocalMaterialChoice)
             {
-                case 0:
+                /*case 0:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat; // S = 0, M = 0: Wooden Wall
                     hitPoints = 20;
                     break;
@@ -124,6 +130,24 @@ public class TestBuildingController : NetworkBehaviour
                     break;
                 case 2:
                     gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat; // S = 0, M = 2: Metal Wall
+                    hitPoints = 80;
+                    break;*/
+                case 0:
+                    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true; //material = WallWoodMat; // S = 0, M = 0: Wooden Wall
+                    gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                    gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+                    hitPoints = 20;
+                    break;
+                case 1:
+                    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // material = WallStoneMat; // S = 0, M = 1: Stone Wall
+                    gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+                    gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+                    hitPoints = 40;
+                    break;
+                case 2:
+                    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // material = WallMetalMat; // S = 0, M = 2: Metal Wall
+                    gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                    gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
                     hitPoints = 80;
                     break;
             }

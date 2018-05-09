@@ -416,7 +416,7 @@ public class PlayerBuildingController : NetworkBehaviour
             }
             else
             {
-                RotationToSet = RotationToSet + 0.5f;
+                RotationToSet = RotationToSet + 2.0f;
                 CmdRotateStructure(RotationToSet);
                 LocalRotateStructure(RotationToSet);
                 //Debug.Log("RotationValue: " + RotationToSet);

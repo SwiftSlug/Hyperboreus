@@ -48,22 +48,31 @@ public class BuildingController : NetworkBehaviour
         if (StructureValue == 0) //if (LocalNeededStructure == 0)
         {
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
+
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
+                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
+                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true; // set wall visible
+                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                 Hitpoints = 100;
             }
             else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
             {
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
+                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
+                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
+                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                 Hitpoints = 200;
             }
             else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
             {
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
+                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
+                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
+                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
                 Hitpoints = 300;
             }
         }
@@ -123,22 +132,30 @@ public class BuildingController : NetworkBehaviour
         if (StructureValue == 0) //if (LocalNeededStructure == 0)
         {
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
             {
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
+                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
+                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true; // set wall visible
+                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                 Hitpoints = 100;
             }
             else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
             {
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
+                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
+                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
+                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
+                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                 Hitpoints = 200;
             }
             else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
             {
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
+                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
+                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
+                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
+                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
                 Hitpoints = 300;
             }
         }

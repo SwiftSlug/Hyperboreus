@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114267761803268318}
   - component: {fileID: 65062333140570730}
   - component: {fileID: 82125543284986968}
+  - component: {fileID: 208640793699464248}
   m_Layer: 0
   m_Name: Ambulance1Coloured
   m_TagString: DestructibleScenery
@@ -100,8 +101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1985455745898786}
-  m_LocalRotation: {x: -0, y: 0.9167703, z: -0, w: 0.39941502}
-  m_LocalPosition: {x: -2334.79, y: 0.25792003, z: -168.43}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -2234.85, y: 0.25792003, z: 152.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4610766408222976}
@@ -408,3 +409,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 60
   audioSync: {fileID: 0}
+--- !u!208 &208640793699464248
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1985455745898786}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1.5, z: 3.55}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5

@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4056993384170754}
   - component: {fileID: 65444980152215426}
   - component: {fileID: 114339805160040848}
+  - component: {fileID: 208780942268424304}
   m_Layer: 0
   m_Name: ParkCafe 1
   m_TagString: Untagged
@@ -299,3 +300,18 @@ MonoBehaviour:
     i15: 201
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208780942268424304
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1420985921645650}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 10.5, y: 2.5, z: 5.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

@@ -76,7 +76,7 @@ public class AIDirector : NetworkBehaviour
     int healthLost;                //  0 - 100 based on how much health has been lost from 100
     float healthIntensity;      //  1.0 + value that multiplies the intensity based on how low the players health is
 
-
+    int spawnScanAttempts = 100;// Max number of areaas scanned
 
 
     // Use this for initialization
@@ -221,7 +221,7 @@ public class AIDirector : NetworkBehaviour
             {
                 foreach (GameObject player in players)
                 {
-                    scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations);
+                    scanSpawnAreas(player.transform.position, 60, 25, numberOfSpawnLocations, spawnScanAttempts);
                 }
             }
             if (Input.GetKeyDown("."))
@@ -244,10 +244,10 @@ public class AIDirector : NetworkBehaviour
     //  any obsticles (aside from floors), if none area found the area is clear to spawn. If a collider is found then another random location is generated and checked.
     //  This is limited up to a defined amount (maxRunAttemps) to stop areas that cann be spawned in cuasing infite loops
 
-    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 10)
+    bool scanSpawnAreas(Vector3 areaCentre, float areaSize, float centerIgnoreSize, int numberOfSpawnLocatoins, int maxRunAttempts = 100)
     {
-
         int maxRunCounter = 0;
+
         //  Remove all old spawn locations
         spawnLocations.Clear();
         bool areaFound = false;

@@ -84,15 +84,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1878656771871122}
-  m_LocalRotation: {x: 0.48296294, y: 0.8365163, z: -0.12940949, w: -0.22414382}
-  m_LocalPosition: {x: -2170.521, y: 2.082, z: 66.81}
+  m_LocalRotation: {x: 0.29883623, y: 0.64085644, z: 0.29883623, w: 0.64085644}
+  m_LocalPosition: {x: -2170.1365, y: 1.4468493, z: 117.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4138047185471476}
   - {fileID: 4804703127566264}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 50}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 50}
 --- !u!4 &4804703127566264
 Transform:
   m_ObjectHideFlags: 1
@@ -342,7 +342,7 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 1.375, y: 1.5, z: 1.375}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: -1.5, y: 1, z: 0}
   m_TimeToStationary: 0.5

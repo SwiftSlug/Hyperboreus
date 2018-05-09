@@ -91,7 +91,7 @@ MonoBehaviour:
   shouldDebugBuildingLocations: 0
   difficulyMultiplier: 1.2
   isDay: 1
-  enemyToSpawn: {fileID: 1615029759136878, guid: 17a471003d8176d48b2869b096995d3f,
+  enemyToSpawn: {fileID: 1332893165969140, guid: 19b2e70d19e7f6746b5bcc127c88a749,
     type: 2}
   numerOfSpawnGroups: 2
   aiSpawnGroupSizeNight: 5

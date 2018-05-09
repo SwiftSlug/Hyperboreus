@@ -97,7 +97,7 @@ MonoBehaviour:
   aiSpawnGroupSizeNight: 5
   aiSpawnGroupSizeDay: 1
   numberOfSpawnLocations: 5
-  spawnBufferSize: 0.5
+  spawnBufferSize: 2
   playerProximitySize: 40
   maxDistanceFromPlayers: 100
   buildingScanDisance: 100

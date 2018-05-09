@@ -305,7 +305,7 @@ public class AIDirector : NetworkBehaviour
                         if (!hitColliders[hits].CompareTag("floor"))
                         {
                             areaClear = false;
-
+                            Debug.Log("Collider = " + hitColliders[hits].name);
                             //  Debug
                             if (shouldAICreateSpawnDebug)
                             {
@@ -412,7 +412,7 @@ public class AIDirector : NetworkBehaviour
                 //  Debug
                 if (shouldAICreateSpawnDebug)
                 {
-                    GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation, Quaternion.identity);
+                    GameObject debugCube = Instantiate(debugSpawnCube, spawnLocation + new Vector3(0,20,0), Quaternion.identity);
                     debugCube.GetComponent<DebugCubeScript>().gizmoColour = Color.red;
                 }
 
@@ -524,7 +524,7 @@ public class AIDirector : NetworkBehaviour
             float xOffset = Random.Range(-spread, spread);   //  Random x offset
             float zOffset = Random.Range(-spread, spread);   //  Random y offset
 
-            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 1.0f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetPlayer.transform.position;
@@ -545,7 +545,7 @@ public class AIDirector : NetworkBehaviour
             float xOffset = Random.Range(-spread, spread);   //  Random x offset
             float zOffset = Random.Range(-spread, spread);   //  Random y offset
 
-            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.5f, position.z + zOffset);    //  Generate spawn location
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 1.0f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             spawnedEnemy.GetComponent<StateController>().moveCommandLocation = targetLocation;

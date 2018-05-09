@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 23841269962669658}
   - component: {fileID: 114246785224386476}
   - component: {fileID: 114125480966616774}
+  - component: {fileID: 65927037919631450}
   m_Layer: 0
   m_Name: MetalRailingsWithEnd1Colour
-  m_TagString: Untagged
+  m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36,13 +37,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145861518138496}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2136.4553, y: 0.5, z: 94.10308}
+  m_LocalRotation: {x: -0.5000007, y: 0.4999993, z: 0.4999993, w: 0.5000007}
+  m_LocalPosition: {x: -2132.01, y: 2.31, z: 76.53}
   m_LocalScale: {x: 10, y: 600, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 90.00001}
 --- !u!23 &23841269962669658
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -84,6 +85,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145861518138496}
   m_Mesh: {fileID: 4300000, guid: f2d191c51038ead4fac0f9cd9b973b9f, type: 3}
+--- !u!65 &65927037919631450
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1145861518138496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.020000078, y: 0.019999998, z: 0.41405407}
+  m_Center: {x: 9.313226e-10, y: 9.25185e-19, z: -0.13297312}
 --- !u!114 &114125480966616774
 MonoBehaviour:
   m_ObjectHideFlags: 1

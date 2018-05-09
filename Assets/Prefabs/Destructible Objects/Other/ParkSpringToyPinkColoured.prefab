@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114616064071260274}
   - component: {fileID: 65321383585178696}
   - component: {fileID: 82586049108808738}
+  - component: {fileID: 208624703683514438}
   m_Layer: 0
   m_Name: ParkSpringToyPinkColoured
   m_TagString: DestructibleScenery
@@ -84,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1976704745911420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2155.349, y: 0.92499995, z: 107.065544}
+  m_LocalPosition: {x: -2158.794, y: 0.92499995, z: 66.68933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4954650358947022}
@@ -331,3 +332,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 5
   audioSync: {fileID: 0}
+--- !u!208 &208624703683514438
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1976704745911420}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

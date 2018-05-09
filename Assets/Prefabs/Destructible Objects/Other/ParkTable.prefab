@@ -25,12 +25,13 @@ GameObject:
   - component: {fileID: 114417268300055854}
   - component: {fileID: 82412312592614390}
   - component: {fileID: 65450929129397914}
+  - component: {fileID: 208792803759872138}
   m_Layer: 0
   m_Name: ParkTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4763267518936190
 Transform:
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1973079952741598}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -2175.7117, y: 1.3000002, z: 96.94}
+  m_LocalPosition: {x: -2188.91, y: 1.3000002, z: 96.94}
   m_LocalScale: {x: 60.000004, y: 200, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
@@ -230,3 +231,18 @@ MonoBehaviour:
   ResourceType: 0
   AmountOfResourceToDrop: 15
   audioSync: {fileID: 0}
+--- !u!208 &208792803759872138
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973079952741598}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.010000001, y: 0.010000001, z: 0.055000003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -0.045}
+  m_TimeToStationary: 0.5

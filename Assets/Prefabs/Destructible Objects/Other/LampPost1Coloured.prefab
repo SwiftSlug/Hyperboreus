@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114275112494798854}
   - component: {fileID: 65444249739750354}
   - component: {fileID: 82092094582759632}
+  - component: {fileID: 208009311864175666}
   m_Layer: 0
   m_Name: LampPost1Coloured
   m_TagString: DestructibleScenery
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656480542915204}
   m_LocalRotation: {x: -0.49991274, y: 0.50008726, z: 0.49991274, w: 0.50008726}
-  m_LocalPosition: {x: -2203.94, y: 4.5099993, z: -0.02}
+  m_LocalPosition: {x: -2298.11, y: 4.5099993, z: -0.02}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -229,3 +230,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 10
   audioSync: {fileID: 0}
+--- !u!208 &208009311864175666
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656480542915204}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.0025, y: 0.0024999995, z: 0.04156688}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.0004999992, y: 0, z: 0.001566887}
+  m_TimeToStationary: 0.5

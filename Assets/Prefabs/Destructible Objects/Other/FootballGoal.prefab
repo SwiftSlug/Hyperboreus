@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1287563530240002
 GameObject:
@@ -40,12 +40,13 @@ GameObject:
   - component: {fileID: 114658119023229542}
   - component: {fileID: 65012498769235010}
   - component: {fileID: 82876127827776208}
+  - component: {fileID: 208361823047815392}
   m_Layer: 0
   m_Name: FootballGoal
   m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1736316818444608
 GameObject:
@@ -62,7 +63,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1905883021481498
 GameObject:
@@ -79,7 +80,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4084303507039072
 Transform:
@@ -101,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287563530240002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2110.7, y: 0.927, z: 64.488045}
+  m_LocalPosition: {x: -2135.86, y: 0.927, z: 112.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4084303507039072}
@@ -402,3 +403,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 10
   audioSync: {fileID: 0}
+--- !u!208 &208361823047815392
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1287563530240002}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.75, z: 1.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
+  m_TimeToStationary: 0.5

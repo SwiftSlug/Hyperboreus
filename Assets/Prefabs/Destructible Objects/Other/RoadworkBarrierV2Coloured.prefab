@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 23003101185558532}
   - component: {fileID: 114825408540838062}
   - component: {fileID: 114193319715614550}
+  - component: {fileID: 208252261603363852}
+  - component: {fileID: 65967774682510084}
   m_Layer: 0
   m_Name: RoadworkBarrierV2Coloured
   m_TagString: Untagged
@@ -37,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113206761353828}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -1850.24, y: 0.11, z: -161.18}
+  m_LocalPosition: {x: -1853.67, y: 0.11, z: -161.18}
   m_LocalScale: {x: 125, y: 15.000001, z: 10.522146}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,6 +88,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1113206761353828}
   m_Mesh: {fileID: 4300000, guid: 06c73df2f765b9e4b8f1b1c0468d4137, type: 3}
+--- !u!65 &65967774682510084
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1113206761353828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.019999996, z: 0.09503763}
+  m_Center: {x: 0, y: -2.665873e-16, z: 0.037518818}
 --- !u!114 &114193319715614550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,3 +150,18 @@ MonoBehaviour:
     i15: 129
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208252261603363852
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1113206761353828}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.010000001, y: 0.010000001, z: 0.047518816}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -2.665873e-16, z: 0.03751882}
+  m_TimeToStationary: 0.5

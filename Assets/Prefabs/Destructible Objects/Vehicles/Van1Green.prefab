@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114154349648289344}
   - component: {fileID: 65121228909670000}
   - component: {fileID: 82384492539178934}
+  - component: {fileID: 208082461158166570}
   m_Layer: 0
   m_Name: Van1Green
   m_TagString: DestructibleScenery
@@ -100,8 +101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1438013027282816}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2309.52, y: 0.51, z: -159.04}
+  m_LocalRotation: {x: 0.0007612654, y: 0.01743584, z: 0.043612763, w: 0.99889606}
+  m_LocalPosition: {x: -1717.33, y: 0.51, z: -81.202835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4314471110393746}
@@ -109,7 +110,7 @@ Transform:
   - {fileID: 4523160260889470}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 95, z: 5}
+  m_LocalEulerAnglesHint: {x: 0, y: 2, z: 5}
 --- !u!4 &4523160260889470
 Transform:
   m_ObjectHideFlags: 1
@@ -411,3 +412,18 @@ MonoBehaviour:
     i15: 184
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208082461158166570
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1438013027282816}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.25, y: 1.5, z: 3.55}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5

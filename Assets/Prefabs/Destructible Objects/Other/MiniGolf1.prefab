@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 114839399821896904}
   - component: {fileID: 114603697321399600}
   - component: {fileID: 82503014110932214}
+  - component: {fileID: 208929320410363856}
   m_Layer: 0
   m_Name: MiniGolf1
   m_TagString: DestructibleScenery
@@ -692,3 +693,18 @@ MonoBehaviour:
     i15: 124
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208929320410363856
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1701064348619968}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5.5, y: 0.6, z: 1.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
+  m_TimeToStationary: 0.5

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114799363125075848}
   - component: {fileID: 65376953961933228}
   - component: {fileID: 82881027716537890}
+  - component: {fileID: 208780026781735292}
   m_Layer: 0
   m_Name: Car1RedColoured
   m_TagString: Untagged
@@ -100,8 +101,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371035230744384}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2326.36, y: 1.62, z: -153.08}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -1725.51, y: 1.76, z: -97.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4447092004101706}
@@ -109,7 +110,7 @@ Transform:
   - {fileID: 4415970932022494}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4415970932022494
 Transform:
   m_ObjectHideFlags: 1
@@ -414,3 +415,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 30
   audioSync: {fileID: 0}
+--- !u!208 &208780026781735292
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371035230744384}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.375, y: 1, z: 3.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 3.15}
+  m_TimeToStationary: 0.5

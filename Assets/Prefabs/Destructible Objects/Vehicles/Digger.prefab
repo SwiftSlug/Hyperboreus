@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 114046610618319652}
   - component: {fileID: 114493213670533298}
   - component: {fileID: 65942722757633700}
+  - component: {fileID: 208265872858706006}
   m_Layer: 0
   m_Name: Digger
   m_TagString: Untagged
@@ -322,3 +323,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 150
   audioSync: {fileID: 0}
+--- !u!208 &208265872858706006
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1648374370502508}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.7, y: 3.25, z: 4}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 1.85, y: 2.5, z: 0.75}
+  m_TimeToStationary: 0.5

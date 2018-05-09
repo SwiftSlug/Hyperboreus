@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1694472785236950
 GameObject:
@@ -43,7 +43,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &1878656771871122
 GameObject:
@@ -57,12 +57,13 @@ GameObject:
   - component: {fileID: 114074940608732416}
   - component: {fileID: 65011692578484806}
   - component: {fileID: 82099428090190824}
+  - component: {fileID: 208435224197420326}
   m_Layer: 0
   m_Name: ParkTableUmbrella
   m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4138047185471476
 Transform:
@@ -83,8 +84,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1878656771871122}
-  m_LocalRotation: {x: 0.42261827, y: 0.9063079, z: 0, w: 0}
-  m_LocalPosition: {x: -2171.019, y: 1.4468493, z: 98.79}
+  m_LocalRotation: {x: 0.48296294, y: 0.8365163, z: -0.12940949, w: -0.22414382}
+  m_LocalPosition: {x: -2170.521, y: 2.082, z: 66.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4138047185471476}
@@ -330,3 +331,18 @@ MonoBehaviour:
     i15: 183
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208435224197420326
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1878656771871122}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.375, y: 1.5, z: 1.375}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.5, y: 1, z: 0}
+  m_TimeToStationary: 0.5

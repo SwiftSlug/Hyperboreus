@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114803512869847404}
   - component: {fileID: 65208197380797426}
   - component: {fileID: 82393621962399222}
+  - component: {fileID: 208974141248288436}
   m_Layer: 0
   m_Name: lp_streeLight1(Scaled)Coloured
   m_TagString: DestructibleScenery
@@ -130,8 +131,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1867899659464132}
-  m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: -2004.55, y: 0.26999998, z: -143.72}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -1739.6302, y: 0.26999998, z: -123.6}
   m_LocalScale: {x: 0.5, y: 0.9, z: 0.5}
   m_Children:
   - {fileID: 4750007583002544}
@@ -140,7 +141,7 @@ Transform:
   - {fileID: 4396203798335316}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4697103156584672
 Transform:
   m_ObjectHideFlags: 1
@@ -474,3 +475,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 10
   audioSync: {fileID: 0}
+--- !u!208 &208974141248288436
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1867899659464132}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 5, z: 0}
+  m_TimeToStationary: 0.5

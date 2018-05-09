@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 114638938638382632}
   - component: {fileID: 65893138415045766}
   - component: {fileID: 82321302516916502}
+  - component: {fileID: 208508817310422658}
   m_Layer: 0
   m_Name: PoliceCarV2Coloured
   m_TagString: DestructibleScenery
@@ -306,8 +307,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824079499040500}
-  m_LocalRotation: {x: -0.030843573, y: 0.7064338, z: 0.030843573, w: -0.7064338}
-  m_LocalPosition: {x: -2093.3, y: 1.67, z: -166.05}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2355.23, y: 1.67, z: 7.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4635660126736090}
@@ -849,3 +850,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 40
   audioSync: {fileID: 0}
+--- !u!208 &208508817310422658
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1824079499040500}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.375, y: 1, z: 3.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 3.15}
+  m_TimeToStationary: 0.5

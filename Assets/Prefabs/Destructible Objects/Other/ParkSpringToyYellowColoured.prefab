@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114733414997069714}
   - component: {fileID: 65315065745844544}
   - component: {fileID: 82423524280630700}
+  - component: {fileID: 208651311690716522}
   m_Layer: 0
   m_Name: ParkSpringToyYellowColoured
   m_TagString: DestructibleScenery
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308621307241338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2155.7556, y: 0.92499995, z: 104.38911}
+  m_LocalPosition: {x: -2158.8967, y: 0.92499995, z: 62.889343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4039915700092290}
@@ -331,3 +332,18 @@ MonoBehaviour:
     i15: 24
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208651311690716522
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1308621307241338}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

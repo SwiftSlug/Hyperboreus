@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 114331144623374478}
   - component: {fileID: 65874721514890654}
   - component: {fileID: 82885934775085900}
+  - component: {fileID: 208745886173304474}
   m_Layer: 0
   m_Name: lp_cargoContainer(Scaled)Coloured
   m_TagString: DestructibleScenery
@@ -2418,3 +2419,18 @@ MonoBehaviour:
     i15: 32
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208745886173304474
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1954937296383442}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.125, y: 2, z: 5.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.1, y: 2, z: 0}
+  m_TimeToStationary: 0.5

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114935081071480244}
   - component: {fileID: 65002037427328292}
   - component: {fileID: 82285529388962938}
+  - component: {fileID: 208188962579742022}
   m_Layer: 0
   m_Name: LowBench
   m_TagString: DestructibleScenery
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1372168692148728}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -2190.198, y: 0.9545456, z: 73.78}
+  m_LocalPosition: {x: -2190.198, y: 0.9545456, z: 119.13382}
   m_LocalScale: {x: 35, y: 150, z: 4.5454545}
   m_Children: []
   m_Father: {fileID: 0}
@@ -230,3 +231,18 @@ MonoBehaviour:
   ResourceType: 0
   AmountOfResourceToDrop: 10
   audioSync: {fileID: 0}
+--- !u!208 &208188962579742022
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1372168692148728}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.015, y: 0.009999995, z: 0.055000003}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: -0.04}
+  m_TimeToStationary: 0.5

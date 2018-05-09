@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114791531794176760}
   - component: {fileID: 114231277774786608}
   - component: {fileID: 65605160586415722}
+  - component: {fileID: 208155538095510636}
   m_Layer: 0
   m_Name: MetalRailingsWithoutEnd1Colour
   m_TagString: DestructibleScenery
@@ -147,3 +148,18 @@ MonoBehaviour:
     i15: 54
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208155538095510636
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1350684377828376}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.010000005, y: 0.01004167, z: 0.232027}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 9.313226e-10, y: 0.00004166645, z: -0.1579731}
+  m_TimeToStationary: 0.5

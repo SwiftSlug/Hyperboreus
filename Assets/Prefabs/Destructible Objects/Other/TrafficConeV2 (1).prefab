@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 23929096609203390}
   - component: {fileID: 114638216663488142}
   - component: {fileID: 114477951682756366}
+  - component: {fileID: 65518167374977062}
+  - component: {fileID: 208505277590118500}
   m_Layer: 0
   m_Name: TrafficConeV2 (1)
   m_TagString: Untagged
@@ -37,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1778613154427274}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -2563.14, y: 0.054448344, z: -139.32866}
+  m_LocalPosition: {x: -1841.28, y: 0.054448344, z: -161.36865}
   m_LocalScale: {x: 40, y: 40, z: 4.9999995}
   m_Children: []
   m_Father: {fileID: 0}
@@ -86,6 +88,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1778613154427274}
   m_Mesh: {fileID: 4300000, guid: 635bb40719c9a2741b10dc0bc1bb7d59, type: 3}
+--- !u!65 &65518167374977062
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1778613154427274}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.018, y: 0.017999995, z: 0.15999998}
+  m_Center: {x: 0, y: 0, z: 0.06911033}
 --- !u!114 &114477951682756366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,3 +150,18 @@ MonoBehaviour:
     i15: 46
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208505277590118500
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1778613154427274}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.009000001, y: 0.009000001, z: 0.080000006}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.06911033}
+  m_TimeToStationary: 0.5

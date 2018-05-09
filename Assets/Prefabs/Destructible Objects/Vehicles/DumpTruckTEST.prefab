@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114767389205981798}
   - component: {fileID: 114628175295651070}
   - component: {fileID: 65564710181387826}
+  - component: {fileID: 208335474391561356}
   m_Layer: 0
   m_Name: DumpTruckTEST
   m_TagString: Untagged
@@ -152,3 +153,18 @@ MonoBehaviour:
     i15: 88
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208335474391561356
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1565184060105048}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.01374552, y: 0.01140835, z: 0.042564657}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.00001179148, y: -0.0009781508, z: 0.00725437}
+  m_TimeToStationary: 0.5

@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114327967611661756}
   - component: {fileID: 65433057452501528}
   - component: {fileID: 82172271765849934}
+  - component: {fileID: 208347957314614680}
   m_Layer: 0
   m_Name: ParkSign
   m_TagString: DestructibleScenery
@@ -70,8 +71,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1804137334682844}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000013113022}
-  m_LocalPosition: {x: -2193.93, y: 2.4999998, z: -25.31}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2198.09, y: 2.4999998, z: 24.783289}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4313088129677824}
@@ -330,3 +331,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 5
   audioSync: {fileID: 0}
+--- !u!208 &208347957314614680
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1804137334682844}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.15, y: 1.5, z: 0.15}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

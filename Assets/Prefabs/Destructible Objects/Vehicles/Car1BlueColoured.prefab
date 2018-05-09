@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 114903352042381756}
   - component: {fileID: 65742314360711502}
   - component: {fileID: 82658450989033812}
+  - component: {fileID: 208529941690338660}
   m_Layer: 0
   m_Name: Car1BlueColoured
   m_TagString: DestructibleScenery
@@ -414,3 +415,18 @@ MonoBehaviour:
     i15: 19
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208529941690338660
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792917152566234}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.375, y: 1, z: 3.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 3.15}
+  m_TimeToStationary: 0.5

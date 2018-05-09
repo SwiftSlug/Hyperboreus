@@ -25,12 +25,13 @@ GameObject:
   - component: {fileID: 114523718404954064}
   - component: {fileID: 65423069425462566}
   - component: {fileID: 82315213178763210}
+  - component: {fileID: 208114211777194638}
   m_Layer: 0
   m_Name: RocksColoured (1)
   m_TagString: DestructibleScenery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4341413219790436
 Transform:
@@ -38,13 +39,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1997087205318912}
-  m_LocalRotation: {x: -0.6659531, y: 0.23771085, z: 0.23771085, w: 0.6659531}
-  m_LocalPosition: {x: -2155.9644, y: 0.70850575, z: 81.570724}
+  m_LocalRotation: {x: -0.50651383, y: 0.49340016, z: 0.49340016, w: 0.50651383}
+  m_LocalPosition: {x: -2150.4553, y: 0.42, z: 83.03}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 39.288002}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 88.497}
 --- !u!23 &23377542798412774
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -229,3 +230,18 @@ MonoBehaviour:
     i15: 132
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208114211777194638
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1997087205318912}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.04164857, y: 0.0632748, z: 0.01749058}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.007115017, y: -0.00260295, z: 0.01141767}
+  m_TimeToStationary: 0.5

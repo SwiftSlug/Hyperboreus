@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114537806729605902}
   - component: {fileID: 65076290168909982}
   - component: {fileID: 82127647810017652}
+  - component: {fileID: 208256130761650858}
   m_Layer: 0
   m_Name: Bus1Coloured
   m_TagString: DestructibleScenery
@@ -38,13 +39,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1777931900409970}
-  m_LocalRotation: {x: -0.22167344, y: 0.2222591, z: 0.6714619, w: -0.67126805}
-  m_LocalPosition: {x: -2331.89, y: 1.8705673, z: 140.33}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: -0.5}
+  m_LocalPosition: {x: -1823.42, y: 2.1, z: -164.62}
   m_LocalScale: {x: 163.45848, y: 599.9997, z: 150}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 359.95, y: -36.59, z: -90.00001}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: -36.59, z: 270}
 --- !u!23 &23112114119495200
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -235,3 +236,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 100
   audioSync: {fileID: 0}
+--- !u!208 &208256130761650858
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1777931900409970}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.011291, y: 0.010293795, z: 0.00999464}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.00003351597, y: 0.00001354096, z: -0.0012}
+  m_TimeToStationary: 0.5

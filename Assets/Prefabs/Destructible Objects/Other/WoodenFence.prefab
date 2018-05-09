@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114014360295762528}
   - component: {fileID: 82494749296981650}
   - component: {fileID: 65001236191534836}
+  - component: {fileID: 208583080570843820}
   m_Layer: 0
   m_Name: WoodenFence
   m_TagString: DestructibleScenery
@@ -38,8 +39,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027418766487222}
-  m_LocalRotation: {x: 0.7072303, y: 0.00000008940696, z: 0.000000103795976, w: -0.70698327}
-  m_LocalPosition: {x: -1998.7518, y: 1.3999518, z: -17.199911}
+  m_LocalRotation: {x: 0, y: 0.7072302, z: 0.7069834, w: 0}
+  m_LocalPosition: {x: -2313.6538, y: 1.523, z: 75.053}
   m_LocalScale: {x: 37.146233, y: 37.146233, z: 37.146233}
   m_Children: []
   m_Father: {fileID: 0}
@@ -229,3 +230,18 @@ MonoBehaviour:
     i15: 64
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208583080570843820
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1027418766487222}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.024511956, y: 0.002035733, z: 0.02142535}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.0000001359731, y: 0.0006205152, z: -0.0008166721}
+  m_TimeToStationary: 0.5

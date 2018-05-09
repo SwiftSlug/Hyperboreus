@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114246785224386476}
   - component: {fileID: 114125480966616774}
   - component: {fileID: 65927037919631450}
+  - component: {fileID: 208406137150366980}
   m_Layer: 0
   m_Name: MetalRailingsWithEnd1Colour
   m_TagString: DestructibleScenery
@@ -37,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1145861518138496}
-  m_LocalRotation: {x: -0.5000007, y: 0.4999993, z: 0.4999993, w: 0.5000007}
-  m_LocalPosition: {x: -2132.01, y: 2.31, z: 76.53}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -2137.885, y: 2.31, z: 105.92}
   m_LocalScale: {x: 10, y: 600, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,3 +148,18 @@ MonoBehaviour:
     i15: 102
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208406137150366980
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1145861518138496}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.01000004, y: 0.010000001, z: 0.20702705}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 9.313226e-10, y: 9.25185e-19, z: -0.1329731}
+  m_TimeToStationary: 0.5

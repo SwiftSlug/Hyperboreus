@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 114065218247598548}
   - component: {fileID: 114176807019056270}
   - component: {fileID: 65497671113512394}
+  - component: {fileID: 208756652850009664}
   m_Layer: 0
   m_Name: TrafficLight1Coloured
   m_TagString: DestructibleScenery
@@ -262,8 +263,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1570507007275490}
-  m_LocalRotation: {x: -0, y: -0.9950721, z: -0, w: 0.09915381}
-  m_LocalPosition: {x: -2362.8528, y: 0.049999952, z: -145.27443}
+  m_LocalRotation: {x: -0, y: 0.054811675, z: -0, w: 0.9984967}
+  m_LocalPosition: {x: -2341.3545, y: 0.049999952, z: -166.72685}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children:
   - {fileID: 4070175141495398}
@@ -276,7 +277,7 @@ Transform:
   - {fileID: 4806132102966666}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -168.619, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 6.2840004, z: 0}
 --- !u!4 &4806132102966666
 Transform:
   m_ObjectHideFlags: 1
@@ -680,3 +681,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 10
   audioSync: {fileID: 0}
+--- !u!208 &208756652850009664
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1570507007275490}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.15, y: 1.25, z: 0.15}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5

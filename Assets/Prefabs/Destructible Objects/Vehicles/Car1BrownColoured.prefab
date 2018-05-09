@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114697107483780506}
   - component: {fileID: 65405773253741438}
   - component: {fileID: 82250761589370894}
+  - component: {fileID: 208161371779698738}
   m_Layer: 0
   m_Name: Car1BrownColoured
   m_TagString: DestructibleScenery
@@ -113,8 +114,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1170600245856684}
-  m_LocalRotation: {x: -0, y: 0.7919967, z: -0, w: 0.61052525}
-  m_LocalPosition: {x: -2048.21, y: 1.6604818, z: -148.84}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1731.78, y: 1.6604818, z: -116.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4371160476085990}
@@ -122,7 +123,7 @@ Transform:
   - {fileID: 4095090441567714}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 104.745, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4661226629610720
 Transform:
   m_ObjectHideFlags: 1
@@ -414,3 +415,18 @@ MonoBehaviour:
     i15: 81
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208161371779698738
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1170600245856684}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.375, y: 1, z: 3.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 3.15}
+  m_TimeToStationary: 0.5

@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 65596490513202706}
   - component: {fileID: 114654016571515874}
   - component: {fileID: 114426074564205688}
+  - component: {fileID: 208805528202444002}
   m_Layer: 0
   m_Name: MiniGolfHut
   m_TagString: DestructibleScenery
@@ -469,3 +470,18 @@ MonoBehaviour:
     i15: 83
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208805528202444002
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1828662583451872}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5, y: 2.5, z: 3.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114388887690222874}
   - component: {fileID: 65823292958955840}
   - component: {fileID: 82416912516455792}
+  - component: {fileID: 208988326135633570}
   m_Layer: 0
   m_Name: LargeTree
   m_TagString: DestructibleScenery
@@ -122,7 +123,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1026575752939992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2226.7705, y: 4.610417, z: 22.357355}
+  m_LocalPosition: {x: -2222.7747, y: 4.610417, z: -113.899216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4997319423132168}
@@ -546,3 +547,18 @@ MonoBehaviour:
     i15: 209
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208988326135633570
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1026575752939992}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.625, y: 4, z: 0.625}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.425, y: 0.1, z: 0}
+  m_TimeToStationary: 0.5

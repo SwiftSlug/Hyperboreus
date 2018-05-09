@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114895759589900780}
   - component: {fileID: 65872890238241844}
   - component: {fileID: 82553929359165934}
+  - component: {fileID: 208384077237328108}
   m_Layer: 0
   m_Name: BandStand 1
   m_TagString: DestructibleScenery
@@ -1194,3 +1195,18 @@ MonoBehaviour:
   ResourceType: 1
   AmountOfResourceToDrop: 20
   audioSync: {fileID: 0}
+--- !u!208 &208384077237328108
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033005920168820}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 10, y: 2.5, z: 10}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 2.5, z: 0}
+  m_TimeToStationary: 0.5

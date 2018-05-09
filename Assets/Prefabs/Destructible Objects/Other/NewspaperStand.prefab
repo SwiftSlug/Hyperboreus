@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114022034399508666}
   - component: {fileID: 65025845554049050}
   - component: {fileID: 82622015655650112}
+  - component: {fileID: 208908147219441082}
   m_Layer: 0
   m_Name: NewspaperStand
   m_TagString: DestructibleScenery
@@ -134,8 +135,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1187482566679108}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2047.61, y: 1.55, z: -131.2}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -1766.2421, y: 1.5499998, z: -47.440002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4336043686880592}
@@ -579,3 +580,18 @@ MonoBehaviour:
     i15: 251
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208908147219441082
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187482566679108}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 1.5, z: 1.25}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

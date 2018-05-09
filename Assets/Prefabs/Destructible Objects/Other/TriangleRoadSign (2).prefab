@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114817381093437196}
   - component: {fileID: 114993434985754822}
   - component: {fileID: 82816817940732776}
+  - component: {fileID: 208084620823192920}
   m_Layer: 0
   m_Name: TriangleRoadSign (2)
   m_TagString: DestructibleScenery
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1333894095695522}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -2004.96, y: 0.05, z: -131.78}
+  m_LocalPosition: {x: -1788.61, y: 0.05, z: -131.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4421088986101528}
@@ -330,3 +331,18 @@ MonoBehaviour:
   ResourceType: 2
   AmountOfResourceToDrop: 5
   audioSync: {fileID: 0}
+--- !u!208 &208084620823192920
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1333894095695522}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.1, y: 1.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5

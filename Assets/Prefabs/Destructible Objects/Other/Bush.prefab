@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114237927829741274}
   - component: {fileID: 65525190811346868}
   - component: {fileID: 82445870684632802}
+  - component: {fileID: 208023785387196644}
   m_Layer: 0
   m_Name: Bush
   m_TagString: DestructibleScenery
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1450800657272898}
   m_LocalRotation: {x: -0.19724578, y: -0.34838632, z: 0.42489454, w: 0.8119025}
-  m_LocalPosition: {x: -2203.2285, y: 1.1199312, z: 42.95}
+  m_LocalPosition: {x: -2250.7332, y: 1.1199312, z: -106.69694}
   m_LocalScale: {x: 58.968002, y: 58.968006, z: 58.968006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -230,3 +231,18 @@ MonoBehaviour:
     i15: 18
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208023785387196644
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1450800657272898}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.013576985, y: 0.015239565, z: 0.01657846}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.0005320576, y: -0.0003832201, z: 0.0001474489}
+  m_TimeToStationary: 0.5

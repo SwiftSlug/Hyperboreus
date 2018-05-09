@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114041829893057928}
   - component: {fileID: 65404473857148462}
   - component: {fileID: 82439282544893378}
+  - component: {fileID: 208148023797505462}
   m_Layer: 0
   m_Name: RoadSigns
   m_TagString: DestructibleScenery
@@ -84,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1785824073384630}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -2004.5, y: 0.049999952, z: -166.66}
+  m_LocalPosition: {x: -1805.95, y: 0.049999952, z: -166.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4265910441915996}
@@ -330,3 +331,18 @@ MonoBehaviour:
     i15: 46
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!208 &208148023797505462
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1785824073384630}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.1, y: 1.25, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
+  m_TimeToStationary: 0.5

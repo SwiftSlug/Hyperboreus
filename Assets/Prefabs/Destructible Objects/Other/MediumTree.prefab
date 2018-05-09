@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114947684743082974}
   - component: {fileID: 65451753144977570}
   - component: {fileID: 82723572331790282}
+  - component: {fileID: 208005856614490962}
   m_Layer: 0
   m_Name: MediumTree
   m_TagString: DestructibleScenery
@@ -39,7 +40,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1016192763020204}
   m_LocalRotation: {x: -0.46715868, y: 0.5308134, z: 0.5308132, w: 0.46715882}
-  m_LocalPosition: {x: -2132.01, y: 5.3661995, z: -134.91998}
+  m_LocalPosition: {x: -2245.2383, y: 5.8161993, z: -114.54674}
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children: []
   m_Father: {fileID: 0}
@@ -230,3 +231,18 @@ MonoBehaviour:
   ResourceType: 0
   AmountOfResourceToDrop: 30
   audioSync: {fileID: 0}
+--- !u!208 &208005856614490962
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1016192763020204}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.003402509, y: 0.0033628135, z: 0.021504875}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.00003347487, y: 0.0005766418, z: -0.005076127}
+  m_TimeToStationary: 0.5

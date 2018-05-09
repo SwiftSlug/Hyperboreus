@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114645660146443850}
   - component: {fileID: 65237024226133780}
   - component: {fileID: 82814084185906820}
+  - component: {fileID: 208413301113213168}
   m_Layer: 0
   m_Name: BrickFenceColoured
   m_TagString: DestructibleScenery
@@ -83,15 +84,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1063653785587170}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -2150.8132, y: 1.37, z: 123.58}
+  m_LocalRotation: {x: -0, y: -0.7071037, z: -0, w: -0.7071099}
+  m_LocalPosition: {x: -2331.5293, y: 1.37, z: -98.040985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4104186925469062}
   - {fileID: 4666112262083042}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 449.999, z: 0}
 --- !u!4 &4666112262083042
 Transform:
   m_ObjectHideFlags: 1
@@ -330,3 +331,18 @@ MonoBehaviour:
   ResourceType: 1
   AmountOfResourceToDrop: 20
   audioSync: {fileID: 0}
+--- !u!208 &208413301113213168
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1063653785587170}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.375, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.35, y: 0.25, z: 0}
+  m_TimeToStationary: 0.5

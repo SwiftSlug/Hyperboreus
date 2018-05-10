@@ -305,7 +305,7 @@ public class AIDirector : NetworkBehaviour
                         if (!hitColliders[hits].CompareTag("floor"))
                         {
                             areaClear = false;
-                            Debug.Log("Collider = " + hitColliders[hits].name);
+                            //Debug.Log("Collider = " + hitColliders[hits].name);
                             //  Debug
                             if (shouldAICreateSpawnDebug)
                             {
@@ -565,7 +565,7 @@ public class AIDirector : NetworkBehaviour
             float xOffset = Random.Range(-spread, spread);   //  Random x offset
             float zOffset = Random.Range(-spread, spread);   //  Random y offset
 
-            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 10.0f, position.z + zOffset);    //  Generate spawn location
+            Vector3 spawnPosition = new Vector3(position.x + xOffset, position.y + 0.9f, position.z + zOffset);    //  Generate spawn location
 
             var spawnedEnemy = (GameObject)Instantiate(enemyToSpawn, spawnPosition, Quaternion.identity);   //  Create new AI units
             NetworkServer.Spawn(spawnedEnemy);  //  Add spawned unit to server list

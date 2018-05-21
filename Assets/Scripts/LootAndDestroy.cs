@@ -31,21 +31,6 @@ public class LootAndDestroy : NetworkBehaviour
         audioSync = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioSync>();
     }
 
-    [Command]
-    public void CmdDestroyObject() // destroy object on server
-    {
-        Destroy(this.gameObject, audioSync.clipArray[1].length);
-        audioSync.ResetSound();
-    }
-
-    [ClientRpc]
-    public void RpcDestroyObject() // destroy object on server
-    {
-        Destroy(this.gameObject, audioSync.clipArray[1].length);
-        audioSync.ResetSound();
-
-        CmdDestroyObject();
-    }
     public void Interacting()
     {
         if (DestroyOrLoot == 0)
@@ -59,7 +44,6 @@ public class LootAndDestroy : NetworkBehaviour
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodText.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodInInventory;
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodTextBackground.text = "" + PlayerDestroyingOrLooting.GetComponent<PlayerStats>().WoodInInventory;
                     PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdDestroyResource();
-                    RpcDestroyObject();
                     break;
                 case 1: //stone
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneInInventory = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().StoneInInventory + AmountOfResourceToDrop;
@@ -83,23 +67,23 @@ public class LootAndDestroy : NetworkBehaviour
             {
                 case 0: //pistol
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().pistolAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().pistolAmmo + AmountOfAmmoToDrop; // give 
-                    CmdDestroyObject();
+                    PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdDestroyResource();
                     break;
                 case 1: //rifle
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().rifleAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().rifleAmmo + AmountOfAmmoToDrop;
-                    CmdDestroyObject();
+                    PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdDestroyResource();
                     break;
                 case 2: // shotgun
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().shotgunAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().shotgunAmmo + AmountOfAmmoToDrop;
-                    CmdDestroyObject();
+                    PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdDestroyResource();
                     break;
                 case 3: //sniper
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().sniperAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().sniperAmmo + AmountOfAmmoToDrop;
-                    CmdDestroyObject();
+                    PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdDestroyResource();
                     break;
                 case 4: //rocket launcher
                     PlayerDestroyingOrLooting.GetComponent<PlayerStats>().rocketAmmo = PlayerDestroyingOrLooting.GetComponent<PlayerStats>().rocketAmmo + AmountOfAmmoToDrop;
-                    CmdDestroyObject();
+                    PlayerDestroyingOrLooting.GetComponent<PlayerController>().CmdDestroyResource();
                     break;
             }
         }

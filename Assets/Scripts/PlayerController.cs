@@ -193,10 +193,12 @@ public class PlayerController : NetworkBehaviour
     {
         if (AbleToDestroy == true)
         {
+            AbleToDestroy = false;
             DamageAsset();
         }
         if (AbleToLoot == true)
         {
+            AbleToLoot = false;
             LootableAmmo();
         }
     }
@@ -210,33 +212,6 @@ public class PlayerController : NetworkBehaviour
             AssetToDestroy.GetComponent<LootAndDestroy>().audioSync.ResetSound();
         }
     }
-
-    /*public void testGatheringResource()
-    {
-        int localResourceType;
-        int localResourceAmount;
-        if (AssetToDestroy != null)
-        {
-            localResourceType = AssetToDestroy.GetComponent<LootAndDestroy>().ResourceType;
-            localResourceAmount = AssetToDestroy.GetComponent<LootAndDestroy>().AmountOfResourceToDrop;
-
-            switch (localResourceType)
-            {
-                case 0:
-                    gameObject.GetComponent<PlayerStats>().WoodInInventory = gameObject.GetComponent<PlayerStats>().WoodInInventory + localResourceAmount;
-                    CmdDestroyResource();
-                    break;
-                case 1:
-                    gameObject.GetComponent<PlayerStats>().StoneInInventory = gameObject.GetComponent<PlayerStats>().StoneInInventory + localResourceAmount;
-                    CmdDestroyResource();
-                    break;
-                case 2:
-                    gameObject.GetComponent<PlayerStats>().MetalInInventory = gameObject.GetComponent<PlayerStats>().MetalInInventory + localResourceAmount;
-                    CmdDestroyResource();
-                    break;
-            }
-        }
-    }*/
 
     public void AddHoritonzalMovement(float horizontal)
     {
@@ -296,10 +271,8 @@ public class PlayerController : NetworkBehaviour
     
     public void DamageAsset()
     {
-        //AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         if (AssetToDestroy != null)
         {
-            //AssetToDestroy.GetComponent<LootAndDestroy>().Interacting();
             AssetToDestroy.GetComponent<LootAndDestroy>().Interacting();
         }
     }
@@ -307,30 +280,10 @@ public class PlayerController : NetworkBehaviour
     
     public void LootableAmmo()
     {
-        //AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         if (AssetToLoot != null)
         {
             AssetToLoot.GetComponent<LootAndDestroy>().Interacting();
         }
-    }
-
-    [Command]
-    public void CmdResetStats()
-    {
-        AbleToLoot = false;
-        AbleToDestroy = false;
-        AssetToLoot = null;
-        AssetToDestroy = null;
-        RpcResetStats();
-    }
-
-    [ClientRpc]
-    public void RpcResetStats()
-    {
-        AbleToLoot = false;
-        AbleToDestroy = false;
-        AssetToLoot = null;
-        AssetToDestroy = null;
     }
 
     void Move(Vector3 move)

@@ -193,13 +193,50 @@ public class PlayerController : NetworkBehaviour
     {
         if (AbleToDestroy == true)
         {
-            CmdDamageAsset();
+            DamageAsset();
         }
         if (AbleToLoot == true)
         {
-            CmdLootableAmmo();
+            LootableAmmo();
         }
     }
+
+    [Command]
+    public void CmdDestroyResource()
+    {
+        if (AssetToDestroy != null)
+        {
+            Destroy(AssetToDestroy, AssetToDestroy.GetComponent<LootAndDestroy>().audioSync.clipArray[1].length);
+            AssetToDestroy.GetComponent<LootAndDestroy>().audioSync.ResetSound();
+        }
+    }
+
+    /*public void testGatheringResource()
+    {
+        int localResourceType;
+        int localResourceAmount;
+        if (AssetToDestroy != null)
+        {
+            localResourceType = AssetToDestroy.GetComponent<LootAndDestroy>().ResourceType;
+            localResourceAmount = AssetToDestroy.GetComponent<LootAndDestroy>().AmountOfResourceToDrop;
+
+            switch (localResourceType)
+            {
+                case 0:
+                    gameObject.GetComponent<PlayerStats>().WoodInInventory = gameObject.GetComponent<PlayerStats>().WoodInInventory + localResourceAmount;
+                    CmdDestroyResource();
+                    break;
+                case 1:
+                    gameObject.GetComponent<PlayerStats>().StoneInInventory = gameObject.GetComponent<PlayerStats>().StoneInInventory + localResourceAmount;
+                    CmdDestroyResource();
+                    break;
+                case 2:
+                    gameObject.GetComponent<PlayerStats>().MetalInInventory = gameObject.GetComponent<PlayerStats>().MetalInInventory + localResourceAmount;
+                    CmdDestroyResource();
+                    break;
+            }
+        }
+    }*/
 
     public void AddHoritonzalMovement(float horizontal)
     {
@@ -256,18 +293,19 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdDamageAsset()
+    
+    public void DamageAsset()
     {
         //AssetToDestroy.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         if (AssetToDestroy != null)
         {
+            //AssetToDestroy.GetComponent<LootAndDestroy>().Interacting();
             AssetToDestroy.GetComponent<LootAndDestroy>().Interacting();
         }
     }
 
-    [Command]
-    public void CmdLootableAmmo()
+    
+    public void LootableAmmo()
     {
         //AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
         if (AssetToLoot != null)

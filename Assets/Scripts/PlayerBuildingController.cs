@@ -29,8 +29,11 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public bool blep = true;
 
-    public int StructureNeeded = 0;
-    public int MaterialNeeded = 0;
+
+    public int ServerStructureNeeded = 0;
+    public int ServerMaterialNeeded = 0;
+    private int localStructureNeeded = 0;
+    private int localMaterialNeeded = 0;
     public int RotationNeeded = 0;
     public float RotationToSet = 0;
 
@@ -59,19 +62,19 @@ public class PlayerBuildingController : NetworkBehaviour
         {
             InbuildMode = true;
 
-            if (MaterialNeeded == 0)
+            if (localMaterialNeeded == 0)
             {
                 WoodSelector.enabled = true;
                 WoodResourceColour.enabled = true;
                 WoodResourceNoColour.enabled = false;
             }
-            else if (MaterialNeeded == 1)
+            else if (localMaterialNeeded == 1)
             {
                 StoneSelector.enabled = true;
                 StoneResourceColour.enabled = true;
                 StoneResourceNoColour.enabled = false;
             }
-            else if (MaterialNeeded == 2)
+            else if (localMaterialNeeded == 2)
             {
                 MetalSelector.enabled = true;
                 MetalResourceColour.enabled = true;
@@ -82,7 +85,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
             TempStructureGuide = Instantiate(StructureSpawnerRef, PointToSpawnStructure.position, PointToSpawnStructure.rotation);
             TempStructureGuide.transform.eulerAngles = new Vector3(0, RotationToSet, 0);
-            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(localStructureNeeded, localMaterialNeeded);
         }
     }
 
@@ -93,7 +96,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
         NetworkSpawnedStructure = (GameObject)Instantiate(TempStructureGuide, PointToSpawnStructure.position, TempStructureGuide.transform.rotation); //GetComponent<Transform>().rotation);
         NetworkServer.Spawn(NetworkSpawnedStructure);
-        NetworkSpawnedStructure.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+        NetworkSpawnedStructure.GetComponent<BuildingController>().RpcSetMaterialAndStructure(ServerStructureNeeded, ServerMaterialNeeded);
         NetworkSpawnedStructure.GetComponent<BuildingController>().StructurePlaced = true;
     }
 
@@ -111,14 +114,14 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdSelectStructure()
     {
-        if (StructureNeeded == 2)
+        if (ServerStructureNeeded == 2)
         {
-            StructureNeeded = 0;
+            ServerStructureNeeded = 0;
             //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
         else
         {
-            StructureNeeded = StructureNeeded + 1;
+            ServerStructureNeeded = ServerStructureNeeded + 1;
             //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
     }
@@ -126,9 +129,9 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdSelectMaterial()
     {
-        if (MaterialNeeded == 2)
+        if (ServerMaterialNeeded == 2)
         {
-            MaterialNeeded = 0;
+            ServerMaterialNeeded = 0;
             //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
             // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
 
@@ -136,7 +139,7 @@ public class PlayerBuildingController : NetworkBehaviour
         }
         else
         {
-            MaterialNeeded = MaterialNeeded + 1;
+            ServerMaterialNeeded = ServerMaterialNeeded + 1;
             //TempStructureGuide.GetComponent<BuildingController>().RpcSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
             // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
         }
@@ -144,24 +147,24 @@ public class PlayerBuildingController : NetworkBehaviour
 
     void LocalSelectStructure()
     {
-        if (StructureNeeded == 2)
+        if (localStructureNeeded == 2)
         {
-            StructureNeeded = 0;
-            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            localStructureNeeded = 0;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(localStructureNeeded, localMaterialNeeded);
         }
         else
         {
-            StructureNeeded = StructureNeeded + 1;
-            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            localStructureNeeded = localStructureNeeded + 1;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(localStructureNeeded, localMaterialNeeded);
         }
     }
 
     void LocalSelectMaterial()
     {
-        if (MaterialNeeded == 2)
+        if (localMaterialNeeded == 2)
         {
-            MaterialNeeded = 0;
-            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            localMaterialNeeded = 0;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(localStructureNeeded, localMaterialNeeded);
             // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
 
             WoodSelector.enabled = true;
@@ -177,11 +180,11 @@ public class PlayerBuildingController : NetworkBehaviour
         }
         else
         {
-            MaterialNeeded = MaterialNeeded + 1;
-            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
+            localMaterialNeeded = localMaterialNeeded + 1;
+            TempStructureGuide.GetComponent<BuildingController>().LocalSetMaterialAndStructure(localStructureNeeded, localMaterialNeeded);
             // LocalSetMaterialAndStructure(StructureNeeded, MaterialNeeded);
 
-            if (MaterialNeeded == 1)
+            if (localMaterialNeeded == 1)
             {
                 StoneSelector.enabled = true;
                 StoneResourceColour.enabled = true;
@@ -194,7 +197,7 @@ public class PlayerBuildingController : NetworkBehaviour
                 MetalResourceColour.enabled = false;
                 MetalResourceNoColour.enabled = true;
             }
-            else if (MaterialNeeded == 2)
+            else if (localMaterialNeeded == 2)
             {
                 MetalSelector.enabled = true;
                 MetalResourceColour.enabled = true;
@@ -258,7 +261,7 @@ public class PlayerBuildingController : NetworkBehaviour
     {
         if ((InbuildMode == true))
         {
-            switch (MaterialNeeded)
+            switch (localMaterialNeeded)
             {
                 case 0:
                     if (gameObject.GetComponent<PlayerStats>().WoodInInventory >= 10)
@@ -322,7 +325,7 @@ public class PlayerBuildingController : NetworkBehaviour
         if (InbuildMode == true)
         {
             CmdSelectStructure();
-            LocalSelectStructure();
+            //LocalSelectStructure();
         }
     }
 

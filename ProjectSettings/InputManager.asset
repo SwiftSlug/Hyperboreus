@@ -345,10 +345,10 @@ InputManager:
     m_Name: BuildingChangeStructure
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 2
+    negativeButton: 
     positiveButton: 
     altNegativeButton: 
-    altPositiveButton: joystick button 4
+    altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000

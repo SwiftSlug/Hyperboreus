@@ -99,7 +99,6 @@ public class BuildingController : NetworkBehaviour
         else if (StructureValue == 1) //else if (LocalNeededStructure == 1)
         {
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
             if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
@@ -122,7 +121,6 @@ public class BuildingController : NetworkBehaviour
         else if (StructureValue == 2) //else if (LocalNeededStructure == 2)
         {
             gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
-
             gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
             gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
             if (MaterialValue == 0) //             if (LocalNeededMaterial == 0)

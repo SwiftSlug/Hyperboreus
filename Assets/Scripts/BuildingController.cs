@@ -60,178 +60,61 @@ public class BuildingController : NetworkBehaviour
     [ClientRpc]
     public void RpcSetMaterialAndStructure(int StructureValue, int MaterialValue)
     {
-        Debug.Log("BuildingController: RpcSetMaterialAndStructure");
-
-        //LocalNeededStructure = LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded;
-        //LocalNeededMaterial = LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded;
-
-        if (StructureValue == 0) //if (LocalNeededStructure == 0)
-        {
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-            gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-
-            if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
-            {
-                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true; // set wall visible
-                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-                Hitpoints = 100;
-            }
-            else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
-            {
-                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
-                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-                Hitpoints = 200;
-            }
-            else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
-            {
-                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
-                gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
-                gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-                gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
-                Hitpoints = 300;
-            }
-        }
-        else if (StructureValue == 1) //else if (LocalNeededStructure == 1)
-        {
-            gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-            if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
-            {
-                //gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorWoodMat;
-                Hitpoints = 100;
-            }
-            else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
-            {
-                //gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorStoneMat;
-                Hitpoints = 200;
-            }
-            else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
-
-            {
-                //gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorMetalMat;
-                Hitpoints = 300;
-            }
-        }
-        else if (StructureValue == 2) //else if (LocalNeededStructure == 2)
-        {
-            gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            if (MaterialValue == 0) //             if (LocalNeededMaterial == 0)
-
-            {
-                //gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorWoodMat;
-                Hitpoints = 100;
-            }
-            else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
-            {
-                //gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorStoneMat;
-                Hitpoints = 200;
-            }
-            else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
-            {
-                //gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorMetalMat;
-                Hitpoints = 300;
-            }
-        }
+        ChangeStructureOrMaterial(StructureValue, MaterialValue);
     }
 
     public void LocalSetMaterialAndStructure(int StructureValue, int MaterialValue)
     {
-        Debug.Log("BuildingController: LocalSetMaterialAndStructure");
+        ChangeStructureOrMaterial(StructureValue, MaterialValue);
+    }
 
-        //LocalNeededStructure = LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded;
-        //LocalNeededMaterial = LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded;
+    public void LocalSetRotation(float Rotation)
+    {
+        gameObject.transform.eulerAngles = new Vector3(0, Rotation, 0);
+    }
 
-        if (StructureValue == 0) //if (LocalNeededStructure == 0)
+    void ChangeStructureOrMaterial(int StructureValue, int MaterialValue)
+    {
+        if (StructureValue == 0) //check if wall is needed
         {
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-            gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-            if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
+
+            if (MaterialValue == 0) // check if wood is needed, if it is then disable renderers for non wood wall models
             {
-                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallWoodMat;
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true; // set wall visible
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                 Hitpoints = 100;
             }
-            else if (MaterialValue == 1) // else if (LocalNeededMaterial == 1)
+            else if (MaterialValue == 1) // check if stone is needed, if it is then disable renderers for non stone wall models
             {
-                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallStoneMat;
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
                 Hitpoints = 200;
             }
-            else if (MaterialValue == 2) //else if (LocalNeededMaterial == 2)
+            else if (MaterialValue == 2) // check if metal is needed, if it is then disable renderers for non metal wall models
             {
-                //gameObject.transform.GetChild(0).GetComponent<Renderer>().material = WallMetalMat;
                 gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false; // set wall visible
                 gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
                 gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
                 Hitpoints = 300;
             }
         }
-        else if (StructureValue == 1) //else if (LocalNeededStructure == 1)
+        if (StructureValue == 1) // //check if gate is needed
         {
-            gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = true;
-
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = false;
-            if (MaterialValue == 0) //if (LocalNeededMaterial == 0)
+            if (MaterialValue == 0)
             {
-                //gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorWoodMat;
-                Hitpoints = 100;
+                // check if wood is needed, if it is then disable renderers for non wood gate models
             }
-            else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
+            else if (MaterialValue == 1)
             {
-               //gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorStoneMat;
-                Hitpoints = 200;
+                // check if stone is needed, if it is then disable renderers for non stone gate models
             }
-            else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
-
+            else if (MaterialValue == 2)
             {
-                //gameObject.transform.GetChild(1).GetComponent<Renderer>().material = FloorMetalMat;
-                Hitpoints = 300;
+                // check if metal is needed, if it is then disable renderers for non metal gate models
             }
         }
-        else if (StructureValue == 2) //else if (LocalNeededStructure == 2)
-        {
-            gameObject.transform.GetChild(2).GetComponent<Renderer>().enabled = true;
-
-            gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            gameObject.transform.GetChild(1).GetComponent<Renderer>().enabled = false;
-            if (MaterialValue == 0) //             if (LocalNeededMaterial == 0)
-
-            {
-                //gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorWoodMat;
-                Hitpoints = 100;
-            }
-            else if (MaterialValue == 1) //            else if (LocalNeededMaterial == 1)
-            {
-               //gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorStoneMat;
-                Hitpoints = 200;
-            }
-            else if (MaterialValue == 2) //            else if (LocalNeededMaterial == 2)
-            {
-                //gameObject.transform.GetChild(2).GetComponent<Renderer>().material = DoorMetalMat;
-                Hitpoints = 300;
-            }
-        }
-    }
-
-    public void LocalSetRotation(float Rotation)
-    {
-        Debug.Log("BuildingController: LocalSetRotation");
-
-        gameObject.transform.eulerAngles = new Vector3(0, Rotation, 0);
     }
 
 }

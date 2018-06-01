@@ -44,7 +44,7 @@ public class DetectBuildingDecision : Decision
         foreach (Collider hit in hitColliders)
         {
             //Debug.Log(hit.name);
-            if (hit.gameObject.GetComponentInParent<TestBuildingController>())
+            if (hit.gameObject.GetComponentInParent<BuildingController>())
             {
                 //Debug.Log("Building set as AI target by DetectBuildingDecision");
 

@@ -17,7 +17,7 @@ public class TargetSetDecision : Decision
         if (controller.target != false)
         {
             
-            if (controller.target.GetComponent<PlayerStats>() || controller.target.GetComponent<TestBuildingController>())
+            if (controller.target.GetComponent<PlayerStats>() || controller.target.GetComponent<BuildingController>())
             {
                 return true;
             }

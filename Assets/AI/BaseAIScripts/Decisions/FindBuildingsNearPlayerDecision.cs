@@ -37,7 +37,7 @@ public class FindBuildingsNearPlayerDecision : Decision
 
         //Debug.Log()
 
-        if (controller.target.GetComponent<TestBuildingController>())
+        if (controller.target.GetComponent<BuildingController>())
         {
             return true;
         }

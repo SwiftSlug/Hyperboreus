@@ -59,7 +59,7 @@ public class AttackWithJumpAction : Action
             }
         }
         //  AI attack for buildings
-        else if (controller.target.GetComponent<TestBuildingController>())
+        else if (controller.target.GetComponent<BuildingController>())
         {
             //Debug.Log("Targetted building for attack");
             if (distanceToTarget < controller.buildingAttackDistance)
@@ -68,7 +68,7 @@ public class AttackWithJumpAction : Action
                 if (Time.time > (controller.lastAttack + controller.attackCooldown))
                 {
                     //  Call attack after cooldown
-                    controller.target.GetComponent<TestBuildingController>().CmdDamage(controller.attackDamage);
+                    controller.target.GetComponent<BuildingController>().CmdDamage(controller.attackDamage);
                     controller.lastAttack = Time.time;
                     //Debug.Log("Damage Called on building !");
                 }

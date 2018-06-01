@@ -36,10 +36,10 @@ public class TargetDeadDecision : Decision
                 return false;
             }
         }
-        else if (controller.target.GetComponent<TestBuildingController>())
+        else if (controller.target.GetComponent<BuildingController>())
         {
             //  Target is a building
-            if(controller.target.GetComponent<TestBuildingController>().hitPoints <= 0)
+            if(controller.target.GetComponent<BuildingController>().Hitpoints <= 0)
             {
                 //  Target was a building so set target back to previously targeted player if possible
 

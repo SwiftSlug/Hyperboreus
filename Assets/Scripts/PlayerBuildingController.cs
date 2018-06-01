@@ -342,7 +342,7 @@ public class PlayerBuildingController : NetworkBehaviour
         //LocalSelectMaterial();
         //LocalRotateStructure(0);
 
-        Debug.Log("I'm working");
+        //Debug.Log("I'm working");
     }
 
     void Update()

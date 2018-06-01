@@ -380,7 +380,7 @@ public class AIDirector : NetworkBehaviour
                                             //  Area already found so ignore other hits
                                             break;
                                         }
-                                        if (hit.gameObject.GetComponentInParent<TestBuildingController>())
+                                        if (hit.gameObject.GetComponentInParent<BuildingController>())
                                         {
                                             //Debug.Log("Director Found a building !");
 
@@ -713,7 +713,7 @@ public class AIDirector : NetworkBehaviour
             foreach (Collider hit in hitColliders)
             {
 
-                if (hit.gameObject.GetComponentInParent<TestBuildingController>())
+                if (hit.gameObject.GetComponentInParent<BuildingController>())
                 {
                     //  Found a building object near the player
 

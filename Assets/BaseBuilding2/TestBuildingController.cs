@@ -24,10 +24,10 @@ public class TestBuildingController : NetworkBehaviour
     [SyncVar]
     public int hitPoints = 100;
 
-    //Client Functions
-    //ChooseStructureAndMaterial
     public void RpcChooseStructureAndMaterial(int StructureChoice, int MaterialChoice)
     {
+        Debug.Log("TestBuildingController: RpcChooseStructureAndMaterial");
+
         LocalStructureChoice = StructureChoice;
         LocalMaterialChoice = MaterialChoice;
 
@@ -109,6 +109,8 @@ public class TestBuildingController : NetworkBehaviour
     //Local Functions
     public void LocalChooseStructureAndMaterial(int StructureChoice, int MaterialChoice)
     {
+        Debug.Log("TestBuildingController: LocalChooseStructureAndMaterial");
+
         LocalStructureChoice = StructureChoice;
         LocalMaterialChoice = MaterialChoice;
 
@@ -203,6 +205,8 @@ public class TestBuildingController : NetworkBehaviour
     [Command]
     public void CmdDamage(int amount)
     {
+        Debug.Log("TestBuildingController: CmdDamage");
+
         if (!isServer)
         {
             return;

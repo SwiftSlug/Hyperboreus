@@ -39,9 +39,29 @@ public class BuildingController : NetworkBehaviour
     void Update()
     {
     }
+
+    [Command]
+    public void CmdDamage(int amount)
+    {
+        Debug.Log("BuildingController: CmdDamage");
+        if (!isServer)
+        {
+            return;
+        }
+
+        Hitpoints -= amount;
+
+        if (Hitpoints <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     [ClientRpc]
     public void RpcSetMaterialAndStructure(int StructureValue, int MaterialValue)
     {
+        Debug.Log("BuildingController: RpcSetMaterialAndStructure");
+
         //LocalNeededStructure = LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded;
         //LocalNeededMaterial = LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded;
 
@@ -126,6 +146,8 @@ public class BuildingController : NetworkBehaviour
 
     public void LocalSetMaterialAndStructure(int StructureValue, int MaterialValue)
     {
+        Debug.Log("BuildingController: LocalSetMaterialAndStructure");
+
         //LocalNeededStructure = LinkedPlayer.GetComponent<PlayerBuildingController>().StructureNeeded;
         //LocalNeededMaterial = LinkedPlayer.GetComponent<PlayerBuildingController>().MaterialNeeded;
 
@@ -209,24 +231,9 @@ public class BuildingController : NetworkBehaviour
 
     public void LocalSetRotation(float Rotation)
     {
+        Debug.Log("BuildingController: LocalSetRotation");
+
         gameObject.transform.eulerAngles = new Vector3(0, Rotation, 0);
-    }
-
-
-    [Command]
-    public void CmdDamage(int amount)
-    {
-        if (!isServer)
-        {
-            return;
-        }
-
-        Hitpoints -= amount;
-
-        if (Hitpoints <= 0 )
-        {
-            Destroy(this.gameObject);
-        }
     }
 
 }

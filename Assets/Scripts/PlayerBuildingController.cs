@@ -39,6 +39,8 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void EnterOrExitBuildMode()
     {
+        Debug.Log("PlayerBuildingController: EnterOrExitBuildMode");
+
         if (InbuildMode == true)
         {
             InbuildMode = false;
@@ -92,6 +94,8 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdPlaceStructure()
     {
+        Debug.Log("PlayerBuildingController: CmdPlaceStructure");
+
         audioSource.PlayOneShot(clipBuildStructure, 1.0f);
 
         NetworkSpawnedStructure = (GameObject)Instantiate(TempStructureGuide, PointToSpawnStructure.position, TempStructureGuide.transform.rotation); //GetComponent<Transform>().rotation);
@@ -103,17 +107,15 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdRotateStructure(float Rotation)
     {
+        Debug.Log("PlayerBuildingController: CmdRotateStructure");
         TempStructureGuide.transform.eulerAngles = new Vector3(0, Rotation, 0);
-    }
-
-    void LocalRotateStructure(float Rotation)
-    {
-        TempStructureGuide.GetComponent<BuildingController>().LocalSetRotation(Rotation);
     }
 
     [Command]
     void CmdSelectStructure()
     {
+        Debug.Log("PlayerBuildingController: CmdSelectStructure");
+
         if (ServerStructureNeeded == 2)
         {
             ServerStructureNeeded = 0;
@@ -129,6 +131,8 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdSelectMaterial()
     {
+        Debug.Log("PlayerBuildingController: CmdSelectMaterial");
+
         if (ServerMaterialNeeded == 2)
         {
             ServerMaterialNeeded = 0;
@@ -145,8 +149,17 @@ public class PlayerBuildingController : NetworkBehaviour
         }
     }
 
+    void LocalRotateStructure(float Rotation)
+    {
+        Debug.Log("PlayerBuildingController: LocalRotateStructure");
+
+        TempStructureGuide.GetComponent<BuildingController>().LocalSetRotation(Rotation);
+    }
+
     void LocalSelectStructure()
     {
+        Debug.Log("PlayerBuildingController: LocalSelectStructure");
+
         if (localStructureNeeded == 2)
         {
             localStructureNeeded = 0;
@@ -161,6 +174,8 @@ public class PlayerBuildingController : NetworkBehaviour
 
     void LocalSelectMaterial()
     {
+        Debug.Log("PlayerBuildingController: LocalSelectMaterial");
+
         if (localMaterialNeeded == 2)
         {
             localMaterialNeeded = 0;
@@ -213,52 +228,10 @@ public class PlayerBuildingController : NetworkBehaviour
         }
     }
 
-    // Use this for initialization
-    void Awake()
-    {
-        PlayerReference = gameObject;
-        StructureSpawnerRef.GetComponent<BuildingController>().LinkedPlayer = PlayerReference;
-
-        WoodResourceColour.enabled = false;
-        StoneResourceColour.enabled = false;
-        MetalResourceColour.enabled = false;
-        WoodResourceNoColour.enabled = true;
-        StoneResourceNoColour.enabled = true;
-        MetalResourceNoColour.enabled = true;
-        WoodSelector.enabled = false;
-        StoneSelector.enabled = false;
-        MetalSelector.enabled = false;
-
-        //Debug.Log("I'm not using the test script");
-
-    }
-
-    private void Start()
-    {
-        //LocalSelectStructure();
-        //LocalSelectMaterial();
-        //LocalRotateStructure(0);
-
-        Debug.Log("I'm working");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
-        if (TempStructureGuide != null)
-        {
-            TempStructureGuide.transform.position = PointToSpawnStructure.position;
-
-        }
-    }
-
     public void PlaceBuilding()
     {
+        Debug.Log("PlayerBuildingController: PlaceBuilding");
+
         if ((InbuildMode == true))
         {
             switch (localMaterialNeeded)
@@ -296,6 +269,8 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void ChangeRotation()
     {
+        Debug.Log("PlayerBuildingController: ChangeRotation");
+
         if (!isLocalPlayer)
         {
             return;
@@ -322,6 +297,8 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void ChangeStructure()
     {
+        Debug.Log("PlayerBuildingController: ChangeStructure");
+
         if (InbuildMode == true)
         {
             CmdSelectStructure();
@@ -331,6 +308,8 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void ChangeMaterial()
     {
+        Debug.Log("PlayerBuildingController: ChangeMaterial");
+
         if (InbuildMode == true)
         {
             CmdSelectMaterial();
@@ -338,5 +317,46 @@ public class PlayerBuildingController : NetworkBehaviour
         }
     }
 
+    void Awake()
+    {
+        PlayerReference = gameObject;
+        StructureSpawnerRef.GetComponent<BuildingController>().LinkedPlayer = PlayerReference;
+
+        WoodResourceColour.enabled = false;
+        StoneResourceColour.enabled = false;
+        MetalResourceColour.enabled = false;
+        WoodResourceNoColour.enabled = true;
+        StoneResourceNoColour.enabled = true;
+        MetalResourceNoColour.enabled = true;
+        WoodSelector.enabled = false;
+        StoneSelector.enabled = false;
+        MetalSelector.enabled = false;
+
+        //Debug.Log("I'm not using the test script");
+
+    }
+
+    private void Start()
+    {
+        //LocalSelectStructure();
+        //LocalSelectMaterial();
+        //LocalRotateStructure(0);
+
+        Debug.Log("I'm working");
+    }
+
+    void Update()
+    {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+        if (TempStructureGuide != null)
+        {
+            TempStructureGuide.transform.position = PointToSpawnStructure.position;
+
+        }
+    }
 }
 

@@ -1,30 +1,27 @@
 fileFormatVersion: 2
-guid: 1430139c82c4fce47908738aa2feea46
-timeCreated: 1528111926
+guid: 9996cae2fcd57d24da8eaa3b7d0717f0
+timeCreated: 1528114294
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Camera
-    100002: Cube.018
-    100004: Lamp
-    100006: //RootNode
-    400000: Camera
-    400002: Cube.018
-    400004: Lamp
-    400006: //RootNode
-    2000000: Camera
+    100000: //RootNode
+    400000: //RootNode
     2100000: Material.006
-    2300000: Cube.018
-    3300000: Cube.018
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: Cube.018
-    10800000: Lamp
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 8215b2821114cd9468d91fbe5c66e976, type: 2}
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 2
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

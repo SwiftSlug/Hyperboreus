@@ -302,7 +302,7 @@ public class PlayerBuildingController : NetworkBehaviour
         if (InbuildMode == true)
         {
             CmdSelectStructure();
-            //LocalSelectStructure();
+            LocalSelectStructure();
         }
     }
 

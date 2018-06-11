@@ -16,6 +16,8 @@ TagManager:
   - floor
   - DayNightController
   - Director
+  - Structure
+  - TestAsset
   layers:
   - Default
   - TransparentFX

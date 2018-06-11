@@ -12,10 +12,18 @@ public class PlayerController : NetworkBehaviour
     public bool AbleToLoot = false;
 
     [SyncVar]
+    public bool AbleToInteractStruc = false;
+
+    [SyncVar]
     public GameObject AssetToDestroy;
 
     [SyncVar]
     public GameObject AssetToLoot;
+
+    [SyncVar]
+    public GameObject StructureToInteract;
+
+    public int tempStructure;
 
     Vector3 previousMousePos = new Vector3(0.0f, 0.0f, 0.0f);
 
@@ -203,6 +211,31 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    public void StructureInteraction()
+    {
+        if (AbleToInteractStruc == true)
+        {
+            int tempMaterial;
+            tempMaterial = StructureToInteract.GetComponent<BuildingController>().LocalNeededMaterial;
+            tempStructure = StructureToInteract.GetComponent<BuildingController>().LocalNeededStructure;
+
+            Debug.Log("Temp structure value: " + tempStructure);
+
+            switch (tempStructure)
+            {
+                case 0:
+                    StructureToInteract.GetComponent<BuildingController>().CmdDamage(500);
+                    StructureToInteract = null;
+                    AbleToInteractStruc = false;
+                    break;
+                case 1:
+                    //Debug.Log("PlayerController: InteractWithGate");
+                   // Debug.Log("Animating gate...");
+                    break;
+            }            
+        }
+    }
+
     [Command]
     public void CmdDestroyResource()
     {
@@ -225,7 +258,6 @@ public class PlayerController : NetworkBehaviour
         transform.Translate(Vector3.forward * yAxis, Space.World);
     }
 
-
     private void OnCollisionEnter(Collision collidedAsset)
     {
         //destroyable asset start collision
@@ -241,6 +273,16 @@ public class PlayerController : NetworkBehaviour
             AbleToLoot = true;
             AssetToLoot = collidedAsset.gameObject;
             AssetToLoot.GetComponent<LootAndDestroy>().PlayerDestroyingOrLooting = gameObject;
+        }
+    }
+
+    private void OnTriggerEnter(Collider collidedAsset)
+    {
+        if (collidedAsset.gameObject.CompareTag("Structure"))
+        {
+            Debug.Log("you're colliding with a structure");
+            AbleToInteractStruc = true;
+            StructureToInteract = collidedAsset.gameObject;
         }
     }
 
@@ -268,7 +310,19 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    
+    private void OnTriggerExit(Collider collidedAsset)
+    {
+        if (collidedAsset.gameObject.CompareTag("Structure"))
+        {
+            if (StructureToInteract != null)
+            {
+                Debug.Log("you're no longer colliding with a structure");
+                AbleToInteractStruc = false;
+                StructureToInteract = null;
+            }
+        }
+    }
+
     public void DamageAsset()
     {
         if (AssetToDestroy != null)
@@ -277,7 +331,6 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    
     public void LootableAmmo()
     {
         if (AssetToLoot != null)

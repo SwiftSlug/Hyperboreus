@@ -387,10 +387,18 @@ public class InputController : NetworkBehaviour
 
         if (Input.GetButton("Interact"))
         {
-            playerControllerScript.LootObject();
+            if (playerControllerScript.AbleToInteractStruc == true)
+            {
+                Debug.Log("InputController: StructureInteraction");
+                playerControllerScript.StructureInteraction();
+            }
+            else if (playerControllerScript.AbleToDestroy == true || playerControllerScript.AbleToLoot == true)
+            {
+                Debug.Log("InputController: Loot/Destroy interaction");
+                playerControllerScript.LootObject();
+            }
 
         }
-
 
         //  Skill abilities ---------------------------------------------------
 

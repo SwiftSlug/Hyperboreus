@@ -745,8 +745,6 @@ public class AIDirector : NetworkBehaviour
 
                             playerBuildingTargets[playerNumber].Add(hit.transform.parent.gameObject);
 
-
-
                             if (shouldDebugBuildingLocations)
                             {
                                 GameObject debugCube = Instantiate(debugSpawnCube, (hit.gameObject.transform.position + new Vector3(0,10,0)), Quaternion.identity);

@@ -20,7 +20,7 @@ public class BuildingController : NetworkBehaviour
     void Start()
     {
         //RpcSetMaterialAndStructure();
-        Debug.Log("I've been spawned! My linked player is: " + LinkedPlayer);
+        //Debug.Log("I've been spawned! My linked player is: " + LinkedPlayer);
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class BuildingController : NetworkBehaviour
     [Command]
     public void CmdDamage(int amount)
     {
-        Debug.Log("BuildingController: CmdDamage");
+       // Debug.Log("BuildingController: CmdDamage");
         if (!isServer)
         {
             return;
@@ -122,7 +122,7 @@ public class BuildingController : NetworkBehaviour
             }
             else if (MaterialValue == 2)
             {
-                Debug.Log("this would be ametal gate...");
+                //Debug.Log("this would be ametal gate...");
                 // check if metal is needed, if it is then disable renderers for non metal gate models
             }
         }

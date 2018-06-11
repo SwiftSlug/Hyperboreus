@@ -94,7 +94,7 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdPlaceStructure()
     {
-        Debug.Log("PlayerBuildingController: CmdPlaceStructure");
+        //Debug.Log("PlayerBuildingController: CmdPlaceStructure");
 
         audioSource.PlayOneShot(clipBuildStructure, 1.0f);
 
@@ -107,14 +107,14 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdRotateStructure(float Rotation)
     {
-        Debug.Log("PlayerBuildingController: CmdRotateStructure");
+        //Debug.Log("PlayerBuildingController: CmdRotateStructure");
         TempStructureGuide.transform.eulerAngles = new Vector3(0, Rotation, 0);
     }
 
     [Command]
     void CmdSelectStructure()
     {
-        Debug.Log("PlayerBuildingController: CmdSelectStructure");
+        //Debug.Log("PlayerBuildingController: CmdSelectStructure");
 
         if (ServerStructureNeeded == 2)
         {
@@ -131,7 +131,7 @@ public class PlayerBuildingController : NetworkBehaviour
     [Command]
     void CmdSelectMaterial()
     {
-        Debug.Log("PlayerBuildingController: CmdSelectMaterial");
+        //Debug.Log("PlayerBuildingController: CmdSelectMaterial");
 
         if (ServerMaterialNeeded == 2)
         {
@@ -151,14 +151,14 @@ public class PlayerBuildingController : NetworkBehaviour
 
     void LocalRotateStructure(float Rotation)
     {
-        Debug.Log("PlayerBuildingController: LocalRotateStructure");
+        //Debug.Log("PlayerBuildingController: LocalRotateStructure");
 
         TempStructureGuide.GetComponent<BuildingController>().LocalSetRotation(Rotation);
     }
 
     void LocalSelectStructure()
     {
-        Debug.Log("PlayerBuildingController: LocalSelectStructure");
+        //Debug.Log("PlayerBuildingController: LocalSelectStructure");
 
         if (localStructureNeeded == 2)
         {
@@ -174,7 +174,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
     void LocalSelectMaterial()
     {
-        Debug.Log("PlayerBuildingController: LocalSelectMaterial");
+        //Debug.Log("PlayerBuildingController: LocalSelectMaterial");
 
         if (localMaterialNeeded == 2)
         {
@@ -230,7 +230,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void PlaceBuilding()
     {
-        Debug.Log("PlayerBuildingController: PlaceBuilding");
+        //Debug.Log("PlayerBuildingController: PlaceBuilding");
 
         if ((InbuildMode == true))
         {
@@ -269,7 +269,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void ChangeRotation()
     {
-        Debug.Log("PlayerBuildingController: ChangeRotation");
+        //Debug.Log("PlayerBuildingController: ChangeRotation");
 
         if (!isLocalPlayer)
         {
@@ -297,7 +297,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void ChangeStructure()
     {
-        Debug.Log("PlayerBuildingController: ChangeStructure");
+        //Debug.Log("PlayerBuildingController: ChangeStructure");
 
         if (InbuildMode == true)
         {
@@ -308,7 +308,7 @@ public class PlayerBuildingController : NetworkBehaviour
 
     public void ChangeMaterial()
     {
-        Debug.Log("PlayerBuildingController: ChangeMaterial");
+        //Debug.Log("PlayerBuildingController: ChangeMaterial");
 
         if (InbuildMode == true)
         {

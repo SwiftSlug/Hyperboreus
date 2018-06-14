@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 208646752092801228}
   - component: {fileID: 95768668230551884}
   - component: {fileID: 114841958329037196}
+  - component: {fileID: 114419772818387722}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -7476,8 +7477,8 @@ MonoBehaviour:
   StoneSelector: {fileID: 114986819667462822}
   MetalSelector: {fileID: 114752186763062220}
   blep: 1
-  StructureNeeded: 0
-  MaterialNeeded: 0
+  ServerStructureNeeded: 0
+  ServerMaterialNeeded: 0
   RotationNeeded: 0
   RotationToSet: 0
 --- !u!114 &114109481225106914
@@ -8054,6 +8055,22 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114419772818387722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e07b7f611a41974091438cb33bf03e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrailShader: {fileID: 4800000, guid: b9b6888b92824284bb7e9b384f694723, type: 3}
+  Terrain: {fileID: 0}
+  Player: {fileID: 4261929151935168}
+  trailSize: 0.5
+  trailStrength: 5
 --- !u!114 &114426596723716520
 MonoBehaviour:
   m_ObjectHideFlags: 1

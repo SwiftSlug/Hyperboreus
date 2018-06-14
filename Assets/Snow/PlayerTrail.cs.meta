@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1e07b7f611a41974091438cb33bf03e3
+timeCreated: 1528991291
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - trailShader: {fileID: 4800000, guid: b9b6888b92824284bb7e9b384f694723, type: 3}
+  - terrain: {instanceID: 0}
+  - player: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

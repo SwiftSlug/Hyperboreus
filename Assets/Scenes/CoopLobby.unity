@@ -89,6 +89,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -269,8 +270,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 10787865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 325, y: 454.5, z: 0}
-  m_LocalScale: {x: 0.33854166, y: 0.33854166, z: 0.33854166}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1422464717}
   m_Father: {fileID: 0}
@@ -384,15 +385,6 @@ MonoBehaviour:
   PlayerStructureGuide: {fileID: 249866316}
   LocalNeededStructure: 0
   LocalNeededMaterial: 0
-  WallWoodMat: {fileID: 2100000, guid: f34cda7f78d214b408b33a9e2ba48681, type: 2}
-  WallStoneMat: {fileID: 2100000, guid: f25edeb57738ab940959c45a04080c02, type: 2}
-  WallMetalMat: {fileID: 2100000, guid: 73aff67290e51f94fa7523bfcea959bf, type: 2}
-  FloorWoodMat: {fileID: 2100000, guid: 3fab533a3969f514495c8a978d6559fb, type: 2}
-  FloorStoneMat: {fileID: 2100000, guid: 69cfc44e7dd8d4b439eb0599abb43f48, type: 2}
-  FloorMetalMat: {fileID: 2100000, guid: 823fbd8424a2a954688cc4b563c877b9, type: 2}
-  DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
-  DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
-  DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
   Hitpoints: 0
   StructurePlaced: 0
 --- !u!208 &249866318
@@ -423,18 +415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b46ae8f7e8d7a91439aab3f3fd7e267e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalStructureChoice: 0
-  LocalMaterialChoice: 0
-  WallWoodMat: {fileID: 2100000, guid: f34cda7f78d214b408b33a9e2ba48681, type: 2}
-  WallStoneMat: {fileID: 2100000, guid: f25edeb57738ab940959c45a04080c02, type: 2}
-  WallMetalMat: {fileID: 2100000, guid: 73aff67290e51f94fa7523bfcea959bf, type: 2}
-  FloorWoodMat: {fileID: 2100000, guid: 3fab533a3969f514495c8a978d6559fb, type: 2}
-  FloorStoneMat: {fileID: 2100000, guid: 69cfc44e7dd8d4b439eb0599abb43f48, type: 2}
-  FloorMetalMat: {fileID: 2100000, guid: 823fbd8424a2a954688cc4b563c877b9, type: 2}
-  DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
-  DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
-  DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
-  hitPoints: 10
 --- !u!114 &249866320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,20 +626,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 224300583479213700, guid: 4e481e6a112f737408406927f600d80d,
+    - target: {fileID: 114419772818387722, guid: 4e481e6a112f737408406927f600d80d,
         type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 31.129055
+      propertyPath: trailSize
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 224300583479213700, guid: 4e481e6a112f737408406927f600d80d,
+    - target: {fileID: 114419772818387722, guid: 4e481e6a112f737408406927f600d80d,
         type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 317.94263
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300583479213700, guid: 4e481e6a112f737408406927f600d80d,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 437.88354
+      propertyPath: trailStrength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e481e6a112f737408406927f600d80d, type: 2}
@@ -748,6 +723,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -1132,7 +1108,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1138322535066456, guid: 4e481e6a112f737408406927f600d80d,
     type: 2}
   m_LobbyScene: CoopLobby
-  m_PlayScene: CityGameMapBlockOut
+  m_PlayScene: AlphaGameMap
   lobbySlots: []
 --- !u!4 &1182266955
 Transform:
@@ -1284,7 +1260,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1422464716}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -870.2, y: 110, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.50624996, y: 0.50624996, z: 0.50624996}
   m_Children:
   - {fileID: 925405520}
@@ -1434,7 +1410,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1034082792856264, guid: 5362d4e65f9a2b343bd8c9c48b27027e, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
         type: 2}

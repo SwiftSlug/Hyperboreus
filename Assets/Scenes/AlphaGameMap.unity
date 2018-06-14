@@ -6253,6 +6253,92 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f93375e268836b247aaf976f49bf5581, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &586881850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 586881854}
+  - component: {fileID: 586881853}
+  - component: {fileID: 586881852}
+  - component: {fileID: 586881851}
+  m_Layer: 0
+  m_Name: SnowTessPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &586881851
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586881850}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 306735c6cf961f1489d4a98cd97d8a8c, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!64 &586881852
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586881850}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &586881853
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586881850}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &586881854
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586881850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.57, y: 2.46, z: 6.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 65
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &595012547
 Prefab:
   m_ObjectHideFlags: 0
@@ -12536,15 +12622,6 @@ MonoBehaviour:
   PlayerStructureGuide: {fileID: 1161709599}
   LocalNeededStructure: 0
   LocalNeededMaterial: 0
-  WallWoodMat: {fileID: 2100000, guid: f34cda7f78d214b408b33a9e2ba48681, type: 2}
-  WallStoneMat: {fileID: 2100000, guid: f25edeb57738ab940959c45a04080c02, type: 2}
-  WallMetalMat: {fileID: 2100000, guid: 73aff67290e51f94fa7523bfcea959bf, type: 2}
-  FloorWoodMat: {fileID: 2100000, guid: 3fab533a3969f514495c8a978d6559fb, type: 2}
-  FloorStoneMat: {fileID: 2100000, guid: 69cfc44e7dd8d4b439eb0599abb43f48, type: 2}
-  FloorMetalMat: {fileID: 2100000, guid: 823fbd8424a2a954688cc4b563c877b9, type: 2}
-  DoorWoodMat: {fileID: 2100000, guid: 106538b6cfb5f46428fdfd525fdc6190, type: 2}
-  DoorStoneMat: {fileID: 2100000, guid: 38ea005b049036c499bdf67a25d0b05c, type: 2}
-  DoorMetalMat: {fileID: 2100000, guid: c17241c8319d8f54e95756c47d1fa866, type: 2}
   Hitpoints: 0
   StructurePlaced: 0
 --- !u!208 &1161709601
@@ -15972,11 +16049,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4488733796077254, guid: 5362d4e65f9a2b343bd8c9c48b27027e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 9.32
+      value: 22.68
       objectReference: {fileID: 0}
     - target: {fileID: 4488733796077254, guid: 5362d4e65f9a2b343bd8c9c48b27027e, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.18
+      value: -2.95
       objectReference: {fileID: 0}
     - target: {fileID: 4488733796077254, guid: 5362d4e65f9a2b343bd8c9c48b27027e, type: 2}
       propertyPath: m_LocalRotation.x
@@ -16000,7 +16077,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1034082792856264, guid: 5362d4e65f9a2b343bd8c9c48b27027e, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
         type: 2}
@@ -16010,7 +16087,7 @@ Prefab:
     - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
         type: 2}
       propertyPath: randomSeed
-      value: 1981083836
+      value: -2058404367
       objectReference: {fileID: 0}
     - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
         type: 2}
@@ -16048,6 +16125,31 @@ Prefab:
         type: 2}
       propertyPath: InitialModule.startSpeed.scalar
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
+        type: 2}
+      propertyPath: TrailModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199893417210526574, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 199893417210526574, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
+        type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
+        type: 2}
+      propertyPath: CollisionModule.collidesWithDynamic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198140531016234006, guid: 5362d4e65f9a2b343bd8c9c48b27027e,
+        type: 2}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5362d4e65f9a2b343bd8c9c48b27027e, type: 2}

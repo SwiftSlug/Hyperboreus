@@ -101,7 +101,7 @@ public class PlayerBuildingController : NetworkBehaviour
         NetworkSpawnedStructure = (GameObject)Instantiate(TempStructureGuide, PointToSpawnStructure.position, TempStructureGuide.transform.rotation); //GetComponent<Transform>().rotation);
         NetworkServer.Spawn(NetworkSpawnedStructure);
         NetworkSpawnedStructure.GetComponent<BuildingController>().RpcSetMaterialAndStructure(ServerStructureNeeded, ServerMaterialNeeded);
-        NetworkSpawnedStructure.GetComponent<BuildingController>().StructurePlaced = true;
+        //NetworkSpawnedStructure.GetComponent<BuildingController>().StructurePlaced = true;
     }
 
     [Command]

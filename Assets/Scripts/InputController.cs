@@ -131,7 +131,8 @@ public class DefaultControllerState : ControllerState
                 //  Switch Controller Class to Base Building
                 controller.ChangeState(controller.buidlingControllerState);
 
-                controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+                //controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+                controller.playerStructureControllerScript.EnterExitBuildMode();
             }
         }
         else
@@ -193,7 +194,8 @@ public class BaseBuildingControllerState : ControllerState
                 //  Swtich back to default controller class
                 controller.ChangeState(controller.defaultControllerState);
 
-                controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+                //controller.playerBuildingControllerScript.EnterOrExitBuildMode();
+                controller.playerStructureControllerScript.EnterExitBuildMode();
 
             }
         }
@@ -209,7 +211,8 @@ public class BaseBuildingControllerState : ControllerState
             {
                 controller.baseBuildingPlaceBuildingHeld = true;
 
-                controller.playerBuildingControllerScript.PlaceBuilding();
+                //controller.playerBuildingControllerScript.PlaceBuilding();
+                controller.playerStructureControllerScript.CmdPlaceStructure();
             }
         }
         else
@@ -241,7 +244,8 @@ public class BaseBuildingControllerState : ControllerState
             {
                 controller.baseBuildingChangeStructureHeld = true;
 
-                controller.playerBuildingControllerScript.ChangeStructure();
+                //controller.playerBuildingControllerScript.ChangeStructure();
+                controller.playerStructureControllerScript.SwitchStructure();
 
             }
         }
@@ -257,7 +261,8 @@ public class BaseBuildingControllerState : ControllerState
             {
                 controller.baseBuildingChangeMaterialHeld = true;
 
-                controller.playerBuildingControllerScript.ChangeMaterial();
+                //controller.playerBuildingControllerScript.ChangeMaterial();
+                controller.playerStructureControllerScript.SwitchMaterial();
 
             }
         }
@@ -298,6 +303,9 @@ public class InputController : NetworkBehaviour
     public PlayerSkills playerSkillScript;
     public PlayerController playerControllerScript;
     public PlayerBuildingController playerBuildingControllerScript;
+
+    public PlayerStructureController playerStructureControllerScript;
+
     public PlayerStats playerStatsScript;
 
     
@@ -324,6 +332,9 @@ public class InputController : NetworkBehaviour
         playerSkillScript = GetComponent<PlayerSkills>();
         playerControllerScript = GetComponent<PlayerController>();
         playerBuildingControllerScript = GetComponent<PlayerBuildingController>();
+
+        playerStructureControllerScript = GetComponent<PlayerStructureController>();
+
         playerStatsScript = GetComponent<PlayerStats>();
 
 
@@ -461,13 +472,15 @@ public class InputController : NetworkBehaviour
         // Building Mode Switch
         if (Input.GetButton("BaseBuilding"))
         {
-            playerBuildingControllerScript.EnterOrExitBuildMode();
+            //playerBuildingControllerScript.EnterOrExitBuildMode();
+            playerStructureControllerScript.EnterExitBuildMode();
         }
 
         //  Place Building
         if (Input.GetButton("BuildingPlace"))
         {
-            playerBuildingControllerScript.PlaceBuilding();
+            //playerBuildingControllerScript.PlaceBuilding();
+            playerStructureControllerScript.CmdPlaceStructure();
         }
 
         //  Change Rotation
@@ -479,13 +492,15 @@ public class InputController : NetworkBehaviour
         //  Change Structure
         if (Input.GetButton("BuildingChangeStructure"))
         {
-            playerBuildingControllerScript.ChangeStructure();
+            //playerBuildingControllerScript.ChangeStructure();
+            playerStructureControllerScript.SwitchStructure();
         }
 
         //  Change Material
         if (Input.GetButton("BuildingChangeMaterial"))
         {
-            playerBuildingControllerScript.ChangeMaterial();
+            //playerBuildingControllerScript.ChangeMaterial();
+            playerStructureControllerScript.SwitchMaterial();
         }
 
     }

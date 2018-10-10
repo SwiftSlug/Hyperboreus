@@ -400,6 +400,7 @@ GameObject:
   - component: {fileID: 208646752092801228}
   - component: {fileID: 95768668230551884}
   - component: {fileID: 114841958329037196}
+  - component: {fileID: 114524135922094586}
   m_Layer: 8
   m_Name: Player
   m_TagString: NetworkedPlayer
@@ -7449,7 +7450,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1138322535066456}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76944d5a1833fb04ea47ca6fecb747d1, type: 3}
   m_Name: 
@@ -7476,8 +7477,8 @@ MonoBehaviour:
   StoneSelector: {fileID: 114986819667462822}
   MetalSelector: {fileID: 114752186763062220}
   blep: 1
-  StructureNeeded: 0
-  MaterialNeeded: 0
+  ServerStructureNeeded: 0
+  ServerMaterialNeeded: 0
   RotationNeeded: 0
   RotationToSet: 0
 --- !u!114 &114109481225106914
@@ -7815,8 +7816,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbleToDestroy: 0
   AbleToLoot: 0
+  AbleToInteractStruc: 0
   AssetToDestroy: {fileID: 0}
   AssetToLoot: {fileID: 0}
+  StructureToInteract: {fileID: 0}
+  tempStructure: 0
   controllerDeadZone: 0.2
 --- !u!114 &114264632023976894
 MonoBehaviour:
@@ -8299,6 +8303,30 @@ MonoBehaviour:
   myCamera: {fileID: 1400124946779370, guid: 64531fe4dd336fb4684aec9123f5080f, type: 2}
   heightOffset: {x: 0, y: 20, z: 0}
   verticalOffset: {x: 0, y: 0, z: -8}
+--- !u!114 &114524135922094586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138322535066456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea97a69a5e9711b4b9bbf95d65c23fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  woodenWall: {fileID: 1901629686930706, guid: 6af5799dd75d83243bde73a95a9fad2b, type: 2}
+  stoneWall: {fileID: 1111965760302300, guid: adba930a3b5610c42a28b1ddd6932b5e, type: 2}
+  metalWall: {fileID: 1041826481831174, guid: 3759b219b0d1d61408cfd38ec6779d26, type: 2}
+  woodenGate: {fileID: 0}
+  stoneGate: {fileID: 0}
+  metalGate: {fileID: 0}
+  structureChoice: 0
+  materialChoice: 0
+  inBuildmode: 0
+  ghostStructure: {fileID: 0}
+  instantiatedGhostStructure: {fileID: 0}
+  serverGhostStructure: {fileID: 0}
+  pointToSpawn: {fileID: 4435395771784770}
 --- !u!114 &114527254494738076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8531,6 +8559,7 @@ MonoBehaviour:
   playerSkillScript: {fileID: 0}
   playerControllerScript: {fileID: 0}
   playerBuildingControllerScript: {fileID: 0}
+  playerStructureControllerScript: {fileID: 0}
   playerStatsScript: {fileID: 0}
   baseBuildingButtonHeld: 0
   baseBuildingPlaceBuildingHeld: 0
